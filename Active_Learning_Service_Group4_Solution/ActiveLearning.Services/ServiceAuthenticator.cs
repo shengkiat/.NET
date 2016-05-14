@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens;
 
-namespace ActiveLearning.ServiceInterfaces
+namespace ActiveLearning.Services
 {
     public class ServiceAuthenticator: System.IdentityModel.Selectors.UserNamePasswordValidator
     {
