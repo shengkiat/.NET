@@ -39,12 +39,25 @@ namespace ActiveLearning.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Course> GetCoursesByStudentSid(int studentSid)
+        public IEnumerable<Course> GetCoursesWithStudentSid()
         {
+            // Uses session studentSid
+            if (this.studentSid == 0)
+            {
+                throw new FaultException("User is not log in as Student");
+            }
+
+
+
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Course>> GetCoursesByStudentSidAsync(int studentSid)
+        //public IEnumerable<Course> GetCoursesByStudentSid(int studentSid)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public async Task<IEnumerable<Course>> GetCoursesByStudentSid(int studentSid)
         {
             //return await Task.Factory.StartNew(() => MyMethod(message));
 

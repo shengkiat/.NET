@@ -17,11 +17,14 @@ namespace ActiveLearning.ServiceInterfaces
         void Validate(string userName, string password);
         //Student Authenticate(string userName, string password);
 
-        [OperationContract]
-        IEnumerable<Course> GetCoursesByStudentSid(int studentSid);
+        //[OperationContract]
+        //IEnumerable<Course> GetCoursesByStudentSid(int studentSid);
 
         [OperationContract]
-        Task<IEnumerable<Course>> GetCoursesByStudentSidAsync(int studentSid);
+        IEnumerable<Course> GetCoursesWithStudentSid();
+
+        [OperationContract]
+        Task<IEnumerable<Course>> GetCoursesByStudentSid(int studentSid);
 
 
         [OperationContract]

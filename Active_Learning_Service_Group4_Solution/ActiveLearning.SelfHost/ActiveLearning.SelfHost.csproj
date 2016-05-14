@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +50,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActiveLearning.DB\ActiveLearning.DB.csproj">
+      <Project>{796c0bd5-0a31-4ceb-8920-78805c20b907}</Project>
+      <Name>ActiveLearning.DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ActiveLearning.ServiceInterfaces\ActiveLearning.ServiceInterfaces.csproj">
+      <Project>{9b9ec9c9-2bf9-43f0-b9c3-9f1a971a989e}</Project>
+      <Name>ActiveLearning.ServiceInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ActiveLearning.Services\ActiveLearning.Services.csproj">
+      <Project>{094fd8a0-a635-4df4-bd4b-bda6f565bb61}</Project>
+      <Name>ActiveLearning.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
