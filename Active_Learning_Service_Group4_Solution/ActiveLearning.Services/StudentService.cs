@@ -9,12 +9,14 @@ using ActiveLearning.DB;
 using System.IdentityModel.Selectors;
 using ActiveLearning.Business.Interface;
 using ActiveLearning.Business.Implementation;
+using System.Threading.Tasks;
 
 namespace ActiveLearning.Services
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class StudentService : UserNamePasswordValidator, IStudentService
     {
+        private int studentSid;
         private IUserManager _userManager;
 
         public StudentService(IUserManager UserManager)
@@ -42,6 +44,13 @@ namespace ActiveLearning.Services
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<Course>> GetCoursesByStudentSidAsync(int studentSid)
+        {
+            //return await Task.Factory.StartNew(() => MyMethod(message));
+
+            throw new NotImplementedException();
+        }
+
         public QuizQuestion GetNextQuiz()
         {
             throw new NotImplementedException();
@@ -62,6 +71,12 @@ namespace ActiveLearning.Services
                 if (user == null)
                 {
                     throw new FaultException(message);
+                }
+                else if (user.Role == "S")
+                {
+                    // save student ID
+                    //TODO
+                    this.studentSid = 1;
                 }
             }
         }

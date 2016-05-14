@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ActiveLearning.ServiceInterfaces
 {
@@ -18,6 +19,10 @@ namespace ActiveLearning.ServiceInterfaces
 
         [OperationContract]
         IEnumerable<Course> GetCoursesByStudentSid(int studentSid);
+
+        [OperationContract]
+        Task<IEnumerable<Course>> GetCoursesByStudentSidAsync(int studentSid);
+
 
         [OperationContract]
         IEnumerable<Content> GetContentsByCourseSid(int courseSid);
