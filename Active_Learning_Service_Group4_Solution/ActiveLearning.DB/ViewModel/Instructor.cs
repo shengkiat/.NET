@@ -13,12 +13,12 @@ namespace ActiveLearning.DB
     {
         [Display(Name = "Enrolled")]
         public bool HasEnrolled { get; set; }
+    }
 
-        public class InstructorMetadata
-        {
-            [Required(ErrorMessage = Common.Constants.Please_Enter + "Qualification")]
-            [Display(Name = "Qualification")]
-            public string Qualification { get; set; }
-        }
+    public class InstructorMetadata
+    {
+        [Required(ErrorMessage = Common.Constants.Please_Enter + "Qualification")]
+        [Display(Name = "Qualification")]
+        public string Qualification { get; set; }
     }
 }

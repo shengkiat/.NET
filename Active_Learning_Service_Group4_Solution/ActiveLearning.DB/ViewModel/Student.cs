@@ -11,15 +11,13 @@ namespace ActiveLearning.DB
     [MetadataType(typeof(StudentMetadata))]
     public partial class Student
     {
-        private class StudentMetadata
-        {
-            [Required(ErrorMessage = Common.Constants.Please_Enter + "Batch Number")]
-            [Display(Name = "Batch Number")]
-            public string BatchNo { get; set; }
-        }
-
         [Display(Name = "Enrolled")]
         public bool HasEnrolled { get; set; }
-
+    }
+    public class StudentMetadata
+    {
+        [Required(ErrorMessage = Common.Constants.Please_Enter + "Batch Number")]
+        [Display(Name = "Batch Number")]
+        public string BatchNo { get; set; }
     }
 }

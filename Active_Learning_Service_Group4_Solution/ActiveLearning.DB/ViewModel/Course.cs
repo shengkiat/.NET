@@ -6,30 +6,32 @@ using System.Threading.Tasks;
 using ActiveLearning.DB;
 using System.ComponentModel.DataAnnotations;
 using ActiveLearning.DB.Common;
+using System.Runtime.Serialization;
 
 namespace ActiveLearning.DB
 {
     [MetadataType(typeof(CourseMetadata))]
+    [DataContract]
     public partial class Course
     {
-        public class CourseMetadata
-        {
-            [Required(ErrorMessage = Constants.Please_Enter + "Course Name")]
-            [Display(Name = "Course Name")]
-            public string CourseName { get; set; }
+    }
+    public class CourseMetadata
+    {
+        [DataMember]
+        [Required(ErrorMessage = Constants.Please_Enter + "Course Name")]
+        [Display(Name = "Course Name")]
+        public string CourseName { get; set; }
 
-            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
-            [Display(Name = "Created Date")]
-            public DateTime CreateDT { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Created Date")]
+        public DateTime CreateDT { get; set; }
 
-            [Display(Name = "Updated Date")]
-            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", NullDisplayText = "-")]
-            public DateTime? UpdateDT { get; set; }
+        [Display(Name = "Updated Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", NullDisplayText = "-")]
+        public DateTime? UpdateDT { get; set; }
 
-            [Display(Name = "Deleted Date")]
-            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", NullDisplayText = "-")]
-            public DateTime? DeleteDT { get; set; }
-        }
-
+        [Display(Name = "Deleted Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", NullDisplayText = "-")]
+        public DateTime? DeleteDT { get; set; }
     }
 }

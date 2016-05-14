@@ -7,29 +7,32 @@ using ActiveLearning.DB;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using System.Web.Script.Serialization;
+using System.Runtime.Serialization;
 
 namespace ActiveLearning.DB
 {
     [MetadataType(typeof(QuizAnswerMetadata))]
+    [DataContract]
     public partial class QuizAnswer
     {
         public int CourseSid { get; set; }
-        public class QuizAnswerMetadata
-        {
-            [JsonIgnore]
-            [ScriptIgnore]
-            [Display(Name = "Createdt Date")]
-            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
-            public DateTime CreateDT { get; set; }
+    }
 
-            [Display(Name = "Updated Date")]
-            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", NullDisplayText = "-")]
-            public DateTime? UpdateDT { get; set; }
+    public class QuizAnswerMetadata
+    {
+        [JsonIgnore]
+        [ScriptIgnore]
+        [Display(Name = "Createdt Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime CreateDT { get; set; }
 
-            [Display(Name = "Deleted Date")]
-            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", NullDisplayText = "-")]
-            public DateTime? DeleteDT { get; set; }
+        [Display(Name = "Updated Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", NullDisplayText = "-")]
+        public DateTime? UpdateDT { get; set; }
 
-        }
+        [Display(Name = "Deleted Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", NullDisplayText = "-")]
+        public DateTime? DeleteDT { get; set; }
+
     }
 }

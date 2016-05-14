@@ -11,9 +11,10 @@ namespace ActiveLearning.DB
     [MetadataType(typeof(AdminMetadata))]
     public partial class Admin
     {
-        public class AdminMetadata
-        {
 
-        }
+    }
+    public class AdminMetadata
+    {
+
     }
 }
