@@ -27,6 +27,16 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="Logout">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LogoutResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="IsAuthenticated">
     <xs:complexType>
       <xs:sequence />

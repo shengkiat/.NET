@@ -273,6 +273,12 @@ namespace ActiveLearning.FormClient.StudentService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Login", ReplyAction="http://tempuri.org/IStudentService/LoginResponse")]
         System.Threading.Tasks.Task LoginAsync(string userName, string password);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Logout", ReplyAction="http://tempuri.org/IStudentService/LogoutResponse")]
+        void Logout();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Logout", ReplyAction="http://tempuri.org/IStudentService/LogoutResponse")]
+        System.Threading.Tasks.Task LogoutAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/IsAuthenticated", ReplyAction="http://tempuri.org/IStudentService/IsAuthenticatedResponse")]
         bool IsAuthenticated();
         
@@ -345,6 +351,14 @@ namespace ActiveLearning.FormClient.StudentService {
         
         public System.Threading.Tasks.Task LoginAsync(string userName, string password) {
             return base.Channel.LoginAsync(userName, password);
+        }
+        
+        public void Logout() {
+            base.Channel.Logout();
+        }
+        
+        public System.Threading.Tasks.Task LogoutAsync() {
+            return base.Channel.LogoutAsync();
         }
         
         public bool IsAuthenticated() {
