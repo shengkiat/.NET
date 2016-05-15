@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ActiveLearning.FormClient.StudentService;
 using System.ServiceModel;
+using System.ServiceModel.Security;
 
 namespace ActiveLearning.FormClient
 {
@@ -30,16 +31,40 @@ namespace ActiveLearning.FormClient
             {
                 try
                 {
-                    client.ClientCredentials.UserName.UserName = userName;
-                    client.ClientCredentials.UserName.Password = password;
+                    //client.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.None;
+                    //client.ClientCredentials.UserName.UserName = userName;
+                    //client.ClientCredentials.UserName.Password = password;
                     //await client.ValidateAsync(userName, password);
- 
+                    client.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.PeerTrust;
+                    client.Login(userName, password);
+                    var isAuthenticated = client.IsAuthenticated();
 
+                    MessageBox.Show(isAuthenticated.ToString());
+                }
+                catch (MessageSecurityException MSE)
+                {
+                    MessageBox.Show(MSE.InnerException.Message);
                 }
                 catch (FaultException FE)
                 {
                     //throw FE;
                     MessageBox.Show(FE.Message);
+                }
+                catch (Exception EX)
+                {
+                    //throw FE;
+                    MessageBox.Show(EX.Message);
+                }
+                finally
+                {
+                    try
+                    {
+                        client.Close();
+                    }
+                    catch (CommunicationObjectFaultedException COE)
+                    {
+
+                    }
                 }
             }
         }

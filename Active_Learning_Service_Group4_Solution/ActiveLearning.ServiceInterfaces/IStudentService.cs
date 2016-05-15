@@ -5,11 +5,18 @@ using System.Threading.Tasks;
 
 namespace ActiveLearning.ServiceInterfaces
 {
-    [ServiceContract]
+    [ServiceContract(SessionMode = SessionMode.Required)]
     public interface IStudentService
     {
         [OperationContract]
         void Validate(string userName, string password);
+        [OperationContract]
+        void Login(string userName, string password);
+        [OperationContract]
+        void Logout();
+
+        [OperationContract]
+        bool IsAuthenticated();
 
         [OperationContract]
         IEnumerable<Course> GetCourses();

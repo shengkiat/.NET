@@ -258,7 +258,7 @@ namespace ActiveLearning.FormClient.StudentService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="StudentService.IStudentService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="StudentService.IStudentService", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IStudentService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Validate", ReplyAction="http://tempuri.org/IStudentService/ValidateResponse")]
@@ -266,6 +266,18 @@ namespace ActiveLearning.FormClient.StudentService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Validate", ReplyAction="http://tempuri.org/IStudentService/ValidateResponse")]
         System.Threading.Tasks.Task ValidateAsync(string userName, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Login", ReplyAction="http://tempuri.org/IStudentService/LoginResponse")]
+        void Login(string userName, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Login", ReplyAction="http://tempuri.org/IStudentService/LoginResponse")]
+        System.Threading.Tasks.Task LoginAsync(string userName, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/IsAuthenticated", ReplyAction="http://tempuri.org/IStudentService/IsAuthenticatedResponse")]
+        bool IsAuthenticated();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/IsAuthenticated", ReplyAction="http://tempuri.org/IStudentService/IsAuthenticatedResponse")]
+        System.Threading.Tasks.Task<bool> IsAuthenticatedAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetCourses", ReplyAction="http://tempuri.org/IStudentService/GetCoursesResponse")]
         System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.Course> GetCourses();
@@ -325,6 +337,22 @@ namespace ActiveLearning.FormClient.StudentService {
         
         public System.Threading.Tasks.Task ValidateAsync(string userName, string password) {
             return base.Channel.ValidateAsync(userName, password);
+        }
+        
+        public void Login(string userName, string password) {
+            base.Channel.Login(userName, password);
+        }
+        
+        public System.Threading.Tasks.Task LoginAsync(string userName, string password) {
+            return base.Channel.LoginAsync(userName, password);
+        }
+        
+        public bool IsAuthenticated() {
+            return base.Channel.IsAuthenticated();
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsAuthenticatedAsync() {
+            return base.Channel.IsAuthenticatedAsync();
         }
         
         public System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.Course> GetCourses() {
