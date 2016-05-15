@@ -17,12 +17,7 @@ namespace ActiveLearning.Services
     public class StudentService : UserNamePasswordValidator, IStudentService
     {
         private int studentSid;
-        private IUserManager _userManager;
-
-        public StudentService(IUserManager UserManager)
-        {
-            _userManager = UserManager;
-        }
+        private IUserManager _userManager = new UserManager();
 
         public bool AnswerQuiz(int quizQuestionSid, int quizAnswserSid)
         {
