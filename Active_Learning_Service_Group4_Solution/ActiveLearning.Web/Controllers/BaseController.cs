@@ -6,9 +6,8 @@ using System.Web.Mvc;
 using ActiveLearning.DB;
 using System.Reflection;
 using ActiveLearning.Web.Filter;
-using log4net;
 using ActiveLearning.Business.Implementation;
-using ActiveLearning.Business.Common;
+using ActiveLearning.Common;
 using Microsoft.Owin;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
@@ -20,11 +19,9 @@ namespace ActiveLearning.Web.Controllers
     {
         #region Property
         public static string UserSessionParam = "LoginUser";
-        protected const string LF = "\r\n";
-        private const string SEPARATOR = "---------------------------------------------------------------------------------------------------------------";
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         // 6 hours
-        public const int Cache_Length = 21600;
+        public const int Cache_Duration = 21600;
 
         #endregion
 
@@ -118,13 +115,13 @@ namespace ActiveLearning.Web.Controllers
             }
             switch (GetLoginUserRole())
             {
-                case Business.Common.Constants.User_Role_Student_Code:
+                case ActiveLearning.Common.Constants.User_Role_Student_Code:
                     return Redirect("~/student");
                     break;
-                case Business.Common.Constants.User_Role_Instructor_Code:
+                case ActiveLearning.Common.Constants.User_Role_Instructor_Code:
                     return Redirect("~/instructor");
                     break;
-                case Business.Common.Constants.User_Role_Admin_Code:
+                case ActiveLearning.Common.Constants.User_Role_Admin_Code:
                     return Redirect("~/admin");
                     break;
                 default:
@@ -271,7 +268,7 @@ namespace ActiveLearning.Web.Controllers
                 }
                 else
                 {
-                    SetTempDataMessage((Business.Common.Constants.ValueIsSuccessful("Password has been changed") + ". Please login using the new password"));
+                    SetTempDataMessage((ActiveLearning.Common.Constants.ValueIsSuccessful("Password has been changed") + ". Please login using the new password"));
                     return RedirectToLogin();
                 }
             }
@@ -281,76 +278,27 @@ namespace ActiveLearning.Web.Controllers
         #region log
         public static void ExceptionLog(Exception ex)
         {
-            string loggerName = MethodBase.GetCurrentMethod().DeclaringType.ToString();
-            ILog logEngine = LogManager.GetLogger(loggerName);
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-            if (logEngine.IsFatalEnabled && !ex.Message.Contains("Thread was being aborted"))
-            {
-                sb.Append(ex.Message);
-                sb.Append(LF);
-                sb.Append(ex.StackTrace);
-                sb.Append(LF);
-                sb.Append(SEPARATOR);
-                logEngine.Error(sb.ToString());
-            }
+            Log.ExceptionLog(ex);
         }
 
         public static void ExceptionLog(string userLog, Exception ex)
         {
-            string loggerName = MethodBase.GetCurrentMethod().DeclaringType.ToString();
-            ILog logEngine = LogManager.GetLogger(loggerName);
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-            if (logEngine.IsFatalEnabled && !ex.Message.Contains("Thread was being aborted"))
-            {
-                sb.Append(userLog);
-                sb.Append(LF);
-                sb.Append(ex.Message);
-                sb.Append(LF);
-                sb.Append(ex.StackTrace);
-                sb.Append(LF);
-                sb.Append(SEPARATOR);
-                logEngine.Error(sb.ToString());
-            }
+            Log.ExceptionLog(userLog, ex);
         }
 
         public static void InfoLog(string message)
         {
-            string loggerName = MethodBase.GetCurrentMethod().DeclaringType.ToString();
-            ILog logEngine = LogManager.GetLogger(loggerName);
-
-            if (logEngine.IsInfoEnabled)
-            {
-                message += LF;
-                message += SEPARATOR;
-                logEngine.Error(message);
-            }
+            Log.InfoLog(message);
         }
 
         public static void DebugLog(string message)
         {
-            string loggerName = MethodBase.GetCurrentMethod().DeclaringType.ToString();
-            ILog logEngine = LogManager.GetLogger(loggerName);
-            if (logEngine.IsDebugEnabled)
-            {
-                message += LF;
-                message += SEPARATOR;
-                logEngine.Debug(message);
-            }
+            Log.DebugLog(message);
         }
 
         public static void ExceptionLog(string message)
         {
-            string loggerName = MethodBase.GetCurrentMethod().DeclaringType.ToString();
-            ILog logEngine = LogManager.GetLogger(loggerName);
-
-            if (logEngine.IsDebugEnabled)
-            {
-                message += LF;
-                message += SEPARATOR;
-                logEngine.Debug(message);
-            }
+            Log.ExceptionLog(message);
         }
 
         #endregion

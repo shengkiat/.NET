@@ -19,12 +19,14 @@ namespace ActiveLearning.SelfHost
                 svcHost = new ServiceHost(typeof(ActiveLearning.Services.StudentService));
                 svcHost.Open();
                 Console.WriteLine("\n\nService is Running  at following address");
-                //Console.WriteLine("\n" + svcHost.BaseAddresses[]);
+                Console.WriteLine("\n" + svcHost.BaseAddresses[0]);
+                Console.ReadKey();
             }
             catch (Exception eX)
             {
                 svcHost = null;
                 Console.WriteLine("Service can not be started \n\nError Message [" + eX.Message + "]");
+                Console.ReadKey();
             }
             if (svcHost != null)
             {

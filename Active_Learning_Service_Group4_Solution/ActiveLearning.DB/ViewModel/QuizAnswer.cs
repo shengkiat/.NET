@@ -34,5 +34,7 @@ namespace ActiveLearning.DB
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", NullDisplayText = "-")]
         public DateTime? DeleteDT { get; set; }
 
+
+
     }
 }

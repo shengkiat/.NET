@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ActiveLearning.DB;
 using System.ComponentModel.DataAnnotations;
-using ActiveLearning.DB.Common;
+using ActiveLearning.Common;
 using System.Runtime.Serialization;
 
 namespace ActiveLearning.DB

@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using System.Security.Claims;
 using ActiveLearning.Business.Implementation;
-using ActiveLearning.Business.Common;
+using ActiveLearning.Common;
 using ActiveLearning.DB;
 using System.Linq;
 using ActiveLearning.Web.Filter;
@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace ActiveLearning.Web.Controllers
 {
-    [CustomAuthorize(Roles = Business.Common.Constants.User_Role_Student_Code)]
+    [CustomAuthorize(Roles = ActiveLearning.Common.Constants.User_Role_Student_Code)]
     public class StudentController : BaseController
     {
         #region Index
@@ -32,7 +32,7 @@ namespace ActiveLearning.Web.Controllers
         #endregion
 
         #region course
-        [OutputCache(Duration = Cache_Length)]
+        [OutputCache(Duration = Cache_Duration)]
         public ActionResult CourseList()
         {
             if (!IsUserAuthenticated())
@@ -91,7 +91,7 @@ namespace ActiveLearning.Web.Controllers
         #endregion
 
         #region quiz
-        [OutputCache(Duration = Cache_Length)]
+        [OutputCache(Duration = Cache_Duration)]
         public ActionResult Quiz(int courseSid)
         {
             if (!IsUserAuthenticated())
@@ -119,7 +119,7 @@ namespace ActiveLearning.Web.Controllers
         #endregion
 
         #region content
-        [OutputCache(Duration = Cache_Length)]
+        [OutputCache(Duration = Cache_Duration)]
         public ActionResult Content(int courseSid)
         {
             if (!IsUserAuthenticated())
@@ -177,15 +177,15 @@ namespace ActiveLearning.Web.Controllers
             var file = File(filepath, System.Net.Mime.MediaTypeNames.Application.Octet, originalFileName);
             if (file == null)
             {
-                return RedirectToError(ActiveLearning.Business.Common.Constants.ValueNotFound(ActiveLearning.Business.Common.Constants.File));
+                return RedirectToError(ActiveLearning.Common.Constants.ValueNotFound(ActiveLearning.Common.Constants.File));
             }
-            if (fileType.Equals(ActiveLearning.Business.Common.Constants.Content_Type_Video))
+            if (fileType.Equals(ActiveLearning.Common.Constants.Content_Type_Video))
             {
                 ViewBag.VideoPath = filepath;
                 SetBackURL("Content?courseSid=" + courseSid);
                 return View("Video");
             }
-            else if (fileType.Equals(ActiveLearning.Business.Common.Constants.Content_Type_File))
+            else if (fileType.Equals(ActiveLearning.Common.Constants.Content_Type_File))
             {
                 return file;
             }

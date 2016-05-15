@@ -57,6 +57,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\ActiveLearning.Common\ActiveLearning.Common.csproj">
+      <Project>{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}</Project>
+      <Name>ActiveLearning.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ActiveLearning.DB\ActiveLearning.DB.csproj">
       <Project>{796c0bd5-0a31-4ceb-8920-78805c20b907}</Project>
       <Name>ActiveLearning.DB</Name>

@@ -4,10 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ActiveLearning.Business.Common
+namespace ActiveLearning.Common
 {
-    public class Constants
+  public  class Constants
     {
+        #region ViewModel
+        public const string Please_Enter = "Please enter ";
+        public const string Please_Enter_A_Valid = "Please enter a valid ";
+        #endregion
+
         #region User Role
         public const string User_Role_Student_Code = "S";
         public const string User_Role_Instructor_Code = "I";
@@ -68,6 +73,8 @@ namespace ActiveLearning.Business.Common
         public const string Authenticating_User = "Authenticating User ";
         public const string Authenticated = "Authenticated ";
         public const string PasswordTooSimple = "Password must be a combination of at least 2 digits, 2 upper case letters, 2 lower case letters and 2 symbols";
+
+        public const string User_Not_Logged_In = "User has not logged in. Please login";
 
         public static string ValueNotAllowed(string value)
         {

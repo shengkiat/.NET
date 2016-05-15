@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.DB", "ActiveLearning.DB\ActiveLearning.DB.csproj", "{796C0BD5-0A31-4CEB-8920-78805C20B907}"
 EndProject
@@ -20,6 +20,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.Services", "ActiveLearning.Services\ActiveLearning.Services.csproj", "{094FD8A0-A635-4DF4-BD4B-BDA6F565BB61}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.SelfHost", "ActiveLearning.SelfHost\ActiveLearning.SelfHost.csproj", "{D649D76B-2158-48F9-B313-F1317F8D3B9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.Common", "ActiveLearning.Common\ActiveLearning.Common.csproj", "{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.FormClient", "ActiveLearning.FormClient\ActiveLearning.FormClient.csproj", "{3C207C7E-F088-4FED-8FF2-BDF8C8C42CA0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{094FD8A0-A635-4DF4-BD4B-BDA6F565BB61} = {094FD8A0-A635-4DF4-BD4B-BDA6F565BB61}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +70,14 @@ Global
 		{D649D76B-2158-48F9-B313-F1317F8D3B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D649D76B-2158-48F9-B313-F1317F8D3B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D649D76B-2158-48F9-B313-F1317F8D3B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C207C7E-F088-4FED-8FF2-BDF8C8C42CA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C207C7E-F088-4FED-8FF2-BDF8C8C42CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C207C7E-F088-4FED-8FF2-BDF8C8C42CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C207C7E-F088-4FED-8FF2-BDF8C8C42CA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

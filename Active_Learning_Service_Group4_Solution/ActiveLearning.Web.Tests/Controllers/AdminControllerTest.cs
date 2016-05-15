@@ -12,7 +12,7 @@ using ActiveLearning.Business.Interface;
 using ActiveLearning.DB;
 using System.Web.Mvc;
 using ActiveLearning.Business.Mock;
-using ActiveLearning.Business.Common;
+using ActiveLearning.Common;
 
 namespace ActiveLearning.Web.Tests.Controllers
 {

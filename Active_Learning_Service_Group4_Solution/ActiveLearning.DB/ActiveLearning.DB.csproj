@@ -84,7 +84,6 @@
     <Compile Include="Chat.cs">
       <DependentUpon>ActiveLearningModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Common\Constants.cs" />
     <Compile Include="Content.cs">
       <DependentUpon>ActiveLearningModel.tt</DependentUpon>
     </Compile>
@@ -154,6 +153,12 @@
       <DependentUpon>ActiveLearningModel.edmx</DependentUpon>
       <LastGenOutput>ActiveLearningModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActiveLearning.Common\ActiveLearning.Common.csproj">
+      <Project>{3ae28001-7d0d-4c85-85d4-df9a0b861ece}</Project>
+      <Name>ActiveLearning.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

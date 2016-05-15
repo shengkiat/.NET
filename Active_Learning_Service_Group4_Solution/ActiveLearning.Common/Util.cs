@@ -2,14 +2,13 @@
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using ActiveLearning.DB;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace ActiveLearning.Business.Common
+namespace ActiveLearning.Common
 {
-    public class Util
+ public   class Util
     {
         #region Copy values
 

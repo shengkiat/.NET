@@ -8,7 +8,7 @@ using ActiveLearning.DB;
 using System.Security.Principal;
 using System.Security.Claims;
 using ActiveLearning.Web.Filter;
-using ActiveLearning.Business.Common;
+using ActiveLearning.Common;
 using ActiveLearning.Business.Interface;
 using System.Text;
 

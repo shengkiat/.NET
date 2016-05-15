@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ActiveLearning.Business.Common;
+using ActiveLearning.Common;
 using System.Data.Entity;
 using ActiveLearning.Business.ViewModel;
 using ActiveLearning.Business.SignalRHub;
@@ -613,6 +613,16 @@ namespace ActiveLearning.Business.Implementation
                 return false;
             }
         }
+        public bool IsQuizAnswerCorrect(int quizQuestionSid, int quizAnswerSid, out string message)
+        {
+
+            if (quizAnswerSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.QuizAnswer);
+                return false;
+            }
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region Async
@@ -777,6 +787,8 @@ namespace ActiveLearning.Business.Implementation
             //    TotalAnswersAverage = (totalUserCount > 0) ? totalAnswerCount / totalUserCount : 0,
             //};
         }
+
+       
         #endregion
     }
 }

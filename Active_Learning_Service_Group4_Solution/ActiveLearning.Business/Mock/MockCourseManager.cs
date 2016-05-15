@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ActiveLearning.Repository.Context;
-using ActiveLearning.Business.Common;
+using ActiveLearning.Common;
 using System.Transactions;
 using ActiveLearning.Business.Implementation;
 

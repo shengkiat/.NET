@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using ActiveLearning.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -33,7 +34,7 @@ namespace ActiveLearning.DB.Tests.ViewModel
             }
             catch (ValidationException ae)
             {
-                Assert.AreEqual(Common.Constants.Please_Enter + "User Name", ae.Message);
+                Assert.AreEqual(Constants.Please_Enter + "User Name", ae.Message);
             }
         }
 

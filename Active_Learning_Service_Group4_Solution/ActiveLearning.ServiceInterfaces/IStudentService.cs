@@ -8,24 +8,20 @@ namespace ActiveLearning.ServiceInterfaces
     [ServiceContract]
     public interface IStudentService
     {
-        // Dont need Operation Contract
+        [OperationContract]
         void Validate(string userName, string password);
-        //Student Authenticate(string userName, string password);
 
         [OperationContract]
-        Task<IEnumerable<Course>> GetCoursesWithStudentSid();
+        IEnumerable<Course> GetCourses();
 
         [OperationContract]
-        Task<IEnumerable<Course>> GetCoursesByStudentSid(int studentSid);
+        IEnumerable<Content> GetContentsByCourseSid(int courseSid);
 
         [OperationContract]
-        Task<IEnumerable<Content>> GetContentsByCourseSid(int courseSid);
+        QuizQuestion GetNextQuizQuestionByCourseSid(int courseSid);
 
         [OperationContract]
-        QuizQuestion GetNextQuiz();
-
-        [OperationContract]
-        bool AnswerQuiz(int quizQuestionSid, int quizAnswserSid);
+        bool AnswerQuiz(int courseSid, int quizQuestionSid, int quizOptionSid);
 
     }
 

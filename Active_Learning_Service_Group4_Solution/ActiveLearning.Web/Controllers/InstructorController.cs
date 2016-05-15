@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ActiveLearning.Web.Controllers
 {
-    [CustomAuthorize(Roles = Business.Common.Constants.User_Role_Instructor_Code)]
+    [CustomAuthorize(Roles = ActiveLearning.Common.Constants.User_Role_Instructor_Code)]
     public class InstructorController : BaseController
     {
         #region Index
@@ -30,7 +30,7 @@ namespace ActiveLearning.Web.Controllers
        
 
         #region Course
-        [OutputCache(Duration = Cache_Length)]
+        [OutputCache(Duration = Cache_Duration)]
         public ActionResult CourseList()
         {
             if (!IsUserAuthenticated())
@@ -138,7 +138,7 @@ namespace ActiveLearning.Web.Controllers
             }
             //if (Request.UrlReferrer == null)
             //{
-            //    return RedirectToError(Business.Common.Constants.ValueIsEmpty("UrlReferrer"));
+            //    return RedirectToError(ActiveLearning.Common.Constants.ValueIsEmpty("UrlReferrer"));
             //}
 
             using (var contentManger = new ContentManager())
@@ -146,7 +146,7 @@ namespace ActiveLearning.Web.Controllers
                 var content = contentManger.AddContent(this, file, courseSid, out message);
                 if (content != null)
                 {
-                    SetTempDataMessage(Business.Common.Constants.ValueSuccessfuly("File has been uploaded"));
+                    SetTempDataMessage(ActiveLearning.Common.Constants.ValueSuccessfuly("File has been uploaded"));
                 }
                 else
                 {
@@ -171,13 +171,13 @@ namespace ActiveLearning.Web.Controllers
             }
             //if (Request.UrlReferrer == null)
             //{
-            //    return RedirectToError(Business.Common.Constants.ValueIsEmpty("UrlReferrer"));
+            //    return RedirectToError(ActiveLearning.Common.Constants.ValueIsEmpty("UrlReferrer"));
             //}
             using (var contentManager = new ContentManager())
             {
                 if (contentManager.DeleteContent(this, contentSid, out message))
                 {
-                    SetTempDataMessage(Business.Common.Constants.ValueSuccessfuly("File hase been deleted"));
+                    SetTempDataMessage(ActiveLearning.Common.Constants.ValueSuccessfuly("File hase been deleted"));
                 }
                 else
                 {
@@ -200,7 +200,7 @@ namespace ActiveLearning.Web.Controllers
             }
             //if (Request.UrlReferrer == null)
             //{
-            //    return RedirectToError(Business.Common.Constants.ValueIsEmpty("UrlReferrer"));
+            //    return RedirectToError(ActiveLearning.Common.Constants.ValueIsEmpty("UrlReferrer"));
             //}
             string filepath;
             string fileType;
@@ -219,17 +219,17 @@ namespace ActiveLearning.Web.Controllers
             var file = File(filepath, System.Net.Mime.MediaTypeNames.Application.Octet, originalFileName);
             if (file == null)
             {
-                SetTempDataError(ActiveLearning.Business.Common.Constants.ValueNotFound(ActiveLearning.Business.Common.Constants.File));
+                SetTempDataError(ActiveLearning.Common.Constants.ValueNotFound(ActiveLearning.Common.Constants.File));
                 return RedirectToAction("ManageContent", new { courseSid = courseSid });
                 //return RedirectToError());
             }
-            if (fileType.Equals(ActiveLearning.Business.Common.Constants.Content_Type_Video))
+            if (fileType.Equals(ActiveLearning.Common.Constants.Content_Type_Video))
             {
                 ViewBag.VideoPath = filepath;
                 SetBackURL("ManageContent?courseSid=" + courseSid);
                 return View("Video");
             }
-            else if (fileType.Equals(ActiveLearning.Business.Common.Constants.Content_Type_File))
+            else if (fileType.Equals(ActiveLearning.Common.Constants.Content_Type_File))
             {
                 return file;
             }
@@ -315,7 +315,7 @@ namespace ActiveLearning.Web.Controllers
                     return View();
                 }
             }
-            SetTempDataMessage(Business.Common.Constants.ValueIsSuccessful("Quiz Question has been created"));
+            SetTempDataMessage(ActiveLearning.Common.Constants.ValueIsSuccessful("Quiz Question has been created"));
             return RedirectToAction("ManageQuiz", new { courseSid = courseSid });
         }
 
@@ -362,7 +362,7 @@ namespace ActiveLearning.Web.Controllers
                 QuizQuestion quizQuestion = deleteQuiz.GetQuizQuestionByQuizQuestionSid(quizQuestionSid, out message);
                 if (deleteQuiz.DeleteQuizQuestion(quizQuestion, out message))
                 {
-                    SetTempDataMessage(Business.Common.Constants.ValueIsSuccessful("Quiz Question has been deleted"));
+                    SetTempDataMessage(ActiveLearning.Common.Constants.ValueIsSuccessful("Quiz Question has been deleted"));
                 }
                 else
                 {
@@ -427,7 +427,7 @@ namespace ActiveLearning.Web.Controllers
             {
                 if (updateQus.UpdateQuizQuestion(quizQusToUpdate, out message))
                 {
-                    SetTempDataMessage(Business.Common.Constants.ValueIsSuccessful("Quiz Question has been updated"));
+                    SetTempDataMessage(ActiveLearning.Common.Constants.ValueIsSuccessful("Quiz Question has been updated"));
                 }
                 else
                 {
@@ -537,7 +537,7 @@ namespace ActiveLearning.Web.Controllers
                     return View();
                 }
             }
-            SetTempDataMessage(Business.Common.Constants.ValueIsSuccessful("Quiz Option has been created"));
+            SetTempDataMessage(ActiveLearning.Common.Constants.ValueIsSuccessful("Quiz Option has been created"));
             return RedirectToAction("ManageOption", new { quizQuestionSid = quizQuestionSid });
         }
 
@@ -591,7 +591,7 @@ namespace ActiveLearning.Web.Controllers
                 QuizOption quizOption = deleteOption.GetQuizOptionByQuizOptionSid(quizOptionSid, out message);
                 if (deleteOption.DeleteQuizOption(quizOption, out message))
                 {
-                    SetTempDataMessage(Business.Common.Constants.ValueIsSuccessful("Quiz option has been deleted"));
+                    SetTempDataMessage(ActiveLearning.Common.Constants.ValueIsSuccessful("Quiz option has been deleted"));
                 }
                 else
                 {
@@ -661,7 +661,7 @@ namespace ActiveLearning.Web.Controllers
             {
                 if (updateOpt.UpdateQuizOption(quizOptToUpdate, out message))
                 {
-                    SetTempDataMessage(Business.Common.Constants.ValueIsSuccessful("Quiz Option has been updated"));
+                    SetTempDataMessage(ActiveLearning.Common.Constants.ValueIsSuccessful("Quiz Option has been updated"));
 
                 }
                 else
