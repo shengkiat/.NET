@@ -261,12 +261,6 @@ namespace ActiveLearning.WCF.TestClient.StudentSvcRef {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="StudentSvcRef.IStudentService")]
     public interface IStudentService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Validate", ReplyAction="http://tempuri.org/IStudentService/ValidateResponse")]
-        void Validate(string userName, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Validate", ReplyAction="http://tempuri.org/IStudentService/ValidateResponse")]
-        System.Threading.Tasks.Task ValidateAsync(string userName, string password);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetCoursesWithStudentSid", ReplyAction="http://tempuri.org/IStudentService/GetCoursesWithStudentSidResponse")]
         ActiveLearning.WCF.TestClient.StudentSvcRef.Course[] GetCoursesWithStudentSid();
         
@@ -323,14 +317,6 @@ namespace ActiveLearning.WCF.TestClient.StudentSvcRef {
         
         public StudentServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        public void Validate(string userName, string password) {
-            base.Channel.Validate(userName, password);
-        }
-        
-        public System.Threading.Tasks.Task ValidateAsync(string userName, string password) {
-            return base.Channel.ValidateAsync(userName, password);
         }
         
         public ActiveLearning.WCF.TestClient.StudentSvcRef.Course[] GetCoursesWithStudentSid() {

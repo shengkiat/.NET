@@ -1,14 +1,11 @@
-﻿using ActiveLearning.ServiceInterfaces;
+﻿using ActiveLearning.Business.Implementation;
+using ActiveLearning.Business.Interface;
+using ActiveLearning.DB;
+using ActiveLearning.ServiceInterfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
-using ActiveLearning.DB;
 using System.IdentityModel.Selectors;
-using ActiveLearning.Business.Interface;
-using ActiveLearning.Business.Implementation;
+using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace ActiveLearning.Services
@@ -29,12 +26,12 @@ namespace ActiveLearning.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Content> GetContentsByCourseSid(int courseSid)
+        public Task<IEnumerable<Content>> GetContentsByCourseSid(int courseSid)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Course> GetCoursesWithStudentSid()
+        public async Task<IEnumerable<Course>> GetCoursesWithStudentSid()
         {
             // Uses session studentSid
             if (this.studentSid == 0)
@@ -42,15 +39,10 @@ namespace ActiveLearning.Services
                 throw new FaultException("User is not log in as Student");
             }
 
-
+            //return await Task.Factory.StartNew(() => MyMethod(message));
 
             throw new NotImplementedException();
         }
-
-        //public IEnumerable<Course> GetCoursesByStudentSid(int studentSid)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public async Task<IEnumerable<Course>> GetCoursesByStudentSid(int studentSid)
         {
