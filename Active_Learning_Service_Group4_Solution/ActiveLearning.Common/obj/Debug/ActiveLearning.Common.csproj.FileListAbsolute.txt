@@ -1,8 +1,0 @@
-C:\Users\sheng kiat\Source\Repos\Active_Learning_Service_Group4\Active_Learning_Service_Group4_Solution\ActiveLearning.Common\bin\Debug\ActiveLearning.Common.dll
-C:\Users\sheng kiat\Source\Repos\Active_Learning_Service_Group4\Active_Learning_Service_Group4_Solution\ActiveLearning.Common\bin\Debug\ActiveLearning.Common.pdb
-C:\Users\sheng kiat\Source\Repos\Active_Learning_Service_Group4\Active_Learning_Service_Group4_Solution\ActiveLearning.Common\bin\Debug\log4net.dll
-C:\Users\sheng kiat\Source\Repos\Active_Learning_Service_Group4\Active_Learning_Service_Group4_Solution\ActiveLearning.Common\bin\Debug\log4net.pdb
-C:\Users\sheng kiat\Source\Repos\Active_Learning_Service_Group4\Active_Learning_Service_Group4_Solution\ActiveLearning.Common\bin\Debug\log4net.xml
-C:\Users\sheng kiat\Source\Repos\Active_Learning_Service_Group4\Active_Learning_Service_Group4_Solution\ActiveLearning.Common\obj\Debug\ActiveLearning.Common.csprojResolveAssemblyReference.cache
-C:\Users\sheng kiat\Source\Repos\Active_Learning_Service_Group4\Active_Learning_Service_Group4_Solution\ActiveLearning.Common\obj\Debug\ActiveLearning.Common.dll
-C:\Users\sheng kiat\Source\Repos\Active_Learning_Service_Group4\Active_Learning_Service_Group4_Solution\ActiveLearning.Common\obj\Debug\ActiveLearning.Common.pdb
