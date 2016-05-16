@@ -11,13 +11,11 @@ using System.Runtime.Serialization;
 namespace ActiveLearning.DB
 {
     [MetadataType(typeof(CourseMetadata))]
-    [DataContract]
     public partial class Course
     {
     }
     public class CourseMetadata
     {
-        [DataMember]
         [Required(ErrorMessage = Constants.Please_Enter + "Course Name")]
         [Display(Name = "Course Name")]
         public string CourseName { get; set; }

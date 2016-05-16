@@ -22,6 +22,36 @@ namespace ActiveLearning.FormClient.StudentService {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Chat[] ChatsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Content[] ContentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CourseNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateDTField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> DeleteDTField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Instructor_Course_Map[] Instructor_Course_MapField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.QuizQuestion[] QuizQuestionsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Student_Course_Map[] Student_Course_MapField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> UpdateDTField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -29,6 +59,341 @@ namespace ActiveLearning.FormClient.StudentService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Chat[] Chats {
+            get {
+                return this.ChatsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ChatsField, value) != true)) {
+                    this.ChatsField = value;
+                    this.RaisePropertyChanged("Chats");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Content[] Contents {
+            get {
+                return this.ContentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContentsField, value) != true)) {
+                    this.ContentsField = value;
+                    this.RaisePropertyChanged("Contents");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CourseName {
+            get {
+                return this.CourseNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CourseNameField, value) != true)) {
+                    this.CourseNameField = value;
+                    this.RaisePropertyChanged("CourseName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateDT {
+            get {
+                return this.CreateDTField;
+            }
+            set {
+                if ((this.CreateDTField.Equals(value) != true)) {
+                    this.CreateDTField = value;
+                    this.RaisePropertyChanged("CreateDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> DeleteDT {
+            get {
+                return this.DeleteDTField;
+            }
+            set {
+                if ((this.DeleteDTField.Equals(value) != true)) {
+                    this.DeleteDTField = value;
+                    this.RaisePropertyChanged("DeleteDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Instructor_Course_Map[] Instructor_Course_Map {
+            get {
+                return this.Instructor_Course_MapField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Instructor_Course_MapField, value) != true)) {
+                    this.Instructor_Course_MapField = value;
+                    this.RaisePropertyChanged("Instructor_Course_Map");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.QuizQuestion[] QuizQuestions {
+            get {
+                return this.QuizQuestionsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.QuizQuestionsField, value) != true)) {
+                    this.QuizQuestionsField = value;
+                    this.RaisePropertyChanged("QuizQuestions");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sid {
+            get {
+                return this.SidField;
+            }
+            set {
+                if ((this.SidField.Equals(value) != true)) {
+                    this.SidField = value;
+                    this.RaisePropertyChanged("Sid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Student_Course_Map[] Student_Course_Map {
+            get {
+                return this.Student_Course_MapField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Student_Course_MapField, value) != true)) {
+                    this.Student_Course_MapField = value;
+                    this.RaisePropertyChanged("Student_Course_Map");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> UpdateDT {
+            get {
+                return this.UpdateDTField;
+            }
+            set {
+                if ((this.UpdateDTField.Equals(value) != true)) {
+                    this.UpdateDTField = value;
+                    this.RaisePropertyChanged("UpdateDT");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Chat", Namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.DB")]
+    [System.SerializableAttribute()]
+    public partial class Chat : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Course CourseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CourseSidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateDTField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> DeleteDTField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Instructor InstructorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> InstructorSidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Student StudentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> StudentSidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> UpdateDTField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Course Course {
+            get {
+                return this.CourseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CourseField, value) != true)) {
+                    this.CourseField = value;
+                    this.RaisePropertyChanged("Course");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CourseSid {
+            get {
+                return this.CourseSidField;
+            }
+            set {
+                if ((this.CourseSidField.Equals(value) != true)) {
+                    this.CourseSidField = value;
+                    this.RaisePropertyChanged("CourseSid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateDT {
+            get {
+                return this.CreateDTField;
+            }
+            set {
+                if ((this.CreateDTField.Equals(value) != true)) {
+                    this.CreateDTField = value;
+                    this.RaisePropertyChanged("CreateDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> DeleteDT {
+            get {
+                return this.DeleteDTField;
+            }
+            set {
+                if ((this.DeleteDTField.Equals(value) != true)) {
+                    this.DeleteDTField = value;
+                    this.RaisePropertyChanged("DeleteDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Instructor Instructor {
+            get {
+                return this.InstructorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InstructorField, value) != true)) {
+                    this.InstructorField = value;
+                    this.RaisePropertyChanged("Instructor");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> InstructorSid {
+            get {
+                return this.InstructorSidField;
+            }
+            set {
+                if ((this.InstructorSidField.Equals(value) != true)) {
+                    this.InstructorSidField = value;
+                    this.RaisePropertyChanged("InstructorSid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sid {
+            get {
+                return this.SidField;
+            }
+            set {
+                if ((this.SidField.Equals(value) != true)) {
+                    this.SidField = value;
+                    this.RaisePropertyChanged("Sid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Student Student {
+            get {
+                return this.StudentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StudentField, value) != true)) {
+                    this.StudentField = value;
+                    this.RaisePropertyChanged("Student");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> StudentSid {
+            get {
+                return this.StudentSidField;
+            }
+            set {
+                if ((this.StudentSidField.Equals(value) != true)) {
+                    this.StudentSidField = value;
+                    this.RaisePropertyChanged("StudentSid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> UpdateDT {
+            get {
+                return this.UpdateDTField;
+            }
+            set {
+                if ((this.UpdateDTField.Equals(value) != true)) {
+                    this.UpdateDTField = value;
+                    this.RaisePropertyChanged("UpdateDT");
+                }
             }
         }
         
@@ -73,6 +438,131 @@ namespace ActiveLearning.FormClient.StudentService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Instructor_Course_Map", Namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.DB")]
+    [System.SerializableAttribute()]
+    public partial class Instructor_Course_Map : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Course CourseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CourseSidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateDTField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Instructor InstructorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int InstructorSidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SidField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Course Course {
+            get {
+                return this.CourseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CourseField, value) != true)) {
+                    this.CourseField = value;
+                    this.RaisePropertyChanged("Course");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CourseSid {
+            get {
+                return this.CourseSidField;
+            }
+            set {
+                if ((this.CourseSidField.Equals(value) != true)) {
+                    this.CourseSidField = value;
+                    this.RaisePropertyChanged("CourseSid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateDT {
+            get {
+                return this.CreateDTField;
+            }
+            set {
+                if ((this.CreateDTField.Equals(value) != true)) {
+                    this.CreateDTField = value;
+                    this.RaisePropertyChanged("CreateDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Instructor Instructor {
+            get {
+                return this.InstructorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InstructorField, value) != true)) {
+                    this.InstructorField = value;
+                    this.RaisePropertyChanged("Instructor");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int InstructorSid {
+            get {
+                return this.InstructorSidField;
+            }
+            set {
+                if ((this.InstructorSidField.Equals(value) != true)) {
+                    this.InstructorSidField = value;
+                    this.RaisePropertyChanged("InstructorSid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sid {
+            get {
+                return this.SidField;
+            }
+            set {
+                if ((this.SidField.Equals(value) != true)) {
+                    this.SidField = value;
+                    this.RaisePropertyChanged("Sid");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="QuizQuestion", Namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.DB")]
     [System.SerializableAttribute()]
     public partial class QuizQuestion : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -93,7 +583,7 @@ namespace ActiveLearning.FormClient.StudentService {
         private System.Nullable<System.DateTime> DeleteDTField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.QuizOption> QuizOptionsField;
+        private ActiveLearning.FormClient.StudentService.QuizOption[] QuizOptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SidField;
@@ -167,7 +657,7 @@ namespace ActiveLearning.FormClient.StudentService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.QuizOption> QuizOptions {
+        public ActiveLearning.FormClient.StudentService.QuizOption[] QuizOptions {
             get {
                 return this.QuizOptionsField;
             }
@@ -215,6 +705,772 @@ namespace ActiveLearning.FormClient.StudentService {
                     this.UpdateDTField = value;
                     this.RaisePropertyChanged("UpdateDT");
                 }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Student_Course_Map", Namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.DB")]
+    [System.SerializableAttribute()]
+    public partial class Student_Course_Map : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Course CourseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CourseSidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateDTField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Student StudentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int StudentSidField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Course Course {
+            get {
+                return this.CourseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CourseField, value) != true)) {
+                    this.CourseField = value;
+                    this.RaisePropertyChanged("Course");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CourseSid {
+            get {
+                return this.CourseSidField;
+            }
+            set {
+                if ((this.CourseSidField.Equals(value) != true)) {
+                    this.CourseSidField = value;
+                    this.RaisePropertyChanged("CourseSid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateDT {
+            get {
+                return this.CreateDTField;
+            }
+            set {
+                if ((this.CreateDTField.Equals(value) != true)) {
+                    this.CreateDTField = value;
+                    this.RaisePropertyChanged("CreateDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sid {
+            get {
+                return this.SidField;
+            }
+            set {
+                if ((this.SidField.Equals(value) != true)) {
+                    this.SidField = value;
+                    this.RaisePropertyChanged("Sid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Student Student {
+            get {
+                return this.StudentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StudentField, value) != true)) {
+                    this.StudentField = value;
+                    this.RaisePropertyChanged("Student");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int StudentSid {
+            get {
+                return this.StudentSidField;
+            }
+            set {
+                if ((this.StudentSidField.Equals(value) != true)) {
+                    this.StudentSidField = value;
+                    this.RaisePropertyChanged("StudentSid");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Instructor", Namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.DB")]
+    [System.SerializableAttribute()]
+    public partial class Instructor : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Chat[] ChatsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool HasEnrolledField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Instructor_Course_Map[] Instructor_Course_MapField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string QualificationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.User UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserSidField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Chat[] Chats {
+            get {
+                return this.ChatsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ChatsField, value) != true)) {
+                    this.ChatsField = value;
+                    this.RaisePropertyChanged("Chats");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool HasEnrolled {
+            get {
+                return this.HasEnrolledField;
+            }
+            set {
+                if ((this.HasEnrolledField.Equals(value) != true)) {
+                    this.HasEnrolledField = value;
+                    this.RaisePropertyChanged("HasEnrolled");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Instructor_Course_Map[] Instructor_Course_Map {
+            get {
+                return this.Instructor_Course_MapField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Instructor_Course_MapField, value) != true)) {
+                    this.Instructor_Course_MapField = value;
+                    this.RaisePropertyChanged("Instructor_Course_Map");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Qualification {
+            get {
+                return this.QualificationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.QualificationField, value) != true)) {
+                    this.QualificationField = value;
+                    this.RaisePropertyChanged("Qualification");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sid {
+            get {
+                return this.SidField;
+            }
+            set {
+                if ((this.SidField.Equals(value) != true)) {
+                    this.SidField = value;
+                    this.RaisePropertyChanged("Sid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.User User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserSid {
+            get {
+                return this.UserSidField;
+            }
+            set {
+                if ((this.UserSidField.Equals(value) != true)) {
+                    this.UserSidField = value;
+                    this.RaisePropertyChanged("UserSid");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Student", Namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.DB")]
+    [System.SerializableAttribute()]
+    public partial class Student : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BatchNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Chat[] ChatsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool HasEnrolledField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.QuizAnswer[] QuizAnswersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Student_Course_Map[] Student_Course_MapField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.User UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserSidField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string BatchNo {
+            get {
+                return this.BatchNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BatchNoField, value) != true)) {
+                    this.BatchNoField = value;
+                    this.RaisePropertyChanged("BatchNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Chat[] Chats {
+            get {
+                return this.ChatsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ChatsField, value) != true)) {
+                    this.ChatsField = value;
+                    this.RaisePropertyChanged("Chats");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool HasEnrolled {
+            get {
+                return this.HasEnrolledField;
+            }
+            set {
+                if ((this.HasEnrolledField.Equals(value) != true)) {
+                    this.HasEnrolledField = value;
+                    this.RaisePropertyChanged("HasEnrolled");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.QuizAnswer[] QuizAnswers {
+            get {
+                return this.QuizAnswersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.QuizAnswersField, value) != true)) {
+                    this.QuizAnswersField = value;
+                    this.RaisePropertyChanged("QuizAnswers");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sid {
+            get {
+                return this.SidField;
+            }
+            set {
+                if ((this.SidField.Equals(value) != true)) {
+                    this.SidField = value;
+                    this.RaisePropertyChanged("Sid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Student_Course_Map[] Student_Course_Map {
+            get {
+                return this.Student_Course_MapField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Student_Course_MapField, value) != true)) {
+                    this.Student_Course_MapField = value;
+                    this.RaisePropertyChanged("Student_Course_Map");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.User User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserSid {
+            get {
+                return this.UserSidField;
+            }
+            set {
+                if ((this.UserSidField.Equals(value) != true)) {
+                    this.UserSidField = value;
+                    this.RaisePropertyChanged("UserSid");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.DB")]
+    [System.SerializableAttribute()]
+    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Admin[] AdminsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateDTField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> DeleteDTField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FullNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Instructor[] InstructorsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsActiveField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordSaltField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RoleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.Student[] StudentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> UpdateDTField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Admin[] Admins {
+            get {
+                return this.AdminsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AdminsField, value) != true)) {
+                    this.AdminsField = value;
+                    this.RaisePropertyChanged("Admins");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateDT {
+            get {
+                return this.CreateDTField;
+            }
+            set {
+                if ((this.CreateDTField.Equals(value) != true)) {
+                    this.CreateDTField = value;
+                    this.RaisePropertyChanged("CreateDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> DeleteDT {
+            get {
+                return this.DeleteDTField;
+            }
+            set {
+                if ((this.DeleteDTField.Equals(value) != true)) {
+                    this.DeleteDTField = value;
+                    this.RaisePropertyChanged("DeleteDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FullName {
+            get {
+                return this.FullNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FullNameField, value) != true)) {
+                    this.FullNameField = value;
+                    this.RaisePropertyChanged("FullName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Instructor[] Instructors {
+            get {
+                return this.InstructorsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InstructorsField, value) != true)) {
+                    this.InstructorsField = value;
+                    this.RaisePropertyChanged("Instructors");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsActive {
+            get {
+                return this.IsActiveField;
+            }
+            set {
+                if ((this.IsActiveField.Equals(value) != true)) {
+                    this.IsActiveField = value;
+                    this.RaisePropertyChanged("IsActive");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password {
+            get {
+                return this.PasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PasswordSalt {
+            get {
+                return this.PasswordSaltField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordSaltField, value) != true)) {
+                    this.PasswordSaltField = value;
+                    this.RaisePropertyChanged("PasswordSalt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Role {
+            get {
+                return this.RoleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RoleField, value) != true)) {
+                    this.RoleField = value;
+                    this.RaisePropertyChanged("Role");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sid {
+            get {
+                return this.SidField;
+            }
+            set {
+                if ((this.SidField.Equals(value) != true)) {
+                    this.SidField = value;
+                    this.RaisePropertyChanged("Sid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.Student[] Students {
+            get {
+                return this.StudentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StudentsField, value) != true)) {
+                    this.StudentsField = value;
+                    this.RaisePropertyChanged("Students");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> UpdateDT {
+            get {
+                return this.UpdateDTField;
+            }
+            set {
+                if ((this.UpdateDTField.Equals(value) != true)) {
+                    this.UpdateDTField = value;
+                    this.RaisePropertyChanged("UpdateDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Username {
+            get {
+                return this.UsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
+                    this.UsernameField = value;
+                    this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Admin", Namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.DB")]
+    [System.SerializableAttribute()]
+    public partial class Admin : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.User UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserSidField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sid {
+            get {
+                return this.SidField;
+            }
+            set {
+                if ((this.SidField.Equals(value) != true)) {
+                    this.SidField = value;
+                    this.RaisePropertyChanged("Sid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.User User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserSid {
+            get {
+                return this.UserSidField;
+            }
+            set {
+                if ((this.UserSidField.Equals(value) != true)) {
+                    this.UserSidField = value;
+                    this.RaisePropertyChanged("UserSid");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="QuizAnswer", Namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.DB")]
+    [System.SerializableAttribute()]
+    public partial class QuizAnswer : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
             }
         }
         
@@ -286,16 +1542,16 @@ namespace ActiveLearning.FormClient.StudentService {
         System.Threading.Tasks.Task<bool> IsAuthenticatedAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetCourses", ReplyAction="http://tempuri.org/IStudentService/GetCoursesResponse")]
-        System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.Course> GetCourses();
+        ActiveLearning.FormClient.StudentService.Course[] GetCourses();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetCourses", ReplyAction="http://tempuri.org/IStudentService/GetCoursesResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.Course>> GetCoursesAsync();
+        System.Threading.Tasks.Task<ActiveLearning.FormClient.StudentService.Course[]> GetCoursesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetContentsByCourseSid", ReplyAction="http://tempuri.org/IStudentService/GetContentsByCourseSidResponse")]
-        System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.Content> GetContentsByCourseSid(int courseSid);
+        ActiveLearning.FormClient.StudentService.Content[] GetContentsByCourseSid(int courseSid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetContentsByCourseSid", ReplyAction="http://tempuri.org/IStudentService/GetContentsByCourseSidResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.Content>> GetContentsByCourseSidAsync(int courseSid);
+        System.Threading.Tasks.Task<ActiveLearning.FormClient.StudentService.Content[]> GetContentsByCourseSidAsync(int courseSid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetNextQuizQuestionByCourseSid", ReplyAction="http://tempuri.org/IStudentService/GetNextQuizQuestionByCourseSidResponse")]
         ActiveLearning.FormClient.StudentService.QuizQuestion GetNextQuizQuestionByCourseSid(int courseSid);
@@ -369,19 +1625,19 @@ namespace ActiveLearning.FormClient.StudentService {
             return base.Channel.IsAuthenticatedAsync();
         }
         
-        public System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.Course> GetCourses() {
+        public ActiveLearning.FormClient.StudentService.Course[] GetCourses() {
             return base.Channel.GetCourses();
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.Course>> GetCoursesAsync() {
+        public System.Threading.Tasks.Task<ActiveLearning.FormClient.StudentService.Course[]> GetCoursesAsync() {
             return base.Channel.GetCoursesAsync();
         }
         
-        public System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.Content> GetContentsByCourseSid(int courseSid) {
+        public ActiveLearning.FormClient.StudentService.Content[] GetContentsByCourseSid(int courseSid) {
             return base.Channel.GetContentsByCourseSid(courseSid);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<ActiveLearning.FormClient.StudentService.Content>> GetContentsByCourseSidAsync(int courseSid) {
+        public System.Threading.Tasks.Task<ActiveLearning.FormClient.StudentService.Content[]> GetContentsByCourseSidAsync(int courseSid) {
             return base.Channel.GetContentsByCourseSidAsync(courseSid);
         }
         

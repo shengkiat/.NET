@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ActiveLearningDBStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="UserSid" ColumnName="UserSid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chats">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.Chat">
+        <MappingFragment StoreEntitySet="Chat">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="CourseSid" ColumnName="CourseSid" />
+          <ScalarProperty Name="StudentSid" ColumnName="StudentSid" />
+          <ScalarProperty Name="InstructorSid" ColumnName="InstructorSid" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+          <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+          <ScalarProperty Name="DeleteDT" ColumnName="DeleteDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contents">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.Content">
+        <MappingFragment StoreEntitySet="Content">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="CourseSid" ColumnName="CourseSid" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="OriginalFileName" ColumnName="OriginalFileName" />
+          <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+          <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+          <ScalarProperty Name="DeleteDT" ColumnName="DeleteDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.Course">
+        <MappingFragment StoreEntitySet="Course">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+          <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+          <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+          <ScalarProperty Name="DeleteDT" ColumnName="DeleteDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instructors">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.Instructor">
+        <MappingFragment StoreEntitySet="Instructor">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="UserSid" ColumnName="UserSid" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instructor_Course_Map">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.Instructor_Course_Map">
+        <MappingFragment StoreEntitySet="Instructor_Course_Map">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="InstructorSid" ColumnName="InstructorSid" />
+          <ScalarProperty Name="CourseSid" ColumnName="CourseSid" />
+          <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuizAnswers">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.QuizAnswer">
+        <MappingFragment StoreEntitySet="QuizAnswer">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="QuizQuestionSid" ColumnName="QuizQuestionSid" />
+          <ScalarProperty Name="QuizOptionSid" ColumnName="QuizOptionSid" />
+          <ScalarProperty Name="StudentSid" ColumnName="StudentSid" />
+          <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+          <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+          <ScalarProperty Name="DeleteDT" ColumnName="DeleteDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuizOptions">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.QuizOption">
+        <MappingFragment StoreEntitySet="QuizOption">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="QuizQuestionSid" ColumnName="QuizQuestionSid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IsCorrect" ColumnName="IsCorrect" />
+          <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+          <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+          <ScalarProperty Name="DeleteDT" ColumnName="DeleteDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuizQuestions">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.QuizQuestion">
+        <MappingFragment StoreEntitySet="QuizQuestion">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+          <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+          <ScalarProperty Name="DeleteDT" ColumnName="DeleteDT" />
+          <ScalarProperty Name="CourseSid" ColumnName="CourseSid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+          <ScalarProperty Name="UserSid" ColumnName="UserSid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student_Course_Map">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.Student_Course_Map">
+        <MappingFragment StoreEntitySet="Student_Course_Map">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="StudentSid" ColumnName="StudentSid" />
+          <ScalarProperty Name="CourseSid" ColumnName="CourseSid" />
+          <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ActiveLearning.DB.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+          <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
+          <ScalarProperty Name="DeleteDT" ColumnName="DeleteDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

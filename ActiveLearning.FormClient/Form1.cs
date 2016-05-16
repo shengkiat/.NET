@@ -20,6 +20,9 @@ namespace ActiveLearning.FormClient
         public Form1()
         {
             InitializeComponent();
+
+            ShowCourseForm frm = new ShowCourseForm();
+            frm.Show();
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
