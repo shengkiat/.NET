@@ -9,14 +9,10 @@ namespace ActiveLearning.ServiceInterfaces
     public interface IStudentService
     {
         [OperationContract]
-        void Validate(string userName, string password);
-        [OperationContract]
         void Login(string userName, string password);
-        [OperationContract]
-        void Logout();
 
         [OperationContract]
-        bool IsAuthenticated();
+        void Logout();
 
         [OperationContract]
         IEnumerable<Course> GetCourses();

@@ -1517,12 +1517,6 @@ namespace ActiveLearning.FormClient.StudentService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="StudentService.IStudentService", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IStudentService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Validate", ReplyAction="http://tempuri.org/IStudentService/ValidateResponse")]
-        void Validate(string userName, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Validate", ReplyAction="http://tempuri.org/IStudentService/ValidateResponse")]
-        System.Threading.Tasks.Task ValidateAsync(string userName, string password);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Login", ReplyAction="http://tempuri.org/IStudentService/LoginResponse")]
         void Login(string userName, string password);
         
@@ -1534,12 +1528,6 @@ namespace ActiveLearning.FormClient.StudentService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/Logout", ReplyAction="http://tempuri.org/IStudentService/LogoutResponse")]
         System.Threading.Tasks.Task LogoutAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/IsAuthenticated", ReplyAction="http://tempuri.org/IStudentService/IsAuthenticatedResponse")]
-        bool IsAuthenticated();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/IsAuthenticated", ReplyAction="http://tempuri.org/IStudentService/IsAuthenticatedResponse")]
-        System.Threading.Tasks.Task<bool> IsAuthenticatedAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetCourses", ReplyAction="http://tempuri.org/IStudentService/GetCoursesResponse")]
         ActiveLearning.FormClient.StudentService.Course[] GetCourses();
@@ -1593,14 +1581,6 @@ namespace ActiveLearning.FormClient.StudentService {
                 base(binding, remoteAddress) {
         }
         
-        public void Validate(string userName, string password) {
-            base.Channel.Validate(userName, password);
-        }
-        
-        public System.Threading.Tasks.Task ValidateAsync(string userName, string password) {
-            return base.Channel.ValidateAsync(userName, password);
-        }
-        
         public void Login(string userName, string password) {
             base.Channel.Login(userName, password);
         }
@@ -1615,14 +1595,6 @@ namespace ActiveLearning.FormClient.StudentService {
         
         public System.Threading.Tasks.Task LogoutAsync() {
             return base.Channel.LogoutAsync();
-        }
-        
-        public bool IsAuthenticated() {
-            return base.Channel.IsAuthenticated();
-        }
-        
-        public System.Threading.Tasks.Task<bool> IsAuthenticatedAsync() {
-            return base.Channel.IsAuthenticatedAsync();
         }
         
         public ActiveLearning.FormClient.StudentService.Course[] GetCourses() {
