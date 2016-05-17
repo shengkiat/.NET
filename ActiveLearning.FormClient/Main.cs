@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,8 @@ namespace ActiveLearning.FormClient
     {
         StudentServiceClient client = new StudentServiceClient();
 
+        CourseDTO[] courses;
+
         public Main()
         {
             InitializeComponent();
@@ -22,14 +25,10 @@ namespace ActiveLearning.FormClient
 
         private void Main_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             var loginForm = new Login(client);
             DialogResult result = loginForm.ShowDialog();
-
-            //if (result == DialogResult.Cancel)
-            //{
-            //    Dispose();
-            //    return;
-            //}
 
             if (result != DialogResult.OK)
             {
@@ -41,25 +40,64 @@ namespace ActiveLearning.FormClient
             showCourseList();
         }
 
-        private void showCourseList()
+        private async void showCourseList()
         {
-            client.GetCoursesAsync();
+            try
+            {
+                courses = await client.GetCoursesAsync();
+                LblMessage.Text = "My Courses";
+                courseDTOBindingSource.DataSource = courses;
+                dataGridView1.MultiSelect = false;
 
+                DataGridViewLinkColumn links = new DataGridViewLinkColumn();
+                links.UseColumnTextForLinkValue = true;
+                links.HeaderText = "Course Material";
+                links.DataPropertyName = "Sid";
+                links.ActiveLinkColor = Color.White;
+                links.LinkBehavior = LinkBehavior.SystemDefault;
+                links.LinkColor = Color.Blue;
+                links.TrackVisitedState = true;
+                links.VisitedLinkColor = Color.Blue;
+                links.Text = "Course Material";
+                links.FillWeight = 20;
+                links.Name = "LbtnCourseMaterial";
+                dataGridView1.Columns.Add(links);
+
+                links = new DataGridViewLinkColumn();
+                links.UseColumnTextForLinkValue = true;
+                links.HeaderText = "Quiz";
+                links.DataPropertyName = "Sid";
+                links.ActiveLinkColor = Color.White;
+                links.LinkBehavior = LinkBehavior.SystemDefault;
+                links.LinkColor = Color.Blue;
+                links.TrackVisitedState = true;
+                links.VisitedLinkColor = Color.Blue;
+                links.Text = "Quiz";
+                links.FillWeight = 20;
+                links.Name = "LbtnQuiz";
+                dataGridView1.Columns.Add(links);
+
+            }
+            catch (FaultException fe)
+            {
+                LblMessage.Text = fe.Message;
+                return;
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+                return;
+            }
         }
 
-        private void showMenu()
-        {
-            
-        }
-        private void loginoutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Dispose();
         }
-
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Main_Load(sender, e);
+        }
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (client != null)
@@ -75,6 +113,20 @@ namespace ActiveLearning.FormClient
             }
         }
 
-     
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // material
+            if (e.ColumnIndex == 2)
+            {
+                var courseMaterial = new CourseMaterial(client, courses[e.RowIndex].Sid);
+                courseMaterial.ShowDialog();
+            }
+            // quiz
+            else if (e.ColumnIndex == 3)
+            {
+                var quiz = new Quiz(client, courses[e.RowIndex].Sid);
+                quiz.ShowDialog();
+            }
+        }
     }
 }

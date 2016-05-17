@@ -15,11 +15,11 @@ namespace ActiveLearning.FormClient
 {
     public partial class Login : Form
     {
-        StudentServiceClient _client;
+        StudentServiceClient client;
 
         public Login(StudentServiceClient client)
         {
-            _client = client;
+            this.client = client;
             InitializeComponent();
         }
 
@@ -27,29 +27,31 @@ namespace ActiveLearning.FormClient
         {
             string userName = txtUserName.Text.Trim();
             string password = txtPass.Text.Trim();
-
+            bool login = false;
             try
             {
-                await _client.LoginAsync(userName, password);
+                login = await client.LoginAsync(userName, password);
             }
-            catch (FaultException FE)
+            catch (FaultException fe)
             {
-                MessageBox.Show(FE.Message);
+                MessageBox.Show(fe.Message);
                 return;
             }
-            catch (MessageSecurityException MSE)
+            catch (MessageSecurityException mse)
             {
-                MessageBox.Show(MSE.InnerException.Message);
+                MessageBox.Show(mse.InnerException.Message);
                 return;
             }
-            catch (Exception EX)
+            catch (Exception ex)
             {
-                MessageBox.Show(EX.Message);
+                MessageBox.Show(ex.Message);
                 return;
             }
-
-            DialogResult = DialogResult.OK;
+            if (login)
+            {
+                DialogResult = DialogResult.OK;
+            }
         }
-   
+
     }
 }
