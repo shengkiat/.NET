@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace ActiveLearning.Business.Interface
 {
-    public interface IContentManager
+    public interface IContentManager : IDisposable
     {
         Content GetContentByContentSid(int contentSid, out string message);
         IEnumerable<Content> GetContentsByCourseSid(int courseSid, out string message);

@@ -8,7 +8,7 @@ using ActiveLearning.Business.ViewModel;
 
 namespace ActiveLearning.Business.Interface
 {
-    public interface IQuizManager
+    public interface IQuizManager : IDisposable
     {
         bool QuizQuestionTitleExists(string quizTitle, out string message);
         QuizQuestion GetQuizQuestionByQuizQuestionSid(int quizQuestionSid, out string message);

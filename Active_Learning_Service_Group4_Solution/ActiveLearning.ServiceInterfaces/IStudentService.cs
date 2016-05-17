@@ -1,7 +1,6 @@
-﻿using ActiveLearning.DB;
+﻿using ActiveLearning.ServiceInterfaces.DTO;
 using System.Collections.Generic;
 using System.ServiceModel;
-using System.Threading.Tasks;
 
 namespace ActiveLearning.ServiceInterfaces
 {
@@ -9,19 +8,19 @@ namespace ActiveLearning.ServiceInterfaces
     public interface IStudentService
     {
         [OperationContract]
-        void Login(string userName, string password);
+        bool Login(string userName, string password);
 
         [OperationContract]
         void Logout();
 
         [OperationContract]
-        IEnumerable<Course> GetCourses();
+        IEnumerable<CourseDTO> GetCourses();
 
         [OperationContract]
-        IEnumerable<Content> GetContentsByCourseSid(int courseSid);
+        IEnumerable<ContentDTO> GetContentsByCourseSid(int courseSid);
 
         [OperationContract]
-        QuizQuestion GetNextQuizQuestionByCourseSid(int courseSid);
+        QuizQuestionDTO GetNextQuizQuestionByCourseSid(int courseSid);
 
         [OperationContract]
         bool AnswerQuiz(int courseSid, int quizQuestionSid, int quizOptionSid);

@@ -33,9 +33,26 @@ namespace ActiveLearning.Common
                     toProp.SetValue(objTo, fromProp.GetValue(objFrom, null), null);
                 }
             }
-
-
         }
+
+        //public static void CopyNonNullListProperty(List<object> listFrom, List<object> listTo)
+        //{
+        //    if(listFrom ==null || listFrom.Count() ==0)
+        //    {
+        //        return;
+        //    }
+        //    if(listTo == null)
+        //    {
+        //        listTo = new List<object>();
+        //    }
+
+        //    foreach (var objFrom in listFrom)
+        //    {
+        //        var objTo = new object();
+        //        CopyNonNullProperty(objFrom, objTo);
+        //        listTo.Add(objTo);
+        //    }
+        //}
         #endregion
 
         #region Hash Password
