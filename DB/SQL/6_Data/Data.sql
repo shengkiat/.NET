@@ -146,29 +146,29 @@ GO
 SET IDENTITY_INSERT [dbo].[Course] ON
 GO
 
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (1, 'Enterprise .NET - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (1, 'Enterprise .NET - SE24', 20, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (2, 'Object Oriented Software Development - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (2, 'Object Oriented Software Development - SE24', 50, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (3, 'Project Initiation and Scope Management - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (3, 'Project Initiation and Scope Management - SE24', 10, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (4, 'Scope Management and Risk Management - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (4, 'Scope Management and Risk Management - SE24', 5, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (5, 'Risk Management and Work Breakdown Structure - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (5, 'Risk Management and Work Breakdown Structure - SE24', 5, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (6, 'Object Oriented Software Design - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (6, 'Object Oriented Software Design - SE24', 5, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (7, 'Scheduling and Producing Project Plans - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (7, 'Scheduling and Producing Project Plans - SE24', 5, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (8, 'Advanced Project Estimation - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (8, 'Advanced Project Estimation - SE24', 5, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (9, 'Project Tracking and Control - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (9, 'Project Tracking and Control - SE24', 5, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (10, 'People Management - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (10, 'People Management - SE24', 5, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (11, 'Computational Intelligence - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (11, 'Computational Intelligence - SE24', 5, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, CreateDT) VALUES (12, 'Agile Software Project Management - SE24', GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (12, 'Agile Software Project Management - SE24', 5, GETDATE())
 GO
 
 SET IDENTITY_INSERT [dbo].[Course] OFF
@@ -707,9 +707,9 @@ SET IDENTITY_INSERT [dbo].[QuizOption] OFF
 -- Content --
 
 SET IDENTITY_INSERT [dbo].[Content] ON
-INSERT INTO [dbo].[Content] ([Sid], [CourseSid], [Type], [Path], [FileName], [OriginalFileName], [CreateDT], [UpdateDT], [DeleteDT]) VALUES(1, 1, 'F', '/Upload/', '0e682838-8ea1-4f47-b8b7-7e55fe322769.txt', 'test.txt', Getdate(), null,  null)
+INSERT INTO [dbo].[Content] ([Sid], [CourseSid], [Type], [Path], [FileName], [OriginalFileName], [Status], [CreateDT], [UpdateDT], [DeleteDT]) VALUES(1, 1, 'F', '/Upload/', '0e682838-8ea1-4f47-b8b7-7e55fe322769.txt', 'test.txt', 'A', Getdate(), null,  null)
 GO
-INSERT INTO [dbo].[Content] ([Sid], [CourseSid], [Type], [Path], [FileName], [OriginalFileName], [CreateDT], [UpdateDT], [DeleteDT]) VALUES(2, 1, 'V', '/Upload/', 'B2ADDC26-CBA3-4F78-AA45-57832EB2AF12.mp4', 'Interstellar Movie - Official Trailer 3.mp4', Getdate(), null,  null)
+INSERT INTO [dbo].[Content] ([Sid], [CourseSid], [Type], [Path], [FileName], [OriginalFileName], [Status], [CreateDT], [UpdateDT], [DeleteDT]) VALUES(2, 1, 'V', '/Upload/', 'B2ADDC26-CBA3-4F78-AA45-57832EB2AF12.mp4', 'Interstellar Movie - Official Trailer 3.mp4', 'A', Getdate(), null,  null)
 GO
 SET IDENTITY_INSERT [dbo].[Content] OFF
 

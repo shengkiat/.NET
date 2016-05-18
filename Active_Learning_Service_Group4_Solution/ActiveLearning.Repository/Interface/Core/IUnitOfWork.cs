@@ -18,6 +18,7 @@ namespace ActiveLearning.Repository.Interface.Core
         IQuizOptionRepository QuizOptions { get; }
         IQuizQuestionRepository QuizQuestions { get; }
         IStudent_Course_MapRepository Student_Course_Maps { get; }
+        IStudentEnrollApplicationRepository StudentEnrollApplications { get; }
         IStudentRepository Students { get; }
         IUserRepository Users { get; }
         int Complete();

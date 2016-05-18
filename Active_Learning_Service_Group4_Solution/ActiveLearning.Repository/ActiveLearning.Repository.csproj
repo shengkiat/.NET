@@ -65,6 +65,7 @@
     <Compile Include="Interface\IQuizQuestionRepository.cs" />
     <Compile Include="Interface\Core\IRepository.cs" />
     <Compile Include="Interface\Core\IRepositoryAsync.cs" />
+    <Compile Include="Interface\IStudentEnrollApplicationRepository.cs" />
     <Compile Include="Interface\IStudentRepository.cs" />
     <Compile Include="Interface\IStudent_Course_MapRepository.cs" />
     <Compile Include="Interface\Core\IUnitOfWork.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Repository\Core\Repository.cs" />
     <Compile Include="Repository\QuizOptionRepository.cs" />
     <Compile Include="Repository\QuizQuestionRepository.cs" />
+    <Compile Include="Repository\StudentEnrollApplicationRepository.cs" />
     <Compile Include="Repository\StudentRepository.cs" />
     <Compile Include="Repository\Student_Course_MapRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />

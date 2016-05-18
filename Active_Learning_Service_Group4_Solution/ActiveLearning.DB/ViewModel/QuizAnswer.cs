@@ -12,7 +12,6 @@ using System.Runtime.Serialization;
 namespace ActiveLearning.DB
 {
     [MetadataType(typeof(QuizAnswerMetadata))]
-    [DataContract]
     public partial class QuizAnswer
     {
         public int CourseSid { get; set; }

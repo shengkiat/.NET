@@ -22,10 +22,12 @@ namespace ActiveLearning.DB
             this.Instructor_Course_Map = new HashSet<Instructor_Course_Map>();
             this.QuizQuestions = new HashSet<QuizQuestion>();
             this.Student_Course_Map = new HashSet<Student_Course_Map>();
+            this.StudentEnrollApplications = new HashSet<StudentEnrollApplication>();
         }
     
         public int Sid { get; set; }
         public string CourseName { get; set; }
+        public int StudentQuota { get; set; }
         public System.DateTime CreateDT { get; set; }
         public Nullable<System.DateTime> UpdateDT { get; set; }
         public Nullable<System.DateTime> DeleteDT { get; set; }
@@ -40,5 +42,7 @@ namespace ActiveLearning.DB
         public virtual ICollection<QuizQuestion> QuizQuestions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student_Course_Map> Student_Course_Map { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentEnrollApplication> StudentEnrollApplications { get; set; }
     }
 }

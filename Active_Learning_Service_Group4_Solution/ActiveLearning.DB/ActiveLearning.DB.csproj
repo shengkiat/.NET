@@ -109,6 +109,9 @@
     <Compile Include="Student.cs">
       <DependentUpon>ActiveLearningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="StudentEnrollApplication.cs">
+      <DependentUpon>ActiveLearningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Student_Course_Map.cs">
       <DependentUpon>ActiveLearningModel.tt</DependentUpon>
     </Compile>
@@ -125,6 +128,7 @@
     <Compile Include="ViewModel\QuizOption.cs" />
     <Compile Include="ViewModel\QuizQuestion.cs" />
     <Compile Include="ViewModel\Student.cs" />
+    <Compile Include="ViewModel\StudentEnrollApplication.cs" />
     <Compile Include="ViewModel\Student_Course_Map.cs" />
     <Compile Include="ViewModel\User.cs" />
   </ItemGroup>
@@ -143,6 +147,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ActiveLearning.Common\ActiveLearning.Common.csproj">
+      <Project>{3ae28001-7d0d-4c85-85d4-df9a0b861ece}</Project>
+      <Name>ActiveLearning.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="ActiveLearningModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ActiveLearningModel.edmx</DependentUpon>
@@ -153,12 +163,6 @@
       <DependentUpon>ActiveLearningModel.edmx</DependentUpon>
       <LastGenOutput>ActiveLearningModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ActiveLearning.Common\ActiveLearning.Common.csproj">
-      <Project>{3ae28001-7d0d-4c85-85d4-df9a0b861ece}</Project>
-      <Name>ActiveLearning.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

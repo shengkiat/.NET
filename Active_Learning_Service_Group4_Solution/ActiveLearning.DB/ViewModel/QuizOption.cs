@@ -8,7 +8,6 @@ using System.Web.Script.Serialization;
 namespace ActiveLearning.DB
 {
     [MetadataType(typeof(QuizOptionMetadata))]
-    [DataContract]
     public partial class QuizOption
     {
         public int CourseSid { get; set; }

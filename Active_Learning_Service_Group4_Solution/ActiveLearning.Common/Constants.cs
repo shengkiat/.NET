@@ -6,8 +6,20 @@ using System.Threading.Tasks;
 
 namespace ActiveLearning.Common
 {
-  public  class Constants
+    public class Constants
     {
+        #region Status
+        public const string Status = "Status";
+        public const string Pending_Code = "P";
+        public const string Pending_Description = "Pending";
+        public const string Accepted_Code = "A";
+        public const string Accepted_Description = "Accepted";
+        public const string Rejected_Code = "R";
+        public const string Rejected_Description = "Rejected";
+        public const string Commented_Code = "C";
+        public const string Commented_Description = "Commented";
+        #endregion
+
         #region ViewModel
         public const string Please_Enter = "Please enter ";
         public const string Please_Enter_A_Valid = "Please enter a valid ";

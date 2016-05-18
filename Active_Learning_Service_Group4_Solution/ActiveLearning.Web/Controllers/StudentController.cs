@@ -136,7 +136,7 @@ namespace ActiveLearning.Web.Controllers
             using (var contentManager = new ContentManager())
             {
                 message = string.Empty;
-                var contents = contentManager.GetContentsByCourseSid(courseSid, out message);
+                var contents = contentManager.GetAcceptedContentsByCourseSid(courseSid, out message);
                 if (contents != null)
                 {
                     items = contents.ToList();
@@ -166,7 +166,7 @@ namespace ActiveLearning.Web.Controllers
             string fileType;
             using (var contentManager = new ContentManager())
             {
-                var content = contentManager.GetContentByContentSid(contentSid, out message);
+                var content = contentManager.GetAcceptedContentByContentSid(contentSid, out message);
                 if (content == null)
                 {
                     return RedirectToError(message);

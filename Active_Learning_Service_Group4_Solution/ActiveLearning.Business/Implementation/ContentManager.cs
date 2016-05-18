@@ -40,7 +40,68 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
-        public IEnumerable<Content> GetContentsByCourseSid(int courseSid, out string message)
+        public Content GetAcceptedContentByContentSid(int contentSid, out string message)
+        {
+            var content = GetContentByContentSid(contentSid, out message);
+
+            if (content == null)
+            {
+                return null;
+            }
+
+            if (content.Status.Equals(Constants.Accepted_Code, StringComparison.CurrentCultureIgnoreCase))
+            {
+                message = string.Empty;
+                return content;
+            }
+            else
+            {
+                message = Constants.ValueNotFound(Constants.Content);
+                return null;
+            }
+
+        }
+        public Content GetCommentedContentByContentSid(int contentSid, out string message)
+        {
+            var content = GetContentByContentSid(contentSid, out message);
+
+            if (content == null)
+            {
+                return null;
+            }
+
+            if (content.Status.Equals(Constants.Commented_Code, StringComparison.CurrentCultureIgnoreCase))
+            {
+                message = string.Empty;
+                return content;
+            }
+            else
+            {
+                message = Constants.ValueNotFound(Constants.Content);
+                return null;
+            }
+        }
+        public Content GetRejectedContentByContentSid(int contentSid, out string message)
+        {
+            var content = GetContentByContentSid(contentSid, out message);
+
+            if (content == null)
+            {
+                return null;
+            }
+
+            if (content.Status.Equals(Constants.Rejected_Code, StringComparison.CurrentCultureIgnoreCase))
+            {
+                message = string.Empty;
+                return content;
+            }
+            else
+            {
+                message = Constants.ValueNotFound(Constants.Content);
+                return null;
+            }
+        }
+        public IEnumerable<Content> GetAllContentsByCourseSid(int courseSid, out string message)
         {
             message = string.Empty;
             try
@@ -64,15 +125,157 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
-
-        public IEnumerable<int> GetContentSidsByCounrseSid(int courseSid, out string message)
+        public IEnumerable<Content> GetPendingContentsByCourseSid(int courseSid, out string message)
         {
-            var contents = GetContentsByCourseSid(courseSid, out message);
+            var contents = GetAllContentsByCourseSid(courseSid, out message);
+
+            if (contents == null)
+            {
+                return null;
+            }
+
+            var filteredContents = contents.Where(c => c.Status.Equals(Constants.Pending_Code, StringComparison.CurrentCultureIgnoreCase));
+
+            if (filteredContents == null || filteredContents.Count() == 0)
+            {
+                message = Constants.ThereIsNoValueFound(Constants.Content);
+                return null;
+            }
+            message = string.Empty;
+            return filteredContents;
+        }
+        public IEnumerable<Content> GetAcceptedContentsByCourseSid(int courseSid, out string message)
+        {
+            var contents = GetAllContentsByCourseSid(courseSid, out message);
+
+            if (contents == null)
+            {
+                return null;
+            }
+
+            var filteredContents = contents.Where(c => c.Status.Equals(Constants.Accepted_Code, StringComparison.CurrentCultureIgnoreCase));
+
+            if (filteredContents == null || filteredContents.Count() == 0)
+            {
+                message = Constants.ThereIsNoValueFound(Constants.Content);
+                return null;
+            }
+            message = string.Empty;
+            return filteredContents;
+        }
+        public IEnumerable<Content> GetCommentedContentsByCourseSid(int courseSid, out string message)
+        {
+            var contents = GetAllContentsByCourseSid(courseSid, out message);
+
+            if (contents == null)
+            {
+                return null;
+            }
+
+            var filteredContents = contents.Where(c => c.Status.Equals(Constants.Commented_Code, StringComparison.CurrentCultureIgnoreCase));
+
+            if (filteredContents == null || filteredContents.Count() == 0)
+            {
+                message = Constants.ThereIsNoValueFound(Constants.Content);
+                return null;
+            }
+            message = string.Empty;
+            return filteredContents;
+        }
+        public IEnumerable<Content> GetRejectedContentsByCourseSid(int courseSid, out string message)
+        {
+            var contents = GetAllContentsByCourseSid(courseSid, out message);
+
+            if (contents == null)
+            {
+                return null;
+            }
+
+            var filteredContents = contents.Where(c => c.Status.Equals(Constants.Rejected_Code, StringComparison.CurrentCultureIgnoreCase));
+
+            if (filteredContents == null || filteredContents.Count() == 0)
+            {
+                message = Constants.ThereIsNoValueFound(Constants.Content);
+                return null;
+            }
+            message = string.Empty;
+            return filteredContents;
+        }
+        public IEnumerable<int> GetAllContentSidsByCounrseSid(int courseSid, out string message)
+        {
+            var contents = GetAllContentsByCourseSid(courseSid, out message);
             if (contents == null || contents.Count() == 0)
             {
                 return null;
             }
             return contents.Select(c => c.Sid).ToList();
+        }
+        public IEnumerable<int> GetPendingContentSidsByCounrseSid(int courseSid, out string message)
+        {
+            var contents = GetPendingContentsByCourseSid(courseSid, out message);
+            if (contents == null || contents.Count() == 0)
+            {
+                return null;
+            }
+            return contents.Select(c => c.Sid).ToList();
+        }
+        public IEnumerable<int> GetAcceptedContentSidsByCounrseSid(int courseSid, out string message)
+        {
+            var contents = GetAcceptedContentsByCourseSid(courseSid, out message);
+            if (contents == null || contents.Count() == 0)
+            {
+                return null;
+            }
+            return contents.Select(c => c.Sid).ToList();
+        }
+        public IEnumerable<int> GetCommentedContentSidsByCounrseSid(int courseSid, out string message)
+        {
+            var contents = GetCommentedContentsByCourseSid(courseSid, out message);
+            if (contents == null || contents.Count() == 0)
+            {
+                return null;
+            }
+            return contents.Select(c => c.Sid).ToList();
+        }
+        public IEnumerable<int> GetRejectedContentSidsByCounrseSid(int courseSid, out string message)
+        {
+            var contents = GetRejectedContentsByCourseSid(courseSid, out message);
+            if (contents == null || contents.Count() == 0)
+            {
+                return null;
+            }
+            return contents.Select(c => c.Sid).ToList();
+        }
+        public string GetContentPathByContentSid(int contentSid, out string message)
+        {
+            message = string.Empty;
+            string path = string.Empty;
+            try
+            {
+                var content = GetContentByContentSid(contentSid, out message);
+                if (content == null)
+                {
+                    message = Constants.ValueNotFound(Constants.Content);
+                    return null;
+                }
+                path = content.Path + content.FileName;
+                return path;
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.File);
+                return null;
+            }
+
+
+            //message = string.Empty;
+            //using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+            //{
+            //    var file = unitOfWork.Contents.GetAll().Where(c => c.CourseSid == courseID && c.DeleteDT == null && c.OriginalFileName == originalFilename).FirstOrDefault();
+
+            //    return file.FileName;
+            //}
         }
         public Content AddContent(Controller controller, HttpPostedFileBase file, int courseSid, out string message)
         {
@@ -142,6 +345,7 @@ namespace ActiveLearning.Business.Implementation
                 content.CreateDT = DateTime.Now;
                 content.FileName = GUIDFileName;
                 content.OriginalFileName = file.FileName;
+                content.Status = Constants.Pending_Code;
                 if (Util.GetVideoFormatsFromConfig().Contains(fileExtension))
                 {
                     content.Type = Constants.Content_Type_Video;
@@ -166,20 +370,14 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
-
-        public bool DeleteContent(Controller controller, Content content, out string message)
+        public bool DeleteContent(string physicalFilePath, int contentSid, out string message)
         {
             message = string.Empty;
-            if (content == null || content.Sid == 0)
+            if(string.IsNullOrEmpty(physicalFilePath))
             {
-                message = Constants.ValueIsEmpty(Constants.File);
+                message = Constants.ValueIsEmpty(Constants.FilePath);
                 return false;
             }
-            return DeleteContent(controller, content.Sid, out message);
-        }
-        public bool DeleteContent(Controller controller, int contentSid, out string message)
-        {
-            message = string.Empty;
             if (contentSid == 0)
             {
                 message = Constants.ValueIsEmpty(Constants.File);
@@ -190,8 +388,7 @@ namespace ActiveLearning.Business.Implementation
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
                     var content = unitOfWork.Contents.Get(contentSid);
-                    string path = controller.Server.MapPath(content.Path + content.FileName);
-                    File.Delete(path);
+                    File.Delete(physicalFilePath);
                     content.DeleteDT = DateTime.Now;
                     unitOfWork.Complete();
                 }
@@ -204,36 +401,43 @@ namespace ActiveLearning.Business.Implementation
                 return false;
             }
         }
-        public string GetContentPathByContentSid(int contentSid, out string message)
-        {
-            message = string.Empty;
-            string path = string.Empty;
-            try
-            {
-                var content = GetContentByContentSid(contentSid, out message);
-                if (content == null)
-                {
-                    message = Constants.ValueNotFound(Constants.Content);
-                    return null;
-                }
-                path = content.Path + content.FileName;
-                return path;
-            }
-            catch (Exception ex)
-            {
-                ExceptionLog(ex);
-                message = Constants.OperationFailedDuringRetrievingValue(Constants.File);
-                return null;
-            }
 
-
-            //message = string.Empty;
-            //using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
-            //{
-            //    var file = unitOfWork.Contents.GetAll().Where(c => c.CourseSid == courseID && c.DeleteDT == null && c.OriginalFileName == originalFilename).FirstOrDefault();
-
-            //    return file.FileName;
-            //}
-        }
+        //public bool DeleteContent(Controller controller, Content content, out string message)
+        //{
+        //    message = string.Empty;
+        //    if (content == null || content.Sid == 0)
+        //    {
+        //        message = Constants.ValueIsEmpty(Constants.File);
+        //        return false;
+        //    }
+        //    return DeleteContent(controller, content.Sid, out message);
+        //}
+        //public bool DeleteContent(Controller controller, int contentSid, out string message)
+        //{
+        //    message = string.Empty;
+        //    if (contentSid == 0)
+        //    {
+        //        message = Constants.ValueIsEmpty(Constants.File);
+        //        return false;
+        //    }
+        //    try
+        //    {
+        //        using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+        //        {
+        //            var content = unitOfWork.Contents.Get(contentSid);
+        //            string path = controller.Server.MapPath(content.Path + content.FileName);
+        //            File.Delete(path);
+        //            content.DeleteDT = DateTime.Now;
+        //            unitOfWork.Complete();
+        //        }
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ExceptionLog(ex);
+        //        message = Constants.OperationFailedDuringDeletingValue(Constants.File);
+        //        return false;
+        //    }
+        //}
     }
 }

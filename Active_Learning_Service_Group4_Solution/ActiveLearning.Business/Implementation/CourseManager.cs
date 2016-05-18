@@ -23,6 +23,28 @@ namespace ActiveLearning.Business.Implementation
         }
 
         #region Course
+        public bool IsCourseFullyEnrolled(int courseSid, out string message)
+        {
+            if(courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return true;
+            }
+            var course = GetCourseByCourseSid(courseSid, out message);
+
+            if(course == null)
+            {
+                return true;
+            }
+
+            //var enrolledStudents = getaccepteden
+
+            throw new NotImplementedException();
+        }
+        public int GetCourseAvailableQuota(int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
         public bool CourseNameExists(string courseName, out string message)
         {
             if (string.IsNullOrEmpty(courseName))

@@ -10,6 +10,8 @@ namespace ActiveLearning.Business.Interface
     public interface ICourseManager : IDisposable
     {
         #region Course
+        bool IsCourseFullyEnrolled(int courseSid, out string message);
+        int GetCourseAvailableQuota(int courseSid, out string message);
         bool CourseNameExists(string courseName, out string message);
         Course GetCourseByCourseSid(int courseSid, out string message);
         IEnumerable<Course> GetAllCourses(out string message);

@@ -3,5 +3,5 @@
 delete from DBVersion
 go
 
-insert into DBVersion ( DBVersion, CreateDT) values ('Schema revision 1.4.1', '2016-04-22')
+insert into DBVersion ( DBVersion, CreateDT) values ('Schema revision 1.5', '2016-05-18')
 go

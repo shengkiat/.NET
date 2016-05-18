@@ -12,20 +12,17 @@ namespace ActiveLearning.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class Content
+    public partial class StudentEnrollApplication
     {
         public int Sid { get; set; }
+        public int StudentSid { get; set; }
         public int CourseSid { get; set; }
-        public string Type { get; set; }
-        public string Path { get; set; }
-        public string FileName { get; set; }
-        public string OriginalFileName { get; set; }
         public string Status { get; set; }
         public string Remark { get; set; }
-        public System.DateTime CreateDT { get; set; }
-        public Nullable<System.DateTime> UpdateDT { get; set; }
-        public Nullable<System.DateTime> DeleteDT { get; set; }
+        public Nullable<System.DateTime> CreateDT { get; set; }
+        public System.DateTime UpdateDT { get; set; }
     
         public virtual Course Course { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

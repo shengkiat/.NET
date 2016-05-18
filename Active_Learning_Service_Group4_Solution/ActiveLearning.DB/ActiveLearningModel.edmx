@@ -35,6 +35,8 @@
           <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="OriginalFileName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
           <Property Name="CreateDT" Type="datetime" Nullable="false" />
           <Property Name="UpdateDT" Type="datetime" />
           <Property Name="DeleteDT" Type="datetime" />
@@ -45,6 +47,7 @@
           </Key>
           <Property Name="Sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CourseName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StudentQuota" Type="int" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Nullable="false" />
           <Property Name="UpdateDT" Type="datetime" />
           <Property Name="DeleteDT" Type="datetime" />
@@ -118,6 +121,18 @@
           <Property Name="StudentSid" Type="int" Nullable="false" />
           <Property Name="CourseSid" Type="int" Nullable="false" />
           <Property Name="CreateDT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentEnrollApplication">
+          <Key>
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentSid" Type="int" Nullable="false" />
+          <Property Name="CourseSid" Type="int" Nullable="false" />
+          <Property Name="Status" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="CreateDT" Type="datetime" />
+          <Property Name="UpdateDT" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -316,6 +331,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StudentEnrollApplication_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="StudentEnrollApplication" Type="Self.StudentEnrollApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Sid" />
+            </Principal>
+            <Dependent Role="StudentEnrollApplication">
+              <PropertyRef Name="CourseSid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentEnrollApplication_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentEnrollApplication" Type="Self.StudentEnrollApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Sid" />
+            </Principal>
+            <Dependent Role="StudentEnrollApplication">
+              <PropertyRef Name="StudentSid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ActiveLearningDBStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
@@ -328,6 +367,7 @@
           <EntitySet Name="QuizQuestion" EntityType="Self.QuizQuestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student_Course_Map" EntityType="Self.Student_Course_Map" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentEnrollApplication" EntityType="Self.StudentEnrollApplication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Admin_User" Association="Self.FK_Admin_User">
             <End Role="User" EntitySet="User" />
@@ -389,6 +429,14 @@
             <End Role="User" EntitySet="User" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
+          <AssociationSet Name="FK_StudentEnrollApplication_Course" Association="Self.FK_StudentEnrollApplication_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="StudentEnrollApplication" EntitySet="StudentEnrollApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentEnrollApplication_Student" Association="Self.FK_StudentEnrollApplication_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentEnrollApplication" EntitySet="StudentEnrollApplication" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -429,6 +477,8 @@
           <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="OriginalFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreateDT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdateDT" Type="DateTime" Precision="3" />
           <Property Name="DeleteDT" Type="DateTime" Precision="3" />
@@ -440,6 +490,7 @@
           </Key>
           <Property Name="Sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CourseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StudentQuota" Type="Int32" Nullable="false" />
           <Property Name="CreateDT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdateDT" Type="DateTime" Precision="3" />
           <Property Name="DeleteDT" Type="DateTime" Precision="3" />
@@ -448,6 +499,7 @@
           <NavigationProperty Name="Instructor_Course_Map" Relationship="Self.FK_Instructor_Course_Map_Course" FromRole="Course" ToRole="Instructor_Course_Map" />
           <NavigationProperty Name="QuizQuestions" Relationship="Self.FK_QuizQuestion_Course" FromRole="Course" ToRole="QuizQuestion" />
           <NavigationProperty Name="Student_Course_Map" Relationship="Self.FK_Student_Course_Map_Course" FromRole="Course" ToRole="Student_Course_Map" />
+          <NavigationProperty Name="StudentEnrollApplications" Relationship="Self.FK_StudentEnrollApplication_Course" FromRole="Course" ToRole="StudentEnrollApplication" />
         </EntityType>
         <EntityType Name="Instructor">
           <Key>
@@ -524,6 +576,7 @@
           <NavigationProperty Name="QuizAnswers" Relationship="Self.FK_QuizAnswer_Student" FromRole="Student" ToRole="QuizAnswer" />
           <NavigationProperty Name="Student_Course_Map" Relationship="Self.FK_Student_Course_Map_Student" FromRole="Student" ToRole="Student_Course_Map" />
           <NavigationProperty Name="User" Relationship="Self.FK_Student_User" FromRole="Student" ToRole="User" />
+          <NavigationProperty Name="StudentEnrollApplications" Relationship="Self.FK_StudentEnrollApplication_Student" FromRole="Student" ToRole="StudentEnrollApplication" />
         </EntityType>
         <EntityType Name="Student_Course_Map">
           <Key>
@@ -535,6 +588,20 @@
           <Property Name="CreateDT" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Course" Relationship="Self.FK_Student_Course_Map_Course" FromRole="Student_Course_Map" ToRole="Course" />
           <NavigationProperty Name="Student" Relationship="Self.FK_Student_Course_Map_Student" FromRole="Student_Course_Map" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="StudentEnrollApplication">
+          <Key>
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentSid" Type="Int32" Nullable="false" />
+          <Property Name="CourseSid" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDT" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_StudentEnrollApplication_Course" FromRole="StudentEnrollApplication" ToRole="Course" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentEnrollApplication_Student" FromRole="StudentEnrollApplication" ToRole="Student" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -650,6 +717,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StudentEnrollApplication_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="StudentEnrollApplication" Type="Self.StudentEnrollApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Sid" />
+            </Principal>
+            <Dependent Role="StudentEnrollApplication">
+              <PropertyRef Name="CourseSid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Instructor_Course_Map_Instructor">
           <End Role="Instructor" Type="Self.Instructor" Multiplicity="1" />
           <End Role="Instructor_Course_Map" Type="Self.Instructor_Course_Map" Multiplicity="*" />
@@ -736,6 +815,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StudentEnrollApplication_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentEnrollApplication" Type="Self.StudentEnrollApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Sid" />
+            </Principal>
+            <Dependent Role="StudentEnrollApplication">
+              <PropertyRef Name="StudentSid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Chats" EntityType="Self.Chat" />
@@ -748,6 +839,7 @@
           <EntitySet Name="QuizQuestions" EntityType="Self.QuizQuestion" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="Student_Course_Map" EntityType="Self.Student_Course_Map" />
+          <EntitySet Name="StudentEnrollApplications" EntityType="Self.StudentEnrollApplication" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK_Admin_User" Association="Self.FK_Admin_User">
             <End Role="User" EntitySet="Users" />
@@ -781,6 +873,10 @@
             <End Role="Course" EntitySet="Courses" />
             <End Role="Student_Course_Map" EntitySet="Student_Course_Map" />
           </AssociationSet>
+          <AssociationSet Name="FK_StudentEnrollApplication_Course" Association="Self.FK_StudentEnrollApplication_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="StudentEnrollApplication" EntitySet="StudentEnrollApplications" />
+          </AssociationSet>
           <AssociationSet Name="FK_Instructor_Course_Map_Instructor" Association="Self.FK_Instructor_Course_Map_Instructor">
             <End Role="Instructor" EntitySet="Instructors" />
             <End Role="Instructor_Course_Map" EntitySet="Instructor_Course_Map" />
@@ -808,6 +904,10 @@
           <AssociationSet Name="FK_Student_User" Association="Self.FK_Student_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentEnrollApplication_Student" Association="Self.FK_StudentEnrollApplication_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentEnrollApplication" EntitySet="StudentEnrollApplications" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -847,6 +947,8 @@
                 <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="OriginalFileName" ColumnName="OriginalFileName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
                 <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
                 <ScalarProperty Name="DeleteDT" ColumnName="DeleteDT" />
@@ -858,6 +960,7 @@
               <MappingFragment StoreEntitySet="Course">
                 <ScalarProperty Name="Sid" ColumnName="Sid" />
                 <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="StudentQuota" ColumnName="StudentQuota" />
                 <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
                 <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
                 <ScalarProperty Name="DeleteDT" ColumnName="DeleteDT" />
@@ -937,6 +1040,19 @@
                 <ScalarProperty Name="StudentSid" ColumnName="StudentSid" />
                 <ScalarProperty Name="CourseSid" ColumnName="CourseSid" />
                 <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentEnrollApplications">
+            <EntityTypeMapping TypeName="ActiveLearning.DB.StudentEnrollApplication">
+              <MappingFragment StoreEntitySet="StudentEnrollApplication">
+                <ScalarProperty Name="Sid" ColumnName="Sid" />
+                <ScalarProperty Name="StudentSid" ColumnName="StudentSid" />
+                <ScalarProperty Name="CourseSid" ColumnName="CourseSid" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CreateDT" ColumnName="CreateDT" />
+                <ScalarProperty Name="UpdateDT" ColumnName="UpdateDT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

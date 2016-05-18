@@ -27,7 +27,7 @@ namespace ActiveLearning.Web.Controllers
         }
         #endregion
 
-       
+
 
         #region Course
         [OutputCache(Duration = Cache_Duration)]
@@ -106,7 +106,7 @@ namespace ActiveLearning.Web.Controllers
             using (var contentManager = new ContentManager())
             {
                 message = string.Empty;
-                var contents = contentManager.GetContentsByCourseSid(courseSid, out message);
+                var contents = contentManager.GetAllContentsByCourseSid(courseSid, out message);
                 if (contents != null)
                 {
                     items = contents.ToList();
@@ -175,7 +175,17 @@ namespace ActiveLearning.Web.Controllers
             //}
             using (var contentManager = new ContentManager())
             {
-                if (contentManager.DeleteContent(this, contentSid, out message))
+                var content = contentManager.GetContentByContentSid(contentSid, out message);
+
+                if(content == null)
+                {
+                    SetTempDataError(message);
+                    return RedirectToAction("ManageContent", new { courseSid = courseSid });
+                }
+
+                string path = Server.MapPath(content.Path + content.FileName);
+
+                if (contentManager.DeleteContent(path, contentSid, out message))
                 {
                     SetTempDataMessage(ActiveLearning.Common.Constants.ValueSuccessfuly("File hase been deleted"));
                 }

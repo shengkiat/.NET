@@ -266,6 +266,16 @@ namespace ActiveLearning.Business.Mock
             throw new NotImplementedException();
         }
 
+        public bool IsCourseFullyEnrolled(int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetCourseAvailableQuota(int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         #endregion

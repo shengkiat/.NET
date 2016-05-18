@@ -59,7 +59,7 @@ namespace ActiveLearning.Services
             using (contentManager = new ContentManager())
             {
                 string message = string.Empty;
-                var contentList = contentManager.GetContentsByCourseSid(courseSid, out message);
+                var contentList = contentManager.GetAcceptedContentsByCourseSid(courseSid, out message);
                 if (contentList == null || contentList.Count() == 0)
                 {
                     throw new FaultException(message);

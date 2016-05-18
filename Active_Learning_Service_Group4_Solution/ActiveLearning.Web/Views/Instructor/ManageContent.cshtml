@@ -61,6 +61,8 @@
             <tr>
                 <th>File Name</th>
                 <th>File Type</th>
+                <th>Status</th>
+                <th>Remark</th>
                 <th>Action</th>
             </tr>
 
@@ -68,7 +70,7 @@
             {
                 <tr>
                     <td>
-                        @Model[i].OriginalFileName.ToString()
+                        @Model[i].OriginalFileName
                     </td>
                     <td>
                         @if (Model[i].Type.Equals(Constants.Content_Type_Video, StringComparison.CurrentCultureIgnoreCase))
@@ -78,6 +80,36 @@
                         else if (Model[i].Type.Equals(Constants.Content_Type_File, StringComparison.CurrentCultureIgnoreCase))
                         {
                             <label class="text-primary">File</label>
+                        }
+                    </td>
+                    <td>
+                        @switch (Model[i].Status)
+                        {
+                            case Constants.Pending_Code:
+                                <label class="text-primary">@Model[i].StatusDescription</label>
+                                break;
+                            case Constants.Accepted_Code:
+                                <label class="text-success">@Model[i].StatusDescription</label>
+                                break;
+                            case Constants.Commented_Code:
+                                <label class="text-warning">@Model[i].StatusDescription</label>
+                                break;
+                            case Constants.Rejected_Code:
+                                <label class="text-danger">@Model[i].StatusDescription</label>
+                                break;
+                            default:
+                                <label class="text-info">@Model[i].StatusDescription</label>
+                                break;
+                        }
+                    </td>
+                    <td style="width:25%;text-wrap:normal">
+                        @if (string.IsNullOrEmpty(@Model[i].Remark))
+                        {
+                            <span>-</span>
+                        }
+                        else
+                        {
+                            @Model[i].Remark
                         }
                     </td>
                     <td style="width:20%">
@@ -92,10 +124,8 @@
                         {
                             @Html.ActionLink("Download", "Download", new { courseSid = ViewBag.CourseSid, contentSid = @Model[i].Sid, originalFileName = @Model[i].OriginalFileName }, new { @class = "btn-md" })
                             <label> &nbsp; | &nbsp;</label>
-                            @Html.ActionLink("Delete", "Delete", new { courseSid = ViewBag.CourseSid, contentSid = @Model[i].Sid }, new { onclick = "return confirm('Confirm to delete the content ?')" ,  @class = "btn-md", })
+                            @Html.ActionLink("Delete", "Delete", new { courseSid = ViewBag.CourseSid, contentSid = @Model[i].Sid }, new { onclick = "return confirm('Confirm to delete the content ?')", @class = "btn-md", })
                         }
-
-
 
                     </td>
                 </tr>

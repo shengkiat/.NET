@@ -32,6 +32,7 @@ namespace ActiveLearning.Repository
             QuizOptions = new QuizOptionRepository(_context);
             QuizQuestions = new QuizQuestionRepository(_context);
             Student_Course_Maps = new Student_Course_MapRepository(_context);
+            StudentEnrollApplications = new StudentEnrollApplicationRepository(_context);
             Students = new StudentRepository(_context);
             Users = new UserRepository(_context);
         }
@@ -45,6 +46,7 @@ namespace ActiveLearning.Repository
         public IQuizOptionRepository QuizOptions { get; private set; }
         public IQuizQuestionRepository QuizQuestions { get; private set; }
         public IStudent_Course_MapRepository Student_Course_Maps { get; private set; }
+        public IStudentEnrollApplicationRepository StudentEnrollApplications { get; private set; }
         public IStudentRepository Students { get; private set; }
         public IUserRepository Users { get; private set; }
 
@@ -66,5 +68,6 @@ namespace ActiveLearning.Repository
         {
             get { return _context as ActiveLearningContext; }
         }
+
     }
 }

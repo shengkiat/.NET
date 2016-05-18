@@ -1,0 +1,7 @@
+1.	Service ClientCredentials
+2.	No special handling for concurrent enrolment application because there is always a first-second sequence when calling the method 
+3.	When there is enrolment decision required from instructors, they will receive notification upon login ? 
+4.	When instructor made decision on course enrolment, student will receive notification upon login ?
+5. 	Admin to put in quota when create/edit course
+6.	Admin to review contents uploaded by instructor
+7.      Student to apply for course

@@ -36,6 +36,7 @@ namespace ActiveLearning.DB
         public virtual DbSet<QuizQuestion> QuizQuestions { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Student_Course_Map> Student_Course_Map { get; set; }
+        public virtual DbSet<StudentEnrollApplication> StudentEnrollApplications { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }
