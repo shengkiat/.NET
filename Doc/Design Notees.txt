@@ -5,3 +5,12 @@
 5. 	Admin to put in quota when create/edit course
 6.	Admin to review contents uploaded by instructor
 7.      Student to apply for course
+8.	Remove all mapping upon removing user
+9.	Upon removing course
+	Remove contens
+	Remove all mappings
+	Remove all quiz
+	Remove all chats
+10.     Upon removing instructor
+	Remove instructor course mapping
+	

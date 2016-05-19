@@ -213,7 +213,7 @@ namespace ActiveLearning.Business.Implementation
                     var contents = unitOfWork.Contents.Find(c => !c.DeleteDT.HasValue && c.Status.Equals(Constants.Pending_Code, StringComparison.CurrentCultureIgnoreCase));
                     if (contents == null || contents.Count() == 0)
                     {
-                        message = Constants.ThereIsNoValueFound(Constants.Content);
+                        message = Constants.ThereIsNoValueFound("pending content");
                         return null;
                     }
 

@@ -36,7 +36,7 @@ namespace ActiveLearning.Web.Controllers
             user.Role = "A";
             user.Username = "Bruce";
             user.FullName = "Bruce Lee";
-            user.Admins.Add(new Admin { Sid=1, UserSid = 1});
+            user.Admins.Add(new Admin { Sid = 1, UserSid = 1 });
             LogUserIn(user);
         }
 
@@ -770,6 +770,66 @@ namespace ActiveLearning.Web.Controllers
                 TempData.Remove("EntrolInstructor");
                 return RedirectToAction("ManageInstructorEnrolment", new { courseSid = courseId });
             }
+        }
+        #endregion
+
+        #region Content
+        public ActionResult ReviewContent()
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            using (var contentManager = new ContentManager())
+            {
+                string message = string.Empty;
+                var contentList = contentManager.GetAllPendingContents(out message);
+                if (contentList == null || contentList.Count() == 0)
+                {
+                    SetViewBagError(message);
+                    return View(contentList);
+                }
+                GetErrorAneMessage();
+                return View(contentList);
+            }
+        }
+        public ActionResult Download(int contentSid, string originalFileName)
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            string message = string.Empty;
+           
+            string filepath;
+            string fileType;
+            using (var contentManager = new ContentManager())
+            {
+                var content = contentManager.GetContentByContentSid(contentSid, out message);
+                if (content == null)
+                {
+                    SetTempDataError(message);
+                    return RedirectToAction("ReviewContent");
+                }
+                filepath = content.Path + content.FileName;
+                fileType = content.Type;
+            }
+            var file = File(filepath, System.Net.Mime.MediaTypeNames.Application.Octet, originalFileName);
+            if (file == null)
+            {
+                SetTempDataError(ActiveLearning.Common.Constants.ValueNotFound(ActiveLearning.Common.Constants.File));
+                return RedirectToAction("ReviewContent");
+            }
+            if (fileType.Equals(ActiveLearning.Common.Constants.Content_Type_Video))
+            {
+                ViewBag.VideoPath = filepath;
+                return View("Video");
+            }
+            else if (fileType.Equals(ActiveLearning.Common.Constants.Content_Type_File))
+            {
+                return file;
+            }
+            return RedirectToError(null); ;
         }
         #endregion
     }
