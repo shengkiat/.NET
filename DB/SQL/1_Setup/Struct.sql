@@ -1,3 +1,6 @@
+USE Active_Learning_Group4
+GO
+
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentEnrollApplication_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentEnrollApplication]'))
 ALTER TABLE [dbo].[StudentEnrollApplication] DROP CONSTRAINT [FK_StudentEnrollApplication_Student]
 GO

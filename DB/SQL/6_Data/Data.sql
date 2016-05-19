@@ -16,7 +16,7 @@ GO
 
 SET IDENTITY_INSERT [dbo].[User] ON 
 GO
-INSERT [dbo].[User] ([Sid], [Username], [Password], [FullName], [IsActive], [CreateDT], [UpdateDT], [DeleteDT], [Role], [PasswordSalt]) VALUES (1, N'Admin1', N'/OdzAoQWZRpJ1JZa+gpRYPannNShlOb8J', 'Super Admin', 1, CAST(N'2016-04-13 23:15:17.527' AS DateTime), NULL, NULL, N'A',N'ZB/sYHfiuxnSFd/ZoMZMfNqAW+MpQu5x ')
+INSERT [dbo].[User] ([Sid], [Username], [Password], [FullName], [IsActive], [CreateDT], [UpdateDT], [DeleteDT], [Role], [PasswordSalt]) VALUES (1, N'Admin1', N'WG7qLtt1uUZI8IS49HuPRMXk14RdyGCE', 'Super Admin', 1, CAST(N'2016-04-13 23:15:17.527' AS DateTime), NULL, NULL, N'A',N'f+3W4Sgya5jto3JLOKiwC3TJtOPs7yhC')
 GO
 INSERT [dbo].[User] ([Sid], [Username], [Password], [FullName], [IsActive], [CreateDT], [UpdateDT], [DeleteDT], [Role], [PasswordSalt]) VALUES (2, N'Instructor1', N't5bahHgyfjMDi7jcwE7zz+CUTW6E8VZw', 'Kent White', 1, CAST(N'2016-04-13 23:17:34.010' AS DateTime), NULL, NULL, N'I',N'C0xyFiz5b3ZacMTRPwKleI0eFaSy0x8C ')
 GO
