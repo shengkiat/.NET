@@ -308,6 +308,7 @@
     <Content Include="Views\Instructor\EditQuizOption.cshtml" />
     <Content Include="Views\Shared\ChangePassword.cshtml" />
     <Content Include="Views\Instructor\Chat.cshtml" />
+    <Content Include="Views\Instructor\ReviewContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

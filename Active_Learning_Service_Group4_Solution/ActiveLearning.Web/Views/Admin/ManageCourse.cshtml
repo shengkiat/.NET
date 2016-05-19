@@ -20,6 +20,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.CourseName)
             </th>
+            <td>
+                @Html.DisplayNameFor(model => model.StudentQuota)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.AvailableQuota)
+            </td>
             <th>
                 @Html.DisplayNameFor(model => model.CreateDT)
             </th>
@@ -34,6 +40,12 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentQuota)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvailableQuota)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CreateDT)

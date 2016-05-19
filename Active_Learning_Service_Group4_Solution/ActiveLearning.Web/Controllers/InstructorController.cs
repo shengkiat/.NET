@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using ActiveLearning.Business.Implementation;
 using ActiveLearning.Web.Filter;
 using System.Threading.Tasks;
+using ActiveLearning.Common;
 
 namespace ActiveLearning.Web.Controllers
 {
@@ -136,14 +137,12 @@ namespace ActiveLearning.Web.Controllers
             {
                 return RedirectToError(message);
             }
-            //if (Request.UrlReferrer == null)
-            //{
-            //    return RedirectToError(ActiveLearning.Common.Constants.ValueIsEmpty("UrlReferrer"));
-            //}
 
-            using (var contentManger = new ContentManager())
+            using (var contentManager = new ContentManager())
             {
-                var content = contentManger.AddContent(this, file, courseSid, out message);
+                var uploadFolder = Util.GetUploadFolderFromConfig();
+                string path = Server.MapPath(uploadFolder);
+                var content = contentManager.AddContent(path, file, courseSid, out message);
                 if (content != null)
                 {
                     SetTempDataMessage(ActiveLearning.Common.Constants.ValueSuccessfuly("File has been uploaded"));

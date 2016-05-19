@@ -13,12 +13,19 @@ namespace ActiveLearning.DB
     [MetadataType(typeof(CourseMetadata))]
     public partial class Course
     {
+        [Display(Name = "Available Student Quota")]
+        public int AvailableQuota { get; set; }
     }
     public class CourseMetadata
     {
         [Required(ErrorMessage = Constants.Please_Enter + "Course Name")]
         [Display(Name = "Course Name")]
         public string CourseName { get; set; }
+
+        [Required(ErrorMessage = Constants.Please_Enter + "Total Student Quota")]
+        [Range(0, int.MaxValue, ErrorMessage = Constants.Please_Enter + "A Positive Ingeter")]
+        [Display(Name = "Student Quota")]
+        public int StudentQuota { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Created Date")]

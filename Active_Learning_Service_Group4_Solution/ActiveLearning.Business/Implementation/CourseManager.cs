@@ -25,25 +25,72 @@ namespace ActiveLearning.Business.Implementation
         #region Course
         public bool IsCourseFullyEnrolled(int courseSid, out string message)
         {
-            if(courseSid == 0)
+            if (courseSid == 0)
             {
                 message = Constants.ValueIsEmpty(Constants.Course);
                 return true;
             }
             var course = GetCourseByCourseSid(courseSid, out message);
 
-            if(course == null)
+            if (course == null)
             {
                 return true;
             }
-
-            //var enrolledStudents = getaccepteden
-
-            throw new NotImplementedException();
+            try
+            {
+                using (UnitOfWork unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    int quotaTaken = 0;
+                    var student_Course_Maps = unitOfWork.Student_Course_Maps.Find(m => m.CourseSid == courseSid);
+                    if (student_Course_Maps != null)
+                    {
+                        quotaTaken = student_Course_Maps.Count();
+                    }
+                    return quotaTaken >= course.StudentQuota;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.Student_Course_Enrolment);
+                return true;
+            }
         }
         public int GetCourseAvailableQuota(int courseSid, out string message)
         {
-            throw new NotImplementedException();
+            if (courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return 0;
+            }
+            try
+            {
+                using (UnitOfWork unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    var course = unitOfWork.Courses.Find(c => c.Sid == courseSid && !c.DeleteDT.HasValue).FirstOrDefault();
+
+                    if (course == null)
+                    {
+                        message = Constants.ValueNotFound(Constants.Course);
+                        return 0;
+                    }
+
+                    int quotaTaken = 0;
+                    var student_Course_Maps = unitOfWork.Student_Course_Maps.Find(m => m.CourseSid == courseSid);
+                    if (student_Course_Maps != null)
+                    {
+                        quotaTaken = student_Course_Maps.Count();
+                    }
+                    message = string.Empty;
+                    return course.StudentQuota - quotaTaken < 0 ? 0 : course.StudentQuota - quotaTaken;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.Student_Course_Enrolment);
+                return 0;
+            }
         }
         public bool CourseNameExists(string courseName, out string message)
         {
@@ -52,17 +99,26 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.ValueIsEmpty(Constants.CourseName);
                 return true;
             }
-            using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+            try
             {
-                var Course = unitOfWork.Courses.Find(c => c.CourseName.Equals(courseName, StringComparison.CurrentCultureIgnoreCase) && !c.DeleteDT.HasValue).FirstOrDefault();
-                if (Course != null)
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
-                    message = Constants.ValueAlreadyExists(courseName);
-                    return true;
+                    var Course = unitOfWork.Courses.Find(c => c.CourseName.Equals(courseName, StringComparison.CurrentCultureIgnoreCase) && !c.DeleteDT.HasValue).FirstOrDefault();
+                    if (Course != null)
+                    {
+                        message = Constants.ValueAlreadyExists(courseName);
+                        return true;
+                    }
                 }
+                message = string.Empty;
+                return false;
             }
-            message = string.Empty;
-            return false;
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.Course);
+                return true;
+            }
         }
         public Course GetCourseByCourseSid(int courseSid, out string message)
         {
@@ -79,6 +135,7 @@ namespace ActiveLearning.Business.Implementation
                         return null;
                     }
                     message = string.Empty;
+                    Course.AvailableQuota = GetCourseAvailableQuota(courseSid, out message);
                     return Course;
                 }
             }
@@ -96,15 +153,19 @@ namespace ActiveLearning.Business.Implementation
             {
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
-                    var Course = unitOfWork.Courses.Find(c => !c.DeleteDT.HasValue);
+                    var Courses = unitOfWork.Courses.Find(c => !c.DeleteDT.HasValue);
 
-                    if (Course == null || Course.Count() == 0)
+                    if (Courses == null || Courses.Count() == 0)
                     {
                         message = Constants.ValueNotFound(Constants.Course);
                         return null;
                     }
                     message = string.Empty;
-                    return Course.ToList();
+                    foreach (var counrse in Courses)
+                    {
+                        counrse.AvailableQuota = GetCourseAvailableQuota(counrse.Sid, out message);
+                    }
+                    return Courses.ToList();
                 }
             }
             catch (Exception ex)
@@ -122,10 +183,15 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.ValueIsEmpty(Constants.Course);
                 return null;
             }
-            if(string.IsNullOrEmpty(course.CourseName) || string.IsNullOrEmpty(course.CourseName.Trim()))
+            if (string.IsNullOrEmpty(course.CourseName) || string.IsNullOrEmpty(course.CourseName.Trim()))
             {
                 message = Constants.PleaseFillInAllRequiredFields();
                 //message = Constants.PleaseEnterValue(Constants.CourseName);
+                return null;
+            }
+            if(course.StudentQuota < 0)
+            {
+                message = Constants.PleaseEnterValue("a positive integer for quota");
                 return null;
             }
             if (CourseNameExists(course.CourseName, out message))
@@ -166,6 +232,11 @@ namespace ActiveLearning.Business.Implementation
             {
                 message = Constants.PleaseFillInAllRequiredFields();
                 //message = Constants.PleaseEnterValue(Constants.CourseName);
+                return false;
+            }
+            if (course.StudentQuota < 0)
+            {
+                message = Constants.PleaseEnterValue("a positive integer for quota");
                 return false;
             }
             try

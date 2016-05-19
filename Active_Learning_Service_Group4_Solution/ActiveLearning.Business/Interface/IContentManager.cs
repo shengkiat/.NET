@@ -21,15 +21,20 @@ namespace ActiveLearning.Business.Interface
         IEnumerable<Content> GetAcceptedContentsByCourseSid(int courseSid, out string message);
         IEnumerable<Content> GetCommentedContentsByCourseSid(int courseSid, out string message);
         IEnumerable<Content> GetRejectedContentsByCourseSid(int courseSid, out string message);
+        IEnumerable<Content> GetAllPendingContents(out string message);
         IEnumerable<int> GetAllContentSidsByCounrseSid(int courseSid, out string message);
         IEnumerable<int> GetPendingContentSidsByCounrseSid(int courseSid, out string message);
         IEnumerable<int> GetAcceptedContentSidsByCounrseSid(int courseSid, out string message);
         IEnumerable<int> GetCommentedContentSidsByCounrseSid(int courseSid, out string message);
         IEnumerable<int> GetRejectedContentSidsByCounrseSid(int courseSid, out string message);
+        IEnumerable<int> GetAllPendingContentSids(out string message);
         String GetContentPathByContentSid(int contentSid, out string message);
-        Content AddContent(Controller controller, HttpPostedFileBase file, int courseSid, out string message);
-        //bool DeleteContent(Controller controller, Content conten, out string message);
-        //bool DeleteContent(Controller controller, int contentSid, out string message);
+        Content AddContent(string physicalUploadPath, HttpPostedFileBase file, int courseSid, out string message);
         bool DeleteContent(string physicalFilePath, int contentSid, out string message);
+        bool UpdateContent(Content content, out string message);
+        bool UpdateContentStatus(int contentSid, string status, string remark, out string message);
+        bool AcceptContent(Content content, out string message);
+        bool CommentContent(Content content, out string message);
+
     }
 }

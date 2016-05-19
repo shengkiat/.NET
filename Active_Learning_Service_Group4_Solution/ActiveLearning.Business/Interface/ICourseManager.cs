@@ -42,6 +42,9 @@ namespace ActiveLearning.Business.Interface
         bool UpdateStudentsCourseEnrolmentByHasEnrolledIndicator(IEnumerable<Student> students, int courseSid, out string message);
         #endregion
 
+        #region Student Enrollment Application
+
+        #endregion
         #region Instructor Enrolment
         IEnumerable<Instructor> GetAllInstructorsWithHasEnrolledIndicatorByCourseSid(int courseSid, out string message);
         IEnumerable<Instructor> GetEnrolledInstructorsByCourseSid(int courseSid, out string message);

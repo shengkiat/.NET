@@ -18,6 +18,7 @@ namespace ActiveLearning.Common
         public const string Rejected_Description = "Rejected";
         public const string Commented_Code = "C";
         public const string Commented_Description = "Commented";
+        public const string Remark = "Remark";
         #endregion
 
         #region ViewModel

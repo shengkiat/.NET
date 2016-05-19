@@ -185,6 +185,7 @@ namespace ActiveLearning.Web.Controllers
             string message = string.Empty;
             var courseToUpdate = TempData.Peek("EditCourse") as Course;
             courseToUpdate.CourseName = course.CourseName;
+            courseToUpdate.StudentQuota = course.StudentQuota;
 
             using (var updateCourse = new CourseManager())
             {

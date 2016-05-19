@@ -574,6 +574,11 @@ namespace ActiveLearning.Business.Implementation
                     using (TransactionScope scope = new TransactionScope())
                     {
                         unitOfWork.Users.Get(student.UserSid).DeleteDT = DateTime.Now;
+                        var studentCourseMaps = unitOfWork.Student_Course_Maps.Find(m => m.StudentSid == student.Sid);
+                        if (studentCourseMaps != null)
+                        {
+                            unitOfWork.Student_Course_Maps.RemoveRange(studentCourseMaps);
+                        }
                         unitOfWork.Complete();
                         scope.Complete();
                     }
@@ -941,6 +946,11 @@ namespace ActiveLearning.Business.Implementation
                     using (TransactionScope scope = new TransactionScope())
                     {
                         unitOfWork.Users.Get(instructor.UserSid).DeleteDT = DateTime.Now;
+                        var instructorCourseMaps = unitOfWork.Instructor_Course_Maps.Find(m => m.InstructorSid == instructor.Sid);
+                        if (instructorCourseMaps != null)
+                        {
+                            unitOfWork.Instructor_Course_Maps.RemoveRange(instructorCourseMaps);
+                        }
                         unitOfWork.Complete();
                         scope.Complete();
                     }

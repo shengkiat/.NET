@@ -11,6 +11,7 @@ using ActiveLearning.Common;
 using System.Web;
 using System.IO;
 using System.Web.Mvc;
+using System.Transactions;
 
 namespace ActiveLearning.Business.Implementation
 {
@@ -201,6 +202,41 @@ namespace ActiveLearning.Business.Implementation
             message = string.Empty;
             return filteredContents;
         }
+        public IEnumerable<Content> GetAllPendingContents(out string message)
+        {
+            var contentList = new List<Content>();
+            message = string.Empty;
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    var contents = unitOfWork.Contents.Find(c => !c.DeleteDT.HasValue && c.Status.Equals(Constants.Pending_Code, StringComparison.CurrentCultureIgnoreCase));
+                    if (contents == null || contents.Count() == 0)
+                    {
+                        message = Constants.ThereIsNoValueFound(Constants.Content);
+                        return null;
+                    }
+
+                    foreach (var content in contents)
+                    {
+                        content.Course = unitOfWork.Courses.Find(c => c.Sid == content.CourseSid && !c.DeleteDT.HasValue).FirstOrDefault();
+                        if (content.Course != null)
+                        {
+                            contentList.Add(content);
+                        }
+                    }
+
+                    message = string.Empty;
+                    return contentList;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.Content);
+                return null;
+            }
+        }
         public IEnumerable<int> GetAllContentSidsByCounrseSid(int courseSid, out string message)
         {
             var contents = GetAllContentsByCourseSid(courseSid, out message);
@@ -244,6 +280,17 @@ namespace ActiveLearning.Business.Implementation
             {
                 return null;
             }
+            message = string.Empty;
+            return contents.Select(c => c.Sid).ToList();
+        }
+        public IEnumerable<int> GetAllPendingContentSids(out string message)
+        {
+            var contents = GetAllPendingContents(out message);
+            if (contents == null || contents.Count() == 0)
+            {
+                return null;
+            }
+            message = string.Empty;
             return contents.Select(c => c.Sid).ToList();
         }
         public string GetContentPathByContentSid(int contentSid, out string message)
@@ -277,14 +324,10 @@ namespace ActiveLearning.Business.Implementation
             //    return file.FileName;
             //}
         }
-        public Content AddContent(Controller controller, HttpPostedFileBase file, int courseSid, out string message)
+        public Content AddContent(string physicalUploadPath, HttpPostedFileBase file, int courseSid, out string message)
         {
             message = string.Empty;
-            if (controller == null)
-            {
-                message = Constants.ValueIsEmpty(Constants.SourceController);
-                return null;
-            }
+
             if (file == null || file.ContentLength == 0 || String.IsNullOrEmpty(file.FileName))
             {
                 message = Constants.ValueIsEmpty(Constants.File);
@@ -328,7 +371,7 @@ namespace ActiveLearning.Business.Implementation
 
             try
             {
-                var uploadPath = Path.Combine(controller.Server.MapPath(uploadFolder), GUIDFileName);
+                var uploadPath = Path.Combine(physicalUploadPath, GUIDFileName);
                 file.SaveAs(uploadPath);
             }
             catch (Exception ex)
@@ -373,7 +416,7 @@ namespace ActiveLearning.Business.Implementation
         public bool DeleteContent(string physicalFilePath, int contentSid, out string message)
         {
             message = string.Empty;
-            if(string.IsNullOrEmpty(physicalFilePath))
+            if (string.IsNullOrEmpty(physicalFilePath))
             {
                 message = Constants.ValueIsEmpty(Constants.FilePath);
                 return false;
@@ -401,43 +444,120 @@ namespace ActiveLearning.Business.Implementation
                 return false;
             }
         }
-
-        //public bool DeleteContent(Controller controller, Content content, out string message)
-        //{
-        //    message = string.Empty;
-        //    if (content == null || content.Sid == 0)
-        //    {
-        //        message = Constants.ValueIsEmpty(Constants.File);
-        //        return false;
-        //    }
-        //    return DeleteContent(controller, content.Sid, out message);
-        //}
-        //public bool DeleteContent(Controller controller, int contentSid, out string message)
-        //{
-        //    message = string.Empty;
-        //    if (contentSid == 0)
-        //    {
-        //        message = Constants.ValueIsEmpty(Constants.File);
-        //        return false;
-        //    }
-        //    try
-        //    {
-        //        using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
-        //        {
-        //            var content = unitOfWork.Contents.Get(contentSid);
-        //            string path = controller.Server.MapPath(content.Path + content.FileName);
-        //            File.Delete(path);
-        //            content.DeleteDT = DateTime.Now;
-        //            unitOfWork.Complete();
-        //        }
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ExceptionLog(ex);
-        //        message = Constants.OperationFailedDuringDeletingValue(Constants.File);
-        //        return false;
-        //    }
-        //}
-    }
+        public bool UpdateContent(Content content, out string message)
+        {
+            message = string.Empty;
+            if (content == null || content.Sid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Content);
+                return false;
+            }
+            var contentToUpdate = GetContentByContentSid(content.Sid, out message);
+            if (contentToUpdate == null)
+            {
+                return false;
+            }
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    Util.CopyNonNullProperty(content, contentToUpdate);
+                    contentToUpdate.UpdateDT = DateTime.Now;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        unitOfWork.Complete();
+                        scope.Complete();
+                    }
+                }
+                message = string.Empty;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringUpdatingValue(Constants.Content);
+                return false;
+            }
+        }
+        public bool UpdateContentStatus(int contentSid, string status, string remark, out string message)
+        {
+            message = string.Empty;
+            if (contentSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Content);
+                return false;
+            }
+            if (string.IsNullOrEmpty(status))
+            {
+                message = Constants.ValueIsEmpty(Constants.Status);
+                return false;
+            }
+            switch (status)
+            {
+                case Constants.Pending_Code:
+                case Constants.Accepted_Code:
+                case Constants.Rejected_Code:
+                    remark = string.Empty;
+                    break;
+                case Constants.Commented_Code:
+                    if (string.IsNullOrEmpty(remark))
+                    {
+                        message = Constants.ValueIsEmpty(Constants.Remark);
+                        return false;
+                    }
+                    break;
+                default:
+                    message = Constants.UnknownValue(Constants.Status);
+                    return false;
+            }
+            var content = GetContentByContentSid(contentSid, out message);
+            if (content == null)
+            {
+                return false;
+            }
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    var contentToUpdate = unitOfWork.Contents.Get(content.Sid);
+                    contentToUpdate.UpdateDT = DateTime.Now;
+                    contentToUpdate.Status = status;
+                    contentToUpdate.Remark = remark;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        unitOfWork.Complete();
+                        scope.Complete();
+                    }
+                }
+                message = string.Empty;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringUpdatingValue(Constants.Content);
+                return false;
+            }
+        }
+        public bool AcceptContent(Content content, out string message)
+        {
+            message = string.Empty;
+            if (content == null || content.Sid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Content);
+                return false;
+            }
+            return UpdateContentStatus(content.Sid, Constants.Accepted_Code, content.Remark, out message);
+        }
+        public bool CommentContent(Content content, out string message)
+        {
+            message = string.Empty;
+            if (content == null || content.Sid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Content);
+                return false;
+            }
+            return UpdateContentStatus(content.Sid, Constants.Commented_Code, content.Remark, out message);
+        }
+      }
 }
