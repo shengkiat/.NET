@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace ActiveLearning.Common
 {
- public   class Util
+    public class Util
     {
         #region Copy values
 
@@ -133,10 +133,10 @@ namespace ActiveLearning.Common
         }
         public static string GetVideoFormatsFromConfig()
         {
-            string defaultVideoFormats = "mp4";
+            string defaultVideoFormats = ".mp4";
             string key = "VideoFormats";
             string[] settings = System.Web.Configuration.WebConfigurationManager.AppSettings.GetValues(key);
-            return settings == null || settings.Length == 0 ? defaultVideoFormats : settings[0];
+            return settings == null || settings.Length == 0 ? defaultVideoFormats : "." + settings[0].Replace(",", ",.");
         }
         public static int GetAllowedFileSizeFromConfig()
         {

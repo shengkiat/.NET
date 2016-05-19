@@ -174,6 +174,7 @@ namespace ActiveLearning.Business.Implementation
             catch (Exception ex)
             {
                 ExceptionLog(ex);
+                ExceptionLog(ex.InnerException);
                 messge = Constants.OperationFailedDuringAuthentingUserValue(userName);
                 return authenticatedUser;
             }
