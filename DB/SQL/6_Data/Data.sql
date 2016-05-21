@@ -262,29 +262,29 @@ INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT],
 GO
 INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (4, N'Which is not actually a Thing.js?', CAST(N'2016-04-20 12:22:15.503' AS DateTime), NULL, NULL, 1)
 GO
-INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (5, N'In what year was the first Voice Over IP (VOIP, GETDATE(), 4) call made?', CAST(N'2016-04-20 12:22:15.503' AS DateTime), NULL, NULL, 2)
+INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (5, N'In what year was the first Voice Over IP (VOIP, GETDATE(), 4) call made?', CAST(N'2016-04-20 12:22:15.503' AS DateTime), NULL, NULL, 1)
 GO
-INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (6, N'"Chica" was codename for what Microsoft product?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 2)
+INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (6, N'"Chica" was codename for what Microsoft product?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 1)
 GO
-INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (7, N'How many loop constructs are there in C#?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 2)
+INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (7, N'How many loop constructs are there in C#?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 1)
 GO
-INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (8, N'What was the first CodePlex.com project?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 3)
+INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (8, N'What was the first CodePlex.com project?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 1)
 GO
-INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (9, N'Last name of the employee who wears Microsoft badge 00001', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 3)
+INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (9, N'Last name of the employee who wears Microsoft badge 00001', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 1)
 GO
-INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (10, N'When did Scott Hanselman join Microsoft?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 4)
+INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (10, N'When did Scott Hanselman join Microsoft?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 1)
 GO
-INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (11, N'How big is a nibble?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 4)
+INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (11, N'How big is a nibble?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 2)
 GO
 INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (12, N'How many function calls did Windows 1.0 approximately have?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 4)
 GO
-INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (13, N'Which Star Wars movie was filmed entirely in the studio?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 4)
+INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (13, N'Which Star Wars movie was filmed entirely in the studio?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 2)
 GO
-INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (14, N'What is Superman''s Kryptonian name?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 4)
+INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (14, N'What is Superman''s Kryptonian name?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 2)
 GO
 INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (15, N'What is the image name for the Windows Task Manager application?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 4)
 GO
-INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (16, N'When was the internet opened to commercial use?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 4)
+INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (16, N'When was the internet opened to commercial use?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 3)
 GO
 INSERT [dbo].[QuizQuestion] ([Sid], [Title], [CreateDT], [UpdateDT], [DeleteDT], [CourseSid]) VALUES (17, N'When was the Xbox unveiled?', CAST(N'2016-04-20 12:22:15.507' AS DateTime), NULL, NULL, 4)
 GO

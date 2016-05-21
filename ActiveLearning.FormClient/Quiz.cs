@@ -63,7 +63,10 @@ namespace ActiveLearning.FormClient
         }
         private async Task SubmitAnswer()
         {
-            int answer = (ListBoxOptions.SelectedItem as QuizOptionDTO).Sid;
+            QuizOptionDTO selectedOption = ListBoxOptions.SelectedItem as QuizOptionDTO;
+            if (selectedOption == null)
+                return;
+            int answer = selectedOption.Sid;
             bool? isCorrect = null;
             try
             {
