@@ -34,7 +34,8 @@ namespace ActiveLearning.Business.Interface
         bool UpdateContent(Content content, out string message);
         bool UpdateContentStatus(int contentSid, string status, string remark, out string message);
         bool AcceptContent(Content content, out string message);
+        bool AcceptContent(int contentSid, out string message);
         bool CommentContent(Content content, out string message);
-
+        bool CommentContent(int contentSid, string remark, out string message);
     }
 }

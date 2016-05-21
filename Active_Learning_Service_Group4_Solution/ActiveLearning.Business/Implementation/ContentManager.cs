@@ -30,6 +30,7 @@ namespace ActiveLearning.Business.Implementation
                         message = Constants.ValueNotFound(Constants.Content);
                         return null;
                     }
+                    content.Course = unitOfWork.Courses.Find(c => c.Sid == content.CourseSid && !c.DeleteDT.HasValue).FirstOrDefault();
                     message = string.Empty;
                     return content;
                 }
@@ -339,7 +340,7 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
 
-            var fileName = file.FileName;
+            var fileName = new FileInfo(file.FileName).Name;
             var fileExtension = Path.GetExtension(file.FileName);
             var fileSize = file.ContentLength;
 
@@ -387,7 +388,7 @@ namespace ActiveLearning.Business.Implementation
                 content.CourseSid = courseSid;
                 content.CreateDT = DateTime.Now;
                 content.FileName = GUIDFileName;
-                content.OriginalFileName = file.FileName;
+                content.OriginalFileName = fileName;
                 content.Status = Constants.Pending_Code;
                 if (Util.GetVideoFormatsFromConfig().Contains(fileExtension))
                 {
@@ -500,9 +501,9 @@ namespace ActiveLearning.Business.Implementation
                     remark = string.Empty;
                     break;
                 case Constants.Commented_Code:
-                    if (string.IsNullOrEmpty(remark))
+                    if (string.IsNullOrEmpty(remark) || string.IsNullOrEmpty(remark.Trim()))
                     {
-                        message = Constants.ValueIsEmpty(Constants.Remark);
+                        message = Constants.PleaseEnterValue(Constants.Remark);
                         return false;
                     }
                     break;
@@ -510,16 +511,12 @@ namespace ActiveLearning.Business.Implementation
                     message = Constants.UnknownValue(Constants.Status);
                     return false;
             }
-            var content = GetContentByContentSid(contentSid, out message);
-            if (content == null)
-            {
-                return false;
-            }
+
             try
             {
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
-                    var contentToUpdate = unitOfWork.Contents.Get(content.Sid);
+                    var contentToUpdate = unitOfWork.Contents.Get(contentSid);
                     contentToUpdate.UpdateDT = DateTime.Now;
                     contentToUpdate.Status = status;
                     contentToUpdate.Remark = remark;
@@ -549,6 +546,10 @@ namespace ActiveLearning.Business.Implementation
             }
             return UpdateContentStatus(content.Sid, Constants.Accepted_Code, content.Remark, out message);
         }
+        public bool AcceptContent(int contentSid, out string message)
+        {
+            return UpdateContentStatus(contentSid, Constants.Accepted_Code, string.Empty, out message);
+        }
         public bool CommentContent(Content content, out string message)
         {
             message = string.Empty;
@@ -559,5 +560,9 @@ namespace ActiveLearning.Business.Implementation
             }
             return UpdateContentStatus(content.Sid, Constants.Commented_Code, content.Remark, out message);
         }
-      }
+        public bool CommentContent(int contentSid, string remark, out string message)
+        {
+            return UpdateContentStatus(contentSid, Constants.Commented_Code, remark, out message);
+        }
+    }
 }

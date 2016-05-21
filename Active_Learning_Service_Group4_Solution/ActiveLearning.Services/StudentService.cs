@@ -27,7 +27,7 @@ namespace ActiveLearning.Services
 
         public IEnumerable<CourseDTO> GetCourses()
         {
-            if (studentDTO == null)
+            if (studentDTO == null || userDTO == null)
             {
                 throw new FaultException(Constants.User_Not_Logged_In);
             }
@@ -52,7 +52,7 @@ namespace ActiveLearning.Services
 
         public IEnumerable<ContentDTO> GetContentsByCourseSid(int courseSid)
         {
-            if (studentDTO == null)
+            if (studentDTO == null || userDTO == null)
             {
                 throw new FaultException(Constants.User_Not_Logged_In);
             }
@@ -77,17 +77,30 @@ namespace ActiveLearning.Services
 
         public QuizQuestionDTO GetNextQuizQuestionByCourseSid(int courseSid)
         {
-            if (studentDTO == null)
+            if (studentDTO == null || userDTO == null)
             {
                 throw new FaultException(Constants.User_Not_Logged_In);
             }
+            using (quizManager = new QuizManager())
+            {
+                string message = string.Empty;
+                var quizQuestion = quizManager.GetNextQuizQuestionByStudentSidCourseSid(studentDTO.Sid, courseSid, out message);
+                if (quizQuestion == null)
+                {
+                    throw new FaultException(message);
+                }
 
+                QuizQuestionDTO quizQuestionDTO = new QuizQuestionDTO();
+                Util.CopyNonNullProperty(quizQuestion, quizQuestionDTO);
+
+                return quizQuestionDTO;
+            }
             throw new NotImplementedException();
         }
 
         public bool AnswerQuiz(int courseSid, int quizQuestionSid, int quizOptionSid)
         {
-            if (studentDTO == null)
+            if (studentDTO == null || userDTO == null)
             {
                 throw new FaultException(Constants.User_Not_Logged_In);
             }
@@ -136,7 +149,8 @@ namespace ActiveLearning.Services
 
         public void Logout()
         {
-
+            userDTO = null;
+            studentDTO = null;
         }
     }
 }

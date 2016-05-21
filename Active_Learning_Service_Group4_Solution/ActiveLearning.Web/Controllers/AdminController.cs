@@ -537,11 +537,10 @@ namespace ActiveLearning.Web.Controllers
             }
             string message = string.Empty;
             var studentToUpdate = TempData.Peek("EditStudent") as Student;
-            studentToUpdate.User.Username = student.User.Username;
             studentToUpdate.User.Password = student.User.Password;
             studentToUpdate.User.FullName = student.User.FullName;
-
             studentToUpdate.BatchNo = student.BatchNo;
+
             using (var userManager = new UserManager())
             {
                 if (userManager.UpdateStudent(studentToUpdate, out message))
@@ -800,7 +799,7 @@ namespace ActiveLearning.Web.Controllers
                 return RedirectToLogin();
             }
             string message = string.Empty;
-           
+
             string filepath;
             string fileType;
             using (var contentManager = new ContentManager())
@@ -830,6 +829,82 @@ namespace ActiveLearning.Web.Controllers
                 return file;
             }
             return RedirectToError(null); ;
+        }
+        [HttpGet]
+        public ActionResult CommentContent(int contentSid)
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            string message = string.Empty;
+
+            using (var contentManager = new ContentManager())
+            {
+                var content = contentManager.GetContentByContentSid(contentSid, out message);
+
+                if (content == null)
+                {
+                    SetViewBagError(message);
+                }
+                SetBackURL("ReviewContent");
+                return View(content);
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Duration = 0)]
+        public ActionResult CommentContent(int contentSid, string remark)
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            string message = string.Empty;
+
+            using (var contentManager = new ContentManager())
+            {
+                var content = contentManager.GetContentByContentSid(contentSid, out message);
+                if (content == null)
+                {
+                    SetViewBagError(message);
+                    SetBackURL("ReviewContent");
+                    return View(content);
+                }
+                content.Remark = remark;
+                if (contentManager.CommentContent(content, out message))
+                {
+                    SetTempDataMessage(Constants.ValueSuccessfuly("Content has been commented"));
+                    return RedirectToAction("ReviewContent");
+                }
+                else
+                {
+                    SetViewBagError(message);
+                    SetBackURL("ReviewContent");
+                    return View(content);
+                }
+            }
+        }
+        public ActionResult AcceptContent(int contentSid)
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            string message = string.Empty;
+
+            using (var contentManager = new ContentManager())
+            {
+                if (contentManager.AcceptContent(contentSid, out message))
+                {
+                    SetTempDataMessage(Constants.ValueSuccessfuly("Content has been accepted"));
+                }
+                else
+                {
+                    SetTempDataError(message);
+                }
+                return RedirectToAction("ReviewContent");
+            }
         }
         #endregion
     }

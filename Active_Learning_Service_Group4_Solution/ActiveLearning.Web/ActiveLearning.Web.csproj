@@ -309,6 +309,9 @@
     <Content Include="Views\Shared\ChangePassword.cshtml" />
     <Content Include="Views\Instructor\Chat.cshtml" />
     <Content Include="Views\Admin\ReviewContent.cshtml" />
+    <Content Include="Views\Admin\CommentContent.cshtml">
+      <BrowseToURL>~/Admin/CommentContent</BrowseToURL>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

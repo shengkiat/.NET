@@ -24,7 +24,5 @@ namespace ActiveLearning.ServiceInterfaces
 
         [OperationContract]
         bool AnswerQuiz(int courseSid, int quizQuestionSid, int quizOptionSid);
-
     }
-
 }

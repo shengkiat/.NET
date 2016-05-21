@@ -28,8 +28,6 @@ namespace ActiveLearning.Web.Controllers
         }
         #endregion
 
-
-
         #region Course
         [OutputCache(Duration = Cache_Duration)]
         public ActionResult CourseList()
@@ -102,7 +100,7 @@ namespace ActiveLearning.Web.Controllers
             {
                 return RedirectToError(message);
             }
-
+            ViewBag.CourseSid = courseSid;
             var items = new List<Content>();
             using (var contentManager = new ContentManager())
             {
@@ -115,10 +113,10 @@ namespace ActiveLearning.Web.Controllers
                 else
                 {
                     SetViewBagError(message);
+                    SetBackURL("courselist");
                     return View(items);
                 }
             }
-            ViewBag.CourseSid = courseSid;
             GetErrorAneMessage();
             SetBackURL("courselist");
             return View(items);

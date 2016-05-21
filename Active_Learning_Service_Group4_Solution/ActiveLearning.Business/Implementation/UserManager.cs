@@ -520,14 +520,15 @@ namespace ActiveLearning.Business.Implementation
                     var userToUpdate = unitOfWork.Users.Get(student.User.Sid);
                     Util.CopyNonNullProperty(student.User, userToUpdate);
                     userToUpdate.UpdateDT = DateTime.Now;
-                    if (userToUpdate.Password != null) userToUpdate.Password = userToUpdate.Password.Trim();
-                    if (!Util.IsPasswordComplex(userToUpdate.Password))
+
+                    if (!string.IsNullOrEmpty(student.User.Password))
                     {
-                        message = Constants.PasswordTooSimple;
-                        return false;
-                    }
-                    if (!string.IsNullOrEmpty(userToUpdate.Password))
-                    {
+                        userToUpdate.Password = student.User.Password.Trim();
+                        if (!Util.IsPasswordComplex(userToUpdate.Password))
+                        {
+                            message = Constants.PasswordTooSimple;
+                            return false;
+                        }
                         userToUpdate.Password = Util.CreateHash(userToUpdate.Password, userToUpdate.PasswordSalt);
                     }
                     using (TransactionScope scope = new TransactionScope())
@@ -890,20 +891,23 @@ namespace ActiveLearning.Business.Implementation
                 {
                     using (TransactionScope scope = new TransactionScope())
                     {
-                        instructor.User.UpdateDT = DateTime.Now;
-                        Util.CopyNonNullProperty(instructor, unitOfWork.Instructors.Get(instructor.Sid));
+                        var instructorToUpdate = unitOfWork.Instructors.Get(instructor.Sid);
+                        Util.CopyNonNullProperty(instructor, instructorToUpdate);
                         var userToUpdate = unitOfWork.Users.Get(instructor.User.Sid);
                         Util.CopyNonNullProperty(instructor.User, userToUpdate);
-                        if (userToUpdate.Password != null) userToUpdate.Password = userToUpdate.Password.Trim();
-                        if (!Util.IsPasswordComplex(userToUpdate.Password))
+                        instructor.User.UpdateDT = DateTime.Now;
+
+                        if (!string.IsNullOrEmpty(instructor.User.Password))
                         {
-                            message = Constants.PasswordTooSimple;
-                            return false;
-                        }
-                        if (!string.IsNullOrEmpty(userToUpdate.Password))
-                        {
+                            userToUpdate.Password = instructor.User.Password.Trim();
+                            if (!Util.IsPasswordComplex(userToUpdate.Password))
+                            {
+                                message = Constants.PasswordTooSimple;
+                                return false;
+                            }
                             userToUpdate.Password = Util.CreateHash(userToUpdate.Password, userToUpdate.PasswordSalt);
                         }
+
                         unitOfWork.Complete();
                         scope.Complete();
                     }

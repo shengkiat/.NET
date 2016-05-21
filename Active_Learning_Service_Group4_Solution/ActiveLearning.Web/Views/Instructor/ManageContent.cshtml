@@ -37,7 +37,7 @@
                             <br />
                             <input hidden="hidden" name="CourseSid" value="@ViewBag.CourseSid" />
                             <div class="editor-field">
-                                <input type="submit" value="Upload File" class="btn btn-success" style="margin-right:25%;width:100%" onclick="return checkFileSelected()" />
+                                <input type="submit" name="upload" value="Upload File" class="btn btn-success has-spinner" style="margin-right:25%;width:100%" onclick="return checkFileSelected()" />
                             </div>
 
                         </fieldset>
@@ -59,7 +59,7 @@
         <table class="table" style="margin-top:20px">
             <tr>
                 <th>File Name</th>
-                <th>File Type</th>
+                <th>Type</th>
                 <th>Status</th>
                 <th>Remark</th>
                 <th>Action</th>
@@ -144,5 +144,52 @@
             return false;
         }
     }
+    $("#upload").click(function () {
+        var $btn = $(this);
+        $btn.button('loading');
+        // simulating a timeout
+        setTimeout(function () {
+            $btn.button('reset');
+        }, 100000);
+    });
+</script>
+<script type="text/javascript" defer="defer">
+
 
 </script>
+<style type="text/css">
+    .spinner {
+        display: inline-block;
+        opacity: 0;
+        width: 0;
+        -webkit-transition: opacity 0.25s, width 0.25s;
+        -moz-transition: opacity 0.25s, width 0.25s;
+        -o-transition: opacity 0.25s, width 0.25s;
+        transition: opacity 0.25s, width 0.25s;
+    }
+
+    .has-spinner.active {
+        cursor: progress;
+    }
+
+        .has-spinner.active .spinner {
+            opacity: 1;
+            width: auto; /* This doesn't work, just fix for unkown width elements */
+        }
+
+    .has-spinner.btn-mini.active .spinner {
+        width: 10px;
+    }
+
+    .has-spinner.btn-small.active .spinner {
+        width: 13px;
+    }
+
+    .has-spinner.btn.active .spinner {
+        width: 16px;
+    }
+
+    .has-spinner.btn-large.active .spinner {
+        width: 19px;
+    }
+</style>

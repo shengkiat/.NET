@@ -77,6 +77,71 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
+        public QuizQuestion GetNextQuizQuestionByStudentSidCourseSid(int studentSid, int courseSid, out string message)
+        {
+            if (studentSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Student);
+                return null;
+            }
+            if (courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return null;
+            }
+            try
+            {
+                using (UnitOfWork unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    // first retrieval of active questions
+                    var quizQuestions = unitOfWork.QuizQuestions.Find(q => q.CourseSid == courseSid && !q.DeleteDT.HasValue);
+
+                    if (quizQuestions == null || quizQuestions.Count() == 0)
+                    {
+                        message = Constants.ThereIsNoValueFound("New Quiz Question");
+                        return null;
+                    }
+
+                    List<int> quizQuestionSids = quizQuestions.Select(q => q.Sid).ToList();
+
+                    // retrieve answers
+                    var answers = unitOfWork.QuizAnswers.Find(a => a.StudentSid == studentSid && !a.DeleteDT.HasValue && quizQuestionSids.Contains(a.QuizQuestionSid));
+
+                    // exlucde answered questions
+                    if (answers != null)
+                    {
+                        List<int> answeredQuizQuestionSid = answers.Select(a => a.QuizQuestionSid).ToList();
+                        quizQuestions = quizQuestions.Where(q => !answeredQuizQuestionSid.Contains(q.Sid));
+                    }
+
+                    if (quizQuestions == null || quizQuestions.Count() == 0)
+                    {
+                        message = Constants.ThereIsNoValueFound("New Quiz Question");
+                        return null;
+                    }
+
+                    //retrive options for each question
+                    foreach (var question in quizQuestions)
+                    {
+                        question.QuizOptions = unitOfWork.QuizOptions.Find(o => o.QuizQuestionSid == question.Sid && !o.DeleteDT.HasValue).ToList();
+                    }
+
+                    // exlclude questions without options
+                    quizQuestions = quizQuestions.Where(q => q.QuizOptions != null && q.QuizOptions.Count() > 0);
+
+                    Random ran = new Random();
+
+                    message = string.Empty;
+                    return quizQuestions.ElementAt(ran.Next(quizQuestions.Count())); ;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.QuizQuestion);
+                return null;
+            }
+        }
         public IEnumerable<QuizQuestion> GetActiveQuizQuestionsByCourseSid(int courseSid, out string message)
         {
             if (courseSid == 0)
@@ -114,7 +179,6 @@ namespace ActiveLearning.Business.Implementation
             }
             return quizQuestions.Select(q => q.Sid).ToList();
         }
-
         public QuizQuestion AddQuizQuestionToCourse(QuizQuestion quizQuestion, int courseSid, out string message)
         {
             if (quizQuestion == null)
@@ -127,7 +191,7 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.ValueIsEmpty(Constants.Course);
                 return null;
             }
-            if(string.IsNullOrEmpty(quizQuestion.Title)|| string.IsNullOrEmpty(quizQuestion.Title.Trim()))
+            if (string.IsNullOrEmpty(quizQuestion.Title) || string.IsNullOrEmpty(quizQuestion.Title.Trim()))
             {
                 message = Constants.PleaseFillInAllRequiredFields();
                 //message = Constants.PleaseEnterValue(Constants.QuizTitle);
@@ -359,7 +423,7 @@ namespace ActiveLearning.Business.Implementation
             {
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
-                    var quizOptionToUpdate = unitOfWork.QuizOptions.GetAll().Where(a=> a.Sid == quizOption.Sid).FirstOrDefault();
+                    var quizOptionToUpdate = unitOfWork.QuizOptions.GetAll().Where(a => a.Sid == quizOption.Sid).FirstOrDefault();
                     Util.CopyNonNullProperty(quizOption, quizOptionToUpdate);
                     quizOptionToUpdate.UpdateDT = DateTime.Now;
 
@@ -428,7 +492,6 @@ namespace ActiveLearning.Business.Implementation
                 return false;
             }
         }
-
         public QuizAnswer GetQuizAnswerByQuizAnswerSid(int quizAnswerSid, out string message)
         {
             if (quizAnswerSid == 0)
@@ -623,6 +686,7 @@ namespace ActiveLearning.Business.Implementation
             }
             throw new NotImplementedException();
         }
+
         #endregion
 
         #region Async
@@ -788,7 +852,7 @@ namespace ActiveLearning.Business.Implementation
             //};
         }
 
-       
+
         #endregion
     }
 }

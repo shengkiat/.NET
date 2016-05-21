@@ -12,6 +12,7 @@ namespace ActiveLearning.Business.Interface
     {
         bool QuizQuestionTitleExists(string quizTitle, out string message);
         QuizQuestion GetQuizQuestionByQuizQuestionSid(int quizQuestionSid, out string message);
+        QuizQuestion GetNextQuizQuestionByStudentSidCourseSid(int studentSid, int courseSid, out string message);
         IEnumerable<QuizQuestion> GetActiveQuizQuestionsByCourseSid(int courseSid, out string message);
         IEnumerable<int> GetActiveQuizQuestionSidsByCourseSid(int courseSid, out string message);
         //IEnumerable<QuizQuestion> GetDeletedQuizQuestionsByCourseSid(int courseSid, out string message);
@@ -36,7 +37,7 @@ namespace ActiveLearning.Business.Interface
         bool DeleteQuizAnswer(int quizAnswerSid, out string message);
         bool IsQuizAnswerCorrect(int quizQuestionSid, int quizAnswerSid, out string message);
         //IEnumerable<QuizQuestion> GetActiveQuizQuestionQuizOptionQuizAnswerByStudentSid(int studentSid, out string message);
-        Task<QuizQuestion> NextQuestionAsync(int userId, int CourseSid);
+        Task<QuizQuestion> NextQuestionAsync(int studentSid, int CourseSid);
         Task<bool> StoreAsync(QuizAnswer answer);
         Task NotifyUpdates(int courseSid);
         Task<StatisticsViewModel> GenerateStatistics(int courseSid);
