@@ -23,6 +23,6 @@ namespace ActiveLearning.ServiceInterfaces
         QuizQuestionDTO GetNextQuizQuestionByCourseSid(int courseSid);
 
         [OperationContract]
-        bool AnswerQuiz(int courseSid, int quizQuestionSid, int quizOptionSid);
+        bool? AnswerQuiz(int quizQuestionSid, int quizOptionSid);
     }
 }

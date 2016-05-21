@@ -69,7 +69,6 @@
   <xs:element name="AnswerQuiz">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="courseSid" type="xs:int" />
         <xs:element minOccurs="0" name="quizQuestionSid" type="xs:int" />
         <xs:element minOccurs="0" name="quizOptionSid" type="xs:int" />
       </xs:sequence>
@@ -78,7 +77,7 @@
   <xs:element name="AnswerQuizResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AnswerQuizResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="AnswerQuizResult" nillable="true" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -27,6 +27,8 @@ namespace ActiveLearning.FormClient
         {
             this.StartPosition = FormStartPosition.CenterScreen;
 
+            //client.ClientCredentials.ServiceCertificate.SslCertificateAuthentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
+
             var loginForm = new Login(client);
             DialogResult result = loginForm.ShowDialog();
 

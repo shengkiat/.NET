@@ -93,24 +93,34 @@ namespace ActiveLearning.Services
                 QuizQuestionDTO quizQuestionDTO = new QuizQuestionDTO();
                 Util.CopyNonNullProperty(quizQuestion, quizQuestionDTO);
 
+                quizQuestionDTO.QuizOptions = new List<QuizOptionDTO>();
+                foreach (var quizOption in quizQuestion.QuizOptions)
+                {
+                    QuizOptionDTO quizOptionDTO = new QuizOptionDTO();
+                    Util.CopyNonNullProperty(quizOption, quizOptionDTO);
+                    quizQuestionDTO.QuizOptions.Add(quizOptionDTO);
+                }
+
                 return quizQuestionDTO;
             }
-            throw new NotImplementedException();
         }
 
-        public bool AnswerQuiz(int courseSid, int quizQuestionSid, int quizOptionSid)
+        public bool? AnswerQuiz(int quizQuestionSid, int quizOptionSid)
         {
             if (studentDTO == null || userDTO == null)
             {
                 throw new FaultException(Constants.User_Not_Logged_In);
             }
-
+            string message = string.Empty;
             using (quizManager = new QuizManager())
             {
-
+                var result = quizManager.IsQuizAnswerCorrect(studentDTO.Sid, quizQuestionSid, quizOptionSid, out message);
+                if (result == null)
+                {
+                    throw new FaultException(message);
+                }
+                return result;
             }
-
-            throw new NotImplementedException();
         }
 
         public bool Login(string userName, string password)

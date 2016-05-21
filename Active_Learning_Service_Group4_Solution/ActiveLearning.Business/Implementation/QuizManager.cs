@@ -676,14 +676,48 @@ namespace ActiveLearning.Business.Implementation
                 return false;
             }
         }
-        public bool IsQuizAnswerCorrect(int quizQuestionSid, int quizAnswerSid, out string message)
+        public bool? IsQuizAnswerCorrect(int studentSid, int quizQuestionSid, int quizOptionSid, out string message)
         {
-
-            if (quizAnswerSid == 0)
+            if (studentSid == 0)
             {
-                message = Constants.ValueIsEmpty(Constants.QuizAnswer);
-                return false;
+                message = Constants.ValueIsEmpty(Constants.Student);
+                return null; 
             }
+            if (quizQuestionSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.QuizQuestion);
+                return null;
+            }
+            if (quizOptionSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.QuizOption);
+                return null;
+            }
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    var quizAnswer = new QuizAnswer();
+                    quizAnswer.CreateDT = DateTime.Now;
+                    quizAnswer.QuizQuestionSid = quizQuestionSid;
+                    quizAnswer.QuizOptionSid = quizOptionSid;
+                    quizAnswer.StudentSid = studentSid;
+                    unitOfWork.QuizAnswers.Add(quizAnswer);
+                    unitOfWork.Complete();
+
+                    var selectedOption = unitOfWork.QuizOptions.Find(o => o.Sid == quizOptionSid && o.QuizQuestionSid == quizQuestionSid && !o.DeleteDT.HasValue).FirstOrDefault();
+                    message = string.Empty;
+                    return selectedOption.IsCorrect;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.QuizOption);
+                return null;
+            }
+
             throw new NotImplementedException();
         }
 

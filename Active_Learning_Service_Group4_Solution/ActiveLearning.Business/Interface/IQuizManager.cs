@@ -35,7 +35,7 @@ namespace ActiveLearning.Business.Interface
         bool UpdateQuizAnswer(QuizAnswer quizAnswer, out string message);
         bool DeleteQuizAnswer(QuizAnswer quizAnswer, out string message);
         bool DeleteQuizAnswer(int quizAnswerSid, out string message);
-        bool IsQuizAnswerCorrect(int quizQuestionSid, int quizAnswerSid, out string message);
+        bool? IsQuizAnswerCorrect(int studentSid, int quizQuestionSid, int quizOptionSid, out string message);
         //IEnumerable<QuizQuestion> GetActiveQuizQuestionQuizOptionQuizAnswerByStudentSid(int studentSid, out string message);
         Task<QuizQuestion> NextQuestionAsync(int studentSid, int CourseSid);
         Task<bool> StoreAsync(QuizAnswer answer);

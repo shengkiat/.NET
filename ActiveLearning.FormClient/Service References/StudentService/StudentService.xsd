@@ -41,10 +41,29 @@
       <xs:element minOccurs="0" name="CourseSid" type="xs:int" />
       <xs:element minOccurs="0" name="CreateDT" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DeleteDT" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="QuizOptions" nillable="true" type="tns:ArrayOfQuizOptionDTO" />
       <xs:element minOccurs="0" name="Sid" type="xs:int" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdateDT" nillable="true" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="QuizQuestionDTO" nillable="true" type="tns:QuizQuestionDTO" />
+  <xs:complexType name="ArrayOfQuizOptionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QuizOptionDTO" nillable="true" type="tns:QuizOptionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuizOptionDTO" nillable="true" type="tns:ArrayOfQuizOptionDTO" />
+  <xs:complexType name="QuizOptionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDT" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DeleteDT" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IsCorrect" type="xs:boolean" />
+      <xs:element minOccurs="0" name="QuizQuestionSid" type="xs:int" />
+      <xs:element minOccurs="0" name="Sid" type="xs:int" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDT" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QuizOptionDTO" nillable="true" type="tns:QuizOptionDTO" />
 </xs:schema>

@@ -314,6 +314,9 @@ namespace ActiveLearning.FormClient.StudentService {
         private System.Nullable<System.DateTime> DeleteDTField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ActiveLearning.FormClient.StudentService.QuizOptionDTO[] QuizOptionsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SidField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -367,6 +370,160 @@ namespace ActiveLearning.FormClient.StudentService {
                 if ((this.DeleteDTField.Equals(value) != true)) {
                     this.DeleteDTField = value;
                     this.RaisePropertyChanged("DeleteDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ActiveLearning.FormClient.StudentService.QuizOptionDTO[] QuizOptions {
+            get {
+                return this.QuizOptionsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.QuizOptionsField, value) != true)) {
+                    this.QuizOptionsField = value;
+                    this.RaisePropertyChanged("QuizOptions");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sid {
+            get {
+                return this.SidField;
+            }
+            set {
+                if ((this.SidField.Equals(value) != true)) {
+                    this.SidField = value;
+                    this.RaisePropertyChanged("Sid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> UpdateDT {
+            get {
+                return this.UpdateDTField;
+            }
+            set {
+                if ((this.UpdateDTField.Equals(value) != true)) {
+                    this.UpdateDTField = value;
+                    this.RaisePropertyChanged("UpdateDT");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="QuizOptionDTO", Namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.ServiceInterfaces.DTO")]
+    [System.SerializableAttribute()]
+    public partial class QuizOptionDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateDTField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> DeleteDTField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsCorrectField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuizQuestionSidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> UpdateDTField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateDT {
+            get {
+                return this.CreateDTField;
+            }
+            set {
+                if ((this.CreateDTField.Equals(value) != true)) {
+                    this.CreateDTField = value;
+                    this.RaisePropertyChanged("CreateDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> DeleteDT {
+            get {
+                return this.DeleteDTField;
+            }
+            set {
+                if ((this.DeleteDTField.Equals(value) != true)) {
+                    this.DeleteDTField = value;
+                    this.RaisePropertyChanged("DeleteDT");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsCorrect {
+            get {
+                return this.IsCorrectField;
+            }
+            set {
+                if ((this.IsCorrectField.Equals(value) != true)) {
+                    this.IsCorrectField = value;
+                    this.RaisePropertyChanged("IsCorrect");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int QuizQuestionSid {
+            get {
+                return this.QuizQuestionSidField;
+            }
+            set {
+                if ((this.QuizQuestionSidField.Equals(value) != true)) {
+                    this.QuizQuestionSidField = value;
+                    this.RaisePropertyChanged("QuizQuestionSid");
                 }
             }
         }
@@ -455,10 +612,10 @@ namespace ActiveLearning.FormClient.StudentService {
         System.Threading.Tasks.Task<ActiveLearning.FormClient.StudentService.QuizQuestionDTO> GetNextQuizQuestionByCourseSidAsync(int courseSid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/AnswerQuiz", ReplyAction="http://tempuri.org/IStudentService/AnswerQuizResponse")]
-        bool AnswerQuiz(int courseSid, int quizQuestionSid, int quizOptionSid);
+        System.Nullable<bool> AnswerQuiz(int quizQuestionSid, int quizOptionSid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/AnswerQuiz", ReplyAction="http://tempuri.org/IStudentService/AnswerQuizResponse")]
-        System.Threading.Tasks.Task<bool> AnswerQuizAsync(int courseSid, int quizQuestionSid, int quizOptionSid);
+        System.Threading.Tasks.Task<System.Nullable<bool>> AnswerQuizAsync(int quizQuestionSid, int quizOptionSid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -528,12 +685,12 @@ namespace ActiveLearning.FormClient.StudentService {
             return base.Channel.GetNextQuizQuestionByCourseSidAsync(courseSid);
         }
         
-        public bool AnswerQuiz(int courseSid, int quizQuestionSid, int quizOptionSid) {
-            return base.Channel.AnswerQuiz(courseSid, quizQuestionSid, quizOptionSid);
+        public System.Nullable<bool> AnswerQuiz(int quizQuestionSid, int quizOptionSid) {
+            return base.Channel.AnswerQuiz(quizQuestionSid, quizOptionSid);
         }
         
-        public System.Threading.Tasks.Task<bool> AnswerQuizAsync(int courseSid, int quizQuestionSid, int quizOptionSid) {
-            return base.Channel.AnswerQuizAsync(courseSid, quizQuestionSid, quizOptionSid);
+        public System.Threading.Tasks.Task<System.Nullable<bool>> AnswerQuizAsync(int quizQuestionSid, int quizOptionSid) {
+            return base.Channel.AnswerQuizAsync(quizQuestionSid, quizOptionSid);
         }
     }
 }

@@ -14,5 +14,7 @@ namespace ActiveLearning.ServiceInterfaces.DTO
         public Nullable<System.DateTime> UpdateDT { get; set; }
         public Nullable<System.DateTime> DeleteDT { get; set; }
         public int CourseSid { get; set; }
+
+        public List<QuizOptionDTO> QuizOptions;
     }
 }

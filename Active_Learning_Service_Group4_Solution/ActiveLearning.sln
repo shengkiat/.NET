@@ -23,11 +23,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.SelfHost", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.Common", "ActiveLearning.Common\ActiveLearning.Common.csproj", "{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.FormClient", "ActiveLearning.FormClient\ActiveLearning.FormClient.csproj", "{3C207C7E-F088-4FED-8FF2-BDF8C8C42CA0}"
-	ProjectSection(ProjectDependencies) = postProject
-		{094FD8A0-A635-4DF4-BD4B-BDA6F565BB61} = {094FD8A0-A635-4DF4-BD4B-BDA6F565BB61}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,10 +69,6 @@ Global
 		{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C207C7E-F088-4FED-8FF2-BDF8C8C42CA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C207C7E-F088-4FED-8FF2-BDF8C8C42CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C207C7E-F088-4FED-8FF2-BDF8C8C42CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C207C7E-F088-4FED-8FF2-BDF8C8C42CA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
