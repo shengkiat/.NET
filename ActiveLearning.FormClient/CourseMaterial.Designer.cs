@@ -30,11 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.BtnClose = new System.Windows.Forms.Button();
-            this.contentDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OriginalFileName = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.contentDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.BtnClose = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contentDTOBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -57,20 +58,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(751, 495);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // BtnClose
-            // 
-            this.BtnClose.Location = new System.Drawing.Point(284, 550);
-            this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new System.Drawing.Size(197, 40);
-            this.BtnClose.TabIndex = 1;
-            this.BtnClose.Text = "Close";
-            this.BtnClose.UseVisualStyleBackColor = true;
-            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
-            // 
-            // contentDTOBindingSource
-            // 
-            this.contentDTOBindingSource.DataSource = typeof(ActiveLearning.FormClient.StudentService.ContentDTO);
             // 
             // sidDataGridViewTextBoxColumn
             // 
@@ -96,6 +83,20 @@
             this.OriginalFileName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.OriginalFileName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // contentDTOBindingSource
+            // 
+            this.contentDTOBindingSource.DataSource = typeof(ActiveLearning.FormClient.StudentService.ContentDTO);
+            // 
+            // BtnClose
+            // 
+            this.BtnClose.Location = new System.Drawing.Point(284, 550);
+            this.BtnClose.Name = "BtnClose";
+            this.BtnClose.Size = new System.Drawing.Size(197, 40);
+            this.BtnClose.TabIndex = 1;
+            this.BtnClose.Text = "Close";
+            this.BtnClose.UseVisualStyleBackColor = true;
+            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            // 
             // CourseMaterial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,5 +121,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewLinkColumn OriginalFileName;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

@@ -167,6 +167,12 @@ namespace ActiveLearning.Common
             string[] settings = System.Web.Configuration.WebConfigurationManager.AppSettings.GetValues(key);
             return settings == null || settings.Length == 0 ? defaultFolder : settings[0];
         }
+
+        public static string GetAppSetting(string key)
+        {
+            string[] settings = System.Web.Configuration.WebConfigurationManager.AppSettings.GetValues(key);
+            return settings == null || settings.Length == 0 ? null : settings[0];
+        }
         #endregion
 
         #region Chat

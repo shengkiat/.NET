@@ -25,11 +25,12 @@ namespace ActiveLearning.FormClient
 
         private void Main_Load(object sender, EventArgs e)
         {
-            this.StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
 
             //client.ClientCredentials.ServiceCertificate.SslCertificateAuthentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
 
             var loginForm = new Login(client);
+            loginForm.StartPosition = FormStartPosition.CenterScreen;
             DialogResult result = loginForm.ShowDialog();
 
             if (result != DialogResult.OK)
@@ -121,12 +122,14 @@ namespace ActiveLearning.FormClient
             if (e.ColumnIndex == 2)
             {
                 var courseMaterial = new CourseMaterial(client, courses[e.RowIndex].Sid);
+                courseMaterial.StartPosition = FormStartPosition.CenterScreen;
                 courseMaterial.ShowDialog();
             }
             // quiz
             else if (e.ColumnIndex == 3)
             {
                 var quiz = new Quiz(client, courses[e.RowIndex].Sid);
+                quiz.StartPosition = FormStartPosition.CenterScreen;
                 quiz.ShowDialog();
             }
         }

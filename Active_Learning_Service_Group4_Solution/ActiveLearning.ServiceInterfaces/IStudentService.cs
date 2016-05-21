@@ -1,6 +1,8 @@
 ﻿using ActiveLearning.ServiceInterfaces.DTO;
 using System.Collections.Generic;
+using System.IO;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 
 namespace ActiveLearning.ServiceInterfaces
 {
@@ -18,6 +20,9 @@ namespace ActiveLearning.ServiceInterfaces
 
         [OperationContract]
         IEnumerable<ContentDTO> GetContentsByCourseSid(int courseSid);
+
+        [OperationContract]
+        byte[] DownloadFileBytes(int contentSid);
 
         [OperationContract]
         QuizQuestionDTO GetNextQuizQuestionByCourseSid(int courseSid);

@@ -5,12 +5,8 @@ using ActiveLearning.Common;
 using ActiveLearning.ServiceInterfaces;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Selectors;
 using System.ServiceModel;
-using System.Threading.Tasks;
 using System.Linq;
-using System.ServiceModel.Security;
-
 using ActiveLearning.ServiceInterfaces.DTO;
 
 namespace ActiveLearning.Services
@@ -24,6 +20,11 @@ namespace ActiveLearning.Services
         private IQuizManager quizManager;
         private ICourseManager courseManager;
         private IContentManager contentManager;
+
+        public StudentService()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+        }
 
         public IEnumerable<CourseDTO> GetCourses()
         {
@@ -161,6 +162,41 @@ namespace ActiveLearning.Services
         {
             userDTO = null;
             studentDTO = null;
+        }
+
+        public byte[] DownloadFileBytes(int contentSid)
+        {
+            if (studentDTO == null || userDTO == null)
+            {
+                throw new FaultException(Constants.User_Not_Logged_In);
+            }
+            string message = string.Empty;
+            using (contentManager = new ContentManager())
+            {
+                Content content = contentManager.GetContentByContentSid(contentSid, out message);
+                if (content == null)
+                {
+                    throw new FaultException(message);
+                }
+                string uploadPath = Util.GetAppSetting("UploadPath");
+                if (string.IsNullOrEmpty(uploadPath))
+                {
+                    throw new FaultException(Constants.ValueNotFound("UploadPath App Setting"));
+                }
+                string path = uploadPath + content.FileName;
+                try
+                {
+                    byte[] bytes = System.IO.File.ReadAllBytes(path);
+                    return bytes;
+                }
+                catch (Exception ex)
+                {
+                    Log.ExceptionLog(ex);
+                    Log.ExceptionLog(ex.InnerException);
+                    throw new FaultException(Constants.OperationFailedDuringRetrievingValue("File"));
+                }
+               
+            }
         }
     }
 }

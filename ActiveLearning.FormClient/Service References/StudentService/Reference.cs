@@ -141,13 +141,7 @@ namespace ActiveLearning.FormClient.StudentService {
         private System.Nullable<System.DateTime> DeleteDTField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FileNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string OriginalFileNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PathField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SidField;
@@ -208,19 +202,6 @@ namespace ActiveLearning.FormClient.StudentService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FileName {
-            get {
-                return this.FileNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
-                    this.FileNameField = value;
-                    this.RaisePropertyChanged("FileName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string OriginalFileName {
             get {
                 return this.OriginalFileNameField;
@@ -229,19 +210,6 @@ namespace ActiveLearning.FormClient.StudentService {
                 if ((object.ReferenceEquals(this.OriginalFileNameField, value) != true)) {
                     this.OriginalFileNameField = value;
                     this.RaisePropertyChanged("OriginalFileName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Path {
-            get {
-                return this.PathField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PathField, value) != true)) {
-                    this.PathField = value;
-                    this.RaisePropertyChanged("Path");
                 }
             }
         }
@@ -605,6 +573,12 @@ namespace ActiveLearning.FormClient.StudentService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetContentsByCourseSid", ReplyAction="http://tempuri.org/IStudentService/GetContentsByCourseSidResponse")]
         System.Threading.Tasks.Task<ActiveLearning.FormClient.StudentService.ContentDTO[]> GetContentsByCourseSidAsync(int courseSid);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/DownloadFileBytes", ReplyAction="http://tempuri.org/IStudentService/DownloadFileBytesResponse")]
+        byte[] DownloadFileBytes(int contentSid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/DownloadFileBytes", ReplyAction="http://tempuri.org/IStudentService/DownloadFileBytesResponse")]
+        System.Threading.Tasks.Task<byte[]> DownloadFileBytesAsync(int contentSid);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetNextQuizQuestionByCourseSid", ReplyAction="http://tempuri.org/IStudentService/GetNextQuizQuestionByCourseSidResponse")]
         ActiveLearning.FormClient.StudentService.QuizQuestionDTO GetNextQuizQuestionByCourseSid(int courseSid);
         
@@ -675,6 +649,14 @@ namespace ActiveLearning.FormClient.StudentService {
         
         public System.Threading.Tasks.Task<ActiveLearning.FormClient.StudentService.ContentDTO[]> GetContentsByCourseSidAsync(int courseSid) {
             return base.Channel.GetContentsByCourseSidAsync(courseSid);
+        }
+        
+        public byte[] DownloadFileBytes(int contentSid) {
+            return base.Channel.DownloadFileBytes(contentSid);
+        }
+        
+        public System.Threading.Tasks.Task<byte[]> DownloadFileBytesAsync(int contentSid) {
+            return base.Channel.DownloadFileBytesAsync(contentSid);
         }
         
         public ActiveLearning.FormClient.StudentService.QuizQuestionDTO GetNextQuizQuestionByCourseSid(int courseSid) {

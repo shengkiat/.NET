@@ -1,5 +1,5 @@
 1. Git URL
-https://github.com/chenghao1983/9EA0F9C3-119A-4D20-9D56-E444CBEC5925_Active_Learning_Group4
+https://github.com/chenghao1983/Active_Learning_Service_Group4
 
 2. Azure URL: chh1983web.cloudapp.net
 Accounts
@@ -14,7 +14,7 @@ Username: admin1 	Password: 1qazxsw2!@QW
 	1. Create MSSQL DB, schema name: Active_Learning_Group4
 	2. Run DB/Active_Learning_Group4_CleanDB.sql to create fresh database	
 
-4. Solution configuration Guide
+4. Web Project configuration Guide
 	1. Create Upload the root and write permission
 	2. Web config. Connection string
 	3. Make sure the following are in the Appsettings in web.config
@@ -25,6 +25,13 @@ Username: admin1 	Password: 1qazxsw2!@QW
 	<add key="ChatHistoryCount" value="100" />
 	<add key="CacheDuration" value="6000" />
 
+5. Service Project configuration Guide
+	1. Web config. Connection string
+	2. Make sure the following are in the Appsettings in web.config
+	<add key="UploadPath" value="../../../ActiveLearning.Web/Upload/" />    -- this value should be based on the actual upload folder of the upload folder
+		
+
+6. Install cert SSL Cert\pt4.activelearning.com.pfx in trusted store
 
 
 

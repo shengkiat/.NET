@@ -27,9 +27,7 @@
       <xs:element minOccurs="0" name="CourseSid" type="xs:int" />
       <xs:element minOccurs="0" name="CreateDT" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DeleteDT" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OriginalFileName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Sid" type="xs:int" />
       <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdateDT" nillable="true" type="xs:dateTime" />
