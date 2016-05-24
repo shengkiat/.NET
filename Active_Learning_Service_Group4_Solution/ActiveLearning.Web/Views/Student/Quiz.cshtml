@@ -65,6 +65,10 @@
                     jQuery.getJSON("/api/QuizQuestion",{'courseSid': @ViewBag.CourseSid}, function (response) {
                         //alert(JSON.stringify(response));
                         //alert(response);
+                        if(response == null)
+                        {   //alert("null");
+                            question.set('title', "There is no new quiz available");
+                        }
                         question.setProperties(response);
                     }).fail(function () { question.set('title', "Oops... something went wrong") });
                     //jQuery.getJSON("/student/Quiz", function (response) {
@@ -79,7 +83,7 @@
                     // prevent multiple posts for the same question
                     jQuery('.front button').attr('disabled', 'disabled');
 
-                    jQuery.post('/api/QuizQuestion', {"CourseSid":option.courseSid, 'QuizQuestionSid': question.sid, 'QuizOptionSid': option.sid }, function (response) {
+                    jQuery.post('/api/QuizQuestion', {"CourseSid": @ViewBag.CourseSid, 'QuizQuestionSid': question.sid, 'QuizOptionSid': option.sid }, function (response) {
                         controller.set('answer', response ? 'correct' : 'incorrect');
                         controller.set('question.answered', true);
                     });

@@ -54,7 +54,7 @@ namespace ActiveLearning.Web.Controllers
                 if (nextQuestion == null)
                 {
                     return null;
-                    //throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+                    //throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NoContent));
                 }
 
                 return nextQuestion;
