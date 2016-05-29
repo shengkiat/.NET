@@ -14,3 +14,11 @@
 10.     Upon removing instructor
 	Remove instructor course mapping
 	
+11. When student request to enroll to course, system check the quota again. If fully enrolled, put in queue
+12. In application table, for the same course, one student can only appear once
+13. Student is not allowed to apply to enroll a rejected course
+
+Assumption:
+1. Login will be taken care of the UI or other precedent functions or service
+2. Admin enroll student function does not have quota control
+3. Student cannot reapply for rejected course
