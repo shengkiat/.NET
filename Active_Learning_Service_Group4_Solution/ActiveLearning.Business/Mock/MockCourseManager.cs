@@ -301,6 +301,106 @@ namespace ActiveLearning.Business.Mock
             throw new NotImplementedException();
         }
 
+        public bool EnrolStudentToCourse(int studentSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplications(int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetPendingStudentEnrollApplications(int studentSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetRejectedStudentEnrollApplications(int studentSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetApprovedStudentEnrollApplications(int studentSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Course> GetNonEnrolledNonPendingNonRejectedCoursesByStudentSid(int studentSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<int> GetNonEnrolledNonPendingNonRejectedCourseSidsByStudentSid(int studentSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplications(int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplications(int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAcceptedStudentEnrollApplications(int studentSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByCourseSid(int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplicationsByCourseSid(int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplicationsByCourseSid(int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByStudentSid(int studentSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplicationsByStudentSid(int studentSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplicationsByStudentSid(int studentSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public StudentEnrollApplication GetStudentEnrollApplicationsByStudentSidCourseSid(int studentSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Course> GetNonEnrolledNonAppliedCoursesByStudentSid(int studentSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<int> GetNonEnrolledNonAppliedCourseSidsByStudentSid(int studentSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool InstructorRejectStudentEnrollApplication(int studentSid, int courseSid, string remark, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         #endregion

@@ -34,7 +34,6 @@ namespace ActiveLearning.WF.Activity
             string message = string.Empty;
             int enrollApplicationSid = 0;
 
-
             using (var courseManager = new CourseManager())
             {
                 if (courseManager.IsCourseFullyEnrolled(courseSid, out message))
@@ -51,7 +50,7 @@ namespace ActiveLearning.WF.Activity
                 }
                 else
                 {
-                    bool enrolled = courseManager.EnrolStudentsToCourse(new List<int> { studentSid }, courseSid, out message);
+                    bool enrolled = courseManager.EnrolStudentToCourse(studentSid, courseSid, out message);
                     if (!enrolled)
                     {
                         throw new FaultException(message);

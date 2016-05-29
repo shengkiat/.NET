@@ -41,15 +41,25 @@ namespace ActiveLearning.Business.Interface
         bool UpdateStudentsCourseEnrolment(IEnumerable<Student> students, int courseSid, out string message);
         bool UpdateStudentsCourseEnrolment(IEnumerable<int> studentSids, int courseSid, out string message);
         bool UpdateStudentsCourseEnrolmentByHasEnrolledIndicator(IEnumerable<Student> students, int courseSid, out string message);
+        IEnumerable<Course> GetNonEnrolledNonAppliedCoursesByStudentSid(int studentSid, out string message);
+        IEnumerable<int> GetNonEnrolledNonAppliedCourseSidsByStudentSid(int studentSid, out string message);
+        bool EnrolStudentToCourse(int studentSid, int courseSid, out string message);
         #endregion
 
         #region Student Enrollment Application
         StudentEnrollApplication AddStudentEnrollApplication(Student student, int courseSid, out string message);
         StudentEnrollApplication AddStudentEnrollApplication(int studentSid, int courseSid, out string message);
-        IEnumerable<StudentEnrollApplication> GetPendingStudentEnrollApplications(int courseSid, out string message);
+        IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByCourseSid(int courseSid, out string message);
+        IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplicationsByCourseSid(int courseSid, out string message);
+        IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplicationsByCourseSid(int courseSid, out string message);
+        IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByStudentSid(int studentSid, out string message);
+        IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplicationsByStudentSid(int studentSid, out string message);
+        IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplicationsByStudentSid(int studentSid, out string message);
+        StudentEnrollApplication GetStudentEnrollApplicationsByStudentSidCourseSid(int studentSid, int courseSid, out string message);
         bool InstructorAcceptStudentEnrollApplication(int studentSid, int courseSid, out string message);
-        bool InstructorRejectStudentEnrollApplication(int studentSid, int courseSid, out string message);
+        bool InstructorRejectStudentEnrollApplication(int studentSid, int courseSid, string remark, out string message);
         #endregion
+
         #region Instructor Enrolment
         IEnumerable<Instructor> GetAllInstructorsWithHasEnrolledIndicatorByCourseSid(int courseSid, out string message);
         IEnumerable<Instructor> GetEnrolledInstructorsByCourseSid(int courseSid, out string message);

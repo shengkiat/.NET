@@ -595,22 +595,18 @@ namespace ActiveLearning.Business.Implementation
         {
             return UpdateStudentsCourseEnrolment(students, courseSid, out message);
         }
-
         public bool EnrolStudentsToCourse(IEnumerable<int> studentSids, int courseSid, out string message)
         {
             return UpdateStudentsCourseEnrolment(studentSids, courseSid, out message);
         }
-
         public bool RemoveStudentsFromCourse(IEnumerable<Student> students, int courseSid, out string message)
         {
             return UpdateStudentsCourseEnrolment(students, courseSid, out message);
         }
-
         public bool RemoveStudentsFromCourse(IEnumerable<int> studentSids, int courseSid, out string message)
         {
             return UpdateStudentsCourseEnrolment(studentSids, courseSid, out message);
         }
-
         public bool UpdateStudentsCourseEnrolment(IEnumerable<Student> students, int courseSid, out string message)
         {
             if (students == null)
@@ -707,6 +703,101 @@ namespace ActiveLearning.Business.Implementation
             return UpdateStudentsCourseEnrolment(list, courseSid, out message);
         }
 
+        /*
+         *For student to retrieva non enrolled non applied courses 
+        */
+        public IEnumerable<Course> GetNonEnrolledNonAppliedCoursesByStudentSid(int studentSid, out string message)
+        {
+            if (studentSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Student);
+                return null;
+            }
+            try
+            {
+                var nonEnrolledCourses = GetNonEnrolledCoursesByStudentSid(studentSid, out message);
+                if (nonEnrolledCourses == null || nonEnrolledCourses.Count() == 0)
+                {
+                    return null;
+                }
+                var nonEnrolledCourseSids = nonEnrolledCourses.Select(c => c.Sid);
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    var applications = unitOfWork.StudentEnrollApplications.Find(a => a.StudentSid == studentSid && nonEnrolledCourseSids.Contains(a.CourseSid) && !a.DeleteDT.HasValue);
+                    if (applications == null || applications.Count() == 0)
+                    {
+                        message = string.Empty;
+                        return nonEnrolledCourses;
+                    }
+                    var appliedCourseSids = applications.Select(a => a.CourseSid);
+                    nonEnrolledCourses = nonEnrolledCourses.Where(c => !appliedCourseSids.Contains(c.Sid));
+                    if (nonEnrolledCourses == null || nonEnrolledCourses.Count() == 0)
+                    {
+                        message = Constants.ThereIsNoValueFound(Constants.NonEnrolledCourse);
+                        return null;
+                    }
+                    message = string.Empty;
+                    return nonEnrolledCourses;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.Course);
+                return null;
+            }
+
+        }
+        /*
+         *For student to retrieva non enrolled non applied courses 
+        */
+        public IEnumerable<int> GetNonEnrolledNonAppliedCourseSidsByStudentSid(int studentSid, out string message)
+        {
+            var courseList = GetNonEnrolledNonAppliedCoursesByStudentSid(studentSid, out message);
+            if (courseList == null)
+            {
+                return null;
+            }
+            return courseList.Select(c => c.Sid);
+        }
+        /*
+         *For student to enroll to course. Course quota will be checked
+        */
+        public bool EnrolStudentToCourse(int studentSid, int courseSid, out string message)
+        {
+            if (studentSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Student);
+                return false;
+            }
+            if (courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return false;
+            }
+            if (IsCourseFullyEnrolled(courseSid, out message))
+            {
+                message = Constants.Course_Fully_Enrolled;
+                return false;
+            }
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    unitOfWork.Student_Course_Maps.Add(new Student_Course_Map() { CourseSid = courseSid, StudentSid = studentSid, CreateDT = DateTime.Now });
+                    unitOfWork.Complete();
+
+                    message = string.Empty;
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringAddingValue(Constants.Student_Course_Enrolment);
+                return false;
+            }
+        }
         #endregion
 
         #region Student Enrollment Application
@@ -731,24 +822,28 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.ValueIsEmpty(Constants.Course);
                 return null;
             }
+
+            var studentEnrollApplication = GetStudentEnrollApplicationsByStudentSidCourseSid(studentSid, courseSid, out message);
+            if (studentEnrollApplication != null)
+            {
+                message = Constants.ValueIsEmpty(Constants.ValueAlreadyExists(Constants.Student_Course_Enrolment_Application));
+                return null;
+            }
+
             try
             {
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        var newStudentEnrollApplication = new StudentEnrollApplication();
-                        newStudentEnrollApplication.CourseSid = courseSid;
-                        newStudentEnrollApplication.CreateDT = DateTime.Now;
-                        newStudentEnrollApplication.Status = Constants.Pending_Code;
-                        newStudentEnrollApplication.StudentSid = studentSid;
-                        unitOfWork.StudentEnrollApplications.Add(newStudentEnrollApplication);
+                    var newStudentEnrollApplication = new StudentEnrollApplication();
+                    newStudentEnrollApplication.CourseSid = courseSid;
+                    newStudentEnrollApplication.CreateDT = DateTime.Now;
+                    newStudentEnrollApplication.Status = Constants.Pending_Code;
+                    newStudentEnrollApplication.StudentSid = studentSid;
+                    unitOfWork.StudentEnrollApplications.Add(newStudentEnrollApplication);
 
-                        unitOfWork.Complete();
-                        scope.Complete();
-                        message = string.Empty;
-                        return newStudentEnrollApplication;
-                    }
+                    unitOfWork.Complete();
+                    message = string.Empty;
+                    return newStudentEnrollApplication;
                 }
             }
             catch (Exception ex)
@@ -758,21 +853,110 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
-        public IEnumerable<StudentEnrollApplication> GetPendingStudentEnrollApplications(int courseSid, out string message)
+        public IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByCourseSid(int courseSid, out string message)
+        {
+            return GeAllStudentEnrollApplicationsByStatusByCourseSid(courseSid, Constants.Pending_Code, Constants.Pending_Description, out message);
+        }
+        public IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplicationsByCourseSid(int courseSid, out string message)
+        {
+            return GeAllStudentEnrollApplicationsByStatusByCourseSid(courseSid, Constants.Rejected_Code, Constants.Rejected_Description, out message);
+        }
+        public IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplicationsByCourseSid(int courseSid, out string message)
+        {
+            return GeAllStudentEnrollApplicationsByStatusByCourseSid(courseSid, Constants.Accepted_Code, Constants.Accepted_Description, out message);
+        }
+        private IEnumerable<StudentEnrollApplication> GeAllStudentEnrollApplicationsByStatusByCourseSid(int courseSid, string statusCode, string statusName, out string message)
         {
             if (courseSid == 0)
             {
                 message = Constants.ValueIsEmpty(Constants.Course);
                 return null;
             }
-
             try
             {
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
+                    var studentEnrollmentApplications = unitOfWork.StudentEnrollApplications.Find(a => a.CourseSid == courseSid && a.Status.Equals(statusCode, StringComparison.CurrentCultureIgnoreCase) && !a.DeleteDT.HasValue);
+                    if (studentEnrollmentApplications == null || studentEnrollmentApplications.Count() == 0)
+                    {
+                        message = Constants.ThereIsNoValueFound(statusName + " " + Constants.Student_Course_Enrolment_Application);
+                        return null;
+                    }
                     message = string.Empty;
-                    return null;
-                    //var pendingStudentEnrollmentApplication = unitOfWork.StudentEnrollApplications.Find(a=>a.StudentSid == studentSid && a.delete);
+                    return studentEnrollmentApplications.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(statusName + " " + Constants.Student_Course_Enrolment_Application);
+                return null;
+            }
+        }
+        public IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByStudentSid(int studentSid, out string message)
+        {
+            return GeAllStudentEnrollApplicationsByStatusByStudentSid(studentSid, Constants.Pending_Code, Constants.Pending_Description, out message);
+        }
+        public IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplicationsByStudentSid(int studentSid, out string message)
+        {
+            return GeAllStudentEnrollApplicationsByStatusByStudentSid(studentSid, Constants.Rejected_Code, Constants.Rejected_Description, out message);
+        }
+        public IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplicationsByStudentSid(int studentSid, out string message)
+        {
+            return GeAllStudentEnrollApplicationsByStatusByStudentSid(studentSid, Constants.Accepted_Code, Constants.Accepted_Description, out message);
+        }
+        private IEnumerable<StudentEnrollApplication> GeAllStudentEnrollApplicationsByStatusByStudentSid(int studentSid, string statusCode, string statusName, out string message)
+        {
+            if (studentSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Student);
+                return null;
+            }
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    var studentEnrollmentApplications = unitOfWork.StudentEnrollApplications.Find(a => a.StudentSid == studentSid && a.Status.Equals(statusCode, StringComparison.CurrentCultureIgnoreCase) && !a.DeleteDT.HasValue);
+                    if (studentEnrollmentApplications == null || studentEnrollmentApplications.Count() == 0)
+                    {
+                        message = Constants.ThereIsNoValueFound(statusName + " " + Constants.Student_Course_Enrolment_Application);
+                        return null;
+                    }
+                    message = string.Empty;
+                    return studentEnrollmentApplications.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(statusName + " " + Constants.Student_Course_Enrolment_Application);
+                return null;
+            }
+        }
+        public StudentEnrollApplication GetStudentEnrollApplicationsByStudentSidCourseSid(int studentSid, int courseSid, out string message)
+        {
+            if (studentSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Student);
+                return null;
+            }
+            if (courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return null;
+            }
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    var studentEnrollmentApplications = unitOfWork.StudentEnrollApplications.Find(a => a.StudentSid == studentSid && a.CourseSid == courseSid && !a.DeleteDT.HasValue).SingleOrDefault();
+                    if (studentEnrollmentApplications == null)
+                    {
+                        message = Constants.ThereIsNoValueFound(Constants.Student_Course_Enrolment_Application);
+                        return null;
+                    }
+                    message = string.Empty;
+                    return studentEnrollmentApplications;
                 }
             }
             catch (Exception ex)
@@ -782,20 +966,101 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
-
         public bool InstructorAcceptStudentEnrollApplication(int studentSid, int courseSid, out string message)
         {
-            throw new NotImplementedException();
-        }
+            if (studentSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Student);
+                return false;
+            }
+            if (courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return false;
+            }
+            var pendingApplication = GetStudentEnrollApplicationsByStudentSidCourseSid(studentSid, courseSid, out message);
+            if (pendingApplication == null || string.IsNullOrEmpty(pendingApplication.Status) || !pendingApplication.Status.Equals(Constants.Pending_Code, StringComparison.CurrentCultureIgnoreCase))
+            {
+                message = Constants.ValueNotFound(Constants.Pending_Description + " " + Constants.Student_Course_Enrolment_Application);
+                return false;
+            }
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                    {
+                        pendingApplication = unitOfWork.StudentEnrollApplications.Get(pendingApplication.Sid);
+                        pendingApplication.Status = Constants.Accepted_Code;
+                        pendingApplication.UpdateDT = DateTime.Now;
 
-        public bool InstructorRejectStudentEnrollApplication(int studentSid, int courseSid, out string message)
+                        var newStudentCourseMap = new Student_Course_Map();
+                        newStudentCourseMap.CourseSid = courseSid;
+                        newStudentCourseMap.StudentSid = studentSid;
+                        newStudentCourseMap.CreateDT = DateTime.Now;
+                        unitOfWork.Student_Course_Maps.Add(newStudentCourseMap);
+
+                        unitOfWork.Complete();
+                        scope.Complete();
+
+                        message = string.Empty;
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.Student_Course_Enrolment_Application);
+                return false;
+            }
+        }
+        public bool InstructorRejectStudentEnrollApplication(int studentSid, int courseSid, string remark, out string message)
         {
-            throw new NotImplementedException();
+            if (studentSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Student);
+                return false;
+            }
+            if (courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return false;
+            }
+            if (string.IsNullOrEmpty(remark) || string.IsNullOrEmpty(remark.Trim()))
+            {
+                message = Constants.PleaseEnterValue(Constants.Remark);
+                return false;
+            }
+            var pendingApplication = GetStudentEnrollApplicationsByStudentSidCourseSid(studentSid, courseSid, out message);
+            if (pendingApplication == null || string.IsNullOrEmpty(pendingApplication.Status) || !pendingApplication.Status.Equals(Constants.Pending_Code, StringComparison.CurrentCultureIgnoreCase))
+            {
+                message = Constants.ValueNotFound(Constants.Pending_Description + " " + Constants.Student_Course_Enrolment_Application);
+                return false;
+            }
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    pendingApplication = unitOfWork.StudentEnrollApplications.Get(pendingApplication.Sid);
+                    pendingApplication.Status = Constants.Rejected_Code;
+                    pendingApplication.Remark = remark.Trim();
+                    pendingApplication.UpdateDT = DateTime.Now;
+
+                    unitOfWork.Complete();
+
+                    message = string.Empty;
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.Student_Course_Enrolment_Application);
+                return false;
+            }
         }
-
-
         #endregion
-
 
         #region Instructor enrolment
         public IEnumerable<Instructor> GetAllInstructorsWithHasEnrolledIndicatorByCourseSid(int courseSid, out string message)
@@ -1183,6 +1448,8 @@ namespace ActiveLearning.Business.Implementation
             }
             return UpdateInstructorsCourseEnrolment(list, courseSid, out message);
         }
+
+
         #endregion
     }
 }

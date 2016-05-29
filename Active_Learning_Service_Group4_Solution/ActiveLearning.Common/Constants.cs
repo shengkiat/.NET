@@ -54,6 +54,7 @@ namespace ActiveLearning.Common
         public const string Student_Course_Enrolment = "Student Course Enrolment ";
         public const string Student_Course_Enrolment_Application = "Student Course Enrolment Application";
         public const string Instructor_Course_Enrolment = "Instructor Course Enrolment ";
+        public const string Course_Fully_Enrolled = "Course is fully enrolled";
 
         public const string AllRequiredFields = "All Required Fields";
         public const string Admin = "Admin";
@@ -89,6 +90,8 @@ namespace ActiveLearning.Common
         public const string PasswordTooSimple = "Password must be a combination of at least 2 digits, 2 upper case letters, 2 lower case letters and 2 symbols";
 
         public const string User_Not_Logged_In = "User has not logged in. Please login";
+
+        
 
         public static string ValueNotAllowed(string value)
         {
