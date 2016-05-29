@@ -720,10 +720,24 @@ namespace ActiveLearning.Business.Implementation
                 {
                     return null;
                 }
-                var nonEnrolledCourseSids = nonEnrolledCourses.Select(c => c.Sid);
+                var nonEnrolledNonFullCourses = new List<Course>();
+                foreach (var course in nonEnrolledCourses)
+                {
+                    if(!IsCourseFullyEnrolled(course.Sid, out message))
+                    {
+                        nonEnrolledNonFullCourses.Add(course);
+                    }
+                }
+                if(nonEnrolledNonFullCourses == null || nonEnrolledNonFullCourses.Count() ==0)
+                {
+                    message = Constants.ThereIsNoValueFound(Constants.NonEnrolledCourse);
+                    return null;
+                }
+                var nonEnrolledNonFullCourseSids = nonEnrolledNonFullCourses.Select(c => c.Sid);
+               
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
-                    var applications = unitOfWork.StudentEnrollApplications.Find(a => a.StudentSid == studentSid && nonEnrolledCourseSids.Contains(a.CourseSid) && !a.DeleteDT.HasValue);
+                    var applications = unitOfWork.StudentEnrollApplications.Find(a => a.StudentSid == studentSid && nonEnrolledNonFullCourseSids.Contains(a.CourseSid) && !a.DeleteDT.HasValue);
                     if (applications == null || applications.Count() == 0)
                     {
                         message = string.Empty;
