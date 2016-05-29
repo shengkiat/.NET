@@ -368,8 +368,9 @@ CREATE TABLE [dbo].[StudentEnrollApplication](
 	[CourseSid] [int] NOT NULL,
 	[Status] [char](1) NOT NULL,
 	[Remark] [nvarchar](max) NULL,
-	[CreateDT] [datetime] NULL,
-	[UpdateDT] [datetime] NOT NULL,
+	[CreateDT] [datetime] NOT NULL,
+	[UpdateDT] [datetime] NULL,
+	[DeleteDT] [datetime] NULL,
  CONSTRAINT [PK_StudentEnrollApplication] PRIMARY KEY CLUSTERED 
 (
 	[Sid] ASC
@@ -1298,5 +1299,5 @@ GO
 delete from DBVersion
 go
 
-insert into DBVersion ( DBVersion, CreateDT) values ('Schema revision 1.5', '2016-05-18')
+insert into DBVersion ( DBVersion, CreateDT) values ('Schema revision 1.5.1', '2016-05-29')
 go

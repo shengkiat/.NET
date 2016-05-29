@@ -367,8 +367,9 @@ CREATE TABLE [dbo].[StudentEnrollApplication](
 	[CourseSid] [int] NOT NULL,
 	[Status] [char](1) NOT NULL,
 	[Remark] [nvarchar](max) NULL,
-	[CreateDT] [datetime] NULL,
-	[UpdateDT] [datetime] NOT NULL,
+	[CreateDT] [datetime] NOT NULL,
+	[UpdateDT] [datetime] NULL,
+	[DeleteDT] [datetime] NULL,
  CONSTRAINT [PK_StudentEnrollApplication] PRIMARY KEY CLUSTERED 
 (
 	[Sid] ASC

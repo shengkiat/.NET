@@ -19,8 +19,9 @@ namespace ActiveLearning.DB
         public int CourseSid { get; set; }
         public string Status { get; set; }
         public string Remark { get; set; }
-        public Nullable<System.DateTime> CreateDT { get; set; }
-        public System.DateTime UpdateDT { get; set; }
+        public System.DateTime CreateDT { get; set; }
+        public Nullable<System.DateTime> UpdateDT { get; set; }
+        public Nullable<System.DateTime> DeleteDT { get; set; }
     
         public virtual Course Course { get; set; }
         public virtual Student Student { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ActiveLearning.DB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ActiveLearning.DB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="Sid" />
@@ -131,8 +131,9 @@
           <Property Name="CourseSid" Type="int" Nullable="false" />
           <Property Name="Status" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Remark" Type="nvarchar(max)" />
-          <Property Name="CreateDT" Type="datetime" />
-          <Property Name="UpdateDT" Type="datetime" Nullable="false" />
+          <Property Name="CreateDT" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDT" Type="datetime" />
+          <Property Name="DeleteDT" Type="datetime" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -438,8 +439,7 @@
             <End Role="StudentEnrollApplication" EntitySet="StudentEnrollApplication" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ActiveLearning.DB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -598,10 +598,11 @@
           <Property Name="CourseSid" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDT" Type="DateTime" Precision="3" />
-          <Property Name="UpdateDT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateDT" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="UpdateDT" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Course" Relationship="Self.FK_StudentEnrollApplication_Course" FromRole="StudentEnrollApplication" ToRole="Course" />
           <NavigationProperty Name="Student" Relationship="Self.FK_StudentEnrollApplication_Student" FromRole="StudentEnrollApplication" ToRole="Student" />
+          <Property Name="DeleteDT" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1046,6 +1047,7 @@
           <EntitySetMapping Name="StudentEnrollApplications">
             <EntityTypeMapping TypeName="ActiveLearning.DB.StudentEnrollApplication">
               <MappingFragment StoreEntitySet="StudentEnrollApplication">
+                <ScalarProperty Name="DeleteDT" ColumnName="DeleteDT" />
                 <ScalarProperty Name="Sid" ColumnName="Sid" />
                 <ScalarProperty Name="StudentSid" ColumnName="StudentSid" />
                 <ScalarProperty Name="CourseSid" ColumnName="CourseSid" />
