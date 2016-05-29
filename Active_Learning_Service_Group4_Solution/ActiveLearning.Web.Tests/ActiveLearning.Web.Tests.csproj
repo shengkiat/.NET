@@ -62,9 +62,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ActiveLearning.Business\ActiveLearning.Business.csproj">
       <Project>{ace1b618-44ac-41f7-b9ab-73c783e149d3}</Project>
       <Name>ActiveLearning.Business</Name>

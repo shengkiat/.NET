@@ -23,7 +23,7 @@ namespace ActiveLearning.Services
 
         public StudentService()
         {
-            log4net.Config.XmlConfigurator.Configure();
+           
         }
 
         public IEnumerable<CourseDTO> GetCourses()

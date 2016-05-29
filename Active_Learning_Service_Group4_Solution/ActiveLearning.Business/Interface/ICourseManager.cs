@@ -19,6 +19,7 @@ namespace ActiveLearning.Business.Interface
         bool UpdateCourse(Course course, out string message);
         bool DeleteCourse(Course course, out string message);
         bool DeleteCourse(int courseSid, out string message);
+
         #endregion
 
         #region Student Enrolment
@@ -43,7 +44,11 @@ namespace ActiveLearning.Business.Interface
         #endregion
 
         #region Student Enrollment Application
-
+        StudentEnrollApplication AddStudentEnrollApplication(Student student, int courseSid, out string message);
+        StudentEnrollApplication AddStudentEnrollApplication(int studentSid, int courseSid, out string message);
+        IEnumerable<StudentEnrollApplication> GetPendingStudentEnrollApplications(int courseSid, out string message);
+        bool InstructorAcceptStudentEnrollApplication(int studentSid, int courseSid, out string message);
+        bool InstructorRejectStudentEnrollApplication(int studentSid, int courseSid, out string message);
         #endregion
         #region Instructor Enrolment
         IEnumerable<Instructor> GetAllInstructorsWithHasEnrolledIndicatorByCourseSid(int courseSid, out string message);

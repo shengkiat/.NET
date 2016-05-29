@@ -1095,6 +1095,31 @@ namespace ActiveLearning.Business.Implementation
             }
             return UpdateInstructorsCourseEnrolment(list, courseSid, out message);
         }
+
+        public StudentEnrollApplication AddStudentEnrollApplication(Student student, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetPendingStudentEnrollApplications(int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool InstructorAcceptStudentEnrollApplication(int studentSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool InstructorRejectStudentEnrollApplication(int studentSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public StudentEnrollApplication AddStudentEnrollApplication(int studentSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.DB", "ActiveLearning.DB\ActiveLearning.DB.csproj", "{796C0BD5-0A31-4CEB-8920-78805C20B907}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.SelfHost", "ActiveLearning.SelfHost\ActiveLearning.SelfHost.csproj", "{D649D76B-2158-48F9-B313-F1317F8D3B9F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.Common", "ActiveLearning.Common\ActiveLearning.Common.csproj", "{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveLearning.WF", "ActiveLearning.WF\ActiveLearning.WF.csproj", "{3233DB5A-638D-4B9B-9E51-CAFBFDE31F40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AE28001-7D0D-4C85-85D4-DF9A0B861ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3233DB5A-638D-4B9B-9E51-CAFBFDE31F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3233DB5A-638D-4B9B-9E51-CAFBFDE31F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3233DB5A-638D-4B9B-9E51-CAFBFDE31F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3233DB5A-638D-4B9B-9E51-CAFBFDE31F40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
