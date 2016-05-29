@@ -66,7 +66,7 @@
       <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="Result" />
       <p1:Variable x:TypeArguments="x:String" Name="Remark" />
     </p1:Sequence.Variables>
-    <Receive x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="Receive_4" OperationName="StudentEnrollCourse" ServiceContractName="p:IService">
+    <Receive x:Name="__ReferenceID0" CanCreateInstance="True" sap2010:WorkflowViewState.IdRef="Receive_4" OperationName="StudentEnrollCourse" ServiceContractName="p:IService">
       <Receive.CorrelationInitializers>
         <QueryCorrelationInitializer>
           <QueryCorrelationInitializer.CorrelationHandle>
@@ -167,7 +167,7 @@
                   </p1:OutArgument>
                 </ReceiveParametersContent>
               </Receive>
-              <awa:InstructorAcceptEnrollApplicationActivity CourseSid="{x:Null}" StudentSid="{x:Null}" sap2010:WorkflowViewState.IdRef="InstructorAcceptEnrollApplicationActivity_1" />
+              <awa:InstructorAcceptEnrollApplicationActivity CourseSid="{x:Null}" Message="{x:Null}" Result="{x:Null}" StudentSid="{x:Null}" sap2010:WorkflowViewState.IdRef="InstructorAcceptEnrollApplicationActivity_1" />
               <SendReply Request="{x:Reference __ReferenceID1}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_5">
                 <SendParametersContent>
                   <p1:InArgument x:TypeArguments="x:Boolean" x:Key="Result">
@@ -242,7 +242,7 @@
                   </p1:OutArgument>
                 </ReceiveParametersContent>
               </Receive>
-              <awa:InstructorRejectEnrollApplicationActivity CourseSid="{x:Null}" StudentSid="{x:Null}" sap2010:WorkflowViewState.IdRef="InstructorRejectEnrollApplicationActivity_1" />
+              <awa:InstructorRejectEnrollApplicationActivity CourseSid="{x:Null}" Message="{x:Null}" Remark="{x:Null}" Result="{x:Null}" StudentSid="{x:Null}" sap2010:WorkflowViewState.IdRef="InstructorRejectEnrollApplicationActivity_1" />
               <SendReply Request="{x:Reference __ReferenceID3}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_6">
                 <SendParametersContent>
                   <p1:InArgument x:TypeArguments="x:Boolean" x:Key="Result">
@@ -268,7 +268,7 @@
         </p1:PickBranch>
       </p1:Pick>
     </p1:DoWhile>
-    <sads:DebugSymbol.Symbol>d4cBRDpcV29ya3NwYWNlXEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNFx0cnVua1xBY3RpdmVfTGVhcm5pbmdfU2VydmljZV9Hcm91cDRfU29sdXRpb25cQWN0aXZlTGVhcm5pbmcuV0ZcU3R1ZGVudENvdXJzZUVucm9sbFdGLnhhbWx4LA8DkAIRAQE/OD8+AQNCOEI/AQJFBWMPAtcBZAVk6gEC1gFlBXERArcBcgWOAhIBBGALYFkC7AFdC11aAuIBSg9KaQLYAWsLa1ACzAFoC2hiAsIBbgtuXAK4AXQJdGACrQF2B40CEQEFdwnBARkBXMIBCYwCGQEGfA21ARsBarcBC8ABFwFdxAENgAIbAROCAguLAhcBB4ABD6kBGQKHAaoBD6oBuQEChgGrAQ+0ARsBa74BOr4BPwFpugERugFwAV7IAQ/0ARkBLvUBD/UBuQEBLfYBD/8BGwEUiQI6iQI/ARKFAhGFAnABCJEBFZEBbwKhAaYBFaYBYwKVAaMBFaMBZAKJAZgBGZwBLAKIAbEBFbEBWgF4rgEVrgFaAWzZARXZAW8BUe4BFe4BYwFG8QEV8QFhATvrARXrAWQBMOABGeQBLAEv/AEV/AFaASD5ARX5AVoBFQ==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d4cBRDpcV29ya3NwYWNlXEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNFx0cnVua1xBY3RpdmVfTGVhcm5pbmdfU2VydmljZV9Hcm91cDRfU29sdXRpb25cQWN0aXZlTGVhcm5pbmcuV0ZcU3R1ZGVudENvdXJzZUVucm9sbFdGLnhhbWx4LA8DkAIRAQE/OD8+AQNCOEI/AQJFBWMPAtcBZAVk6gEC1gFlBXERArcBcgWOAhIBBGALYFkC7AFdC11aAuIBSg9KaQLYAWsLa1ACzAFoC2hiAsIBbgtuXAK4AXQJdGACrQF2B40CEQEFdwnBARkBXMIBCYwCGQEGfA21ARsBarcBC8ABFwFdxAENgAIbAROCAguLAhcBB4ABD6kBGQKHAaoBD6oB3gEChgGrAQ+0ARsBa74BOr4BPwFpugERugFwAV7IAQ/0ARkBLvUBD/UB8AEBLfYBD/8BGwEUiQI6iQI/ARKFAhGFAnABCJEBFZEBbwKhAaYBFaYBYwKVAaMBFaMBZAKJAZgBGZwBLAKIAbEBFbEBWgF4rgEVrgFaAWzZARXZAW8BUe4BFe4BYwFG8QEV8QFhATvrARXrAWQBMOABGeQBLAEv/AEV/AFaASD5ARX5AVoBFQ==</sads:DebugSymbol.Symbol>
   </p1:Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
