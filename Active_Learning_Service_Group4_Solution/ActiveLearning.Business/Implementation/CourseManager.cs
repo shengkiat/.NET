@@ -189,7 +189,7 @@ namespace ActiveLearning.Business.Implementation
                 //message = Constants.PleaseEnterValue(Constants.CourseName);
                 return null;
             }
-            if(course.StudentQuota < 0)
+            if (course.StudentQuota < 0)
             {
                 message = Constants.PleaseEnterValue("a positive integer for quota");
                 return null;
@@ -709,6 +709,94 @@ namespace ActiveLearning.Business.Implementation
 
         #endregion
 
+        #region Student Enrollment Application
+        public StudentEnrollApplication AddStudentEnrollApplication(Student student, int courseSid, out string message)
+        {
+            if (student == null || student.Sid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Student);
+                return null;
+            }
+            if (courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return null;
+            }
+            return AddStudentEnrollApplication(student.Sid, courseSid, out message);
+        }
+        public StudentEnrollApplication AddStudentEnrollApplication(int studentSid, int courseSid, out string message)
+        {
+            if (courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return null;
+            }
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        var newStudentEnrollApplication = new StudentEnrollApplication();
+                        newStudentEnrollApplication.CourseSid = courseSid;
+                        newStudentEnrollApplication.CreateDT = DateTime.Now;
+                        newStudentEnrollApplication.Status = Constants.Pending_Code;
+                        newStudentEnrollApplication.StudentSid = studentSid;
+                        unitOfWork.StudentEnrollApplications.Add(newStudentEnrollApplication);
+
+                        unitOfWork.Complete();
+                        scope.Complete();
+                        message = string.Empty;
+                        return newStudentEnrollApplication;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringAddingValue(Constants.Student_Course_Enrolment_Application);
+                return null;
+            }
+        }
+        public IEnumerable<StudentEnrollApplication> GetPendingStudentEnrollApplications(int courseSid, out string message)
+        {
+            if (courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return null;
+            }
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    message = string.Empty;
+                    return null;
+                    //var pendingStudentEnrollmentApplication = unitOfWork.StudentEnrollApplications.Find(a=>a.StudentSid == studentSid && a.delete);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.Student_Course_Enrolment_Application);
+                return null;
+            }
+        }
+
+        public bool InstructorAcceptStudentEnrollApplication(int studentSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool InstructorRejectStudentEnrollApplication(int studentSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        #endregion
+
+
         #region Instructor enrolment
         public IEnumerable<Instructor> GetAllInstructorsWithHasEnrolledIndicatorByCourseSid(int courseSid, out string message)
         {
@@ -1094,31 +1182,6 @@ namespace ActiveLearning.Business.Implementation
                 }
             }
             return UpdateInstructorsCourseEnrolment(list, courseSid, out message);
-        }
-
-        public StudentEnrollApplication AddStudentEnrollApplication(Student student, int courseSid, out string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<StudentEnrollApplication> GetPendingStudentEnrollApplications(int courseSid, out string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool InstructorAcceptStudentEnrollApplication(int studentSid, int courseSid, out string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool InstructorRejectStudentEnrollApplication(int studentSid, int courseSid, out string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public StudentEnrollApplication AddStudentEnrollApplication(int studentSid, int courseSid, out string message)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

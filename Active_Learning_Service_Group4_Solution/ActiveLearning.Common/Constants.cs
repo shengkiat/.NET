@@ -52,6 +52,7 @@ namespace ActiveLearning.Common
         public const string EnrolledInstructor = "Enrolled Instructor";
         public const string NonEnrolledInstructor = "Non Enrolled Instructor";
         public const string Student_Course_Enrolment = "Student Course Enrolment ";
+        public const string Student_Course_Enrolment_Application = "Student Course Enrolment Application";
         public const string Instructor_Course_Enrolment = "Instructor Course Enrolment ";
 
         public const string AllRequiredFields = "All Required Fields";
