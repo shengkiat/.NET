@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ActiveLearning.Business.Implementation;
 using System.Activities;
 
 namespace ActiveLearning.WF.Activity
 {
-
     public sealed class ReviewerAcceptContentActivity : CodeActivity
     {
-        // Define an activity input argument of type string
-        public InArgument<string> UploadID { get; set; }
 
-        public InArgument<int> CourseSid { get; set; }
+        public InArgument<int> ContentSid { get; set; }
 
-        // If your activity returns a value, derive from CodeActivity<TResult>
-        // and return the value from the Execute method.
+        public OutArgument<string> Message { get; set; }
+
         protected override void Execute(CodeActivityContext context)
         {
-            // Obtain the runtime value of the Text input argument
-            string uploadID = context.GetValue(this.UploadID);
+            int contentSid = context.GetValue(this.ContentSid);
 
-            int courseSid = context.GetValue(this.CourseSid);
+            string message = string.Empty;
+
+            using (var contentManager = new ContentManager())
+            {
+                var content = contentManager.AcceptContent(contentSid, out message);
+            }
+
+            context.SetValue(this.Message, message);
         }
     }
 }

@@ -10,6 +10,8 @@
  xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
  xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
  xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ssx="clr-namespace:System.ServiceModel.XamlIntegration;assembly=System.ServiceModel"
+ xmlns:sw="clr-namespace:System.Web;assembly=System.Web"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <p1:Sequence DisplayName="Sequential Service" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <p1:TextExpression.Namespaces>
@@ -19,6 +21,8 @@
         <x:String>System.Data</x:String>
         <x:String>System.Linq</x:String>
         <x:String>System.Text</x:String>
+        <x:String>System.Web</x:String>
+        <x:String>System.ServiceModel.Activities</x:String>
       </sco:Collection>
     </p1:TextExpression.Namespaces>
     <p1:TextExpression.References>
@@ -47,6 +51,7 @@
         <p1:AssemblyReference>WindowsBase</p1:AssemblyReference>
         <p1:AssemblyReference>ActiveLearning.Business</p1:AssemblyReference>
         <p1:AssemblyReference>ActiveLearning.DB</p1:AssemblyReference>
+        <p1:AssemblyReference>ActiveLearning.Common</p1:AssemblyReference>
         <p1:AssemblyReference>mscorlib</p1:AssemblyReference>
         <p1:AssemblyReference>ActiveLearning.WF</p1:AssemblyReference>
       </sco:Collection>
@@ -57,7 +62,9 @@
       <p1:Variable x:TypeArguments="x:String" Name="PhysicalUploadPath" />
       <p1:Variable x:TypeArguments="x:String" Name="Message" />
       <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="AcceptedMaterial" />
-      <p1:Variable x:TypeArguments="x:String" Name="UploadID" />
+      <p1:Variable x:TypeArguments="x:Int32" Name="ContentSid" />
+      <p1:Variable x:TypeArguments="sw:HttpPostedFileBase" Name="file" />
+      <p1:Variable x:TypeArguments="CorrelationHandle" Name="UploadContentHandle" />
     </p1:Sequence.Variables>
     <Receive x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="Receive_1" OperationName="UploadNewMaterial" ServiceContractName="p:IService">
       <Receive.CorrelationInitializers>
@@ -68,21 +75,43 @@
             </p1:InArgument>
           </RequestReplyCorrelationInitializer.CorrelationHandle>
         </RequestReplyCorrelationInitializer>
+        <QueryCorrelationInitializer>
+          <QueryCorrelationInitializer.CorrelationHandle>
+            <p1:InArgument x:TypeArguments="CorrelationHandle">
+              <mca:CSharpValue x:TypeArguments="CorrelationHandle">UploadContentHandle</mca:CSharpValue>
+            </p1:InArgument>
+          </QueryCorrelationInitializer.CorrelationHandle>
+          <XPathMessageQuery x:Key="key1">
+            <XPathMessageQuery.Namespaces>
+              <ssx:XPathMessageContextMarkup>
+                <x:String x:Key="xgSc">http://tempuri.org/</x:String>
+              </ssx:XPathMessageContextMarkup>
+            </XPathMessageQuery.Namespaces>sm:body()/xgSc:UploadNewMaterial/xgSc: ContentSid</XPathMessageQuery>
+        </QueryCorrelationInitializer>
       </Receive.CorrelationInitializers>
       <ReceiveParametersContent>
         <p1:OutArgument x:TypeArguments="x:String" x:Key="PhysicalUploadPath">
           <mca:CSharpReference x:TypeArguments="x:String">PhysicalUploadPath</mca:CSharpReference>
         </p1:OutArgument>
+        <p1:OutArgument x:TypeArguments="sw:HttpPostedFileBase" x:Key="file">
+          <mca:CSharpReference x:TypeArguments="sw:HttpPostedFileBase">file</mca:CSharpReference>
+        </p1:OutArgument>
         <p1:OutArgument x:TypeArguments="x:Int32" x:Key="CourseSid">
           <mca:CSharpReference x:TypeArguments="x:Int32">CourseSid</mca:CSharpReference>
         </p1:OutArgument>
-        <p1:OutArgument x:TypeArguments="x:String" x:Key="UploadID">
-          <mca:CSharpReference x:TypeArguments="x:String">UploadID</mca:CSharpReference>
+        <p1:OutArgument x:TypeArguments="x:Int32" x:Key=" ContentSid">
+          <mca:CSharpReference x:TypeArguments="x:Int32">ContentSid</mca:CSharpReference>
         </p1:OutArgument>
       </ReceiveParametersContent>
     </Receive>
-    <awa:UploadCourseContentActivity CourseSid="{x:Null}" PhysicalUploadPath="{x:Null}" sap2010:WorkflowViewState.IdRef="UploadCourseContentActivity_1" />
-    <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_1" />
+    <awa:UploadCourseContentActivity CourseSid="{x:Null}" Message="{x:Null}" PhysicalUploadPath="{x:Null}" file="{x:Null}" sap2010:WorkflowViewState.IdRef="UploadCourseContentActivity_1" />
+    <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_1">
+      <SendParametersContent>
+        <p1:InArgument x:TypeArguments="x:String" x:Key="Message ">
+          <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+        </p1:InArgument>
+      </SendParametersContent>
+    </SendReply>
     <p1:DoWhile sap2010:WorkflowViewState.IdRef="DoWhile_1">
       <p1:DoWhile.Condition>
         <mca:CSharpValue x:TypeArguments="x:Boolean">!AcceptedMaterial</mca:CSharpValue>
@@ -95,6 +124,19 @@
                 <x:Reference>__ReferenceID2</x:Reference>
               </p1:Sequence.Variables>
               <Receive x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="Receive_3" OperationName="ReviewerAcceptContent" ServiceContractName="p:IService">
+                <Receive.CorrelatesOn>
+                  <XPathMessageQuery x:Key="key1">
+                    <XPathMessageQuery.Namespaces>
+                      <ssx:XPathMessageContextMarkup>
+                        <x:String x:Key="xgSc">http://tempuri.org/</x:String>
+                      </ssx:XPathMessageContextMarkup>
+                    </XPathMessageQuery.Namespaces>sm:body()/xgSc:ReviewerAcceptContent/xgSc:ContentSid</XPathMessageQuery>
+                </Receive.CorrelatesOn>
+                <Receive.CorrelatesWith>
+                  <p1:InArgument x:TypeArguments="CorrelationHandle">
+                    <mca:CSharpValue x:TypeArguments="CorrelationHandle">UploadContentHandle</mca:CSharpValue>
+                  </p1:InArgument>
+                </Receive.CorrelatesWith>
                 <Receive.CorrelationInitializers>
                   <RequestReplyCorrelationInitializer>
                     <RequestReplyCorrelationInitializer.CorrelationHandle>
@@ -109,13 +151,19 @@
                   </RequestReplyCorrelationInitializer>
                 </Receive.CorrelationInitializers>
                 <ReceiveParametersContent>
-                  <p1:OutArgument x:TypeArguments="x:String" x:Key="UploadID">
-                    <mca:CSharpReference x:TypeArguments="x:String">UploadID</mca:CSharpReference>
+                  <p1:OutArgument x:TypeArguments="x:Int32" x:Key="ContentSid">
+                    <mca:CSharpReference x:TypeArguments="x:Int32">ContentSid</mca:CSharpReference>
                   </p1:OutArgument>
                 </ReceiveParametersContent>
               </Receive>
-              <awa:ReviewerAcceptContentActivity CourseSid="{x:Null}" UploadID="{x:Null}" sap2010:WorkflowViewState.IdRef="ReviewerAcceptContentActivity_1" />
-              <SendReply Request="{x:Reference __ReferenceID1}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_3" />
+              <awa:ReviewerAcceptContentActivity ContentSid="{x:Null}" Message="{x:Null}" sap2010:WorkflowViewState.IdRef="ReviewerAcceptContentActivity_2" />
+              <SendReply Request="{x:Reference __ReferenceID1}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_3">
+                <SendParametersContent>
+                  <p1:InArgument x:TypeArguments="x:String" x:Key="Message ">
+                    <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+                  </p1:InArgument>
+                </SendParametersContent>
+              </SendReply>
             </p1:Sequence>
           </p1:PickBranch.Trigger>
           <p1:Assign sap2010:WorkflowViewState.IdRef="Assign_1">
@@ -136,6 +184,19 @@
                 <p1:Variable x:TypeArguments="x:String" Name="Comment" />
               </p1:Sequence.Variables>
               <Receive x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="Receive_2" OperationName="ReviewerAddComment" ServiceContractName="p:IService">
+                <Receive.CorrelatesOn>
+                  <XPathMessageQuery x:Key="key1">
+                    <XPathMessageQuery.Namespaces>
+                      <ssx:XPathMessageContextMarkup>
+                        <x:String x:Key="xgSc">http://tempuri.org/</x:String>
+                      </ssx:XPathMessageContextMarkup>
+                    </XPathMessageQuery.Namespaces>sm:body()/xgSc:ReviewerAddComment/xgSc:ContentSid</XPathMessageQuery>
+                </Receive.CorrelatesOn>
+                <Receive.CorrelatesWith>
+                  <p1:InArgument x:TypeArguments="CorrelationHandle">
+                    <mca:CSharpValue x:TypeArguments="CorrelationHandle">UploadContentHandle</mca:CSharpValue>
+                  </p1:InArgument>
+                </Receive.CorrelatesWith>
                 <Receive.CorrelationInitializers>
                   <RequestReplyCorrelationInitializer>
                     <RequestReplyCorrelationInitializer.CorrelationHandle>
@@ -146,22 +207,28 @@
                   </RequestReplyCorrelationInitializer>
                 </Receive.CorrelationInitializers>
                 <ReceiveParametersContent>
-                  <p1:OutArgument x:TypeArguments="x:String" x:Key="UploadID">
-                    <mca:CSharpReference x:TypeArguments="x:String">UploadID</mca:CSharpReference>
+                  <p1:OutArgument x:TypeArguments="x:Int32" x:Key="ContentSid">
+                    <mca:CSharpReference x:TypeArguments="x:Int32">ContentSid</mca:CSharpReference>
                   </p1:OutArgument>
                   <p1:OutArgument x:TypeArguments="x:String" x:Key="Comment">
                     <mca:CSharpReference x:TypeArguments="x:String">Comment</mca:CSharpReference>
                   </p1:OutArgument>
                 </ReceiveParametersContent>
               </Receive>
-              <awa:ReviewerAddCommentActivity Comment="{x:Null}" UploadID="{x:Null}" sap2010:WorkflowViewState.IdRef="ReviewerAddCommentActivity_1" />
-              <SendReply Request="{x:Reference __ReferenceID3}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_2" />
+              <awa:ReviewerAddCommentActivity Comment="{x:Null}" ContentSid="{x:Null}" Message="{x:Null}" sap2010:WorkflowViewState.IdRef="ReviewerAddCommentActivity_2" />
+              <SendReply Request="{x:Reference __ReferenceID3}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_2">
+                <SendParametersContent>
+                  <p1:InArgument x:TypeArguments="x:String" x:Key="Message ">
+                    <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+                  </p1:InArgument>
+                </SendParametersContent>
+              </SendReply>
             </p1:Sequence>
           </p1:PickBranch.Trigger>
         </p1:PickBranch>
       </p1:Pick>
     </p1:DoWhile>
-    <sads:DebugSymbol.Symbol>d5YBQzpcVXNlcnNcc2hlbmcga2lhdFxTb3VyY2VcUmVwb3NcQWN0aXZlX0xlYXJuaW5nX1NlcnZpY2VfR3JvdXA0XEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNF9Tb2x1dGlvblxBY3RpdmVMZWFybmluZy5XRlxVcGxvYWRDb3Vyc2VNYXRlcmlhbFdGLnhhbWx4Hg4DpQERAQE7ODs/AQI+BVMPAWJUBVSbAQFhVQVViAEBUlYFowESAQNNC01ZAXhKC0pjAXFDD0NfAWpQC1BZAWNYCVhZAUtaB6IBEQEEWwmDARkBMoQBCaEBGQEFXQ13GwE8eQuCARcBM4YBDZ8BGwEGYQ90GQFBdQ91nwEBQHYPdpIBAT2AATqAAT4BO3wRfGgBNIoBD5wBGQEZnQEPnQGXAQEYngEPngGSAQEHZhlqLAFKcRVxYwFCmQEVmQFiASqPARmPAWkBIpYBFZYBYwEa</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d5YBQzpcVXNlcnNcc2hlbmcga2lhdFxTb3VyY2VcUmVwb3NcQWN0aXZlX0xlYXJuaW5nX1NlcnZpY2VfR3JvdXA0XEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNF9Tb2x1dGlvblxBY3RpdmVMZWFybmluZy5XRlxVcGxvYWRDb3Vyc2VNYXRlcmlhbFdGLnhhbWx4JRAD6AERAQFAOEA/AQJFBWoPAqcBawVrvgECpgFsBXIRAooBcwXmARIBA2ELYWIC1QFkC2RZAswBXgteYwLDAUoPSl8CugFnC2daArEBUQ9RaQKoAW8Lb1ACiwF1CXVZAoEBdwflAREBBHgJswEZAVC0AQnkARkBBXoNpwEbAVypAQuyARcBUbYBDeIBGwEGfg+eARkBa58BD58BnwEBaqABD6YBGwFdsAE6sAE+AVusARGsAWgBUroBD9kBGQEn2gEP2gGsAQEm2wEP4QEbAQeJARWJAW8Bd5ABGZQBLAF2mwEVmwFkAWyjARWjAVoBXsUBFcUBbwFG1gEV1gFiATzMARnMAWkBMtMBFdMBZAEo3gEV3gFaAQg=</sads:DebugSymbol.Symbol>
   </p1:Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -169,7 +236,7 @@
       <sap2010:ViewStateData Id="UploadCourseContentActivity_1" sap:VirtualizedContainerService.HintSize="794,22" />
       <sap2010:ViewStateData Id="SendReply_1" sap:VirtualizedContainerService.HintSize="794,86" />
       <sap2010:ViewStateData Id="Receive_3" sap:VirtualizedContainerService.HintSize="255,86" />
-      <sap2010:ViewStateData Id="ReviewerAcceptContentActivity_1" sap:VirtualizedContainerService.HintSize="255,22" />
+      <sap2010:ViewStateData Id="ReviewerAcceptContentActivity_2" sap:VirtualizedContainerService.HintSize="255,22" />
       <sap2010:ViewStateData Id="SendReply_3" sap:VirtualizedContainerService.HintSize="255,86" />
       <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="277,398">
         <sap:WorkflowViewStateService.ViewState>
@@ -181,7 +248,7 @@
       <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,62" />
       <sap2010:ViewStateData Id="PickBranch_1" sap:VirtualizedContainerService.HintSize="307,658" />
       <sap2010:ViewStateData Id="Receive_2" sap:VirtualizedContainerService.HintSize="255,86" />
-      <sap2010:ViewStateData Id="ReviewerAddCommentActivity_1" sap:VirtualizedContainerService.HintSize="255,22" />
+      <sap2010:ViewStateData Id="ReviewerAddCommentActivity_2" sap:VirtualizedContainerService.HintSize="255,22" />
       <sap2010:ViewStateData Id="SendReply_2" sap:VirtualizedContainerService.HintSize="255,86" />
       <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="277,398">
         <sap:WorkflowViewStateService.ViewState>
