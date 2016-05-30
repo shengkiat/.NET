@@ -51,6 +51,27 @@ namespace ActiveLearning.Web.Controllers
                 return View(courseList);
             }
         }
+
+
+        [OutputCache(Duration = Cache_Duration)]
+        public ActionResult NonEnrolCourseList()
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+
+            string message = string.Empty;
+            using (var courseManager = new CourseManager())
+            {
+                var nonEnroledCourseList = courseManager.GetNonEnrolledNonAppliedCoursesByStudentSid(GetLoginUser().Students.FirstOrDefault().Sid, out message);
+                if (nonEnroledCourseList == null || nonEnroledCourseList.Count() == 0)
+                {
+                    SetViewBagError(message);
+                }
+                return View(nonEnroledCourseList);
+            }
+        }
         #endregion
 
         #region chat
