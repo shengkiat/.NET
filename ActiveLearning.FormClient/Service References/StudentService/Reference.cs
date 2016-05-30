@@ -573,11 +573,11 @@ namespace ActiveLearning.FormClient.StudentService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetContentsByCourseSid", ReplyAction="http://tempuri.org/IStudentService/GetContentsByCourseSidResponse")]
         System.Threading.Tasks.Task<ActiveLearning.FormClient.StudentService.ContentDTO[]> GetContentsByCourseSidAsync(int courseSid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/DownloadFileBytes", ReplyAction="http://tempuri.org/IStudentService/DownloadFileBytesResponse")]
-        byte[] DownloadFileBytes(int contentSid);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/DownloadFileStream", ReplyAction="http://tempuri.org/IStudentService/DownloadFileStreamResponse")]
+        System.IO.Stream DownloadFileStream(int contentSid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/DownloadFileBytes", ReplyAction="http://tempuri.org/IStudentService/DownloadFileBytesResponse")]
-        System.Threading.Tasks.Task<byte[]> DownloadFileBytesAsync(int contentSid);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/DownloadFileStream", ReplyAction="http://tempuri.org/IStudentService/DownloadFileStreamResponse")]
+        System.Threading.Tasks.Task<System.IO.Stream> DownloadFileStreamAsync(int contentSid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentService/GetNextQuizQuestionByCourseSid", ReplyAction="http://tempuri.org/IStudentService/GetNextQuizQuestionByCourseSidResponse")]
         ActiveLearning.FormClient.StudentService.QuizQuestionDTO GetNextQuizQuestionByCourseSid(int courseSid);
@@ -651,12 +651,12 @@ namespace ActiveLearning.FormClient.StudentService {
             return base.Channel.GetContentsByCourseSidAsync(courseSid);
         }
         
-        public byte[] DownloadFileBytes(int contentSid) {
-            return base.Channel.DownloadFileBytes(contentSid);
+        public System.IO.Stream DownloadFileStream(int contentSid) {
+            return base.Channel.DownloadFileStream(contentSid);
         }
         
-        public System.Threading.Tasks.Task<byte[]> DownloadFileBytesAsync(int contentSid) {
-            return base.Channel.DownloadFileBytesAsync(contentSid);
+        public System.Threading.Tasks.Task<System.IO.Stream> DownloadFileStreamAsync(int contentSid) {
+            return base.Channel.DownloadFileStreamAsync(contentSid);
         }
         
         public ActiveLearning.FormClient.StudentService.QuizQuestionDTO GetNextQuizQuestionByCourseSid(int courseSid) {

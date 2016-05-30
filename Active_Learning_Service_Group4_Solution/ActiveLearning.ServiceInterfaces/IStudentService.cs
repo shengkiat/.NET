@@ -21,8 +21,11 @@ namespace ActiveLearning.ServiceInterfaces
         [OperationContract]
         IEnumerable<ContentDTO> GetContentsByCourseSid(int courseSid);
 
+        //[OperationContract]
+        //byte[] DownloadFileBytes(int contentSid);
+
         [OperationContract]
-        byte[] DownloadFileBytes(int contentSid);
+        Stream DownloadFileStream(int contentSid);
 
         [OperationContract]
         QuizQuestionDTO GetNextQuizQuestionByCourseSid(int courseSid);

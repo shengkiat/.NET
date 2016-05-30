@@ -10,6 +10,8 @@ namespace ActiveLearning.WF.Activity
         // Define an activity input argument of type string
         public InArgument<int> StudentSid { get; set; }
         public InArgument<int> CourseSid { get; set; }
+        public InArgument<int> EnrollApplicationSid { get; set; }
+        
         public OutArgument<bool> Result { get; set; }
         public OutArgument<string> Message { get; set; }
 
@@ -21,6 +23,7 @@ namespace ActiveLearning.WF.Activity
             // Obtain the runtime value of the Text input argument
             int studentSid = context.GetValue(this.StudentSid);
             int courseSid = context.GetValue(this.CourseSid);
+            int enrollApplicationSid = context.GetValue(this.EnrollApplicationSid);
 
             bool result = false;
             string message = string.Empty;

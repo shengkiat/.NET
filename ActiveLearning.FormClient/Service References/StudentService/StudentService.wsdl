@@ -249,7 +249,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IStudentService_DownloadFileBytes_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IStudentService_DownloadFileStream_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -268,7 +268,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IStudentService_DownloadFileBytes_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IStudentService_DownloadFileStream_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -368,6 +368,7 @@
       <xsd:import schemaLocation="http://localhost:9005/StudentService?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:9005/StudentService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:9005/StudentService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.ServiceInterfaces.DTO" />
+      <xsd:import schemaLocation="http://localhost:9005/StudentService?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IStudentService_Login_InputMessage">
@@ -394,11 +395,11 @@
   <wsdl:message name="IStudentService_GetContentsByCourseSid_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetContentsByCourseSidResponse" />
   </wsdl:message>
-  <wsdl:message name="IStudentService_DownloadFileBytes_InputMessage">
-    <wsdl:part name="parameters" element="tns:DownloadFileBytes" />
+  <wsdl:message name="IStudentService_DownloadFileStream_InputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadFileStream" />
   </wsdl:message>
-  <wsdl:message name="IStudentService_DownloadFileBytes_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DownloadFileBytesResponse" />
+  <wsdl:message name="IStudentService_DownloadFileStream_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadFileStreamResponse" />
   </wsdl:message>
   <wsdl:message name="IStudentService_GetNextQuizQuestionByCourseSid_InputMessage">
     <wsdl:part name="parameters" element="tns:GetNextQuizQuestionByCourseSid" />
@@ -429,9 +430,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentService/GetContentsByCourseSid" message="tns:IStudentService_GetContentsByCourseSid_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStudentService/GetContentsByCourseSidResponse" message="tns:IStudentService_GetContentsByCourseSid_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="DownloadFileBytes">
-      <wsdl:input wsaw:Action="http://tempuri.org/IStudentService/DownloadFileBytes" message="tns:IStudentService_DownloadFileBytes_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IStudentService/DownloadFileBytesResponse" message="tns:IStudentService_DownloadFileBytes_OutputMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="DownloadFileStream">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentService/DownloadFileStream" message="tns:IStudentService_DownloadFileStream_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentService/DownloadFileStreamResponse" message="tns:IStudentService_DownloadFileStream_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetNextQuizQuestionByCourseSid">
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentService/GetNextQuizQuestionByCourseSid" message="tns:IStudentService_GetNextQuizQuestionByCourseSid_InputMessage" />
@@ -489,14 +490,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DownloadFileBytes">
-      <soap12:operation soapAction="http://tempuri.org/IStudentService/DownloadFileBytes" style="document" />
+    <wsdl:operation name="DownloadFileStream">
+      <soap12:operation soapAction="http://tempuri.org/IStudentService/DownloadFileStream" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IStudentService_DownloadFileBytes_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IStudentService_DownloadFileStream_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IStudentService_DownloadFileBytes_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IStudentService_DownloadFileStream_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

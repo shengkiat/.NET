@@ -51,7 +51,9 @@ namespace ActiveLearning.FormClient
         {
             try
             {
-                contentBytes = await client.DownloadFileBytesAsync(content.Sid);
+                Stream st = await client.DownloadFileStreamAsync(content.Sid);
+
+                contentBytes = GetBytesFromStream(st);
 
                 saveFileDialog1.FileName = content.OriginalFileName;
                 DialogResult result = saveFileDialog1.ShowDialog();
@@ -62,6 +64,7 @@ namespace ActiveLearning.FormClient
 
                 File.WriteAllBytes(path, contentBytes);
                 MessageBox.Show("File save at  " + path);
+
             }
             catch (FaultException fe)
             {
@@ -75,6 +78,19 @@ namespace ActiveLearning.FormClient
             }
         }
 
+        private byte[] GetBytesFromStream(Stream st)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = st.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
+        }
         private void BtnClose_Click(object sender, EventArgs e)
         {
             Dispose();

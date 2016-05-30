@@ -129,6 +129,9 @@
     <None Include="Service References\StudentService\StudentService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\StudentService\StudentService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

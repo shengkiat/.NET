@@ -723,18 +723,18 @@ namespace ActiveLearning.Business.Implementation
                 var nonEnrolledNonFullCourses = new List<Course>();
                 foreach (var course in nonEnrolledCourses)
                 {
-                    if(!IsCourseFullyEnrolled(course.Sid, out message))
+                    if (!IsCourseFullyEnrolled(course.Sid, out message))
                     {
                         nonEnrolledNonFullCourses.Add(course);
                     }
                 }
-                if(nonEnrolledNonFullCourses == null || nonEnrolledNonFullCourses.Count() ==0)
+                if (nonEnrolledNonFullCourses == null || nonEnrolledNonFullCourses.Count() == 0)
                 {
                     message = Constants.ThereIsNoValueFound(Constants.NonEnrolledCourse);
                     return null;
                 }
                 var nonEnrolledNonFullCourseSids = nonEnrolledNonFullCourses.Select(c => c.Sid);
-               
+
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
                     var applications = unitOfWork.StudentEnrollApplications.Find(a => a.StudentSid == studentSid && nonEnrolledNonFullCourseSids.Contains(a.CourseSid) && !a.DeleteDT.HasValue);
@@ -775,7 +775,7 @@ namespace ActiveLearning.Business.Implementation
             return courseList.Select(c => c.Sid);
         }
         /*
-         *For student to enroll to course. Course quota will be checked
+         *For student to enroll to course. Course quota will be checked. Whether enrolled will be checked
         */
         public bool EnrolStudentToCourse(int studentSid, int courseSid, out string message)
         {
@@ -792,6 +792,11 @@ namespace ActiveLearning.Business.Implementation
             if (IsCourseFullyEnrolled(courseSid, out message))
             {
                 message = Constants.Course_Fully_Enrolled;
+                return false;
+            }
+            if (HasStudentEnrolledToCourse(studentSid, courseSid, out message))
+            {
+                message = Constants.Course_Already_Enrolled;
                 return false;
             }
             try
@@ -812,6 +817,40 @@ namespace ActiveLearning.Business.Implementation
                 return false;
             }
         }
+        public bool HasStudentEnrolledToCourse(int studentSid, int courseSid, out string message)
+        {
+            if (studentSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Student);
+                return false;
+            }
+            if (courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return false;
+            }
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    var map = unitOfWork.Student_Course_Maps.Find(m => m.StudentSid == studentSid && m.CourseSid == courseSid);
+                    if (map != null && map.Count() > 0)
+                    {
+                        message = Constants.Course_Already_Enrolled;
+                        return true;
+                    }
+                    message = string.Empty;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.Student_Course_Enrolment);
+                return false;
+            }
+        }
+
         #endregion
 
         #region Student Enrollment Application
@@ -836,14 +875,10 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.ValueIsEmpty(Constants.Course);
                 return null;
             }
-
-            var studentEnrollApplication = GetStudentEnrollApplicationsByStudentSidCourseSid(studentSid, courseSid, out message);
-            if (studentEnrollApplication != null)
+            if (HasStudentAppliedCourse(studentSid, courseSid, out message))
             {
-                message = Constants.ValueIsEmpty(Constants.ValueAlreadyExists(Constants.Student_Course_Enrolment_Application));
                 return null;
             }
-
             try
             {
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
@@ -947,7 +982,7 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
-        public StudentEnrollApplication GetStudentEnrollApplicationsByStudentSidCourseSid(int studentSid, int courseSid, out string message)
+        public StudentEnrollApplication GetStudentEnrollApplicationByStudentSidCourseSid(int studentSid, int courseSid, out string message)
         {
             if (studentSid == 0)
             {
@@ -980,6 +1015,17 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
+        public bool HasStudentAppliedCourse(int studentSid, int courseSid, out string message)
+        {
+            var studentEnrollApplication = GetStudentEnrollApplicationByStudentSidCourseSid(studentSid, courseSid, out message);
+            if (studentEnrollApplication != null)
+            {
+                message = Constants.Course_Already_Applied;
+                return true;
+            }
+            message = string.Empty;
+            return false;
+        }
         public bool InstructorAcceptStudentEnrollApplication(int studentSid, int courseSid, out string message)
         {
             if (studentSid == 0)
@@ -992,7 +1038,7 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.ValueIsEmpty(Constants.Course);
                 return false;
             }
-            var pendingApplication = GetStudentEnrollApplicationsByStudentSidCourseSid(studentSid, courseSid, out message);
+            var pendingApplication = GetStudentEnrollApplicationByStudentSidCourseSid(studentSid, courseSid, out message);
             if (pendingApplication == null || string.IsNullOrEmpty(pendingApplication.Status) || !pendingApplication.Status.Equals(Constants.Pending_Code, StringComparison.CurrentCultureIgnoreCase))
             {
                 message = Constants.ValueNotFound(Constants.Pending_Description + " " + Constants.Student_Course_Enrolment_Application);
@@ -1046,7 +1092,7 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.PleaseEnterValue(Constants.Remark);
                 return false;
             }
-            var pendingApplication = GetStudentEnrollApplicationsByStudentSidCourseSid(studentSid, courseSid, out message);
+            var pendingApplication = GetStudentEnrollApplicationByStudentSidCourseSid(studentSid, courseSid, out message);
             if (pendingApplication == null || string.IsNullOrEmpty(pendingApplication.Status) || !pendingApplication.Status.Equals(Constants.Pending_Code, StringComparison.CurrentCultureIgnoreCase))
             {
                 message = Constants.ValueNotFound(Constants.Pending_Description + " " + Constants.Student_Course_Enrolment_Application);

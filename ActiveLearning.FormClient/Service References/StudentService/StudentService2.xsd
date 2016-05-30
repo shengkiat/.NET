@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:9005/StudentService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.ServiceInterfaces.DTO" />
+  <xs:import schemaLocation="http://localhost:9005/StudentService?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
   <xs:element name="Login">
     <xs:complexType>
       <xs:sequence>
@@ -52,17 +53,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DownloadFileBytes">
+  <xs:element name="DownloadFileStream">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="contentSid" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DownloadFileBytesResponse">
+  <xs:element name="DownloadFileStreamResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DownloadFileBytesResult" nillable="true" type="xs:base64Binary" />
+        <xs:element xmlns:q3="http://schemas.microsoft.com/Message" name="DownloadFileStreamResult" type="q3:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -76,7 +77,7 @@
   <xs:element name="GetNextQuizQuestionByCourseSidResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ActiveLearning.ServiceInterfaces.DTO" minOccurs="0" name="GetNextQuizQuestionByCourseSidResult" nillable="true" type="q3:QuizQuestionDTO" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ActiveLearning.ServiceInterfaces.DTO" minOccurs="0" name="GetNextQuizQuestionByCourseSidResult" nillable="true" type="q4:QuizQuestionDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -1,4 +1,4 @@
-﻿<WorkflowService mc:Ignorable="sap sap2010 sads" p1:TextExpression.Namespaces="{x:Reference __ReferenceID5}" p1:TextExpression.References="{x:Reference __ReferenceID6}" ConfigurationName="Service1" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WorkflowService_1" Name="Service1"
+﻿<WorkflowService mc:Ignorable="sap sap2010 sads" p1:TextExpression.Namespaces="{x:Reference __ReferenceID3}" p1:TextExpression.References="{x:Reference __ReferenceID4}" ConfigurationName="Service1" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WorkflowService_1" Name="Service1"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
  xmlns:awa="clr-namespace:ActiveLearning.WF.Activity;assembly=ActiveLearning.WF"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,7 +14,7 @@
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <p1:Sequence DisplayName="StudentCourseEnrollWF" sap2010:WorkflowViewState.IdRef="Sequence_4">
     <p1:TextExpression.Namespaces>
-      <sco:Collection x:TypeArguments="x:String" x:Name="__ReferenceID5">
+      <sco:Collection x:TypeArguments="x:String" x:Name="__ReferenceID3">
         <x:String>System</x:String>
         <x:String>System.Collections.Generic</x:String>
         <x:String>System.Data</x:String>
@@ -26,7 +26,7 @@
       </sco:Collection>
     </p1:TextExpression.Namespaces>
     <p1:TextExpression.References>
-      <sco:Collection x:TypeArguments="p1:AssemblyReference" x:Name="__ReferenceID6">
+      <sco:Collection x:TypeArguments="p1:AssemblyReference" x:Name="__ReferenceID4">
         <p1:AssemblyReference>Microsoft.CSharp</p1:AssemblyReference>
         <p1:AssemblyReference>PresentationCore</p1:AssemblyReference>
         <p1:AssemblyReference>PresentationFramework</p1:AssemblyReference>
@@ -44,13 +44,18 @@
         <p1:AssemblyReference>System.ServiceModel</p1:AssemblyReference>
         <p1:AssemblyReference>System.ServiceModel.Activities</p1:AssemblyReference>
         <p1:AssemblyReference>System.ServiceModel.Channels</p1:AssemblyReference>
-        <p1:AssemblyReference>System.Web</p1:AssemblyReference>
         <p1:AssemblyReference>System.Xaml</p1:AssemblyReference>
         <p1:AssemblyReference>System.Xml</p1:AssemblyReference>
         <p1:AssemblyReference>System.Xml.Linq</p1:AssemblyReference>
         <p1:AssemblyReference>WindowsBase</p1:AssemblyReference>
         <p1:AssemblyReference>ActiveLearning.Business</p1:AssemblyReference>
+        <p1:AssemblyReference>ActiveLearning.Common</p1:AssemblyReference>
         <p1:AssemblyReference>ActiveLearning.DB</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.Razor</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.WebPages</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.WebPages.Razor</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.Mvc</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web</p1:AssemblyReference>
         <p1:AssemblyReference>mscorlib</p1:AssemblyReference>
         <p1:AssemblyReference>ActiveLearning.WF</p1:AssemblyReference>
       </sco:Collection>
@@ -65,56 +70,76 @@
       <p1:Variable x:TypeArguments="CorrelationHandle" Name="CourseStudentHandle" />
       <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="Result" />
       <p1:Variable x:TypeArguments="x:String" Name="Remark" />
+      <p1:Variable x:TypeArguments="CorrelationHandle" Name="__handle1" />
+      <p1:Variable x:TypeArguments="CorrelationHandle" Name="__handle2" />
+      <p1:Variable x:TypeArguments="CorrelationHandle" Name="__handle3" />
+      <p1:Variable x:TypeArguments="CorrelationHandle" Name="EnrollApplicationSidHandle" />
     </p1:Sequence.Variables>
-    <Receive x:Name="__ReferenceID0" CanCreateInstance="True" sap2010:WorkflowViewState.IdRef="Receive_4" OperationName="StudentEnrollCourse" ServiceContractName="p:IService">
-      <Receive.CorrelationInitializers>
-        <QueryCorrelationInitializer>
-          <QueryCorrelationInitializer.CorrelationHandle>
-            <p1:InArgument x:TypeArguments="CorrelationHandle">
-              <mca:CSharpValue x:TypeArguments="CorrelationHandle">CourseStudentHandle</mca:CSharpValue>
-            </p1:InArgument>
-          </QueryCorrelationInitializer.CorrelationHandle>
-          <XPathMessageQuery x:Key="key1">
-            <XPathMessageQuery.Namespaces>
-              <ssx:XPathMessageContextMarkup>
-                <x:String x:Key="xgSc">http://tempuri.org/</x:String>
-              </ssx:XPathMessageContextMarkup>
-            </XPathMessageQuery.Namespaces>sm:body()/xgSc:StudentEnrollCourse/xgSc:StudentSid</XPathMessageQuery>
-          <XPathMessageQuery x:Key="key2">
-            <XPathMessageQuery.Namespaces>
-              <ssx:XPathMessageContextMarkup>
-                <x:String x:Key="xgSc">http://tempuri.org/</x:String>
-              </ssx:XPathMessageContextMarkup>
-            </XPathMessageQuery.Namespaces>sm:body()/xgSc:StudentEnrollCourse/xgSc:CourseSid</XPathMessageQuery>
-        </QueryCorrelationInitializer>
-      </Receive.CorrelationInitializers>
-      <ReceiveParametersContent>
-        <p1:OutArgument x:TypeArguments="x:Int32" x:Key="StudentSid">
-          <mca:CSharpReference x:TypeArguments="x:Int32">StudentSid</mca:CSharpReference>
-        </p1:OutArgument>
-        <p1:OutArgument x:TypeArguments="x:Int32" x:Key="CourseSid">
-          <mca:CSharpReference x:TypeArguments="x:Int32">CourseSid</mca:CSharpReference>
-        </p1:OutArgument>
-      </ReceiveParametersContent>
-    </Receive>
-    <awa:StudentEnrollCourseActivity CourseSid="{x:Null}" EnrollApplicationPending="{x:Null}" EnrollApplicationSid="{x:Null}" Message="{x:Null}" StudentSid="{x:Null}" sap2010:WorkflowViewState.IdRef="StudentEnrollCourseActivity_1" />
-    <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_4">
-      <SendParametersContent>
-        <p1:InArgument x:TypeArguments="x:Boolean" x:Key="EnrollApplicationPending">
-          <mca:CSharpValue x:TypeArguments="x:Boolean">EnrollApplicationPending</mca:CSharpValue>
-        </p1:InArgument>
-        <p1:InArgument x:TypeArguments="x:String" x:Key="Message ">
-          <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
-        </p1:InArgument>
-        <p1:InArgument x:TypeArguments="x:Int32" x:Key="EnrollApplicationSid ">
-          <mca:CSharpValue x:TypeArguments="x:Int32">EnrollApplicationSid</mca:CSharpValue>
-        </p1:InArgument>
-      </SendParametersContent>
-    </SendReply>
-    <p1:DoWhile sap2010:WorkflowViewState.IdRef="DoWhile_1">
-      <p1:DoWhile.Condition>
+    <p1:Sequence sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <Receive x:Name="__ReferenceID0" CanCreateInstance="True" sap2010:WorkflowViewState.IdRef="Receive_4" OperationName="StudentEnrollCourse" ServiceContractName="p:IService">
+        <Receive.CorrelationInitializers>
+          <RequestReplyCorrelationInitializer>
+            <RequestReplyCorrelationInitializer.CorrelationHandle>
+              <p1:InArgument x:TypeArguments="CorrelationHandle">
+                <mca:CSharpValue x:TypeArguments="CorrelationHandle">__handle1</mca:CSharpValue>
+              </p1:InArgument>
+            </RequestReplyCorrelationInitializer.CorrelationHandle>
+          </RequestReplyCorrelationInitializer>
+        </Receive.CorrelationInitializers>
+        <ReceiveParametersContent>
+          <p1:OutArgument x:TypeArguments="x:Int32" x:Key="StudentSid">
+            <mca:CSharpReference x:TypeArguments="x:Int32">StudentSid</mca:CSharpReference>
+          </p1:OutArgument>
+          <p1:OutArgument x:TypeArguments="x:Int32" x:Key="CourseSid">
+            <mca:CSharpReference x:TypeArguments="x:Int32">CourseSid</mca:CSharpReference>
+          </p1:OutArgument>
+        </ReceiveParametersContent>
+      </Receive>
+      <awa:StudentEnrollCourseActivity sap2010:WorkflowViewState.IdRef="StudentEnrollCourseActivity_1">
+        <awa:StudentEnrollCourseActivity.CourseSid>
+          <p1:InArgument x:TypeArguments="x:Int32">
+            <mca:CSharpValue x:TypeArguments="x:Int32">CourseSid</mca:CSharpValue>
+          </p1:InArgument>
+        </awa:StudentEnrollCourseActivity.CourseSid>
+        <awa:StudentEnrollCourseActivity.EnrollApplicationPending>
+          <p1:OutArgument x:TypeArguments="x:Boolean">
+            <mca:CSharpReference x:TypeArguments="x:Boolean">EnrollApplicationPending</mca:CSharpReference>
+          </p1:OutArgument>
+        </awa:StudentEnrollCourseActivity.EnrollApplicationPending>
+        <awa:StudentEnrollCourseActivity.EnrollApplicationSid>
+          <p1:OutArgument x:TypeArguments="x:Int32">
+            <mca:CSharpReference x:TypeArguments="x:Int32">EnrollApplicationSid</mca:CSharpReference>
+          </p1:OutArgument>
+        </awa:StudentEnrollCourseActivity.EnrollApplicationSid>
+        <awa:StudentEnrollCourseActivity.Message>
+          <p1:OutArgument x:TypeArguments="x:String">
+            <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
+          </p1:OutArgument>
+        </awa:StudentEnrollCourseActivity.Message>
+        <awa:StudentEnrollCourseActivity.StudentSid>
+          <p1:InArgument x:TypeArguments="x:Int32">
+            <mca:CSharpValue x:TypeArguments="x:Int32">StudentSid</mca:CSharpValue>
+          </p1:InArgument>
+        </awa:StudentEnrollCourseActivity.StudentSid>
+      </awa:StudentEnrollCourseActivity>
+      <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_4">
+        <SendParametersContent>
+          <p1:InArgument x:TypeArguments="x:Boolean" x:Key="EnrollApplicationPending">
+            <mca:CSharpValue x:TypeArguments="x:Boolean">EnrollApplicationPending</mca:CSharpValue>
+          </p1:InArgument>
+          <p1:InArgument x:TypeArguments="x:String" x:Key="Message ">
+            <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+          </p1:InArgument>
+          <p1:InArgument x:TypeArguments="x:Int32" x:Key="EnrollApplicationSid ">
+            <mca:CSharpValue x:TypeArguments="x:Int32">EnrollApplicationSid</mca:CSharpValue>
+          </p1:InArgument>
+        </SendParametersContent>
+      </SendReply>
+    </p1:Sequence>
+    <p1:While sap2010:WorkflowViewState.IdRef="While_1">
+      <p1:While.Condition>
         <mca:CSharpValue x:TypeArguments="x:Boolean">EnrollApplicationPending</mca:CSharpValue>
-      </p1:DoWhile.Condition>
+      </p1:While.Condition>
       <p1:Pick sap2010:WorkflowViewState.IdRef="Pick_1">
         <p1:PickBranch DisplayName="InstructorAcceptBranch" sap2010:WorkflowViewState.IdRef="PickBranch_1">
           <p1:PickBranch.Variables>
@@ -123,37 +148,27 @@
           <p1:PickBranch.Trigger>
             <p1:Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
               <p1:Sequence.Variables>
-                <x:Reference>__ReferenceID2</x:Reference>
+                <p1:Variable x:TypeArguments="CorrelationHandle" Name="__handle1" />
               </p1:Sequence.Variables>
-              <Receive x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="Receive_5" OperationName="InstructorAcceptEnrollApplication" ServiceContractName="p:IService">
+              <Receive x:Name="__ReferenceID1" CanCreateInstance="True" sap2010:WorkflowViewState.IdRef="Receive_5" OperationName="InstructorAcceptEnrollApplication" ServiceContractName="p:IService">
                 <Receive.CorrelatesOn>
                   <XPathMessageQuery x:Key="key1">
                     <XPathMessageQuery.Namespaces>
                       <ssx:XPathMessageContextMarkup>
                         <x:String x:Key="xgSc">http://tempuri.org/</x:String>
                       </ssx:XPathMessageContextMarkup>
-                    </XPathMessageQuery.Namespaces>sm:body()/xgSc:InstructorAccept/xgSc:StudentSid</XPathMessageQuery>
-                  <XPathMessageQuery x:Key="key2">
-                    <XPathMessageQuery.Namespaces>
-                      <ssx:XPathMessageContextMarkup>
-                        <x:String x:Key="xgSc">http://tempuri.org/</x:String>
-                      </ssx:XPathMessageContextMarkup>
-                    </XPathMessageQuery.Namespaces>sm:body()/xgSc:InstructorAccept/xgSc:CourseSid</XPathMessageQuery>
+                    </XPathMessageQuery.Namespaces>sm:body()/xgSc:InstructorAcceptEnrollApplication/xgSc:EnrollApplicationSid</XPathMessageQuery>
                 </Receive.CorrelatesOn>
                 <Receive.CorrelatesWith>
                   <p1:InArgument x:TypeArguments="CorrelationHandle">
-                    <mca:CSharpValue x:TypeArguments="CorrelationHandle">CourseStudentHandle</mca:CSharpValue>
+                    <mca:CSharpValue x:TypeArguments="CorrelationHandle">EnrollApplicationSidHandle</mca:CSharpValue>
                   </p1:InArgument>
                 </Receive.CorrelatesWith>
                 <Receive.CorrelationInitializers>
                   <RequestReplyCorrelationInitializer>
                     <RequestReplyCorrelationInitializer.CorrelationHandle>
                       <p1:InArgument x:TypeArguments="CorrelationHandle">
-                        <p1:VariableValue x:TypeArguments="CorrelationHandle">
-                          <p1:VariableValue.Variable>
-                            <p1:Variable x:TypeArguments="CorrelationHandle" x:Name="__ReferenceID2" Name="__handle1" />
-                          </p1:VariableValue.Variable>
-                        </p1:VariableValue>
+                        <mca:CSharpValue x:TypeArguments="CorrelationHandle">__handle2</mca:CSharpValue>
                       </p1:InArgument>
                     </RequestReplyCorrelationInitializer.CorrelationHandle>
                   </RequestReplyCorrelationInitializer>
@@ -165,9 +180,33 @@
                   <p1:OutArgument x:TypeArguments="x:Int32" x:Key="CourseSid">
                     <mca:CSharpReference x:TypeArguments="x:Int32">CourseSid</mca:CSharpReference>
                   </p1:OutArgument>
+                  <p1:OutArgument x:TypeArguments="x:Int32" x:Key="EnrollApplicationSid">
+                    <mca:CSharpReference x:TypeArguments="x:Int32">EnrollApplicationSid</mca:CSharpReference>
+                  </p1:OutArgument>
                 </ReceiveParametersContent>
               </Receive>
-              <awa:InstructorAcceptEnrollApplicationActivity CourseSid="{x:Null}" Message="{x:Null}" Result="{x:Null}" StudentSid="{x:Null}" sap2010:WorkflowViewState.IdRef="InstructorAcceptEnrollApplicationActivity_1" />
+              <awa:InstructorAcceptEnrollApplicationActivity EnrollApplicationSid="{x:Null}" sap2010:WorkflowViewState.IdRef="InstructorAcceptEnrollApplicationActivity_1">
+                <awa:InstructorAcceptEnrollApplicationActivity.CourseSid>
+                  <p1:InArgument x:TypeArguments="x:Int32">
+                    <mca:CSharpValue x:TypeArguments="x:Int32">CourseSid</mca:CSharpValue>
+                  </p1:InArgument>
+                </awa:InstructorAcceptEnrollApplicationActivity.CourseSid>
+                <awa:InstructorAcceptEnrollApplicationActivity.Message>
+                  <p1:OutArgument x:TypeArguments="x:String">
+                    <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
+                  </p1:OutArgument>
+                </awa:InstructorAcceptEnrollApplicationActivity.Message>
+                <awa:InstructorAcceptEnrollApplicationActivity.Result>
+                  <p1:OutArgument x:TypeArguments="x:Boolean">
+                    <mca:CSharpReference x:TypeArguments="x:Boolean">Result</mca:CSharpReference>
+                  </p1:OutArgument>
+                </awa:InstructorAcceptEnrollApplicationActivity.Result>
+                <awa:InstructorAcceptEnrollApplicationActivity.StudentSid>
+                  <p1:InArgument x:TypeArguments="x:Int32">
+                    <mca:CSharpValue x:TypeArguments="x:Int32">StudentSid</mca:CSharpValue>
+                  </p1:InArgument>
+                </awa:InstructorAcceptEnrollApplicationActivity.StudentSid>
+              </awa:InstructorAcceptEnrollApplicationActivity>
               <SendReply Request="{x:Reference __ReferenceID1}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_5">
                 <SendParametersContent>
                   <p1:InArgument x:TypeArguments="x:Boolean" x:Key="Result">
@@ -195,9 +234,9 @@
           <p1:PickBranch.Trigger>
             <p1:Sequence sap2010:WorkflowViewState.IdRef="Sequence_7">
               <p1:Sequence.Variables>
-                <x:Reference>__ReferenceID4</x:Reference>
+                <p1:Variable x:TypeArguments="CorrelationHandle" Name="__handle1" />
               </p1:Sequence.Variables>
-              <Receive x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="Receive_6" OperationName="InstructorRejectEnrollApplication" ServiceContractName="p:IService">
+              <Receive x:Name="__ReferenceID2" CanCreateInstance="True" sap2010:WorkflowViewState.IdRef="Receive_6" OperationName="InstructorRejectEnrollApplication" ServiceContractName="p:IService">
                 <Receive.CorrelatesOn>
                   <XPathMessageQuery x:Key="key1">
                     <XPathMessageQuery.Namespaces>
@@ -221,11 +260,7 @@
                   <RequestReplyCorrelationInitializer>
                     <RequestReplyCorrelationInitializer.CorrelationHandle>
                       <p1:InArgument x:TypeArguments="CorrelationHandle">
-                        <p1:VariableValue x:TypeArguments="CorrelationHandle">
-                          <p1:VariableValue.Variable>
-                            <p1:Variable x:TypeArguments="CorrelationHandle" x:Name="__ReferenceID4" Name="__handle1" />
-                          </p1:VariableValue.Variable>
-                        </p1:VariableValue>
+                        <mca:CSharpValue x:TypeArguments="CorrelationHandle">__handle3</mca:CSharpValue>
                       </p1:InArgument>
                     </RequestReplyCorrelationInitializer.CorrelationHandle>
                   </RequestReplyCorrelationInitializer>
@@ -240,10 +275,39 @@
                   <p1:OutArgument x:TypeArguments="x:String" x:Key="Remark">
                     <mca:CSharpReference x:TypeArguments="x:String">Remark</mca:CSharpReference>
                   </p1:OutArgument>
+                  <p1:OutArgument x:TypeArguments="x:Int32" x:Key="EnrollApplicationSid">
+                    <mca:CSharpReference x:TypeArguments="x:Int32">EnrollApplicationSid</mca:CSharpReference>
+                  </p1:OutArgument>
                 </ReceiveParametersContent>
               </Receive>
-              <awa:InstructorRejectEnrollApplicationActivity CourseSid="{x:Null}" Message="{x:Null}" Remark="{x:Null}" Result="{x:Null}" StudentSid="{x:Null}" sap2010:WorkflowViewState.IdRef="InstructorRejectEnrollApplicationActivity_1" />
-              <SendReply Request="{x:Reference __ReferenceID3}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_6">
+              <awa:InstructorRejectEnrollApplicationActivity sap2010:WorkflowViewState.IdRef="InstructorRejectEnrollApplicationActivity_1">
+                <awa:InstructorRejectEnrollApplicationActivity.CourseSid>
+                  <p1:InArgument x:TypeArguments="x:Int32">
+                    <mca:CSharpValue x:TypeArguments="x:Int32">CourseSid</mca:CSharpValue>
+                  </p1:InArgument>
+                </awa:InstructorRejectEnrollApplicationActivity.CourseSid>
+                <awa:InstructorRejectEnrollApplicationActivity.Message>
+                  <p1:OutArgument x:TypeArguments="x:String">
+                    <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
+                  </p1:OutArgument>
+                </awa:InstructorRejectEnrollApplicationActivity.Message>
+                <awa:InstructorRejectEnrollApplicationActivity.Remark>
+                  <p1:InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">Remark</mca:CSharpValue>
+                  </p1:InArgument>
+                </awa:InstructorRejectEnrollApplicationActivity.Remark>
+                <awa:InstructorRejectEnrollApplicationActivity.Result>
+                  <p1:OutArgument x:TypeArguments="x:Boolean">
+                    <mca:CSharpReference x:TypeArguments="x:Boolean">Result</mca:CSharpReference>
+                  </p1:OutArgument>
+                </awa:InstructorRejectEnrollApplicationActivity.Result>
+                <awa:InstructorRejectEnrollApplicationActivity.StudentSid>
+                  <p1:InArgument x:TypeArguments="x:Int32">
+                    <mca:CSharpValue x:TypeArguments="x:Int32">StudentSid</mca:CSharpValue>
+                  </p1:InArgument>
+                </awa:InstructorRejectEnrollApplicationActivity.StudentSid>
+              </awa:InstructorRejectEnrollApplicationActivity>
+              <SendReply Request="{x:Reference __ReferenceID2}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_6">
                 <SendParametersContent>
                   <p1:InArgument x:TypeArguments="x:Boolean" x:Key="Result">
                     <mca:CSharpValue x:TypeArguments="x:Boolean">Result</mca:CSharpValue>
@@ -267,14 +331,21 @@
           </p1:Assign>
         </p1:PickBranch>
       </p1:Pick>
-    </p1:DoWhile>
-    <sads:DebugSymbol.Symbol>d4cBRDpcV29ya3NwYWNlXEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNFx0cnVua1xBY3RpdmVfTGVhcm5pbmdfU2VydmljZV9Hcm91cDRfU29sdXRpb25cQWN0aXZlTGVhcm5pbmcuV0ZcU3R1ZGVudENvdXJzZUVucm9sbFdGLnhhbWx4LA8DkAIRAQE/OD8+AQNCOEI/AQJFBWMPAtcBZAVk6gEC1gFlBXERArcBcgWOAhIBBGALYFkC7AFdC11aAuIBSg9KaQLYAWsLa1ACzAFoC2hiAsIBbgtuXAK4AXQJdGACrQF2B40CEQEFdwnBARkBXMIBCYwCGQEGfA21ARsBarcBC8ABFwFdxAENgAIbAROCAguLAhcBB4ABD6kBGQKHAaoBD6oB3gEChgGrAQ+0ARsBa74BOr4BPwFpugERugFwAV7IAQ/0ARkBLvUBD/UB8AEBLfYBD/8BGwEUiQI6iQI/ARKFAhGFAnABCJEBFZEBbwKhAaYBFaYBYwKVAaMBFaMBZAKJAZgBGZwBLAKIAbEBFbEBWgF4rgEVrgFaAWzZARXZAW8BUe4BFe4BYwFG8QEV8QFhATvrARXrAWQBMOABGeQBLAEv/AEV/AFaASD5ARX5AVoBFQ==</sads:DebugSymbol.Symbol>
+    </p1:While>
+    <sads:DebugSymbol.Symbol>d4cBRDpcV29ya3NwYWNlXEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNFx0cnVua1xBY3RpdmVfTGVhcm5pbmdfU2VydmljZV9Hcm91cDRfU29sdXRpb25cQWN0aXZlTGVhcm5pbmcuV0ZcU3R1ZGVudENvdXJzZUVucm9sbFdGLnhhbWx4PQ8D0AIRAQFEOEQ+AQNHOEc/AQJOBYoBEwLwA4sBBc4CEAEETwdhEQL/BGIHfCkCuAR9B4kBEwLxA48BB80CEQETjQEJjQFgAQVeDV5bApwFWw1bXAKOBVQRVGECgAV0DXRaAvEEZQ1lUwLjBG8Nb2YC1QRqDWpsAscEeQ15VAK5BIMBDYMBUgKOBIABDYABZAKABIYBDYYBXgLyA5ABCegBGQKKAukBCcwCGQEUlQEN3AEbApwC3gEL5wEXAosC6wENwAIbASXCAgvLAhcBFZkBD7sBGQKfA7wBD9EBPwLeAtIBD9sBGwKdAuUBOuUBPwKbAuEBEeEBcAKMAu8BD5oCGQKvAZsCD7UCPwFjtgIPvwIbASbJAjrJAj8BJMUCEcUCcAEWpAEVpAF2AuADtQEVtQFjAtADuAEVuAFuAsADsgEVsgFkArADqwEZqwFpAqADxAEVxAFiAo8DvwEVvwFbAv8CyQEVyQFiAu8CzgEVzgFcAt8C2AEV2AFaAq4C1QEV1QFaAp4CgAIVgAJvAvsBkQIVkQJjAuwBlwIVlwJuAt0BlAIVlAJhAs4BjgIVjgJkAr8BhwIZhwJpArABowIVowJiAqABngIVngJbApEBrQIVrQJiAoIBqAIVqAJZAXOyAhWyAlwBZLwCFbwCWgE2uQIVuQJaASc=</sads:DebugSymbol.Symbol>
   </p1:Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="Receive_4" sap:VirtualizedContainerService.HintSize="794,90" />
-      <sap2010:ViewStateData Id="StudentEnrollCourseActivity_1" sap:VirtualizedContainerService.HintSize="794,22" />
-      <sap2010:ViewStateData Id="SendReply_4" sap:VirtualizedContainerService.HintSize="794,90" />
+      <sap2010:ViewStateData Id="Receive_4" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="StudentEnrollCourseActivity_1" sap:VirtualizedContainerService.HintSize="255,22" />
+      <sap2010:ViewStateData Id="SendReply_4" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="794,406">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Receive_5" sap:VirtualizedContainerService.HintSize="255,90" />
       <sap2010:ViewStateData Id="InstructorAcceptEnrollApplicationActivity_1" sap:VirtualizedContainerService.HintSize="255,22" />
       <sap2010:ViewStateData Id="SendReply_5" sap:VirtualizedContainerService.HintSize="255,90" />
@@ -300,15 +371,15 @@
       <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,62" />
       <sap2010:ViewStateData Id="PickBranch_2" sap:VirtualizedContainerService.HintSize="307,666" />
       <sap2010:ViewStateData Id="Pick_1" sap:VirtualizedContainerService.HintSize="768,712" />
-      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="794,876" />
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="816,1322">
+      <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="794,872" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="816,1442">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="WorkflowService_1" sap:VirtualizedContainerService.HintSize="846,1392" />
+      <sap2010:ViewStateData Id="WorkflowService_1" sap:VirtualizedContainerService.HintSize="846,1512" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </WorkflowService>

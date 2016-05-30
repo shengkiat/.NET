@@ -44,6 +44,7 @@ namespace ActiveLearning.Business.Interface
         IEnumerable<Course> GetNonEnrolledNonAppliedCoursesByStudentSid(int studentSid, out string message);
         IEnumerable<int> GetNonEnrolledNonAppliedCourseSidsByStudentSid(int studentSid, out string message);
         bool EnrolStudentToCourse(int studentSid, int courseSid, out string message);
+        bool HasStudentEnrolledToCourse(int studentSid, int courseSid, out string message);
         #endregion
 
         #region Student Enrollment Application
@@ -55,7 +56,8 @@ namespace ActiveLearning.Business.Interface
         IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByStudentSid(int studentSid, out string message);
         IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplicationsByStudentSid(int studentSid, out string message);
         IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplicationsByStudentSid(int studentSid, out string message);
-        StudentEnrollApplication GetStudentEnrollApplicationsByStudentSidCourseSid(int studentSid, int courseSid, out string message);
+        StudentEnrollApplication GetStudentEnrollApplicationByStudentSidCourseSid(int studentSid, int courseSid, out string message);
+        bool HasStudentAppliedCourse(int studentSid, int courseSid, out string message);
         bool InstructorAcceptStudentEnrollApplication(int studentSid, int courseSid, out string message);
         bool InstructorRejectStudentEnrollApplication(int studentSid, int courseSid, string remark, out string message);
         #endregion

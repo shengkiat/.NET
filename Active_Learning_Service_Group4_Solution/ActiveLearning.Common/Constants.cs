@@ -55,6 +55,8 @@ namespace ActiveLearning.Common
         public const string Student_Course_Enrolment_Application = "Student Course Enrolment Application";
         public const string Instructor_Course_Enrolment = "Instructor Course Enrolment ";
         public const string Course_Fully_Enrolled = "Course is fully enrolled";
+        public const string Course_Already_Enrolled = "You have already enrolled in this course";
+        public const string Course_Already_Applied = "You have already applied to this course";
 
         public const string AllRequiredFields = "All Required Fields";
         public const string Admin = "Admin";
@@ -133,6 +135,7 @@ namespace ActiveLearning.Common
         {
             return value + " already exists";
         }
+
         public static string OperationFailedDuringRetrievingValue(string value)
         {
             return "Operation failed during retrieving " + value + ". Please contact system admin";
