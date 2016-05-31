@@ -1015,6 +1015,35 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
+        public StudentEnrollApplication GetStudentEnrollApplicationBySidCourseSid(int enrollApplicationSid, out string message)
+        {
+            if (enrollApplicationSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Student_Course_Enrolment_Application_Sid);
+                return null;
+            }
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    var studentEnrollmentApplications = unitOfWork.StudentEnrollApplications.Find(a => a.Sid == enrollApplicationSid && !a.DeleteDT.HasValue).SingleOrDefault();
+                    if (studentEnrollmentApplications == null)
+                    {
+                        message = Constants.ThereIsNoValueFound(Constants.Student_Course_Enrolment_Application);
+                        return null;
+                    }
+                    message = string.Empty;
+                    return studentEnrollmentApplications;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.Student_Course_Enrolment_Application);
+                return null;
+            }
+        }
         public bool HasStudentAppliedCourse(int studentSid, int courseSid, out string message)
         {
             var studentEnrollApplication = GetStudentEnrollApplicationByStudentSidCourseSid(studentSid, courseSid, out message);
@@ -1075,6 +1104,15 @@ namespace ActiveLearning.Business.Implementation
                 return false;
             }
         }
+        public bool InstructorAcceptStudentEnrollApplication(int enrollApplicationSid, out string message)
+        {
+            var enrollApplication = GetStudentEnrollApplicationBySidCourseSid(enrollApplicationSid, out message);
+            if (enrollApplication == null)
+            {
+                return false;
+            }
+            return InstructorAcceptStudentEnrollApplication(enrollApplication.StudentSid, enrollApplication.CourseSid, out message);
+        }
         public bool InstructorRejectStudentEnrollApplication(int studentSid, int courseSid, string remark, out string message)
         {
             if (studentSid == 0)
@@ -1119,6 +1157,15 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.OperationFailedDuringRetrievingValue(Constants.Student_Course_Enrolment_Application);
                 return false;
             }
+        }
+        public bool InstructorRejectStudentEnrollApplication(int enrollApplicationSid, string remark, out string message)
+        {
+            var enrollApplication = GetStudentEnrollApplicationBySidCourseSid(enrollApplicationSid, out message);
+            if (enrollApplication == null)
+            {
+                return false;
+            }
+            return InstructorRejectStudentEnrollApplication(enrollApplication.StudentSid, enrollApplication.CourseSid, remark, out message);
         }
         #endregion
 

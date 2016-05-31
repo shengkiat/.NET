@@ -86,10 +86,16 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Compile Include="Activity\CheckWhetherAppliedActivity.cs" />
+    <Compile Include="Activity\CheckWhetherCourseExists.cs" />
+    <Compile Include="Activity\CheckWhetherCourseFullActivity.cs" />
+    <Compile Include="Activity\CheckWhetherEnrolledCourseActivity.cs" />
+    <Compile Include="Activity\CheckWhetherStudentExists.cs" />
     <Compile Include="Activity\InstructorAcceptEnrollApplicationActivity.cs" />
     <Compile Include="Activity\InstructorRejectEnrollApplicationActivity.cs" />
     <Compile Include="Activity\ReviewerAcceptContentActivity.cs" />
     <Compile Include="Activity\ReviewerAddCommentActivity.cs" />
+    <Compile Include="Activity\StudentApplyToEnrollCourseActivity.cs" />
     <Compile Include="Activity\StudentEnrollCourseActivity.cs" />
     <Compile Include="Activity\UploadCourseContentActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,6 +125,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UploadCourseMaterialWF.xamlx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="StudentCourseEnrollFLowChartWF.xamlx">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

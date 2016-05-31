@@ -416,6 +416,21 @@ namespace ActiveLearning.Business.Mock
             throw new NotImplementedException();
         }
 
+        public StudentEnrollApplication GetStudentEnrollApplicationBySidCourseSid(int enrollApplicationSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool InstructorAcceptStudentEnrollApplication(int enrollApplicationSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool InstructorRejectStudentEnrollApplication(int enrollApplicationSid, string remark, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         #endregion

@@ -53,10 +53,11 @@ namespace ActiveLearning.Common
         public const string NonEnrolledInstructor = "Non Enrolled Instructor";
         public const string Student_Course_Enrolment = "Student Course Enrolment ";
         public const string Student_Course_Enrolment_Application = "Student Course Enrolment Application";
+        public const string Student_Course_Enrolment_Application_Sid = "Student Course Enrolment Application ID";
         public const string Instructor_Course_Enrolment = "Instructor Course Enrolment ";
         public const string Course_Fully_Enrolled = "Course is fully enrolled";
         public const string Course_Already_Enrolled = "You have already enrolled in this course";
-        public const string Course_Already_Applied = "You have already applied to this course";
+        public const string Course_Already_Applied = "You have already applied for this course";
 
         public const string AllRequiredFields = "All Required Fields";
         public const string Admin = "Admin";
