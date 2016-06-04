@@ -446,6 +446,11 @@ namespace ActiveLearning.Business.Mock
             throw new NotImplementedException();
         }
 
+        public StudentEnrollApplication GetStudentEnrollApplicationBySid(int enrollApplicationSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         #endregion

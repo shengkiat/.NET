@@ -1036,7 +1036,7 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
-        public StudentEnrollApplication GetStudentEnrollApplicationBySidCourseSid(int enrollApplicationSid, out string message)
+        public StudentEnrollApplication GetStudentEnrollApplicationBySid(int enrollApplicationSid, out string message)
         {
             if (enrollApplicationSid == 0)
             {
@@ -1127,7 +1127,7 @@ namespace ActiveLearning.Business.Implementation
         }
         public bool InstructorAcceptStudentEnrollApplication(int enrollApplicationSid, out string message)
         {
-            var enrollApplication = GetStudentEnrollApplicationBySidCourseSid(enrollApplicationSid, out message);
+            var enrollApplication = GetStudentEnrollApplicationBySid(enrollApplicationSid, out message);
             if (enrollApplication == null)
             {
                 return false;
@@ -1181,7 +1181,7 @@ namespace ActiveLearning.Business.Implementation
         }
         public bool InstructorRejectStudentEnrollApplication(int enrollApplicationSid, string remark, out string message)
         {
-            var enrollApplication = GetStudentEnrollApplicationBySidCourseSid(enrollApplicationSid, out message);
+            var enrollApplication = GetStudentEnrollApplicationBySid(enrollApplicationSid, out message);
             if (enrollApplication == null)
             {
                 return false;
