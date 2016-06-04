@@ -136,7 +136,10 @@ namespace ActiveLearning.Common
         {
             return value + " already exists";
         }
-
+        public static string OperationFailedDuringCallingValue(string value)
+        {
+            return "Operation failed during calling " + value + ". Please contact system admin";
+        }
         public static string OperationFailedDuringRetrievingValue(string value)
         {
             return "Operation failed during retrieving " + value + ". Please contact system admin";

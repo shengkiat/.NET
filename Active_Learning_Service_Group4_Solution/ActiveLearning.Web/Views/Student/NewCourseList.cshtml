@@ -14,7 +14,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.CourseName)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullyEnrolled)
+            </th>
+            <th>Action</th>
         </tr>
 
         @foreach (var item in Model)
@@ -22,6 +25,16 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @if(item.FullyEnrolled)
+                    {
+                        <label class="text-danger">Yes</label>
+                    }
+                    else
+                    {
+                    <label class="text-success">No</label>
+                    }
                 </td>
                 <td>
                     @Html.ActionLink("Enroll", "RequestToEnrollCourse", new { courseSid = item.Sid })

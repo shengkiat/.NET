@@ -30,22 +30,25 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.ValueIsEmpty(Constants.Course);
                 return true;
             }
-            var course = GetCourseByCourseSid(courseSid, out message);
-
-            if (course == null)
-            {
-                return true;
-            }
             try
             {
                 using (UnitOfWork unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
+                    var course = unitOfWork.Courses.Find(c => c.Sid == courseSid && !c.DeleteDT.HasValue).FirstOrDefault();
+
+                    if (course == null)
+                    {
+                        message = Constants.ValueNotFound(Constants.Course);
+                        return true;
+                    }
+
                     int quotaTaken = 0;
                     var student_Course_Maps = unitOfWork.Student_Course_Maps.Find(m => m.CourseSid == courseSid);
                     if (student_Course_Maps != null)
                     {
                         quotaTaken = student_Course_Maps.Count();
                     }
+                    message = string.Empty;
                     return quotaTaken >= course.StudentQuota;
                 }
             }
@@ -134,8 +137,9 @@ namespace ActiveLearning.Business.Implementation
                         message = Constants.ValueNotFound(Constants.Course);
                         return null;
                     }
-                    message = string.Empty;
                     Course.AvailableQuota = GetCourseAvailableQuota(courseSid, out message);
+                    Course.FullyEnrolled = IsCourseFullyEnrolled(courseSid, out message);
+                    message = string.Empty;
                     return Course;
                 }
             }
@@ -164,6 +168,7 @@ namespace ActiveLearning.Business.Implementation
                     foreach (var counrse in Courses)
                     {
                         counrse.AvailableQuota = GetCourseAvailableQuota(counrse.Sid, out message);
+                        counrse.FullyEnrolled = IsCourseFullyEnrolled(counrse.Sid, out message);
                     }
                     return Courses.ToList();
                 }
@@ -560,7 +565,9 @@ namespace ActiveLearning.Business.Implementation
                     }
                     else
                     {
-                        list = allCourses.SkipWhile(a => enrolledCourses.Select(e => e.Sid).Contains(a.Sid));
+                        var enrolledCourseSids = enrolledCourses.Select(e => e.Sid);
+                        //list = allCourses.SkipWhile(a => enrolledCourses.Select(e => e.Sid).Contains(a.Sid));
+                        list = allCourses.Where(a => !enrolledCourseSids.Contains(a.Sid));
                         if (list == null || list.Count() == 0)
                         {
                             message = Constants.ThereIsNoValueFound(Constants.NonEnrolledCourse);
@@ -944,14 +951,14 @@ namespace ActiveLearning.Business.Implementation
                         return null;
                     }
                     using (var userManager = new UserManager())
-                    { 
+                    {
                         foreach (var application in studentEnrollmentApplications)
                         {
                             application.Course = GetCourseByCourseSid(application.CourseSid, out message);
                             application.Student = userManager.GetStudentByStudentSid(application.StudentSid, out message);
                         }
                     }
-                    studentEnrollmentApplications = studentEnrollmentApplications.Where(a => a.Course != null && a.Student !=null);
+                    studentEnrollmentApplications = studentEnrollmentApplications.Where(a => a.Course != null && a.Student != null);
                     message = string.Empty;
                     return studentEnrollmentApplications.ToList();
                 }

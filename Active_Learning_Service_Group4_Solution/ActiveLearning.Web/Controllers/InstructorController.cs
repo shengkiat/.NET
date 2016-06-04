@@ -724,7 +724,12 @@ namespace ActiveLearning.Web.Controllers
                 try
                 {
                     acceptedSuccessfully = client.AcceptEnrollApplication(enrollmentAppliationSid, out message, out hasError);
-                    if(acceptedSuccessfully)
+                    if (acceptedSuccessfully)
+                    {
+                        SetTempDataMessage(message);
+                        return RedirectToAction("PendingCourseEnrollment");
+                    }
+                    else
                     {
                         SetTempDataError(message);
                         return RedirectToAction("PendingCourseEnrollment");
@@ -733,18 +738,21 @@ namespace ActiveLearning.Web.Controllers
                 catch (Exception ex)
                 {
                     ExceptionLog(ex);
-                    SetTempDataError(ex.Message);
+                    SetTempDataError(Common.Constants.OperationFailedDuringCallingValue("course enrollment workflow service"));
                     return RedirectToAction("PendingCourseEnrollment");
                 }
             }
-            SetTempDataMessage(message);
-            return RedirectToAction("PendingCourseEnrollment");
         }
 
-
-
-
-
+        //public ActionResult testView(int id)
+        //{
+        //    string message = string.Empty;
+        //    using (var courseManager = new CourseManager())
+        //    {
+        //        var app = courseManager.GetStudentEnrollApplicationBySid(id, out message);
+        //        return View(app);
+        //    }
+        //}
 
 
         #endregion
