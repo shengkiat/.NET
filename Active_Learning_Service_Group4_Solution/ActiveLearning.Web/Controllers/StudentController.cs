@@ -100,6 +100,11 @@ namespace ActiveLearning.Web.Controllers
                     SetTempDataError(ex.Message);
                     return RedirectToAction("NewCourseList");
                 }
+                if(!enrolledCourseSuccesfully && !appliedCourseSuccesfully)
+                {
+                    SetTempDataError(message);
+                    return RedirectToAction("NewCourseList");
+                }
             }
             SetTempDataMessage(message);
             return RedirectToAction("NewCourseList");
