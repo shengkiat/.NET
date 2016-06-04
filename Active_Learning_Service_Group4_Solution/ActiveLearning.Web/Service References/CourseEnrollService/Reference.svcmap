@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="eaca5215-eb88-488c-b777-218c9d090261" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fc8548af-2123-4353-a8ac-a76b7ab1c680" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="StudentCourseEnrollFLowChartWF.xsd" MetadataType="Schema" ID="feb19c97-ee76-491a-830e-bf1871ee339a" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?xsd=xsd1" />
-    <MetadataFile FileName="StudentCourseEnrollFLowChartWF1.xsd" MetadataType="Schema" ID="5efb27b3-e2b6-4555-b7b9-2f24008ba0b9" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?xsd=xsd0" />
-    <MetadataFile FileName="StudentCourseEnrollFLowChartWF.wsdl" MetadataType="Wsdl" ID="17207a3a-e902-40d5-8724-e5d3f9c95067" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?wsdl" />
-    <MetadataFile FileName="StudentCourseEnrollFLowChartWF.disco" MetadataType="Disco" ID="0e516e3d-4a3e-4cfb-bfef-b7ef31004608" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?disco" />
+    <MetadataFile FileName="StudentCourseEnrollFLowChartWF.xsd" MetadataType="Schema" ID="14b26006-2bf4-44cb-8950-bcaa6c90c103" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?xsd=xsd1" />
+    <MetadataFile FileName="StudentCourseEnrollFLowChartWF1.xsd" MetadataType="Schema" ID="bef275ef-34c7-4959-b5db-6f4fdc77146d" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?xsd=xsd0" />
+    <MetadataFile FileName="StudentCourseEnrollFLowChartWF.wsdl" MetadataType="Wsdl" ID="5bf32d53-9075-4bf2-88a3-e842a0ed0594" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?wsdl" />
+    <MetadataFile FileName="StudentCourseEnrollFLowChartWF.disco" MetadataType="Disco" ID="9ce16bb1-825f-4364-b302-4f7f487480b9" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

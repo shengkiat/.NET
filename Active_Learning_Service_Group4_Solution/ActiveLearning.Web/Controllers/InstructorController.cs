@@ -719,7 +719,7 @@ namespace ActiveLearning.Web.Controllers
             }
             bool hasError = false;
             bool acceptedSuccessfully = false;
-            using (StudentCourseEnrollServiceReference.ServiceClient client = new StudentCourseEnrollServiceReference.ServiceClient())
+            using (CourseEnrollService.ServiceClient client = new CourseEnrollService.ServiceClient())
             {
                 try
                 {

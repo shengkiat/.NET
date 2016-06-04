@@ -200,7 +200,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\StudentCourseEnrollServiceReference\Reference.cs">
+    <Compile Include="Service References\CourseEnrollService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -255,19 +255,19 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\statistics.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Service References\StudentCourseEnrollServiceReference\ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationResponse.datasource">
+    <Content Include="Service References\CourseEnrollService\ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\StudentCourseEnrollServiceReference\ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationResponse.datasource">
+    <Content Include="Service References\CourseEnrollService\ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\StudentCourseEnrollServiceReference\ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseResponse.datasource">
+    <Content Include="Service References\CourseEnrollService\ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Service References\StudentCourseEnrollServiceReference\StudentCourseEnrollFLowChartWF.disco" />
-    <None Include="Service References\StudentCourseEnrollServiceReference\configuration91.svcinfo" />
-    <None Include="Service References\StudentCourseEnrollServiceReference\configuration.svcinfo" />
-    <None Include="Service References\StudentCourseEnrollServiceReference\Reference.svcmap">
+    <None Include="Service References\CourseEnrollService\StudentCourseEnrollFLowChartWF.disco" />
+    <None Include="Service References\CourseEnrollService\configuration91.svcinfo" />
+    <None Include="Service References\CourseEnrollService\configuration.svcinfo" />
+    <None Include="Service References\CourseEnrollService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -335,15 +335,15 @@
     <Content Include="Views\Admin\CommentContent.cshtml">
       <BrowseToURL>~/Admin/CommentContent</BrowseToURL>
     </Content>
-    <None Include="Service References\StudentCourseEnrollServiceReference\StudentCourseEnrollFLowChartWF.wsdl" />
-    <None Include="Service References\StudentCourseEnrollServiceReference\StudentCourseEnrollFLowChartWF.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\StudentCourseEnrollServiceReference\StudentCourseEnrollFLowChartWF1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\Student\NewCourseList.cshtml" />
     <Content Include="Views\Instructor\PendingCourseEnrollment.cshtml" />
+    <None Include="Service References\CourseEnrollService\StudentCourseEnrollFLowChartWF.wsdl" />
+    <None Include="Service References\CourseEnrollService\StudentCourseEnrollFLowChartWF.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CourseEnrollService\StudentCourseEnrollFLowChartWF1.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -379,7 +379,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\StudentCourseEnrollServiceReference\" />
+    <WCFMetadataStorage Include="Service References\CourseEnrollService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

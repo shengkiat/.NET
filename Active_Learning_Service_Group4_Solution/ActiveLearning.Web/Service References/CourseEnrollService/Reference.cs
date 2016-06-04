@@ -8,33 +8,33 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ActiveLearning.Web.StudentCourseEnrollServiceReference {
+namespace ActiveLearning.Web.CourseEnrollService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="StudentCourseEnrollServiceReference.IService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CourseEnrollService.IService")]
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/StudentRequestToEnrollCourse", ReplyAction="http://tempuri.org/IService/StudentRequestToEnrollCourseResponse")]
-        ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseResponse StudentRequestToEnrollCourse(ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseRequest request);
+        ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseResponse StudentRequestToEnrollCourse(ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/StudentRequestToEnrollCourse", ReplyAction="http://tempuri.org/IService/StudentRequestToEnrollCourseResponse")]
-        System.Threading.Tasks.Task<ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseResponse> StudentRequestToEnrollCourseAsync(ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseRequest request);
+        System.Threading.Tasks.Task<ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseResponse> StudentRequestToEnrollCourseAsync(ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptEnrollApplication", ReplyAction="http://tempuri.org/IService/AcceptEnrollApplicationResponse")]
-        ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationResponse AcceptEnrollApplication(ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationRequest request);
+        ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationResponse AcceptEnrollApplication(ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AcceptEnrollApplication", ReplyAction="http://tempuri.org/IService/AcceptEnrollApplicationResponse")]
-        System.Threading.Tasks.Task<ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationResponse> AcceptEnrollApplicationAsync(ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationRequest request);
+        System.Threading.Tasks.Task<ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationResponse> AcceptEnrollApplicationAsync(ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RejectEnrollApplication", ReplyAction="http://tempuri.org/IService/RejectEnrollApplicationResponse")]
-        ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationResponse RejectEnrollApplication(ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationRequest request);
+        ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationResponse RejectEnrollApplication(ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RejectEnrollApplication", ReplyAction="http://tempuri.org/IService/RejectEnrollApplicationResponse")]
-        System.Threading.Tasks.Task<ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationResponse> RejectEnrollApplicationAsync(ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationRequest request);
+        System.Threading.Tasks.Task<ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationResponse> RejectEnrollApplicationAsync(ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -178,12 +178,12 @@ namespace ActiveLearning.Web.StudentCourseEnrollServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceChannel : ActiveLearning.Web.StudentCourseEnrollServiceReference.IService, System.ServiceModel.IClientChannel {
+    public interface IServiceChannel : ActiveLearning.Web.CourseEnrollService.IService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceClient : System.ServiceModel.ClientBase<ActiveLearning.Web.StudentCourseEnrollServiceReference.IService>, ActiveLearning.Web.StudentCourseEnrollServiceReference.IService {
+    public partial class ServiceClient : System.ServiceModel.ClientBase<ActiveLearning.Web.CourseEnrollService.IService>, ActiveLearning.Web.CourseEnrollService.IService {
         
         public ServiceClient() {
         }
@@ -205,15 +205,15 @@ namespace ActiveLearning.Web.StudentCourseEnrollServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseResponse ActiveLearning.Web.StudentCourseEnrollServiceReference.IService.StudentRequestToEnrollCourse(ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseRequest request) {
+        ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseResponse ActiveLearning.Web.CourseEnrollService.IService.StudentRequestToEnrollCourse(ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseRequest request) {
             return base.Channel.StudentRequestToEnrollCourse(request);
         }
         
         public string StudentRequestToEnrollCourse(ref int StudentSid, ref int CourseSid, out int EnrollApplicationSid, out bool EnrollApplicationSuccessfully, out bool EnrolledSuccessfully) {
-            ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseRequest inValue = new ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseRequest();
+            ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseRequest inValue = new ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseRequest();
             inValue.StudentSid = StudentSid;
             inValue.CourseSid = CourseSid;
-            ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseResponse retVal = ((ActiveLearning.Web.StudentCourseEnrollServiceReference.IService)(this)).StudentRequestToEnrollCourse(inValue);
+            ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseResponse retVal = ((ActiveLearning.Web.CourseEnrollService.IService)(this)).StudentRequestToEnrollCourse(inValue);
             StudentSid = retVal.StudentSid;
             CourseSid = retVal.CourseSid;
             EnrollApplicationSid = retVal.EnrollApplicationSid;
@@ -222,44 +222,44 @@ namespace ActiveLearning.Web.StudentCourseEnrollServiceReference {
             return retVal.Message;
         }
         
-        public System.Threading.Tasks.Task<ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseResponse> StudentRequestToEnrollCourseAsync(ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseRequest request) {
+        public System.Threading.Tasks.Task<ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseResponse> StudentRequestToEnrollCourseAsync(ActiveLearning.Web.CourseEnrollService.StudentRequestToEnrollCourseRequest request) {
             return base.Channel.StudentRequestToEnrollCourseAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationResponse ActiveLearning.Web.StudentCourseEnrollServiceReference.IService.AcceptEnrollApplication(ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationRequest request) {
+        ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationResponse ActiveLearning.Web.CourseEnrollService.IService.AcceptEnrollApplication(ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationRequest request) {
             return base.Channel.AcceptEnrollApplication(request);
         }
         
         public bool AcceptEnrollApplication(int EnrollApplicationSid, out string Message, out bool HasError) {
-            ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationRequest inValue = new ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationRequest();
+            ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationRequest inValue = new ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationRequest();
             inValue.EnrollApplicationSid = EnrollApplicationSid;
-            ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationResponse retVal = ((ActiveLearning.Web.StudentCourseEnrollServiceReference.IService)(this)).AcceptEnrollApplication(inValue);
+            ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationResponse retVal = ((ActiveLearning.Web.CourseEnrollService.IService)(this)).AcceptEnrollApplication(inValue);
             Message = retVal.Message;
             HasError = retVal.HasError;
             return retVal.IsAcceptedSuccessfully;
         }
         
-        public System.Threading.Tasks.Task<ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationResponse> AcceptEnrollApplicationAsync(ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationRequest request) {
+        public System.Threading.Tasks.Task<ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationResponse> AcceptEnrollApplicationAsync(ActiveLearning.Web.CourseEnrollService.AcceptEnrollApplicationRequest request) {
             return base.Channel.AcceptEnrollApplicationAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationResponse ActiveLearning.Web.StudentCourseEnrollServiceReference.IService.RejectEnrollApplication(ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationRequest request) {
+        ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationResponse ActiveLearning.Web.CourseEnrollService.IService.RejectEnrollApplication(ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationRequest request) {
             return base.Channel.RejectEnrollApplication(request);
         }
         
         public bool RejectEnrollApplication(string Remark, int EnrollApplicationSid, out string Message, out bool HasError) {
-            ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationRequest inValue = new ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationRequest();
+            ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationRequest inValue = new ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationRequest();
             inValue.Remark = Remark;
             inValue.EnrollApplicationSid = EnrollApplicationSid;
-            ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationResponse retVal = ((ActiveLearning.Web.StudentCourseEnrollServiceReference.IService)(this)).RejectEnrollApplication(inValue);
+            ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationResponse retVal = ((ActiveLearning.Web.CourseEnrollService.IService)(this)).RejectEnrollApplication(inValue);
             Message = retVal.Message;
             HasError = retVal.HasError;
             return retVal.IsRejectedSuccessfully;
         }
         
-        public System.Threading.Tasks.Task<ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationResponse> RejectEnrollApplicationAsync(ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationRequest request) {
+        public System.Threading.Tasks.Task<ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationResponse> RejectEnrollApplicationAsync(ActiveLearning.Web.CourseEnrollService.RejectEnrollApplicationRequest request) {
             return base.Channel.RejectEnrollApplicationAsync(request);
         }
     }

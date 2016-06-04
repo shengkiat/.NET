@@ -88,7 +88,7 @@ namespace ActiveLearning.Web.Controllers
             int enrollApplicationSid = 0;
             bool enrolledCourseSuccesfully = false;
             bool appliedCourseSuccesfully = false;
-            using (StudentCourseEnrollServiceReference.ServiceClient client = new StudentCourseEnrollServiceReference.ServiceClient())
+            using (CourseEnrollService.ServiceClient client = new CourseEnrollService.ServiceClient())
             {
                 try
                 {
