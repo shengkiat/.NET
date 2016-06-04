@@ -740,6 +740,13 @@ namespace ActiveLearning.Web.Controllers
             SetTempDataMessage(message);
             return RedirectToAction("PendingCourseEnrollment");
         }
+
+
+
+
+
+
+
         #endregion
     }
 }

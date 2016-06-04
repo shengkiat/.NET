@@ -255,6 +255,15 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\statistics.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Service References\StudentCourseEnrollServiceReference\ActiveLearning.Web.StudentCourseEnrollServiceReference.AcceptEnrollApplicationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\StudentCourseEnrollServiceReference\ActiveLearning.Web.StudentCourseEnrollServiceReference.RejectEnrollApplicationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\StudentCourseEnrollServiceReference\ActiveLearning.Web.StudentCourseEnrollServiceReference.StudentRequestToEnrollCourseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\StudentCourseEnrollServiceReference\StudentCourseEnrollFLowChartWF.disco" />
     <None Include="Service References\StudentCourseEnrollServiceReference\configuration91.svcinfo" />
     <None Include="Service References\StudentCourseEnrollServiceReference\configuration.svcinfo" />
