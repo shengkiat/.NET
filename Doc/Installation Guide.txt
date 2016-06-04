@@ -35,5 +35,14 @@ Username: admin1 	Password: 1qazxsw2!@QW
 
 
 
+Test data:
+
+student5
+student6
+
+instructor1
+
+edge case: course 10
+
 
 Notes: chat history is now available :)
