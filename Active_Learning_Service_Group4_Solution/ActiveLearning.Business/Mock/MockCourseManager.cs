@@ -431,6 +431,21 @@ namespace ActiveLearning.Business.Mock
             throw new NotImplementedException();
         }
 
+        public IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByCourseSids(List<int> courseSids, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplicationsByCourseSids(List<int> courseSids, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplicationsByCourseSids(List<int> courseSids, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         #endregion

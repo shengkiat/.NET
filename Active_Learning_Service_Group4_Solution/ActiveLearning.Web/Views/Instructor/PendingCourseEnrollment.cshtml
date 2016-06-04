@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ActiveLearning.DB.StudentEnrollApplication>
+
+@using ActiveLearning.Common;
+@{
+    ViewBag.Title = "Pending Course Enrollment Application";
+}
+
+<h2>Pending Course Enrollment Application</h2>
+
+@Html.Partial("_MessageBoxPartial")
+@if (Model != null && Model.Count() > 0)
+{
+    <table class="table" style="margin-top:100px">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student.User.FullName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.User.FullName)
+                </td>
+                <td>
+                    @Html.ActionLink("Accept", "AcceptEnrollmentApplication", new { courseSid = item.CourseSid, enrollmentAppliationSid = item.Sid })
+                    &nbsp;|&nbsp;
+                    @Html.ActionLink("Reject", "RejectEnrollmentApplication", new { courseSid = item.CourseSid, enrollmentAppliationSid = item.Sid })
+                </td>
+            </tr>
+        }
+    </table>
+}

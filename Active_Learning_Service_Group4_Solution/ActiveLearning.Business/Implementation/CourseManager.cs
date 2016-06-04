@@ -720,31 +720,32 @@ namespace ActiveLearning.Business.Implementation
                 {
                     return null;
                 }
-                var nonEnrolledNonFullCourses = new List<Course>();
-                foreach (var course in nonEnrolledCourses)
-                {
-                    if (!IsCourseFullyEnrolled(course.Sid, out message))
-                    {
-                        nonEnrolledNonFullCourses.Add(course);
-                    }
-                }
-                if (nonEnrolledNonFullCourses == null || nonEnrolledNonFullCourses.Count() == 0)
-                {
-                    message = Constants.ThereIsNoValueFound(Constants.NonEnrolledCourse);
-                    return null;
-                }
-                var nonEnrolledNonFullCourseSids = nonEnrolledNonFullCourses.Select(c => c.Sid);
+                var nonEnrolledCourseSids = nonEnrolledCourses.Select(c => c.Sid).ToList();
+                //var nonEnrolledNonFullCourses = new List<Course>();
+                //foreach (var course in nonEnrolledCourses)
+                //{
+                //    if (!IsCourseFullyEnrolled(course.Sid, out message))
+                //    {
+                //        nonEnrolledNonFullCourses.Add(course);
+                //    }
+                //}
+                //if (nonEnrolledNonFullCourses == null || nonEnrolledNonFullCourses.Count() == 0)
+                //{
+                //    message = Constants.ThereIsNoValueFound(Constants.NonEnrolledCourse);
+                //    return null;
+                //}
+                //var nonEnrolledNonFullCourseSids = nonEnrolledNonFullCourses.Select(c => c.Sid);
 
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
-                    var applications = unitOfWork.StudentEnrollApplications.Find(a => a.StudentSid == studentSid && nonEnrolledNonFullCourseSids.Contains(a.CourseSid) && !a.DeleteDT.HasValue);
+                    var applications = unitOfWork.StudentEnrollApplications.Find(a => a.StudentSid == studentSid && nonEnrolledCourseSids.Contains(a.CourseSid) && !a.DeleteDT.HasValue);
                     if (applications == null || applications.Count() == 0)
                     {
                         message = string.Empty;
                         return nonEnrolledCourses;
                     }
                     var appliedCourseSids = applications.Select(a => a.CourseSid);
-                    nonEnrolledCourses = nonEnrolledCourses.Where(c => !appliedCourseSids.Contains(c.Sid));
+                    nonEnrolledCourses = nonEnrolledCourses.Where(c => !appliedCourseSids.Contains(c.Sid)).ToList();
                     if (nonEnrolledCourses == null || nonEnrolledCourses.Count() == 0)
                     {
                         message = Constants.ThereIsNoValueFound(Constants.NonEnrolledCourse);
@@ -902,21 +903,32 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
-        public IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByCourseSid(int courseSid, out string message)
+        public IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByInstructorSid(int instructorSid, out string message)
         {
-            return GeAllStudentEnrollApplicationsByStatusByCourseSid(courseSid, Constants.Pending_Code, Constants.Pending_Description, out message);
+            var enrolledCourses = GetEnrolledCoursesByInstructorSid(instructorSid, out message);
+            if (enrolledCourses == null)
+            {
+                return null;
+            }
+            var enrolledCourseSids = enrolledCourses.Select(c => c.Sid).ToList();
+
+            return GetAllPendingStudentEnrollApplicationsByCourseSids(enrolledCourseSids, out message);
         }
-        public IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplicationsByCourseSid(int courseSid, out string message)
+        public IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByCourseSids(List<int> courseSids, out string message)
         {
-            return GeAllStudentEnrollApplicationsByStatusByCourseSid(courseSid, Constants.Rejected_Code, Constants.Rejected_Description, out message);
+            return GeAllStudentEnrollApplicationsByStatusByCourseSids(courseSids, Constants.Pending_Code, Constants.Pending_Description, out message);
         }
-        public IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplicationsByCourseSid(int courseSid, out string message)
+        public IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplicationsByCourseSids(List<int> courseSids, out string message)
         {
-            return GeAllStudentEnrollApplicationsByStatusByCourseSid(courseSid, Constants.Accepted_Code, Constants.Accepted_Description, out message);
+            return GeAllStudentEnrollApplicationsByStatusByCourseSids(courseSids, Constants.Rejected_Code, Constants.Rejected_Description, out message);
         }
-        private IEnumerable<StudentEnrollApplication> GeAllStudentEnrollApplicationsByStatusByCourseSid(int courseSid, string statusCode, string statusName, out string message)
+        public IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplicationsByCourseSids(List<int> courseSids, out string message)
         {
-            if (courseSid == 0)
+            return GeAllStudentEnrollApplicationsByStatusByCourseSids(courseSids, Constants.Accepted_Code, Constants.Accepted_Description, out message);
+        }
+        private IEnumerable<StudentEnrollApplication> GeAllStudentEnrollApplicationsByStatusByCourseSids(List<int> courseSids, string statusCode, string statusName, out string message)
+        {
+            if (courseSids == null || courseSids.Count() == 0)
             {
                 message = Constants.ValueIsEmpty(Constants.Course);
                 return null;
@@ -925,12 +937,21 @@ namespace ActiveLearning.Business.Implementation
             {
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
-                    var studentEnrollmentApplications = unitOfWork.StudentEnrollApplications.Find(a => a.CourseSid == courseSid && a.Status.Equals(statusCode, StringComparison.CurrentCultureIgnoreCase) && !a.DeleteDT.HasValue);
+                    var studentEnrollmentApplications = unitOfWork.StudentEnrollApplications.Find(a => courseSids.Contains(a.CourseSid) && a.Status.Equals(statusCode, StringComparison.CurrentCultureIgnoreCase) && !a.DeleteDT.HasValue);
                     if (studentEnrollmentApplications == null || studentEnrollmentApplications.Count() == 0)
                     {
                         message = Constants.ThereIsNoValueFound(statusName + " " + Constants.Student_Course_Enrolment_Application);
                         return null;
                     }
+                    using (var userManager = new UserManager())
+                    { 
+                        foreach (var application in studentEnrollmentApplications)
+                        {
+                            application.Course = GetCourseByCourseSid(application.CourseSid, out message);
+                            application.Student = userManager.GetStudentByStudentSid(application.StudentSid, out message);
+                        }
+                    }
+                    studentEnrollmentApplications = studentEnrollmentApplications.Where(a => a.Course != null && a.Student !=null);
                     message = string.Empty;
                     return studentEnrollmentApplications.ToList();
                 }

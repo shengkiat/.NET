@@ -174,7 +174,7 @@ namespace ActiveLearning.Web.Controllers
             {
                 var content = contentManager.GetContentByContentSid(contentSid, out message);
 
-                if(content == null)
+                if (content == null)
                 {
                     SetTempDataError(message);
                     return RedirectToAction("ManageContent", new { courseSid = courseSid });
@@ -679,6 +679,66 @@ namespace ActiveLearning.Web.Controllers
                 }
                 return RedirectToAction("ManageOption", new { quizQuestionSid = quizQuestionSid });
             }
+        }
+        #endregion
+
+        #region Course Enrollment
+        public ActionResult PendingCourseEnrollment()
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            int instructorSid = GetLoginUser().Instructors.FirstOrDefault().Sid;
+            string message = string.Empty;
+            using (var courseManager = new CourseManager())
+            {
+                var applications = courseManager.GetAllPendingStudentEnrollApplicationsByInstructorSid(instructorSid, out message);
+                if (applications == null || applications.Count() == 0)
+                {
+                    SetViewBagError(message);
+                }
+                else
+                {
+                    GetErrorAneMessage();
+                }
+                return View(applications);
+            }
+        }
+
+        public ActionResult AcceptEnrollmentApplication(int courseSid, int enrollmentAppliationSid)
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            string message = string.Empty;
+            if (!HasAccessToCourse(courseSid, out message))
+            {
+                return RedirectToError(message);
+            }
+            bool hasError = false;
+            bool acceptedSuccessfully = false;
+            using (StudentCourseEnrollServiceReference.ServiceClient client = new StudentCourseEnrollServiceReference.ServiceClient())
+            {
+                try
+                {
+                    acceptedSuccessfully = client.AcceptEnrollApplication(enrollmentAppliationSid, out message, out hasError);
+                    if(acceptedSuccessfully)
+                    {
+                        SetTempDataError(message);
+                        return RedirectToAction("PendingCourseEnrollment");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ExceptionLog(ex);
+                    SetTempDataError(ex.Message);
+                    return RedirectToAction("PendingCourseEnrollment");
+                }
+            }
+            SetTempDataMessage(message);
+            return RedirectToAction("PendingCourseEnrollment");
         }
         #endregion
     }

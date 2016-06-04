@@ -54,7 +54,7 @@ namespace ActiveLearning.Web.Controllers
 
 
         [OutputCache(Duration = Cache_Duration)]
-        public ActionResult NonEnrolCourseList()
+        public ActionResult NewCourseList()
         {
             if (!IsUserAuthenticated())
             {
@@ -69,8 +69,40 @@ namespace ActiveLearning.Web.Controllers
                 {
                     SetViewBagError(message);
                 }
+                else
+                {
+                    GetErrorAneMessage();
+                }
                 return View(nonEnroledCourseList);
             }
+        }
+        public ActionResult RequestToEnrollCourse(int courseSid)
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            string message = string.Empty;
+
+            int studentSid = GetLoginUser().Students.FirstOrDefault().Sid;
+            int enrollApplicationSid = 0;
+            bool enrolledCourseSuccesfully = false;
+            bool appliedCourseSuccesfully = false;
+            using (StudentCourseEnrollServiceReference.ServiceClient client = new StudentCourseEnrollServiceReference.ServiceClient())
+            {
+                try
+                {
+                    message = client.StudentRequestToEnrollCourse(ref studentSid, ref courseSid, out enrollApplicationSid, out appliedCourseSuccesfully, out enrolledCourseSuccesfully);
+                }
+                catch (Exception ex)
+                {
+                    ExceptionLog(ex);
+                    SetTempDataError(ex.Message);
+                    return RedirectToAction("NewCourseList");
+                }
+            }
+            SetTempDataMessage(message);
+            return RedirectToAction("NewCourseList");
         }
         #endregion
 

@@ -699,11 +699,11 @@ INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (8, 
 GO
 INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (9, 'Project Tracking and Control - SE24', 5, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (10, 'People Management - SE24', 5, GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (10, 'People Management - SE24', 1, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (11, 'Computational Intelligence - SE24', 5, GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (11, 'Computational Intelligence - SE24', 1, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (12, 'Agile Software Project Management - SE24', 5, GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (12, 'Agile Software Project Management - SE24', 1, GETDATE())
 GO
 
 SET IDENTITY_INSERT [dbo].[Course] OFF

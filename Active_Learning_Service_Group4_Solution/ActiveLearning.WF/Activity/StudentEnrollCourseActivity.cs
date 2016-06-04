@@ -36,6 +36,7 @@ namespace ActiveLearning.WF.Activity
                 else
                 {
                     message = Constants.ValueSuccessfuly("Course has been enrolled");
+                    enrolledSuccessfully = true;
                 }
             }
             context.SetValue(this.EnrolledSuccessfully, enrolledSuccessfully);

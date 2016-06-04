@@ -18,7 +18,7 @@
 12. In application table, for the same course, one student can only appear once
 13. Student is not allowed to apply to enroll a pending or rejected course
 14. When instructor reject student application, remark is required
-
+15. Service Trace log
 
 
 Assumption:

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="eaca5215-eb88-488c-b777-218c9d090261" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="StudentCourseEnrollFLowChartWF.xsd" MetadataType="Schema" ID="feb19c97-ee76-491a-830e-bf1871ee339a" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?xsd=xsd1" />
+    <MetadataFile FileName="StudentCourseEnrollFLowChartWF1.xsd" MetadataType="Schema" ID="5efb27b3-e2b6-4555-b7b9-2f24008ba0b9" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?xsd=xsd0" />
+    <MetadataFile FileName="StudentCourseEnrollFLowChartWF.wsdl" MetadataType="Wsdl" ID="17207a3a-e902-40d5-8724-e5d3f9c95067" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?wsdl" />
+    <MetadataFile FileName="StudentCourseEnrollFLowChartWF.disco" MetadataType="Disco" ID="0e516e3d-4a3e-4cfb-bfef-b7ef31004608" SourceId="1" SourceUrl="http://localhost:7662/StudentCourseEnrollFLowChartWF.xamlx?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
