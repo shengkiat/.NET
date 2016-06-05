@@ -28,7 +28,7 @@ namespace ActiveLearning.WF.Activity
 
             using (var contentManager = new ContentManager())
             {
-                revisedSuccessfully = contentManager.UpdateContent(content, out message);
+                revisedSuccessfully = contentManager.ReviseContent(content, out message);
                 if (!revisedSuccessfully)
                 {
                     // message from content manager

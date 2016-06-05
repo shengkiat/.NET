@@ -309,6 +309,7 @@ namespace ActiveLearning.Web.Controllers
                     SetTempDataError(Common.Constants.ValueNotFound(Common.Constants.Commented_Description + " " + Common.Constants.Content));
                     return RedirectToAction("ManageContent", new { courseSid = courseSid });
                 }
+                GetErrorAneMessage();
                 SetBackURL("ManageContent?courseSid=" + courseSid);
                 return View(content);
             }
@@ -339,8 +340,9 @@ namespace ActiveLearning.Web.Controllers
 
                 if (content == null)
                 {
-                    SetViewBagError(message);
-                    return View(content);
+                    SetTempDataError(message);
+                    return RedirectToAction("ReviseContent", new { courseSid = courseSid, contentSid = contentSid });
+                    //return View(content);
                 }
                 SetBackURL("ManageContent?courseSid=" + courseSid);
                 var oldFilePath = Server.MapPath(content.Path + content.FileName);
@@ -349,8 +351,9 @@ namespace ActiveLearning.Web.Controllers
 
                 if (!oldFileDeleted)
                 {
-                    SetViewBagError(message);
-                    return View(content);
+                    SetTempDataError(message);
+                    return RedirectToAction("ReviseContent", new { courseSid = courseSid, contentSid = contentSid });
+                    //return View(content);
                 }
 
                 var uploadFolder = Util.GetUploadFolderFromConfig();
@@ -364,8 +367,9 @@ namespace ActiveLearning.Web.Controllers
 
                 if (newContent == null)
                 {
-                    SetViewBagError(message);
-                    return View(content);
+                    SetTempDataError(message);
+                    return RedirectToAction("ReviseContent", new { courseSid = courseSid, contentSid = contentSid });
+                    //return View(content);
                 }
             }
             var instructorSid = GetLoginUser().Instructors.FirstOrDefault().Sid;
@@ -384,15 +388,17 @@ namespace ActiveLearning.Web.Controllers
                     }
                     else
                     {
-                        SetViewBagError(message);
-                        return View(content);
+                        SetTempDataError(message);
+                        return RedirectToAction("ReviseContent", new { courseSid = courseSid, contentSid = contentSid });
+                        //return View(content);
                     }
                 }
                 catch (Exception ex)
                 {
                     ExceptionLog(ex);
-                    SetViewBagError(Common.Constants.OperationFailedDuringCallingValue("course enrollment workflow service"));
-                    return View(content);
+                    SetTempDataError(Common.Constants.OperationFailedDuringCallingValue("course enrollment workflow service"));
+                    return RedirectToAction("ReviseContent", new { courseSid = courseSid, contentSid = contentSid });
+                    //return View(content);
                 }
             }
         }

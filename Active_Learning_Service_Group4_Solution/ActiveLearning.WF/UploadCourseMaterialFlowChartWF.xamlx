@@ -1,4 +1,4 @@
-﻿<WorkflowService mc:Ignorable="sap sap2010 sads" p1:TextExpression.Namespaces="{x:Reference __ReferenceID16}" p1:TextExpression.References="{x:Reference __ReferenceID17}" ConfigurationName="UploadCourseMaterialFlowChartWF" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WorkflowService_1" Name="UploadCourseMaterialFlowChartWF"
+﻿<WorkflowService mc:Ignorable="sap sap2010 sads" p1:TextExpression.Namespaces="{x:Reference __ReferenceID17}" p1:TextExpression.References="{x:Reference __ReferenceID18}" ConfigurationName="UploadCourseMaterialFlowChartWF" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WorkflowService_1" Name="UploadCourseMaterialFlowChartWF"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
  xmlns:ad="clr-namespace:ActiveLearning.DB;assembly=ActiveLearning.DB"
  xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -16,7 +16,7 @@
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <p1:Flowchart DisplayName="Main" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <p1:TextExpression.Namespaces>
-      <sco:Collection x:TypeArguments="x:String" x:Name="__ReferenceID16">
+      <sco:Collection x:TypeArguments="x:String" x:Name="__ReferenceID17">
         <x:String>System</x:String>
         <x:String>System.Collections.Generic</x:String>
         <x:String>System.Data</x:String>
@@ -29,7 +29,7 @@
       </sco:Collection>
     </p1:TextExpression.Namespaces>
     <p1:TextExpression.References>
-      <sco:Collection x:TypeArguments="p1:AssemblyReference" x:Name="__ReferenceID17">
+      <sco:Collection x:TypeArguments="p1:AssemblyReference" x:Name="__ReferenceID18">
         <p1:AssemblyReference>EntityFramework</p1:AssemblyReference>
         <p1:AssemblyReference>EntityFramework.SqlServer</p1:AssemblyReference>
         <p1:AssemblyReference>Microsoft.CSharp</p1:AssemblyReference>
@@ -76,15 +76,15 @@
       <p1:Variable x:TypeArguments="x:Int32" Name="AdminSid" />
       <p1:Variable x:TypeArguments="x:String" Name="Remark" />
       <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="RevisedSuccessfully" />
-      <x:Reference>__ReferenceID14</x:Reference>
+      <x:Reference>__ReferenceID15</x:Reference>
       <p1:Variable x:TypeArguments="x:String" Name="ContentStatus" />
       <p1:Variable x:TypeArguments="CorrelationHandle" Name="ContentHandle" />
       <p1:Variable x:TypeArguments="x:Int32" Name="ContentSid" />
     </p1:Flowchart.Variables>
     <p1:Flowchart.StartNode>
-      <x:Reference>__ReferenceID15</x:Reference>
+      <x:Reference>__ReferenceID16</x:Reference>
     </p1:Flowchart.StartNode>
-    <p1:FlowStep x:Name="__ReferenceID15" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+    <p1:FlowStep x:Name="__ReferenceID16" sap2010:WorkflowViewState.IdRef="FlowStep_1">
       <p1:Sequence DisplayName="Instructor Save Content Data" sap2010:WorkflowViewState.IdRef="Sequence_1">
         <Receive x:Name="__ReferenceID4" CanCreateInstance="True" sap2010:WorkflowViewState.IdRef="Receive_1" OperationName="InstructorSaveContentData" ServiceContractName="p:IService">
           <Receive.CorrelationInitializers>
@@ -385,112 +385,125 @@
                 </p1:Pick>
               </p1:Sequence>
               <p1:FlowStep.Next>
-                <p1:FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID13" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_1">
-                  <p1:FlowSwitch.Expression>
-                    <mca:CSharpValue x:TypeArguments="x:String">ContentStatus</mca:CSharpValue>
-                  </p1:FlowSwitch.Expression>
-                  <p1:FlowStep x:Key="&quot;Accepted&quot;" x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_2">
-                    <p1:TerminateWorkflow sap2010:WorkflowViewState.IdRef="TerminateWorkflow_1">
-                      <p1:TerminateWorkflow.Reason>
-                        <p1:InArgument x:TypeArguments="x:String">
-                          <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
-                        </p1:InArgument>
-                      </p1:TerminateWorkflow.Reason>
-                    </p1:TerminateWorkflow>
-                  </p1:FlowStep>
-                  <p1:FlowStep x:Key="&quot;Commented&quot;" x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_4">
-                    <p1:Sequence DisplayName="Revise Content" sap2010:WorkflowViewState.IdRef="Sequence_3">
-                      <Receive x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="Receive_4" OperationName="InstructorReviseContentData" ServiceContractName="p:IService">
-                        <Receive.CorrelatesOn>
-                          <XPathMessageQuery x:Key="key1">
-                            <XPathMessageQuery.Namespaces>
-                              <ssx:XPathMessageContextMarkup>
-                                <x:String x:Key="xgSc">http://tempuri.org/</x:String>
-                              </ssx:XPathMessageContextMarkup>
-                            </XPathMessageQuery.Namespaces>sm:body()/xgSc:InstructorReviseContentData/xgSc:ContentSid</XPathMessageQuery>
-                        </Receive.CorrelatesOn>
-                        <Receive.CorrelatesWith>
-                          <p1:InArgument x:TypeArguments="CorrelationHandle">
-                            <mca:CSharpValue x:TypeArguments="CorrelationHandle">ContentHandle</mca:CSharpValue>
-                          </p1:InArgument>
-                        </Receive.CorrelatesWith>
-                        <Receive.CorrelationInitializers>
-                          <RequestReplyCorrelationInitializer>
-                            <RequestReplyCorrelationInitializer.CorrelationHandle>
-                              <p1:InArgument x:TypeArguments="CorrelationHandle">
-                                <p1:VariableValue x:TypeArguments="CorrelationHandle">
-                                  <p1:VariableValue.Variable>
-                                    <p1:Variable x:TypeArguments="CorrelationHandle" x:Name="__ReferenceID14" Name="__handle1" />
-                                  </p1:VariableValue.Variable>
-                                </p1:VariableValue>
-                              </p1:InArgument>
-                            </RequestReplyCorrelationInitializer.CorrelationHandle>
-                          </RequestReplyCorrelationInitializer>
-                        </Receive.CorrelationInitializers>
-                        <ReceiveParametersContent>
-                          <p1:OutArgument x:TypeArguments="ad:Content" x:Key="Content">
-                            <mca:CSharpReference x:TypeArguments="ad:Content">Content</mca:CSharpReference>
-                          </p1:OutArgument>
-                          <p1:OutArgument x:TypeArguments="x:String" x:Key="Message">
-                            <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
-                          </p1:OutArgument>
-                          <p1:OutArgument x:TypeArguments="x:Int32" x:Key="ContentSid">
-                            <mca:CSharpReference x:TypeArguments="x:Int32">ContentSid</mca:CSharpReference>
-                          </p1:OutArgument>
-                        </ReceiveParametersContent>
-                      </Receive>
-                      <awa:InstructorReviseContentData sap2010:WorkflowViewState.IdRef="InstructorReviseContentData_1">
-                        <awa:InstructorReviseContentData.Content>
-                          <p1:InArgument x:TypeArguments="ad:Content">
-                            <mca:CSharpValue x:TypeArguments="ad:Content">Content</mca:CSharpValue>
-                          </p1:InArgument>
-                        </awa:InstructorReviseContentData.Content>
-                        <awa:InstructorReviseContentData.ContentStatus>
-                          <p1:OutArgument x:TypeArguments="x:String">
-                            <mca:CSharpReference x:TypeArguments="x:String">ContentStatus</mca:CSharpReference>
-                          </p1:OutArgument>
-                        </awa:InstructorReviseContentData.ContentStatus>
-                        <awa:InstructorReviseContentData.Message>
-                          <p1:OutArgument x:TypeArguments="x:String">
-                            <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
-                          </p1:OutArgument>
-                        </awa:InstructorReviseContentData.Message>
-                        <awa:InstructorReviseContentData.RevisedSuccessfully>
-                          <p1:OutArgument x:TypeArguments="x:Boolean">
-                            <mca:CSharpReference x:TypeArguments="x:Boolean">RevisedSuccessfully</mca:CSharpReference>
-                          </p1:OutArgument>
-                        </awa:InstructorReviseContentData.RevisedSuccessfully>
-                      </awa:InstructorReviseContentData>
-                      <SendReply Request="{x:Reference __ReferenceID7}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_4">
-                        <SendParametersContent>
-                          <p1:InArgument x:TypeArguments="x:Boolean" x:Key="RevisedSuccessfully">
-                            <mca:CSharpValue x:TypeArguments="x:Boolean">RevisedSuccessfully</mca:CSharpValue>
-                          </p1:InArgument>
-                          <p1:InArgument x:TypeArguments="x:String" x:Key="Message">
+                <p1:FlowDecision x:Name="__ReferenceID13" DisplayName="Accepted ?" sap2010:WorkflowViewState.IdRef="FlowDecision_8">
+                  <p1:FlowDecision.Condition>
+                    <mca:CSharpValue x:TypeArguments="x:Boolean">AcceptedSuccessfully</mca:CSharpValue>
+                  </p1:FlowDecision.Condition>
+                  <p1:FlowDecision.True>
+                    <p1:FlowStep x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+                      <p1:TerminateWorkflow sap2010:WorkflowViewState.IdRef="TerminateWorkflow_1">
+                        <p1:TerminateWorkflow.Reason>
+                          <p1:InArgument x:TypeArguments="x:String">
                             <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
                           </p1:InArgument>
-                          <p1:InArgument x:TypeArguments="x:String" x:Key="ContentStatus">
-                            <mca:CSharpValue x:TypeArguments="x:String">ContentStatus</mca:CSharpValue>
-                          </p1:InArgument>
-                        </SendParametersContent>
-                      </SendReply>
-                    </p1:Sequence>
-                    <p1:FlowStep.Next>
-                      <p1:FlowDecision x:Name="__ReferenceID12" DisplayName="Content Revised Successfully?" sap2010:WorkflowViewState.IdRef="FlowDecision_7">
-                        <p1:FlowDecision.Condition>
-                          <mca:CSharpValue x:TypeArguments="x:Boolean">RevisedSuccessfully</mca:CSharpValue>
-                        </p1:FlowDecision.Condition>
-                        <p1:FlowDecision.True>
-                          <x:Reference>__ReferenceID8</x:Reference>
-                        </p1:FlowDecision.True>
-                        <p1:FlowDecision.False>
-                          <x:Reference>__ReferenceID9</x:Reference>
-                        </p1:FlowDecision.False>
-                      </p1:FlowDecision>
-                    </p1:FlowStep.Next>
-                  </p1:FlowStep>
-                  <x:Reference>__ReferenceID8<x:Key>"Pending"</x:Key></x:Reference>
-                </p1:FlowSwitch>
+                        </p1:TerminateWorkflow.Reason>
+                      </p1:TerminateWorkflow>
+                    </p1:FlowStep>
+                  </p1:FlowDecision.True>
+                  <p1:FlowDecision.False>
+                    <p1:FlowDecision x:Name="__ReferenceID14" DisplayName="Commented ?" sap2010:WorkflowViewState.IdRef="FlowDecision_9">
+                      <p1:FlowDecision.Condition>
+                        <mca:CSharpValue x:TypeArguments="x:Boolean">CommentedSuccessfully</mca:CSharpValue>
+                      </p1:FlowDecision.Condition>
+                      <p1:FlowDecision.True>
+                        <p1:FlowStep x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_4">
+                          <p1:Sequence DisplayName="Revise Content" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                            <Receive x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="Receive_4" OperationName="InstructorReviseContentData" ServiceContractName="p:IService">
+                              <Receive.CorrelatesOn>
+                                <XPathMessageQuery x:Key="key1">
+                                  <XPathMessageQuery.Namespaces>
+                                    <ssx:XPathMessageContextMarkup>
+                                      <x:String x:Key="xgSc">http://tempuri.org/</x:String>
+                                    </ssx:XPathMessageContextMarkup>
+                                  </XPathMessageQuery.Namespaces>sm:body()/xgSc:InstructorReviseContentData/xgSc:ContentSid</XPathMessageQuery>
+                              </Receive.CorrelatesOn>
+                              <Receive.CorrelatesWith>
+                                <p1:InArgument x:TypeArguments="CorrelationHandle">
+                                  <mca:CSharpValue x:TypeArguments="CorrelationHandle">ContentHandle</mca:CSharpValue>
+                                </p1:InArgument>
+                              </Receive.CorrelatesWith>
+                              <Receive.CorrelationInitializers>
+                                <RequestReplyCorrelationInitializer>
+                                  <RequestReplyCorrelationInitializer.CorrelationHandle>
+                                    <p1:InArgument x:TypeArguments="CorrelationHandle">
+                                      <p1:VariableValue x:TypeArguments="CorrelationHandle">
+                                        <p1:VariableValue.Variable>
+                                          <p1:Variable x:TypeArguments="CorrelationHandle" x:Name="__ReferenceID15" Name="__handle1" />
+                                        </p1:VariableValue.Variable>
+                                      </p1:VariableValue>
+                                    </p1:InArgument>
+                                  </RequestReplyCorrelationInitializer.CorrelationHandle>
+                                </RequestReplyCorrelationInitializer>
+                              </Receive.CorrelationInitializers>
+                              <ReceiveParametersContent>
+                                <p1:OutArgument x:TypeArguments="ad:Content" x:Key="Content">
+                                  <mca:CSharpReference x:TypeArguments="ad:Content">Content</mca:CSharpReference>
+                                </p1:OutArgument>
+                                <p1:OutArgument x:TypeArguments="x:String" x:Key="Message">
+                                  <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
+                                </p1:OutArgument>
+                                <p1:OutArgument x:TypeArguments="x:Int32" x:Key="ContentSid">
+                                  <mca:CSharpReference x:TypeArguments="x:Int32">ContentSid</mca:CSharpReference>
+                                </p1:OutArgument>
+                              </ReceiveParametersContent>
+                            </Receive>
+                            <awa:InstructorReviseContentData sap2010:WorkflowViewState.IdRef="InstructorReviseContentData_1">
+                              <awa:InstructorReviseContentData.Content>
+                                <p1:InArgument x:TypeArguments="ad:Content">
+                                  <mca:CSharpValue x:TypeArguments="ad:Content">Content</mca:CSharpValue>
+                                </p1:InArgument>
+                              </awa:InstructorReviseContentData.Content>
+                              <awa:InstructorReviseContentData.ContentStatus>
+                                <p1:OutArgument x:TypeArguments="x:String">
+                                  <mca:CSharpReference x:TypeArguments="x:String">ContentStatus</mca:CSharpReference>
+                                </p1:OutArgument>
+                              </awa:InstructorReviseContentData.ContentStatus>
+                              <awa:InstructorReviseContentData.Message>
+                                <p1:OutArgument x:TypeArguments="x:String">
+                                  <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
+                                </p1:OutArgument>
+                              </awa:InstructorReviseContentData.Message>
+                              <awa:InstructorReviseContentData.RevisedSuccessfully>
+                                <p1:OutArgument x:TypeArguments="x:Boolean">
+                                  <mca:CSharpReference x:TypeArguments="x:Boolean">RevisedSuccessfully</mca:CSharpReference>
+                                </p1:OutArgument>
+                              </awa:InstructorReviseContentData.RevisedSuccessfully>
+                            </awa:InstructorReviseContentData>
+                            <SendReply Request="{x:Reference __ReferenceID7}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_4">
+                              <SendParametersContent>
+                                <p1:InArgument x:TypeArguments="x:Boolean" x:Key="RevisedSuccessfully">
+                                  <mca:CSharpValue x:TypeArguments="x:Boolean">RevisedSuccessfully</mca:CSharpValue>
+                                </p1:InArgument>
+                                <p1:InArgument x:TypeArguments="x:String" x:Key="Message">
+                                  <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+                                </p1:InArgument>
+                                <p1:InArgument x:TypeArguments="x:String" x:Key="ContentStatus">
+                                  <mca:CSharpValue x:TypeArguments="x:String">ContentStatus</mca:CSharpValue>
+                                </p1:InArgument>
+                              </SendParametersContent>
+                            </SendReply>
+                          </p1:Sequence>
+                          <p1:FlowStep.Next>
+                            <p1:FlowDecision x:Name="__ReferenceID12" DisplayName="Content Revised Successfully?" sap2010:WorkflowViewState.IdRef="FlowDecision_7">
+                              <p1:FlowDecision.Condition>
+                                <mca:CSharpValue x:TypeArguments="x:Boolean">RevisedSuccessfully</mca:CSharpValue>
+                              </p1:FlowDecision.Condition>
+                              <p1:FlowDecision.True>
+                                <x:Reference>__ReferenceID8</x:Reference>
+                              </p1:FlowDecision.True>
+                              <p1:FlowDecision.False>
+                                <x:Reference>__ReferenceID9</x:Reference>
+                              </p1:FlowDecision.False>
+                            </p1:FlowDecision>
+                          </p1:FlowStep.Next>
+                        </p1:FlowStep>
+                      </p1:FlowDecision.True>
+                      <p1:FlowDecision.False>
+                        <x:Reference>__ReferenceID8</x:Reference>
+                      </p1:FlowDecision.False>
+                    </p1:FlowDecision>
+                  </p1:FlowDecision.False>
+                </p1:FlowDecision>
               </p1:FlowStep.Next>
             </p1:FlowStep>
           </p1:FlowDecision.True>
@@ -506,7 +519,8 @@
     <x:Reference>__ReferenceID11</x:Reference>
     <x:Reference>__ReferenceID12</x:Reference>
     <x:Reference>__ReferenceID13</x:Reference>
-    <sads:DebugSymbol.Symbol>d5EBRDpcV29ya3NwYWNlXEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNFx0cnVua1xBY3RpdmVfTGVhcm5pbmdfU2VydmljZV9Hcm91cDRfU29sdXRpb25cQWN0aXZlTGVhcm5pbmcuV0ZcVXBsb2FkQ291cnNlTWF0ZXJpYWxGbG93Q2hhcnRXRi54YW1seFkRA/4DEgEBQzhDPwEHRDhEPwEGRThFPwEFSDhIPwEESThJPwEDTjhOPwECWAfdARUC7wXhAQ3hAWgC3gWJAxWPAywCzAXlAQ+CAx0C7AGGAxWGA2AC2wGSAxXdAyMBGeEDG+EDbQEIWQluEwKnCG8JvQEYAugGvgEJ3AEVAvAFjAMbjANgAs0F5gERgQMbAu0BkwMXuQMhApUBugMXzwM5AVDQAxfcAyMBGmsPa10C2whoD2heAsoIZQ9lYQK5CF4TXmMCqAinAQ23ASsC8wd5D3lgAuIHcQ11HALQB30RnAExAukG1gEP1gFqAtcG0AEP0AFUAqQGwwETwwFnApMG2QEP2QFaAoIG0wEP0wFWAvEF5wETrwIjAu8DsAITgAMjAu4BngMdngNxAsoBswMdswNqArkBsAMdsANsAqgBpQMhqQM0AqcBtgMdtgNsApYBzAMdzAN3AoQBxwMdxwNqAXO9Ax29A2QBYsIDHcIDcAFR0wMd0wNvAT/WAx3WA2IBLNkDHdkDaAEbqgETqgFsApYItAETtAFgAoUIrwETrwFdAvQHcxFzVgLRB4UBF4UBegK/B5kBF5kBZAKuB5QBF5QBXQKdB4ABF4ABXgKMB48BF48BagL7BooBF4oBZgLqBukBF60CJQLwA7ICF/4CJQLvAe0BGYkCIwKVBYoCGZ8CMgLMBKACGawCJQLxA7YCGdUCIwKmA9YCGfACMwLLAvECGf0CJQLwAfgBH/gBcwK6Bf8BI/8BcwKoBYYCH4YCbgKWBY0CH40CegKDBZwCH5wCbALxBJcCH5cCcgLfBJICH5ICZgLNBKMCH6MCcgK6BKYCH6YCZAKEBKkCH6kCagLyA8ECH8ECcwLdA9ICH9ICawLLA8gCI8gCcwK5A88CH88CbgKnA+gCH+gCbAKUA+0CH+0CYwKCA9kCH9kCewLwAuMCH+MCcgLeAt4CH94CZgLMAvcCH/cCZAKVAvQCH/QCcwKDAvoCH/oCagLxAQ==</sads:DebugSymbol.Symbol>
+    <x:Reference>__ReferenceID14</x:Reference>
+    <sads:DebugSymbol.Symbol>d5EBRDpcV29ya3NwYWNlXEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNFx0cnVua1xBY3RpdmVfTGVhcm5pbmdfU2VydmljZV9Hcm91cDRfU29sdXRpb25cQWN0aXZlTGVhcm5pbmcuV0ZcVXBsb2FkQ291cnNlTWF0ZXJpYWxGbG93Q2hhcnRXRi54YW1seFoRA4wEEgEBQzhDPwEHRDhEPwEGRThFPwEFSDhIPwEESThJPwEDTjhOPwECWAfdARUCgAbhAQ3hAWgC7wWKAxeQAy4C3QXlAQ+CAx0C/QGGAxWGA2gC7AGWAxmWA20C2wGaAxvlAykBGekDIekDcwEIWQluEwK4CG8JvQEYAvkGvgEJ3AEVAoEGjQMdjQNiAt4F5gERgQMbAv4BmwMdwQMnApUBwgMd1wM/AVDYAx3kAykBGmsPa10C7AhoD2heAtsIZQ9lYQLKCF4TXmMCuQinAQ23ASsChAh5D3lgAvMHcQ11HALhB30RnAExAvoG1gEP1gFqAugG0AEP0AFUArUGwwETwwFnAqQG2QEP2QFaApMG0wEP0wFWAoIG5wETrwIjAoAEsAITgAMjAv8BpgMjpgN3AsoBuwMjuwNwArkBuAMjuANyAqgBrQMnsQM6AqcBvgMjvgNyApYB1AMj1AN9AoQBzwMjzwNwAXPFAyPFA2oBYsoDI8oDdgFR2wMj2wN1AT/eAyPeA2gBLOEDI+EDbgEbqgETqgFsAqcItAETtAFgApYIrwETrwFdAoUIcxFzVgLiB4UBF4UBegLQB5kBF5kBZAK/B5QBF5QBXQKuB4ABF4ABXgKdB48BF48BagKMB4oBF4oBZgL7BukBF60CJQKBBLICF/4CJQKAAu0BGYkCIwKmBYoCGZ8CMgLdBKACGawCJQKCBLYCGdUCIwK3A9YCGfACMwLcAvECGf0CJQKBAvgBH/gBcwLLBf8BI/8BcwK5BYYCH4YCbgKnBY0CH40CegKUBZwCH5wCbAKCBZcCH5cCcgLwBJICH5ICZgLeBKMCH6MCcgLLBKYCH6YCZAKVBKkCH6kCagKDBMECH8ECcwLuA9ICH9ICawLcA8gCI8gCcwLKA88CH88CbgK4A+gCH+gCbAKlA+0CH+0CYwKTA9kCH9kCewKBA+MCH+MCcgLvAt4CH94CZgLdAvcCH/cCZAKmAvQCH/QCcwKUAvoCH/oCagKCAg==</sads:DebugSymbol.Symbol>
   </p1:Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -637,7 +651,7 @@
       <sap2010:ViewStateData Id="Receive_4" sap:VirtualizedContainerService.HintSize="255,90" />
       <sap2010:ViewStateData Id="InstructorReviseContentData_1" sap:VirtualizedContainerService.HintSize="255,22" />
       <sap2010:ViewStateData Id="SendReply_4" sap:VirtualizedContainerService.HintSize="255,90" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="277,406">
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -658,21 +672,31 @@
       <sap2010:ViewStateData Id="FlowStep_4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">380,524.5</av:Point>
+            <av:Point x:Key="ShapeLocation">390,504.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">480,524.5 480,463.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">490,504.5 490,474.5 480,474.5 480,463.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowSwitch`1_1" sap:VirtualizedContainerService.HintSize="70,87">
+      <sap2010:ViewStateData Id="FlowDecision_9" sap:VirtualizedContainerService.HintSize="81,87">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <av:Point x:Key="ShapeLocation">135,506.5</av:Point>
+            <av:Point x:Key="ShapeLocation">239.5,516.5</av:Point>
+            <av:Size x:Key="ShapeSize">81,87</av:Size>
+            <av:PointCollection x:Key="TrueConnector">239.5,560 220,560 220,615.5 490,615.5 490,555.5</av:PointCollection>
+            <av:PointCollection x:Key="FalseConnector">320.5,560 350.5,560 350.5,420 270,420</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowDecision_8" sap:VirtualizedContainerService.HintSize="70,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">55,516.5</av:Point>
             <av:Size x:Key="ShapeSize">70,87</av:Size>
-            <av:PointCollection x:Key="&quot;Accepted&quot;Connector">170,593.5 170,670 540,670</av:PointCollection>
-            <av:PointCollection x:Key="&quot;Commented&quot;Connector">205,550 380,550</av:PointCollection>
-            <av:PointCollection x:Key="&quot;Pending&quot;Connector">135,550 40,550 40,420 70,420</av:PointCollection>
+            <av:PointCollection x:Key="TrueConnector">55,560 25,560 25,670 540,670</av:PointCollection>
+            <av:PointCollection x:Key="FalseConnector">125,560 155,560 155,486.5 280,486.5 280,516.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -681,7 +705,7 @@
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">70,394.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">170,445.5 170,506.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">170,445.5 170,475.5 90,475.5 90,516.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>

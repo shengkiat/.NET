@@ -37,6 +37,7 @@ namespace ActiveLearning.Business.Interface
         bool DeleteContent(string physicalFilePath, int contentSid, out string message);
         bool DeleteContentWithouData(string physicalFilePath, out string message);
         bool UpdateContent(Content content, out string message);
+        bool ReviseContent(Content content, out string message);
         bool UpdateContentStatus(int contentSid, string status, string remark, out string message);
         bool AcceptContent(Content content, out string message);
         bool AcceptContent(int contentSid, out string message);

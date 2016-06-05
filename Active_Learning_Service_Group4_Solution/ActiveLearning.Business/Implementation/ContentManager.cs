@@ -563,15 +563,15 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.ValueIsEmpty(Constants.Content);
                 return false;
             }
-            var contentToUpdate = GetContentByContentSid(content.Sid, out message);
-            if (contentToUpdate == null)
-            {
-                return false;
-            }
             try
             {
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
+                    var contentToUpdate = unitOfWork.Contents.Find(c => c.Sid == content.Sid && !c.DeleteDT.HasValue).FirstOrDefault();
+                    if (contentToUpdate == null)
+                    {
+                        return false;
+                    }
                     Util.CopyNonNullProperty(content, contentToUpdate);
                     contentToUpdate.UpdateDT = DateTime.Now;
                     using (TransactionScope scope = new TransactionScope())
@@ -589,6 +589,17 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.OperationFailedDuringUpdatingValue(Constants.Content);
                 return false;
             }
+        }
+        public bool ReviseContent(Content content, out string message)
+        {
+            if (content == null || content.Sid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Content);
+                return false;
+            }
+            content.Status = Constants.Pending_Code;
+            content.Remark = string.Empty;
+            return UpdateContent(content, out message);
         }
         public bool UpdateContentStatus(int contentSid, string status, string remark, out string message)
         {
