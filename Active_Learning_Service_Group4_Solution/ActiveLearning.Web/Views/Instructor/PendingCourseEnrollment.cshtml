@@ -33,7 +33,7 @@
                 <td>
                     @Html.ActionLink("Accept", "AcceptEnrollmentApplication", new { courseSid = item.CourseSid, enrollmentAppliationSid = item.Sid })
                     &nbsp;|&nbsp;
-                    @Html.ActionLink("Reject", "RejectEnrollmentApplication", new { courseSid = item.CourseSid, enrollmentAppliationSid = item.Sid })
+                    @Html.ActionLink("Reject", "RemarkForReject", new { enrollmentAppliationSid = item.Sid })
                 </td>
             </tr>
         }

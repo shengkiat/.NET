@@ -754,6 +754,68 @@ namespace ActiveLearning.Web.Controllers
         //    }
         //}
 
+        public ActionResult RemarkForReject(int enrollmentAppliationSid)
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            string message = string.Empty;
+            using (var getEnrollApp = new CourseManager())
+            {
+                StudentEnrollApplication studentEnrollApplication = getEnrollApp.GetStudentEnrollApplicationBySid(enrollmentAppliationSid, out message);
+                if (getEnrollApp == null)
+                {
+                    SetViewBagError(message);
+                }
+
+                TempData["RejectApp"] = studentEnrollApplication;
+                SetBackURL("PendingCourseEnrollment");
+                return View(studentEnrollApplication);
+            };
+        }
+
+        [HttpPost, ActionName("RemarkForReject")]
+        [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Duration = 0)]
+        public ActionResult updateRemark(StudentEnrollApplication studentEnrollApplication)
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            string message = string.Empty;
+
+
+            var remarkToUpdate = TempData.Peek("RejectApp") as StudentEnrollApplication;
+            remarkToUpdate.Remark = studentEnrollApplication.Remark;
+
+            bool hasError = false;
+            bool remarkedSuccessfully = false;
+
+            using (CourseEnrollService.ServiceClient client = new CourseEnrollService.ServiceClient())
+            {
+                try
+                {
+                    remarkedSuccessfully = client.RejectEnrollApplication(remarkToUpdate.Remark, studentEnrollApplication.Sid, out message, out hasError);
+                    if (remarkedSuccessfully)
+                    {
+                        SetTempDataError(message);
+                        return RedirectToAction("PendingCourseEnrollment");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ExceptionLog(ex);
+                    SetTempDataError(ex.Message);
+                    return RedirectToAction("PendingCourseEnrollment");
+                }
+            }
+            SetTempDataMessage(message);
+            return RedirectToAction("PendingCourseEnrollment");
+
+        }
+
 
         #endregion
     }
