@@ -81,8 +81,11 @@ namespace ActiveLearning.Common
         public const string SourceController = "Source Controller";
         public const string Content = "Content";
         public const string File = "File";
+        public const string FileName = "File Name";
+        public const string OriginalFileName = "Original File Name";
         public const string FileSize = "File Size";
         public const string FilePath = "File Path";
+        public const string FileType = "File Type";
         public const string FileExtension = "File Extension";
         public const string Upload = "Upload";
 

@@ -96,28 +96,26 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Compile Include="Activity\CheckWhetherAppliedActivity.cs" />
-    <Compile Include="Activity\CheckWhetherCourseExists.cs" />
-    <Compile Include="Activity\CheckWhetherCourseFullActivity.cs" />
-    <Compile Include="Activity\CheckWhetherEnrolledCourseActivity.cs" />
-    <Compile Include="Activity\CheckWhetherStudentExists.cs" />
-    <Compile Include="Activity\InstructorAcceptEnrollApplicationActivity.cs" />
-    <Compile Include="Activity\InstructorRejectEnrollApplicationActivity.cs" />
-    <Compile Include="Activity\ReviewerAcceptContentActivity.cs" />
-    <Compile Include="Activity\ReviewerAddCommentActivity.cs" />
-    <Compile Include="Activity\StudentApplyToEnrollCourseActivity.cs" />
-    <Compile Include="Activity\StudentEnrollCourseActivity.cs" />
-    <Compile Include="Activity\UploadCourseContentActivity.cs" />
+    <Compile Include="Activity\CheckIfAppliedCourse.cs" />
+    <Compile Include="Activity\CheckIfCourseExists.cs" />
+    <Compile Include="Activity\CheckIfCourseFull.cs" />
+    <Compile Include="Activity\CheckIfEnrolledCourse.cs" />
+    <Compile Include="Activity\CheckIfFileExists.cs" />
+    <Compile Include="Activity\CheckIfInstructorExists.cs" />
+    <Compile Include="Activity\CheckIfStudentExists.cs" />
+    <Compile Include="Activity\CheckIfTeachCourse.cs" />
+    <Compile Include="Activity\InstructorAcceptEnrollApplication.cs" />
+    <Compile Include="Activity\InstructorRejectEnrollApplication.cs" />
+    <Compile Include="Activity\AdminAcceptContent.cs" />
+    <Compile Include="Activity\AdminCommentContent.cs" />
+    <Compile Include="Activity\InstructorReviseContentData.cs" />
+    <Compile Include="Activity\StudentApplyToEnrollCourse.cs" />
+    <Compile Include="Activity\StudentEnrollCourse.cs" />
+    <Compile Include="Activity\InstructorSaveContentData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="StudentCourseEnrollWF.xamlx">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ActiveLearning.Business\ActiveLearning.Business.csproj">
@@ -134,17 +132,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UploadCourseMaterialWF.xamlx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="StudentCourseEnrollFLowChartWF.xamlx">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="UploadCourseMaterialFlowChartWF.xamlx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

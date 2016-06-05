@@ -860,29 +860,59 @@ namespace ActiveLearning.Web.Controllers
             {
                 return RedirectToLogin();
             }
+            SetBackURL("ReviewContent");
             string message = string.Empty;
-
             using (var contentManager = new ContentManager())
             {
                 var content = contentManager.GetContentByContentSid(contentSid, out message);
                 if (content == null)
                 {
                     SetViewBagError(message);
-                    SetBackURL("ReviewContent");
                     return View(content);
                 }
                 content.Remark = remark;
-                if (contentManager.CommentContent(content, out message))
+                if (string.IsNullOrEmpty(content.Remark) || string.IsNullOrEmpty(content.Remark.Trim()))
                 {
-                    SetTempDataMessage(Constants.ValueSuccessfuly("Content has been commented"));
-                    return RedirectToAction("ReviewContent");
-                }
-                else
-                {
-                    SetViewBagError(message);
-                    SetBackURL("ReviewContent");
+                    SetViewBagError(Common.Constants.PleaseEnterValue(Common.Constants.Remark));
                     return View(content);
                 }
+                using (UploadContentService.ServiceClient client = new UploadContentService.ServiceClient())
+                {
+                    string contentStauts = string.Empty;
+                    bool commentedSuccessfully = false;
+                    try
+                    {
+                        commentedSuccessfully = client.AdminCommentContent(contentSid, remark, out message, out contentStauts);
+                        if (commentedSuccessfully)
+                        {
+                            SetTempDataMessage(message);
+                            return RedirectToAction("ReviewContent");
+                        }
+                        else
+                        {
+                            SetViewBagError(message);
+                            return View(content);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionLog(ex);
+                        SetViewBagError(Common.Constants.OperationFailedDuringCallingValue("course enrollment workflow service"));
+                        return View(content);
+                    }
+                }
+                //if (contentManager.CommentContent(content, out message))
+                //{
+                //    SetTempDataMessage(Constants.ValueSuccessfuly("Content has been commented"));
+                //    return RedirectToAction("ReviewContent");
+                //}
+                //else
+                //{
+                //    SetViewBagError(message);
+                //    SetBackURL("ReviewContent");
+                //    return View(content);
+                //}
             }
         }
         public ActionResult AcceptContent(int contentSid)
@@ -895,15 +925,40 @@ namespace ActiveLearning.Web.Controllers
 
             using (var contentManager = new ContentManager())
             {
-                if (contentManager.AcceptContent(contentSid, out message))
+                using (UploadContentService.ServiceClient client = new UploadContentService.ServiceClient())
                 {
-                    SetTempDataMessage(Constants.ValueSuccessfuly("Content has been accepted"));
-                }
-                else
-                {
-                    SetTempDataError(message);
+                    string contentStauts = string.Empty;
+                    bool acceptedSuccessfully = false;
+                    try
+                    {
+                        acceptedSuccessfully = client.AdminAcceptContent(contentSid, out message, out contentStauts);
+                        if (acceptedSuccessfully)
+                        {
+                            SetTempDataMessage(message);
+                        }
+                        else
+                        {
+                            SetTempDataError(message);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionLog(ex);
+                        SetTempDataError(Common.Constants.OperationFailedDuringCallingValue("course enrollment workflow service"));
+                    }
                 }
                 return RedirectToAction("ReviewContent");
+
+                //if (contentManager.AcceptContent(contentSid, out message))
+                //{
+                //    SetTempDataMessage(Constants.ValueSuccessfuly("Content has been accepted"));
+                //}
+                //else
+                //{
+                //    SetTempDataError(message);
+                //}
+                //return RedirectToAction("ReviewContent");
             }
         }
         #endregion

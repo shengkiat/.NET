@@ -84,6 +84,7 @@ namespace ActiveLearning.Business.Interface
         bool UpdateInstructorsCourseEnrolment(IEnumerable<Instructor> Instructors, int courseSid, out string message);
         bool UpdateInstructorsCourseEnrolment(IEnumerable<int> InstructorSids, int courseSid, out string message);
         bool UpdateInstructorsCourseEnrolmentByHasEnrolledIndicator(IEnumerable<Instructor> Instructors, int courseSid, out string message);
+        bool CheckIfInstructorEnrolledCourse(int instructorSid, int courseSid, out string message);
         #endregion
     }
 }

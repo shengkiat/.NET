@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Activities;
 using ActiveLearning.Business.Implementation;
-using ActiveLearning.Common;
 
 namespace ActiveLearning.WF.Activity
 {
 
-    public sealed class CheckWhetherCourseFullActivity : CodeActivity
+    public sealed class CheckIfEnrolledCourse : CodeActivity
     {
         // Define an activity input argument of type string
+        public InArgument<int> StudentSid { get; set; }
         public InArgument<int> CourseSid { get; set; }
-        public OutArgument<bool> IsCourseFull { get; set; }
+
+        public OutArgument<bool> HasEnrolled { get; set; }
         public OutArgument<string> Message { get; set; }
 
         // If your activity returns a value, derive from CodeActivity<TResult>
@@ -21,21 +22,21 @@ namespace ActiveLearning.WF.Activity
         protected override void Execute(CodeActivityContext context)
         {
             // Obtain the runtime value of the Text input argument
+            int studentSid = context.GetValue(this.StudentSid);
             int courseSid = context.GetValue(this.CourseSid);
 
-            bool isCourseFull = false;
+            bool hasEnrolled = false;
             string message = string.Empty;
 
             using (var courseManager = new CourseManager())
             {
-                if (courseManager.IsCourseFullyEnrolled(courseSid, out message))
+                if (courseManager.HasStudentEnrolledToCourse(studentSid, courseSid, out message))
                 {
-                    message = Constants.Course_Fully_Enrolled;
-                    isCourseFull = true;
+                    hasEnrolled = true;
                 }
             }
 
-            context.SetValue(this.IsCourseFull, isCourseFull);
+            context.SetValue(this.HasEnrolled, hasEnrolled);
             context.SetValue(this.Message, message);
         }
     }

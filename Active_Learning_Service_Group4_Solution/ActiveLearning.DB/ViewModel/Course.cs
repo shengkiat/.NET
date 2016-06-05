@@ -16,6 +16,9 @@ namespace ActiveLearning.DB
         [Display(Name = "Available Student Quota")]
         public int AvailableQuota { get; set; }
 
+        [Display(Name = "Seats Taken")]
+        public int SeatsTaken { get; set; }
+
         [Display(Name = "Fully Enrolled")]
         public bool FullyEnrolled { get; set; }
     }

@@ -451,6 +451,11 @@ namespace ActiveLearning.Business.Mock
             throw new NotImplementedException();
         }
 
+        public bool CheckIfInstructorEnrolledCourse(int instructorSid, int courseSid, out string message)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         #endregion

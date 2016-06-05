@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:7662/UploadCourseMaterialFlowChartWF.xamlx?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ActiveLearning.DB" />
+  <xs:element name="InstructorSaveContentData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InstructorSid" type="xs:int" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ActiveLearning.DB" minOccurs="0" name="Content" nillable="true" type="q1:Content" />
+        <xs:element minOccurs="0" name="CourseSid" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InstructorSaveContentDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ContentSid" type="xs:int" />
+        <xs:element minOccurs="0" name="ContentDataSavedSuccessfully" type="xs:boolean" />
+        <xs:element minOccurs="0" name="ContentStatus" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InstructorReviseContentData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ActiveLearning.DB" minOccurs="0" name="Content" nillable="true" type="q2:Content" />
+        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ContentSid" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InstructorReviseContentDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RevisedSuccessfully" type="xs:boolean" />
+        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ContentStatus" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdminAcceptContent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ContentSid" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdminAcceptContentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AcceptedSuccessfully" type="xs:boolean" />
+        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ContentStatus" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdminCommentContent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ContentSid" type="xs:int" />
+        <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdminCommentContentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CommentedSuccessfully" type="xs:boolean" />
+        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ContentStatus" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

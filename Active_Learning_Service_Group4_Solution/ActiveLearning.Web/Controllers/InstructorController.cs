@@ -36,10 +36,15 @@ namespace ActiveLearning.Web.Controllers
             {
                 return RedirectToLogin();
             }
+            if (GetLoginUser().Instructors.FirstOrDefault() == null)
+            {
+                return RedirectToLogin();
+            }
+            var instructorSid = GetLoginUser().Instructors.FirstOrDefault().Sid;
             string message = string.Empty;
             using (var courseManager = new CourseManager())
             {
-                var courseList = courseManager.GetEnrolledCoursesByInstructorSid(GetLoginUser().Instructors.FirstOrDefault().Sid, out message);
+                var courseList = courseManager.GetEnrolledCoursesByInstructorSid(instructorSid, out message);
                 if (courseList == null || courseList.Count() == 0)
                 {
                     SetViewBagError(message);
@@ -61,6 +66,10 @@ namespace ActiveLearning.Web.Controllers
             if (!HasAccessToCourse(courseSid, out message))
             {
                 return RedirectToError(message);
+            }
+            if (GetLoginUser().Instructors.FirstOrDefault() == null)
+            {
+                return RedirectToLogin();
             }
             var claims = new List<Claim>();
 
@@ -135,26 +144,57 @@ namespace ActiveLearning.Web.Controllers
             {
                 return RedirectToError(message);
             }
+            if (GetLoginUser().Instructors.FirstOrDefault() == null)
+            {
+                return RedirectToLogin();
+            }
 
+            Content content = null;
             using (var contentManager = new ContentManager())
             {
                 var uploadFolder = Util.GetUploadFolderFromConfig();
                 string path = Server.MapPath(uploadFolder);
-                var content = contentManager.AddContent(path, file, courseSid, out message);
-                if (content != null)
-                {
-                    SetTempDataMessage(ActiveLearning.Common.Constants.ValueSuccessfuly("File has been uploaded"));
-                }
-                else
+
+                content = contentManager.AddContentWithoutData(path, file, out message);
+                if (content == null)
                 {
                     SetTempDataError(message);
+                    return RedirectToAction("ManageContent", new { courseSid = courseSid });
                 }
             }
             //return new RedirectResult(Request.UrlReferrer.ToString());
+
+            var instructorSid = GetLoginUser().Instructors.FirstOrDefault().Sid;
+
+            int contentSid = 0;
+            bool contentDataSavedSuccessfully = false;
+            string contentStatus = string.Empty;
+            using (UploadContentService.ServiceClient client = new UploadContentService.ServiceClient())
+            {
+                try
+                {
+                    message = client.InstructorSaveContentData(instructorSid, content, courseSid, out contentSid, out contentDataSavedSuccessfully, out contentStatus);
+                    if (contentDataSavedSuccessfully)
+                    {
+                        SetTempDataMessage(message);
+                        //return RedirectToAction("PendingCourseEnrollment");
+                    }
+                    else
+                    {
+                        SetTempDataError(message);
+                        //return RedirectToAction("PendingCourseEnrollment");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ExceptionLog(ex);
+                    SetTempDataError(Common.Constants.OperationFailedDuringCallingValue("course enrollment workflow service"));
+                    //return RedirectToAction("PendingCourseEnrollment");
+                }
+            }
+
             return RedirectToAction("ManageContent", new { courseSid = courseSid });
         }
-
-
         public ActionResult Delete(int courseSid, int contentSid)
         {
             if (!IsUserAuthenticated())
@@ -193,7 +233,6 @@ namespace ActiveLearning.Web.Controllers
             }
             return RedirectToAction("ManageContent", new { courseSid = courseSid });
         }
-
         public ActionResult Download(int courseSid, int contentSid, string originalFileName)
         {
             if (!IsUserAuthenticated())
@@ -241,6 +280,121 @@ namespace ActiveLearning.Web.Controllers
                 return file;
             }
             return RedirectToError(null); ;
+        }
+        public ActionResult ReviseContent(int courseSid, int contentSid)
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            string message = string.Empty;
+            if (!HasAccessToCourse(courseSid, out message))
+            {
+                return RedirectToError(message);
+            }
+            ViewBag.CourseSid = courseSid;
+            ViewBag.ContentSid = contentSid;
+
+            using (var contentManager = new ContentManager())
+            {
+                message = string.Empty;
+                var content = contentManager.GetContentByContentSid(contentSid, out message);
+                if (content == null)
+                {
+                    SetTempDataError(message);
+                    return RedirectToAction("ManageContent", new { courseSid = courseSid });
+                }
+                if (!content.Status.Equals(Common.Constants.Commented_Code, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    SetTempDataError(Common.Constants.ValueNotFound(Common.Constants.Commented_Description + " " + Common.Constants.Content));
+                    return RedirectToAction("ManageContent", new { courseSid = courseSid });
+                }
+                SetBackURL("ManageContent?courseSid=" + courseSid);
+                return View(content);
+            }
+        }
+        [HttpPost]
+        public ActionResult ReviseContent(HttpPostedFileBase file, int courseSid, int contentSid)
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            string message = string.Empty;
+            if (!HasAccessToCourse(courseSid, out message))
+            {
+                return RedirectToError(message);
+            }
+            if (GetLoginUser().Instructors.FirstOrDefault() == null)
+            {
+                return RedirectToLogin();
+            }
+
+            Content content = null;
+            Content newContent = null;
+
+            using (var contentManager = new ContentManager())
+            {
+                content = contentManager.GetContentByContentSid(contentSid, out message);
+
+                if (content == null)
+                {
+                    SetViewBagError(message);
+                    return View(content);
+                }
+                SetBackURL("ManageContent?courseSid=" + courseSid);
+                var oldFilePath = Server.MapPath(content.Path + content.FileName);
+
+                bool oldFileDeleted = contentManager.DeleteContentWithouData(oldFilePath, out message);
+
+                if (!oldFileDeleted)
+                {
+                    SetViewBagError(message);
+                    return View(content);
+                }
+
+                var uploadFolder = Util.GetUploadFolderFromConfig();
+                string path = Server.MapPath(uploadFolder);
+
+                newContent = contentManager.AddContentWithoutData(path, file, out message);
+                newContent.Sid = content.Sid;
+                newContent.CourseSid = content.CourseSid;
+                newContent.CreateDT = content.CreateDT;
+                newContent.Remark = content.Remark;
+
+                if (newContent == null)
+                {
+                    SetViewBagError(message);
+                    return View(content);
+                }
+            }
+            var instructorSid = GetLoginUser().Instructors.FirstOrDefault().Sid;
+
+            bool contentDataRevisedSuccessfully = false;
+            string contentStatus = string.Empty;
+            using (UploadContentService.ServiceClient client = new UploadContentService.ServiceClient())
+            {
+                try
+                {
+                    contentDataRevisedSuccessfully = client.InstructorReviseContentData(newContent, ref message, contentSid, out contentStatus);
+                    if (contentDataRevisedSuccessfully)
+                    {
+                        SetTempDataMessage(message);
+                        return RedirectToAction("ManageContent", new { courseSid = courseSid });
+                    }
+                    else
+                    {
+                        SetViewBagError(message);
+                        return View(content);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ExceptionLog(ex);
+                    SetViewBagError(Common.Constants.OperationFailedDuringCallingValue("course enrollment workflow service"));
+                    return View(content);
+                }
+            }
         }
         #endregion
 
@@ -689,6 +843,11 @@ namespace ActiveLearning.Web.Controllers
             {
                 return RedirectToLogin();
             }
+
+            if (GetLoginUser().Instructors.FirstOrDefault() == null)
+            {
+                return RedirectToLogin();
+            }
             int instructorSid = GetLoginUser().Instructors.FirstOrDefault().Sid;
             string message = string.Empty;
             using (var courseManager = new CourseManager())
@@ -754,13 +913,17 @@ namespace ActiveLearning.Web.Controllers
         //    }
         //}
 
-        public ActionResult RemarkForReject(int enrollmentAppliationSid)
+        public ActionResult RejectEnrollmentApplication(int courseSid, int enrollmentAppliationSid)
         {
             if (!IsUserAuthenticated())
             {
                 return RedirectToLogin();
             }
             string message = string.Empty;
+            if (!HasAccessToCourse(courseSid, out message))
+            {
+                return RedirectToError(message);
+            }
             using (var getEnrollApp = new CourseManager())
             {
                 StudentEnrollApplication studentEnrollApplication = getEnrollApp.GetStudentEnrollApplicationBySid(enrollmentAppliationSid, out message);
@@ -775,48 +938,56 @@ namespace ActiveLearning.Web.Controllers
             };
         }
 
-        [HttpPost, ActionName("RemarkForReject")]
+        [HttpPost, ActionName("RejectEnrollmentApplication")]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Duration = 0)]
-        public ActionResult updateRemark(StudentEnrollApplication studentEnrollApplication)
+        public ActionResult RejectWithRemark(StudentEnrollApplication studentEnrollApplication)
         {
             if (!IsUserAuthenticated())
             {
                 return RedirectToLogin();
             }
             string message = string.Empty;
-
+            if (!HasAccessToCourse(studentEnrollApplication.CourseSid, out message))
+            {
+                return RedirectToError(message);
+            }
 
             var remarkToUpdate = TempData.Peek("RejectApp") as StudentEnrollApplication;
             remarkToUpdate.Remark = studentEnrollApplication.Remark;
 
+            if (string.IsNullOrEmpty(remarkToUpdate.Remark) || string.IsNullOrEmpty(remarkToUpdate.Remark.Trim()))
+            {
+                SetViewBagError(Common.Constants.PleaseEnterValue(Common.Constants.Remark));
+                return View(studentEnrollApplication);
+            }
             bool hasError = false;
-            bool remarkedSuccessfully = false;
+            bool rejectedSuccessfully = false;
 
             using (CourseEnrollService.ServiceClient client = new CourseEnrollService.ServiceClient())
             {
                 try
                 {
-                    remarkedSuccessfully = client.RejectEnrollApplication(remarkToUpdate.Remark, studentEnrollApplication.Sid, out message, out hasError);
-                    if (remarkedSuccessfully)
+                    rejectedSuccessfully = client.RejectEnrollApplication(remarkToUpdate.Remark, studentEnrollApplication.Sid, out message, out hasError);
+                    if (rejectedSuccessfully)
                     {
-                        SetTempDataError(message);
+                        SetTempDataMessage(message);
                         return RedirectToAction("PendingCourseEnrollment");
+                    }
+                    else
+                    {
+                        SetViewBagError(message);
+                        return View(studentEnrollApplication);
                     }
                 }
                 catch (Exception ex)
                 {
                     ExceptionLog(ex);
-                    SetTempDataError(ex.Message);
-                    return RedirectToAction("PendingCourseEnrollment");
+                    SetViewBagError(Common.Constants.OperationFailedDuringCallingValue("course enrollment workflow service"));
+                    return View(studentEnrollApplication);
                 }
             }
-            SetTempDataMessage(message);
-            return RedirectToAction("PendingCourseEnrollment");
-
         }
-
-
         #endregion
     }
 }

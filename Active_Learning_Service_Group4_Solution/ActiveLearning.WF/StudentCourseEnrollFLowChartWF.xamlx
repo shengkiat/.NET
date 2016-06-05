@@ -26,17 +26,19 @@
     </p1:TextExpression.Namespaces>
     <p1:TextExpression.References>
       <sco:Collection x:TypeArguments="p1:AssemblyReference" x:Name="__ReferenceID25">
+        <p1:AssemblyReference>EntityFramework</p1:AssemblyReference>
+        <p1:AssemblyReference>EntityFramework.SqlServer</p1:AssemblyReference>
         <p1:AssemblyReference>Microsoft.CSharp</p1:AssemblyReference>
         <p1:AssemblyReference>Microsoft.Web.Infrastructure</p1:AssemblyReference>
         <p1:AssemblyReference>PresentationCore</p1:AssemblyReference>
         <p1:AssemblyReference>PresentationFramework</p1:AssemblyReference>
         <p1:AssemblyReference>System.Activities.Presentation</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ComponentModel.DataAnnotations</p1:AssemblyReference>
         <p1:AssemblyReference>System.Drawing</p1:AssemblyReference>
         <p1:AssemblyReference>System</p1:AssemblyReference>
         <p1:AssemblyReference>System.Activities</p1:AssemblyReference>
         <p1:AssemblyReference>System.Core</p1:AssemblyReference>
         <p1:AssemblyReference>System.Data</p1:AssemblyReference>
-        <p1:AssemblyReference>System.Data.Entity</p1:AssemblyReference>
         <p1:AssemblyReference>System.Runtime.Serialization</p1:AssemblyReference>
         <p1:AssemblyReference>System.ServiceModel</p1:AssemblyReference>
         <p1:AssemblyReference>System.ServiceModel.Activities</p1:AssemblyReference>
@@ -111,68 +113,61 @@
             <x:Reference>__ReferenceID12</x:Reference>
           </p1:Flowchart.StartNode>
           <p1:FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_16">
-            <awa:StudentEnrollCourseActivity DisplayName="StudentEnrollCourse" sap2010:WorkflowViewState.IdRef="StudentEnrollCourseActivity_2">
-              <awa:StudentEnrollCourseActivity.CourseSid>
+            <awa:StudentEnrollCourse DisplayName="StudentEnrollCourse" sap2010:WorkflowViewState.IdRef="StudentEnrollCourse_2">
+              <awa:StudentEnrollCourse.CourseSid>
                 <p1:InArgument x:TypeArguments="x:Int32">
                   <mca:CSharpValue x:TypeArguments="x:Int32">CourseSid</mca:CSharpValue>
                 </p1:InArgument>
-              </awa:StudentEnrollCourseActivity.CourseSid>
-              <awa:StudentEnrollCourseActivity.EnrolledSuccessfully>
+              </awa:StudentEnrollCourse.CourseSid>
+              <awa:StudentEnrollCourse.EnrolledSuccessfully>
                 <p1:OutArgument x:TypeArguments="x:Boolean">
                   <mca:CSharpReference x:TypeArguments="x:Boolean">EnrolledSuccessfully</mca:CSharpReference>
                 </p1:OutArgument>
-              </awa:StudentEnrollCourseActivity.EnrolledSuccessfully>
-              <awa:StudentEnrollCourseActivity.Message>
+              </awa:StudentEnrollCourse.EnrolledSuccessfully>
+              <awa:StudentEnrollCourse.Message>
                 <p1:OutArgument x:TypeArguments="x:String">
                   <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
                 </p1:OutArgument>
-              </awa:StudentEnrollCourseActivity.Message>
-              <awa:StudentEnrollCourseActivity.StudentSid>
+              </awa:StudentEnrollCourse.Message>
+              <awa:StudentEnrollCourse.StudentSid>
                 <p1:InArgument x:TypeArguments="x:Int32">
                   <mca:CSharpValue x:TypeArguments="x:Int32">StudentSid</mca:CSharpValue>
                 </p1:InArgument>
-              </awa:StudentEnrollCourseActivity.StudentSid>
-            </awa:StudentEnrollCourseActivity>
+              </awa:StudentEnrollCourse.StudentSid>
+            </awa:StudentEnrollCourse>
             <p1:FlowStep.Next>
-              <p1:FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_29">
-                <p1:Assign sap2010:WorkflowViewState.IdRef="Assign_1">
-                  <p1:Assign.To>
-                    <p1:OutArgument x:TypeArguments="x:String">
-                      <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
-                    </p1:OutArgument>
-                  </p1:Assign.To>
-                  <p1:Assign.Value>
-                    <p1:InArgument x:TypeArguments="x:String">
-                      <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
-                    </p1:InArgument>
-                  </p1:Assign.Value>
-                </p1:Assign>
+              <p1:FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_30">
+                <p1:WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_1">
+                  <p1:InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+                  </p1:InArgument>
+                </p1:WriteLine>
               </p1:FlowStep>
             </p1:FlowStep.Next>
           </p1:FlowStep>
           <p1:FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_21">
-            <awa:CheckWhetherEnrolledCourseActivity DisplayName="CheckWhetherEnrolled" sap2010:WorkflowViewState.IdRef="CheckWhetherEnrolledCourseActivity_4">
-              <awa:CheckWhetherEnrolledCourseActivity.CourseSid>
+            <awa:CheckIfEnrolledCourse DisplayName="CheckIfEnrolled" sap2010:WorkflowViewState.IdRef="CheckIfEnrolledCourse_4">
+              <awa:CheckIfEnrolledCourse.CourseSid>
                 <p1:InArgument x:TypeArguments="x:Int32">
                   <mca:CSharpValue x:TypeArguments="x:Int32">CourseSid</mca:CSharpValue>
                 </p1:InArgument>
-              </awa:CheckWhetherEnrolledCourseActivity.CourseSid>
-              <awa:CheckWhetherEnrolledCourseActivity.HasEnrolled>
+              </awa:CheckIfEnrolledCourse.CourseSid>
+              <awa:CheckIfEnrolledCourse.HasEnrolled>
                 <p1:OutArgument x:TypeArguments="x:Boolean">
                   <mca:CSharpReference x:TypeArguments="x:Boolean">HasEnrolled</mca:CSharpReference>
                 </p1:OutArgument>
-              </awa:CheckWhetherEnrolledCourseActivity.HasEnrolled>
-              <awa:CheckWhetherEnrolledCourseActivity.Message>
+              </awa:CheckIfEnrolledCourse.HasEnrolled>
+              <awa:CheckIfEnrolledCourse.Message>
                 <p1:OutArgument x:TypeArguments="x:String">
                   <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
                 </p1:OutArgument>
-              </awa:CheckWhetherEnrolledCourseActivity.Message>
-              <awa:CheckWhetherEnrolledCourseActivity.StudentSid>
+              </awa:CheckIfEnrolledCourse.Message>
+              <awa:CheckIfEnrolledCourse.StudentSid>
                 <p1:InArgument x:TypeArguments="x:Int32">
                   <mca:CSharpValue x:TypeArguments="x:Int32">StudentSid</mca:CSharpValue>
                 </p1:InArgument>
-              </awa:CheckWhetherEnrolledCourseActivity.StudentSid>
-            </awa:CheckWhetherEnrolledCourseActivity>
+              </awa:CheckIfEnrolledCourse.StudentSid>
+            </awa:CheckIfEnrolledCourse>
             <p1:FlowStep.Next>
               <p1:FlowDecision x:Name="__ReferenceID7" DisplayName="HasEnrolled ?" sap2010:WorkflowViewState.IdRef="FlowDecision_6">
                 <p1:FlowDecision.Condition>
@@ -183,23 +178,23 @@
                 </p1:FlowDecision.True>
                 <p1:FlowDecision.False>
                   <p1:FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_20">
-                    <awa:CheckWhetherCourseFullActivity DisplayName="CheckWhetherCourseFull" sap2010:WorkflowViewState.IdRef="CheckWhetherCourseFullActivity_2">
-                      <awa:CheckWhetherCourseFullActivity.CourseSid>
+                    <awa:CheckIfCourseFull DisplayName="CheckIfCourseFull" sap2010:WorkflowViewState.IdRef="CheckIfCourseFull_2">
+                      <awa:CheckIfCourseFull.CourseSid>
                         <p1:InArgument x:TypeArguments="x:Int32">
                           <mca:CSharpValue x:TypeArguments="x:Int32">CourseSid</mca:CSharpValue>
                         </p1:InArgument>
-                      </awa:CheckWhetherCourseFullActivity.CourseSid>
-                      <awa:CheckWhetherCourseFullActivity.IsCourseFull>
+                      </awa:CheckIfCourseFull.CourseSid>
+                      <awa:CheckIfCourseFull.IsCourseFull>
                         <p1:OutArgument x:TypeArguments="x:Boolean">
                           <mca:CSharpReference x:TypeArguments="x:Boolean">IsCourseFull</mca:CSharpReference>
                         </p1:OutArgument>
-                      </awa:CheckWhetherCourseFullActivity.IsCourseFull>
-                      <awa:CheckWhetherCourseFullActivity.Message>
+                      </awa:CheckIfCourseFull.IsCourseFull>
+                      <awa:CheckIfCourseFull.Message>
                         <p1:OutArgument x:TypeArguments="x:String">
                           <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
                         </p1:OutArgument>
-                      </awa:CheckWhetherCourseFullActivity.Message>
-                    </awa:CheckWhetherCourseFullActivity>
+                      </awa:CheckIfCourseFull.Message>
+                    </awa:CheckIfCourseFull>
                     <p1:FlowStep.Next>
                       <p1:FlowDecision x:Name="__ReferenceID4" DisplayName="IsCourseFull ?" sap2010:WorkflowViewState.IdRef="FlowDecision_5">
                         <p1:FlowDecision.Condition>
@@ -207,28 +202,28 @@
                         </p1:FlowDecision.Condition>
                         <p1:FlowDecision.True>
                           <p1:FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_19">
-                            <awa:CheckWhetherAppliedActivity DisplayName="CheckWhetherApplied" sap2010:WorkflowViewState.IdRef="CheckWhetherAppliedActivity_2">
-                              <awa:CheckWhetherAppliedActivity.CourseSid>
+                            <awa:CheckIfAppliedCourse DisplayName="CheckIfAppliedCourse" sap2010:WorkflowViewState.IdRef="CheckIfAppliedCourse_2">
+                              <awa:CheckIfAppliedCourse.CourseSid>
                                 <p1:InArgument x:TypeArguments="x:Int32">
                                   <mca:CSharpValue x:TypeArguments="x:Int32">CourseSid</mca:CSharpValue>
                                 </p1:InArgument>
-                              </awa:CheckWhetherAppliedActivity.CourseSid>
-                              <awa:CheckWhetherAppliedActivity.HasApplied>
+                              </awa:CheckIfAppliedCourse.CourseSid>
+                              <awa:CheckIfAppliedCourse.HasApplied>
                                 <p1:OutArgument x:TypeArguments="x:Boolean">
                                   <mca:CSharpReference x:TypeArguments="x:Boolean">HasApplied</mca:CSharpReference>
                                 </p1:OutArgument>
-                              </awa:CheckWhetherAppliedActivity.HasApplied>
-                              <awa:CheckWhetherAppliedActivity.Message>
+                              </awa:CheckIfAppliedCourse.HasApplied>
+                              <awa:CheckIfAppliedCourse.Message>
                                 <p1:OutArgument x:TypeArguments="x:String">
                                   <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
                                 </p1:OutArgument>
-                              </awa:CheckWhetherAppliedActivity.Message>
-                              <awa:CheckWhetherAppliedActivity.StudentSid>
+                              </awa:CheckIfAppliedCourse.Message>
+                              <awa:CheckIfAppliedCourse.StudentSid>
                                 <p1:InArgument x:TypeArguments="x:Int32">
                                   <mca:CSharpValue x:TypeArguments="x:Int32">StudentSid</mca:CSharpValue>
                                 </p1:InArgument>
-                              </awa:CheckWhetherAppliedActivity.StudentSid>
-                            </awa:CheckWhetherAppliedActivity>
+                              </awa:CheckIfAppliedCourse.StudentSid>
+                            </awa:CheckIfAppliedCourse>
                             <p1:FlowStep.Next>
                               <p1:FlowDecision x:Name="__ReferenceID2" DisplayName="HasApplied ?" sap2010:WorkflowViewState.IdRef="FlowDecision_4">
                                 <p1:FlowDecision.Condition>
@@ -239,33 +234,33 @@
                                 </p1:FlowDecision.True>
                                 <p1:FlowDecision.False>
                                   <p1:FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_18">
-                                    <awa:StudentApplyToEnrollCourseActivity DisplayName="StudentApplyToEnroll" sap2010:WorkflowViewState.IdRef="StudentApplyToEnrollCourseActivity_2">
-                                      <awa:StudentApplyToEnrollCourseActivity.CourseSid>
+                                    <awa:StudentApplyToEnrollCourse DisplayName="StudentApplyToEnroll" sap2010:WorkflowViewState.IdRef="StudentApplyToEnrollCourse_2">
+                                      <awa:StudentApplyToEnrollCourse.CourseSid>
                                         <p1:InArgument x:TypeArguments="x:Int32">
                                           <mca:CSharpValue x:TypeArguments="x:Int32">CourseSid</mca:CSharpValue>
                                         </p1:InArgument>
-                                      </awa:StudentApplyToEnrollCourseActivity.CourseSid>
-                                      <awa:StudentApplyToEnrollCourseActivity.EnrollApplicationSid>
+                                      </awa:StudentApplyToEnrollCourse.CourseSid>
+                                      <awa:StudentApplyToEnrollCourse.EnrollApplicationSid>
                                         <p1:OutArgument x:TypeArguments="x:Int32">
                                           <mca:CSharpReference x:TypeArguments="x:Int32">EnrollApplicationSid</mca:CSharpReference>
                                         </p1:OutArgument>
-                                      </awa:StudentApplyToEnrollCourseActivity.EnrollApplicationSid>
-                                      <awa:StudentApplyToEnrollCourseActivity.EnrollAppliedSuccessfully>
+                                      </awa:StudentApplyToEnrollCourse.EnrollApplicationSid>
+                                      <awa:StudentApplyToEnrollCourse.EnrollAppliedSuccessfully>
                                         <p1:OutArgument x:TypeArguments="x:Boolean">
                                           <mca:CSharpReference x:TypeArguments="x:Boolean">EnrollApplicationSuccessfully</mca:CSharpReference>
                                         </p1:OutArgument>
-                                      </awa:StudentApplyToEnrollCourseActivity.EnrollAppliedSuccessfully>
-                                      <awa:StudentApplyToEnrollCourseActivity.Message>
+                                      </awa:StudentApplyToEnrollCourse.EnrollAppliedSuccessfully>
+                                      <awa:StudentApplyToEnrollCourse.Message>
                                         <p1:OutArgument x:TypeArguments="x:String">
                                           <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
                                         </p1:OutArgument>
-                                      </awa:StudentApplyToEnrollCourseActivity.Message>
-                                      <awa:StudentApplyToEnrollCourseActivity.StudentSid>
+                                      </awa:StudentApplyToEnrollCourse.Message>
+                                      <awa:StudentApplyToEnrollCourse.StudentSid>
                                         <p1:InArgument x:TypeArguments="x:Int32">
                                           <mca:CSharpValue x:TypeArguments="x:Int32">StudentSid</mca:CSharpValue>
                                         </p1:InArgument>
-                                      </awa:StudentApplyToEnrollCourseActivity.StudentSid>
-                                    </awa:StudentApplyToEnrollCourseActivity>
+                                      </awa:StudentApplyToEnrollCourse.StudentSid>
+                                    </awa:StudentApplyToEnrollCourse>
                                     <p1:FlowStep.Next>
                                       <x:Reference>__ReferenceID0</x:Reference>
                                     </p1:FlowStep.Next>
@@ -292,23 +287,23 @@
           <x:Reference>__ReferenceID6</x:Reference>
           <x:Reference>__ReferenceID7</x:Reference>
           <p1:FlowStep x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_26">
-            <awa:CheckWhetherCourseExists sap2010:WorkflowViewState.IdRef="CheckWhetherCourseExists_2">
-              <awa:CheckWhetherCourseExists.CourseExists>
+            <awa:CheckIfCourseExists sap2010:WorkflowViewState.IdRef="CheckIfCourseExists_2">
+              <awa:CheckIfCourseExists.CourseExists>
                 <p1:OutArgument x:TypeArguments="x:Boolean">
                   <mca:CSharpReference x:TypeArguments="x:Boolean">CourseExists</mca:CSharpReference>
                 </p1:OutArgument>
-              </awa:CheckWhetherCourseExists.CourseExists>
-              <awa:CheckWhetherCourseExists.CourseSid>
+              </awa:CheckIfCourseExists.CourseExists>
+              <awa:CheckIfCourseExists.CourseSid>
                 <p1:InArgument x:TypeArguments="x:Int32">
                   <mca:CSharpValue x:TypeArguments="x:Int32">CourseSid</mca:CSharpValue>
                 </p1:InArgument>
-              </awa:CheckWhetherCourseExists.CourseSid>
-              <awa:CheckWhetherCourseExists.Message>
+              </awa:CheckIfCourseExists.CourseSid>
+              <awa:CheckIfCourseExists.Message>
                 <p1:OutArgument x:TypeArguments="x:String">
                   <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
                 </p1:OutArgument>
-              </awa:CheckWhetherCourseExists.Message>
-            </awa:CheckWhetherCourseExists>
+              </awa:CheckIfCourseExists.Message>
+            </awa:CheckIfCourseExists>
             <p1:FlowStep.Next>
               <p1:FlowDecision x:Name="__ReferenceID11" DisplayName="CourseExists ?" sap2010:WorkflowViewState.IdRef="FlowDecision_9">
                 <p1:FlowDecision.Condition>
@@ -324,23 +319,23 @@
             </p1:FlowStep.Next>
           </p1:FlowStep>
           <p1:FlowStep x:Name="__ReferenceID12" sap2010:WorkflowViewState.IdRef="FlowStep_27">
-            <awa:CheckWhetherStudentExists sap2010:WorkflowViewState.IdRef="CheckWhetherStudentExists_2">
-              <awa:CheckWhetherStudentExists.Message>
+            <awa:CheckIfStudentExists sap2010:WorkflowViewState.IdRef="CheckIfStudentExists_2">
+              <awa:CheckIfStudentExists.Message>
                 <p1:OutArgument x:TypeArguments="x:String">
                   <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
                 </p1:OutArgument>
-              </awa:CheckWhetherStudentExists.Message>
-              <awa:CheckWhetherStudentExists.StudentExists>
+              </awa:CheckIfStudentExists.Message>
+              <awa:CheckIfStudentExists.StudentExists>
                 <p1:OutArgument x:TypeArguments="x:Boolean">
                   <mca:CSharpReference x:TypeArguments="x:Boolean">StudentExists</mca:CSharpReference>
                 </p1:OutArgument>
-              </awa:CheckWhetherStudentExists.StudentExists>
-              <awa:CheckWhetherStudentExists.StudentSid>
+              </awa:CheckIfStudentExists.StudentExists>
+              <awa:CheckIfStudentExists.StudentSid>
                 <p1:InArgument x:TypeArguments="x:Int32">
                   <mca:CSharpValue x:TypeArguments="x:Int32">StudentSid</mca:CSharpValue>
                 </p1:InArgument>
-              </awa:CheckWhetherStudentExists.StudentSid>
-            </awa:CheckWhetherStudentExists>
+              </awa:CheckIfStudentExists.StudentSid>
+            </awa:CheckIfStudentExists>
             <p1:FlowStep.Next>
               <p1:FlowDecision x:Name="__ReferenceID10" DisplayName="StudentExists ?" sap2010:WorkflowViewState.IdRef="FlowDecision_8">
                 <p1:FlowDecision.Condition>
@@ -445,28 +440,28 @@
                             </p1:OutArgument>
                           </ReceiveParametersContent>
                         </Receive>
-                        <awa:InstructorAcceptEnrollApplicationActivity sap2010:WorkflowViewState.IdRef="InstructorAcceptEnrollApplicationActivity_4">
-                          <awa:InstructorAcceptEnrollApplicationActivity.EnrollApplicationSid>
+                        <awa:InstructorAcceptEnrollApplication sap2010:WorkflowViewState.IdRef="InstructorAcceptEnrollApplication_4">
+                          <awa:InstructorAcceptEnrollApplication.EnrollApplicationSid>
                             <p1:InArgument x:TypeArguments="x:Int32">
                               <mca:CSharpValue x:TypeArguments="x:Int32">EnrollApplicationSid</mca:CSharpValue>
                             </p1:InArgument>
-                          </awa:InstructorAcceptEnrollApplicationActivity.EnrollApplicationSid>
-                          <awa:InstructorAcceptEnrollApplicationActivity.HasError>
+                          </awa:InstructorAcceptEnrollApplication.EnrollApplicationSid>
+                          <awa:InstructorAcceptEnrollApplication.HasError>
                             <p1:OutArgument x:TypeArguments="x:Boolean">
                               <mca:CSharpReference x:TypeArguments="x:Boolean">HasError</mca:CSharpReference>
                             </p1:OutArgument>
-                          </awa:InstructorAcceptEnrollApplicationActivity.HasError>
-                          <awa:InstructorAcceptEnrollApplicationActivity.IsAcceptedSuccessfully>
+                          </awa:InstructorAcceptEnrollApplication.HasError>
+                          <awa:InstructorAcceptEnrollApplication.IsAcceptedSuccessfully>
                             <p1:OutArgument x:TypeArguments="x:Boolean">
                               <mca:CSharpReference x:TypeArguments="x:Boolean">IsAcceptedSuccessfully</mca:CSharpReference>
                             </p1:OutArgument>
-                          </awa:InstructorAcceptEnrollApplicationActivity.IsAcceptedSuccessfully>
-                          <awa:InstructorAcceptEnrollApplicationActivity.Message>
+                          </awa:InstructorAcceptEnrollApplication.IsAcceptedSuccessfully>
+                          <awa:InstructorAcceptEnrollApplication.Message>
                             <p1:OutArgument x:TypeArguments="x:String">
                               <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
                             </p1:OutArgument>
-                          </awa:InstructorAcceptEnrollApplicationActivity.Message>
-                        </awa:InstructorAcceptEnrollApplicationActivity>
+                          </awa:InstructorAcceptEnrollApplication.Message>
+                        </awa:InstructorAcceptEnrollApplication>
                         <SendReply Request="{x:Reference __ReferenceID14}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_3">
                           <SendParametersContent>
                             <p1:InArgument x:TypeArguments="x:Boolean" x:Key="IsAcceptedSuccessfully">
@@ -527,33 +522,33 @@
                             </p1:OutArgument>
                           </ReceiveParametersContent>
                         </Receive>
-                        <awa:InstructorRejectEnrollApplicationActivity sap2010:WorkflowViewState.IdRef="InstructorRejectEnrollApplicationActivity_3">
-                          <awa:InstructorRejectEnrollApplicationActivity.EnrollApplicationSid>
+                        <awa:InstructorRejectEnrollApplication sap2010:WorkflowViewState.IdRef="InstructorRejectEnrollApplication_3">
+                          <awa:InstructorRejectEnrollApplication.EnrollApplicationSid>
                             <p1:InArgument x:TypeArguments="x:Int32">
                               <mca:CSharpValue x:TypeArguments="x:Int32">EnrollApplicationSid</mca:CSharpValue>
                             </p1:InArgument>
-                          </awa:InstructorRejectEnrollApplicationActivity.EnrollApplicationSid>
-                          <awa:InstructorRejectEnrollApplicationActivity.HasError>
+                          </awa:InstructorRejectEnrollApplication.EnrollApplicationSid>
+                          <awa:InstructorRejectEnrollApplication.HasError>
                             <p1:OutArgument x:TypeArguments="x:Boolean">
                               <mca:CSharpReference x:TypeArguments="x:Boolean">HasError</mca:CSharpReference>
                             </p1:OutArgument>
-                          </awa:InstructorRejectEnrollApplicationActivity.HasError>
-                          <awa:InstructorRejectEnrollApplicationActivity.IsRejectedSuccessfully>
+                          </awa:InstructorRejectEnrollApplication.HasError>
+                          <awa:InstructorRejectEnrollApplication.IsRejectedSuccessfully>
                             <p1:OutArgument x:TypeArguments="x:Boolean">
                               <mca:CSharpReference x:TypeArguments="x:Boolean">IsRejectedSuccessfully</mca:CSharpReference>
                             </p1:OutArgument>
-                          </awa:InstructorRejectEnrollApplicationActivity.IsRejectedSuccessfully>
-                          <awa:InstructorRejectEnrollApplicationActivity.Message>
+                          </awa:InstructorRejectEnrollApplication.IsRejectedSuccessfully>
+                          <awa:InstructorRejectEnrollApplication.Message>
                             <p1:OutArgument x:TypeArguments="x:String">
                               <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
                             </p1:OutArgument>
-                          </awa:InstructorRejectEnrollApplicationActivity.Message>
-                          <awa:InstructorRejectEnrollApplicationActivity.Remark>
+                          </awa:InstructorRejectEnrollApplication.Message>
+                          <awa:InstructorRejectEnrollApplication.Remark>
                             <p1:InArgument x:TypeArguments="x:String">
                               <mca:CSharpValue x:TypeArguments="x:String">Remark</mca:CSharpValue>
                             </p1:InArgument>
-                          </awa:InstructorRejectEnrollApplicationActivity.Remark>
-                        </awa:InstructorRejectEnrollApplicationActivity>
+                          </awa:InstructorRejectEnrollApplication.Remark>
+                        </awa:InstructorRejectEnrollApplication>
                         <SendReply Request="{x:Reference __ReferenceID16}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_4">
                           <SendParametersContent>
                             <p1:InArgument x:TypeArguments="x:Boolean" x:Key="IsRejectedSuccessfully">
@@ -573,14 +568,11 @@
                 </p1:PickBranch>
               </p1:Pick>
               <p1:FlowStep.Next>
-                <p1:FlowDecision x:Name="__ReferenceID21" DisplayName="HasError ?" sap2010:WorkflowViewState.IdRef="FlowDecision_10">
+                <p1:FlowDecision x:Name="__ReferenceID21" DisplayName="Accepted/Rejected Successfully?" sap2010:WorkflowViewState.IdRef="FlowDecision_10">
                   <p1:FlowDecision.Condition>
-                    <mca:CSharpValue x:TypeArguments="x:Boolean">HasError</mca:CSharpValue>
+                    <mca:CSharpValue x:TypeArguments="x:Boolean">IsAcceptedSuccessfully||IsRejectedSuccessfully</mca:CSharpValue>
                   </p1:FlowDecision.Condition>
                   <p1:FlowDecision.True>
-                    <x:Reference>__ReferenceID18</x:Reference>
-                  </p1:FlowDecision.True>
-                  <p1:FlowDecision.False>
                     <p1:FlowStep x:Name="__ReferenceID19" sap2010:WorkflowViewState.IdRef="FlowStep_12">
                       <p1:TerminateWorkflow sap2010:WorkflowViewState.IdRef="TerminateWorkflow_2">
                         <p1:TerminateWorkflow.Reason>
@@ -590,6 +582,9 @@
                         </p1:TerminateWorkflow.Reason>
                       </p1:TerminateWorkflow>
                     </p1:FlowStep>
+                  </p1:FlowDecision.True>
+                  <p1:FlowDecision.False>
+                    <x:Reference>__ReferenceID18</x:Reference>
                   </p1:FlowDecision.False>
                 </p1:FlowDecision>
               </p1:FlowStep.Next>
@@ -605,30 +600,30 @@
     <x:Reference>__ReferenceID18</x:Reference>
     <x:Reference>__ReferenceID20</x:Reference>
     <x:Reference>__ReferenceID21</x:Reference>
-    <sads:DebugSymbol.Symbol>d5ABRDpcV29ya3NwYWNlXEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNFx0cnVua1xBY3RpdmVfTGVhcm5pbmdfU2VydmljZV9Hcm91cDRfU29sdXRpb25cQWN0aXZlTGVhcm5pbmcuV0ZcU3R1ZGVudENvdXJzZUVucm9sbEZMb3dDaGFydFdGLnhhbWx4bBAD4gQSAQE+OD4/AQs/Nj85AQpANkA5AQlBOEE/AQhCOEI/AQdDNkM5AQZFOEU/AQVGOEY/AQRKOEo/AQNLOEs/AQJRB5ADFQKkA5QDDZQDaQKUA8oEF9AELgKDA5gDD78EGQEcwwQVwwRcAQxSCWgTApcJaQnqAhgCmATrAgmPAxUCpQPNBB3NBGIChAOZAxHnAyEC4QHoAxG+BCEBHWUPZV0CqQliD2JeApkJVxNbJgKYCWs+a0UCmwRsPmxFApoEbT5tRQKZBMgCDdgCLQLdCNwCE9wCXwLKCIsBEZYBHQKjCKgCDbgCLALpB7wCE7wCXgLWB5sBDbABNgKJB7QBE7QBXQL2BrsBFcsBOgK8Bs8BG88BZgKpBnMNiAEvAtwF0wEd6AE/Ao8F7AEj7AFsAvwE8wEljQJOApwEiQMPiQNrAogEjAMPjANiAvgDgwMPgwNUAuYDgAMPgANVAtYDhgMPhgNgAsYD/QIP/QJWArYD8AIT8AJxAqYDmwMV5QMjAuIB6gMVvAQjAR7LAhPLAmAChAnVAhPVAloC8QjQAhPQAmcC3giTAReTAVwCtwiOAReOAWQCpAi1AhO1AmACkAiwAhOwAlkC/QerAhOrAmYC6geoAROoAWACwweeAROeAVkCsAejAROjAWUCnQetAROtAVoCigfIARvIAWgC4wa+ARu+AWEC0AbDARvDAW4CvQZ7E3tuApYGgAETgAFgAoMGdhN2WQLwBYUBE4UBWgLdBdsBI9sBdALJBeABI+ABcAK2BdYBI9YBaQKjBeUBI+UBagKQBYUCK4UCeALpBPYBK/YBcQLWBPsBK/sBhAECwwSAAiuAAo8BArAEigIrigJyAp0EnAMX5AMlAuMB7gMXuwQlAR+gAxnAAyMC3wLBAxnWA0kCmgLXAxnjAyUC5AHvAxmSBCMCrAGTBBmtBEkBVq4EGboEJQEgqwMfqwN9AvICvQMfvQN4AuECsgMjtgM2AuACzgMfzgN8As4C0wMf0wNsAr0CxAMfxANwAqwCyQMfyQNuApsC2gMf2gN0AokC3QMf3QNkAvYB4AMf4ANmAuUB+gMf+gN9AtABjwQfjwR4Ar8BjAQfjARrAq4BgQQjhQQ2Aq0BoAQfoAR8ApsBpQQfpQRsAooBlgQflgRwAXmbBB+bBG4BaKoEH6oEYwFXsQQfsQR0AUW0BB+0BGQBMrcEH7cEZgEh</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d5ABRDpcV29ya3NwYWNlXEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNFx0cnVua1xBY3RpdmVfTGVhcm5pbmdfU2VydmljZV9Hcm91cDRfU29sdXRpb25cQWN0aXZlTGVhcm5pbmcuV0ZcU3R1ZGVudENvdXJzZUVucm9sbEZMb3dDaGFydFdGLnhhbWx4ahAD3AQSAQFAOEA/AQtBNkE5AQpCNkI5AQlDOEM/AQhEOEQ/AQdFNkU5AQZHOEc/AQVIOEg/AQRMOEw/AQNNOE0/AQJTB4oDFQKkA44DDY4DaQKUA8EEF8cELgKDA5IDD7kEGQEcvQQVvQSCAQEMVAlqEwLjCGsJ5AIYApgE5QIJiQMVAqUDxAQdxARiAoQDkwMR4QMhAuEB4gMRuAQhAR1nD2ddAvUIZA9kXgLlCFkTXSYC5AhtPm1FApoEbj5uRQKZBMICDdICKAKsCNYCE9YCXwKaCIwBEZABIAKHCKICDbICJwLQB7YCE7YCXgK+B5UBDaoBKQL1Bq4BE64BXQLjBrUBFcUBLQKsBskBG8kBZgKaBnQNiQEnAtEFzQEd4gEyAogF5gEj5gFsAvYE7QElhwJGApsEgwMPgwNrAogEhgMPhgNiAvgD/QIP/QJUAuYD+gIP+gJVAtYDgAMPgANgAsYD9wIP9wJWArYD6gIT6gJxAqYDlQMV3wMjAuIB5AMVtgQjAR7FAhPFAmAC0QjPAhPPAloCvwjKAhPKAmcCrQiOARWOAVoCiAivAhOvAmAC9QeqAhOqAlkC4welAhOlAmYC0QeiAROiAWACrAeYAROYAVkCmgedAROdAWUCiAenAROnAVoC9gbCARvCAWgC0Qa4ARu4AWECvwa9ARu9AW4CrQZ8E3xuAogGgQETgQFgAvYFdxN3WQLkBYYBE4YBWgLSBdUBI9UBdAK/BdoBI9oBcAKtBdABI9ABaQKbBd8BI98BagKJBf8BK/8BeALkBPABK/ABcQLSBPUBK/UBhAECwAT6ASv6AY8BAq4EhAIrhAJyApwElgMX3gMlAuMB6AMXtQQlAR+aAxm6AyMC3wK7AxnQA0ECmgLRAxndAyUC5AHpAxmMBCMCrAGNBBmnBEEBVqgEGbQEJQEgpQMfpQN9AvICtwMftwN4AuECrAMjsAM2AuACyAMfyAN8As4CzQMfzQNsAr0CvgMfvgNwAqwCwwMfwwNuApsC1AMf1AN0AokC1wMf1wNkAvYB2gMf2gNmAuUB9AMf9AN9AtABiQQfiQR4Ar8BhgQfhgRrAq4B+wMj/wM2Aq0BmgQfmgR8ApsBnwQfnwRsAooBkAQfkARwAXmVBB+VBG4BaKQEH6QEYwFXqwQfqwR0AUWuBB+uBGQBMrEEH7EEZgEh</sads:DebugSymbol.Symbol>
   </p1:Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="Receive_3" sap:VirtualizedContainerService.HintSize="255.2,88" />
-      <sap2010:ViewStateData Id="StudentEnrollCourseActivity_2" sap:VirtualizedContainerService.HintSize="200,22.4">
+      <sap2010:ViewStateData Id="Receive_3" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="StudentEnrollCourse_2" sap:VirtualizedContainerService.HintSize="200,22">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="243.2,62.4">
+      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="211,62">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowStep_29">
+      <sap2010:ViewStateData Id="FlowStep_30">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">449,629</av:Point>
-            <av:Size x:Key="ShapeSize">243.2,62.4</av:Size>
+            <av:Point x:Key="ShapeLocation">454.5,609</av:Point>
+            <av:Size x:Key="ShapeSize">211,62</av:Size>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -636,33 +631,33 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">970,349</av:Point>
-            <av:Size x:Key="ShapeSize">200,22.4</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">1170,360.2 1200,360.2 1200,660.2 692.2,660.2</av:PointCollection>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">1170,360 1200,360 1200,640 665.5,640</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CheckWhetherEnrolledCourseActivity_4" sap:VirtualizedContainerService.HintSize="200,22.4">
+      <sap2010:ViewStateData Id="CheckIfEnrolledCourse_4" sap:VirtualizedContainerService.HintSize="200,22">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CheckWhetherCourseFullActivity_2" sap:VirtualizedContainerService.HintSize="200,22.4">
+      <sap2010:ViewStateData Id="CheckIfCourseFull_2" sap:VirtualizedContainerService.HintSize="200,22">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CheckWhetherAppliedActivity_2" sap:VirtualizedContainerService.HintSize="200,22.4">
+      <sap2010:ViewStateData Id="CheckIfAppliedCourse_2" sap:VirtualizedContainerService.HintSize="200,22">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="StudentApplyToEnrollCourseActivity_2" sap:VirtualizedContainerService.HintSize="200,22.4">
+      <sap2010:ViewStateData Id="StudentApplyToEnrollCourse_2" sap:VirtualizedContainerService.HintSize="200,22">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -673,19 +668,19 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">760,459</av:Point>
-            <av:Size x:Key="ShapeSize">200,22.4</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">860,481.4 860,660.2 692.2,660.2</av:PointCollection>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">860,481 860,640 665.5,640</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowDecision_4" sap:VirtualizedContainerService.HintSize="73.6,87.2">
+      <sap2010:ViewStateData Id="FlowDecision_4" sap:VirtualizedContainerService.HintSize="75,87">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <av:Point x:Key="ShapeLocation">532.5,426.5</av:Point>
-            <av:Size x:Key="ShapeSize">73.6,87.2</av:Size>
-            <av:PointCollection x:Key="TrueConnector">532.5,470 509.726906755906,470 509.726906755906,538.069991668674 570,538.069991668674 570,629</av:PointCollection>
-            <av:PointCollection x:Key="FalseConnector">606.1,470.1 636.1,470.1 636.1,470.2 760,470.2</av:PointCollection>
+            <av:Size x:Key="ShapeSize">75,87</av:Size>
+            <av:PointCollection x:Key="TrueConnector">532.5,470 502.5,470 502.5,579 560,579 560,609</av:PointCollection>
+            <av:PointCollection x:Key="FalseConnector">607.5,470 760,470</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -693,19 +688,19 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">470,349</av:Point>
-            <av:Size x:Key="ShapeSize">200,22.4</av:Size>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
             <av:PointCollection x:Key="ConnectorLocation">570,371 570,426.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowDecision_5" sap:VirtualizedContainerService.HintSize="76,87.2">
+      <sap2010:ViewStateData Id="FlowDecision_5" sap:VirtualizedContainerService.HintSize="78,87">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <av:Point x:Key="ShapeLocation">771,316.5</av:Point>
-            <av:Size x:Key="ShapeSize">76,87.2</av:Size>
+            <av:Size x:Key="ShapeSize">78,87</av:Size>
             <av:PointCollection x:Key="TrueConnector">771,360 670,360</av:PointCollection>
-            <av:PointCollection x:Key="FalseConnector">846.2,360.1 876.2,360.1 876.2,360.2 970,360.2</av:PointCollection>
+            <av:PointCollection x:Key="FalseConnector">849,360 970,360</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -713,19 +708,19 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">710,159</av:Point>
-            <av:Size x:Key="ShapeSize">200,22.4</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">810,181.4 810,211.4 808.6,211.4 808.6,316.5</av:PointCollection>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">810,181 810,316.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowDecision_6" sap:VirtualizedContainerService.HintSize="76,87.2">
+      <sap2010:ViewStateData Id="FlowDecision_6" sap:VirtualizedContainerService.HintSize="77,87">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <av:Point x:Key="ShapeLocation">511.5,126.5</av:Point>
-            <av:Size x:Key="ShapeSize">76,87.2</av:Size>
-            <av:PointCollection x:Key="TrueConnector">511.5,170 419,170 419,660 449,660</av:PointCollection>
-            <av:PointCollection x:Key="FalseConnector">587.5,170.1 617.5,170.1 617.5,170.2 710,170.2</av:PointCollection>
+            <av:Size x:Key="ShapeSize">77,87</av:Size>
+            <av:PointCollection x:Key="TrueConnector">511.5,170 424.5,170 424.5,640 454.5,640</av:PointCollection>
+            <av:PointCollection x:Key="FalseConnector">588.5,170 710,170</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -733,20 +728,20 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">450,39</av:Point>
-            <av:Size x:Key="ShapeSize">200,22.4</av:Size>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
             <av:PointCollection x:Key="ConnectorLocation">550,61 550,126.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CheckWhetherCourseExists_2" sap:VirtualizedContainerService.HintSize="200,22.4" />
-      <sap2010:ViewStateData Id="FlowDecision_9" sap:VirtualizedContainerService.HintSize="78.4,87.2">
+      <sap2010:ViewStateData Id="CheckIfCourseExists_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="FlowDecision_9" sap:VirtualizedContainerService.HintSize="79,87">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <av:Point x:Key="ShapeLocation">240.5,376.5</av:Point>
-            <av:Size x:Key="ShapeSize">78.4,87.2</av:Size>
+            <av:Size x:Key="ShapeSize">79,87</av:Size>
             <av:PointCollection x:Key="TrueConnector">240.5,420 210.5,420 210.5,346.5 401,346.5 401,50 450,50</av:PointCollection>
-            <av:PointCollection x:Key="FalseConnector">318.1,420.1 348.1,420.1 348.1,599 569.8,599 569.8,629</av:PointCollection>
+            <av:PointCollection x:Key="FalseConnector">319.5,420 349.5,420 349.5,640 454.5,640</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -754,20 +749,20 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">10,279</av:Point>
-            <av:Size x:Key="ShapeSize">200,22.4</av:Size>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
             <av:PointCollection x:Key="ConnectorLocation">210,290 280,290 280,376.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CheckWhetherStudentExists_2" sap:VirtualizedContainerService.HintSize="200,22.4" />
-      <sap2010:ViewStateData Id="FlowDecision_8" sap:VirtualizedContainerService.HintSize="82.4,87.2">
+      <sap2010:ViewStateData Id="CheckIfStudentExists_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="FlowDecision_8" sap:VirtualizedContainerService.HintSize="83,87">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <av:Point x:Key="ShapeLocation">158.5,146.5</av:Point>
-            <av:Size x:Key="ShapeSize">82.4,87.2</av:Size>
+            <av:Size x:Key="ShapeSize">83,87</av:Size>
             <av:PointCollection x:Key="TrueConnector">158.5,190 110,190 110,279</av:PointCollection>
-            <av:PointCollection x:Key="FalseConnector">240.9,190.1 330,190.1 330,599 569.8,599 569.8,629</av:PointCollection>
+            <av:PointCollection x:Key="FalseConnector">241.5,190 424.5,190 424.5,640 454.5,640</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -775,25 +770,25 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">100,79</av:Point>
-            <av:Size x:Key="ShapeSize">200,22.4</av:Size>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
             <av:PointCollection x:Key="ConnectorLocation">200,101 200,146.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Flowchart_2" sap:VirtualizedContainerService.HintSize="255.2,52.8">
+      <sap2010:ViewStateData Id="Flowchart_2" sap:VirtualizedContainerService.HintSize="1384,737">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
             <av:Point x:Key="ShapeLocation">0,2.5</av:Point>
-            <av:Size x:Key="ShapeSize">60,75.2</av:Size>
+            <av:Size x:Key="ShapeSize">60,75</av:Size>
             <x:Double x:Key="Width">1370</x:Double>
             <x:Double x:Key="Height">701.01953125</x:Double>
             <av:PointCollection x:Key="ConnectorLocation">60,40 200,40 200,79</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="SendReply_2" sap:VirtualizedContainerService.HintSize="255.2,88" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="277.6,433.6">
+      <sap2010:ViewStateData Id="SendReply_2" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="277,435">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -801,7 +796,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Receive_4" sap:VirtualizedContainerService.HintSize="255.2,88" />
-      <sap2010:ViewStateData Id="InstructorAcceptEnrollApplicationActivity_4" sap:VirtualizedContainerService.HintSize="255.2,22.4" />
+      <sap2010:ViewStateData Id="InstructorAcceptEnrollApplication_4" sap:VirtualizedContainerService.HintSize="255.2,22.4" />
       <sap2010:ViewStateData Id="SendReply_3" sap:VirtualizedContainerService.HintSize="255.2,88" />
       <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="277.6,403.2">
         <sap:WorkflowViewStateService.ViewState>
@@ -819,7 +814,7 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="PickBranch_1" sap:VirtualizedContainerService.HintSize="330.4,788" />
       <sap2010:ViewStateData Id="Receive_5" sap:VirtualizedContainerService.HintSize="255.2,88" />
-      <sap2010:ViewStateData Id="InstructorRejectEnrollApplicationActivity_3" sap:VirtualizedContainerService.HintSize="255.2,22.4" />
+      <sap2010:ViewStateData Id="InstructorRejectEnrollApplication_3" sap:VirtualizedContainerService.HintSize="255.2,22.4" />
       <sap2010:ViewStateData Id="SendReply_4" sap:VirtualizedContainerService.HintSize="255.2,88" />
       <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="277.6,403.2">
         <sap:WorkflowViewStateService.ViewState>
@@ -836,14 +831,14 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="PickBranch_2" sap:VirtualizedContainerService.HintSize="330.4,788" />
-      <sap2010:ViewStateData Id="Pick_1" sap:VirtualizedContainerService.HintSize="200,52.8">
+      <sap2010:ViewStateData Id="Pick_1" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TerminateWorkflow_2" sap:VirtualizedContainerService.HintSize="200,22.4">
+      <sap2010:ViewStateData Id="TerminateWorkflow_2" sap:VirtualizedContainerService.HintSize="200,22">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -853,19 +848,19 @@
       <sap2010:ViewStateData Id="FlowStep_12">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">210,589</av:Point>
-            <av:Size x:Key="ShapeSize">200,22.4</av:Size>
+            <av:Point x:Key="ShapeLocation">240,599</av:Point>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowDecision_10" sap:VirtualizedContainerService.HintSize="70.4,87.2">
+      <sap2010:ViewStateData Id="FlowDecision_10" sap:VirtualizedContainerService.HintSize="160,87">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <av:Point x:Key="ShapeLocation">155,446.5</av:Point>
-            <av:Size x:Key="ShapeSize">70.4,87.2</av:Size>
-            <av:PointCollection x:Key="FalseConnector">225,490 310,490 310,589</av:PointCollection>
-            <av:PointCollection x:Key="TrueConnector">155,490 60,490 60,350 90,350</av:PointCollection>
+            <av:Point x:Key="ShapeLocation">110,436.5</av:Point>
+            <av:Size x:Key="ShapeSize">160,87</av:Size>
+            <av:PointCollection x:Key="FalseConnector">270,480 347.5,480 347.5,350 290,350</av:PointCollection>
+            <av:PointCollection x:Key="TrueConnector">110,480 80,480 80,610 240,610</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -873,19 +868,19 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">90,324.5</av:Point>
-            <av:Size x:Key="ShapeSize">200,52.8</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">190,377.3 190,407.3 190.2,407.3 190.2,446.5</av:PointCollection>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">190,375.5 190,436.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowDecision_7" sap:VirtualizedContainerService.HintSize="160,87.2">
+      <sap2010:ViewStateData Id="FlowDecision_7" sap:VirtualizedContainerService.HintSize="160,87">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <av:Point x:Key="ShapeLocation">240,206.5</av:Point>
-            <av:Size x:Key="ShapeSize">160,87.2</av:Size>
+            <av:Size x:Key="ShapeSize">160,87</av:Size>
             <av:PointCollection x:Key="TrueConnector">240,250 190,250 190,324.5</av:PointCollection>
-            <av:PointCollection x:Key="FalseConnector">400,250 430,250 430,600 410,600</av:PointCollection>
+            <av:PointCollection x:Key="FalseConnector">400,250 470,250 470,610 440,610</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -893,23 +888,23 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">220,104.5</av:Point>
-            <av:Size x:Key="ShapeSize">200,52.8</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">320,157.3 320,206.5</av:PointCollection>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">320,155.5 320,206.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="614.4,665.6">
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="614,665">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
             <av:Point x:Key="ShapeLocation">290,2.5</av:Point>
-            <av:Size x:Key="ShapeSize">60,75.2</av:Size>
+            <av:Size x:Key="ShapeSize">60,75</av:Size>
             <av:PointCollection x:Key="ConnectorLocation">320,77.5 320,104.5</av:PointCollection>
             <x:Double x:Key="Height">628.92000000000007</x:Double>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="WorkflowService_1" sap:VirtualizedContainerService.HintSize="644,735.2" />
+      <sap2010:ViewStateData Id="WorkflowService_1" sap:VirtualizedContainerService.HintSize="644,735" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </WorkflowService>

@@ -1,0 +1,120 @@
+﻿@model ActiveLearning.DB.Content
+@using ActiveLearning.Common;
+@{
+    ViewBag.Title = "Revise Content";
+}
+
+<h2>Revise Content</h2>
+
+@Html.Partial("_MessageBoxPartial")
+
+<div class="container modal-footer">
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog" style="margin-top:10%">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title small">Choose File</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("ReviseContent", "instructor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @*@Html.AntiForgeryToken()*@
+                        <fieldset>
+                            @*<legend>Upload a file</legend>*@
+
+                            <div class="editor-field panel-info" style="margin-left:25%">
+                                @Html.TextBox("file", "", new { type = "file", @class = "btn btn-info btn-group-sm" })
+                                <label id="error" class="alert-info" style="margin-right:50%"></label>
+                            </div>
+
+                            <br />
+                            <input hidden="hidden" name="CourseSid" value="@ViewBag.CourseSid" />
+                            <input hidden="hidden" name="ContentSid" value="@ViewBag.ContentSid" />
+                            <div class="editor-field">
+                                <input type="submit" name="upload" value="Upload File" class="btn btn-success has-spinner" style="margin-right:25%;width:100%" onclick="return checkFileSelected()" />
+                            </div>
+
+                        </fieldset>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@if (Model != null)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Sid)
+
+            <div class="form-group" style="margin-left:25%">
+                <label class="control-label col-md-2">
+                    Course Name
+                </label>
+                <div class="col-md-10">
+                    <label class="control-label">@Html.DisplayFor(model => model.Course.CourseName)</label>
+                </div>
+            </div>
+            <div class="form-group" style="margin-left:25%">
+                <label class="control-label col-md-2">
+                    File Name
+                </label>
+                <div class="col-md-10">
+                    <label class="control-label">@Html.DisplayFor(model => model.OriginalFileName)</label>
+                </div>
+            </div>
+            <div class="form-group" style="margin-left:25%">
+                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @if (Model.Type.Equals(Constants.Content_Type_Video, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        <label class="control-label">Video</label>
+                    }
+                    else if (Model.Type.Equals(Constants.Content_Type_File, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        <label class="control-label">File</label>
+                    }
+                </div>
+            </div>
+            <div class="form-group" style="margin-left:25%">
+                @Html.LabelFor(model => model.CreateDT, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <label class="control-label">@Html.DisplayFor(model => model.CreateDT)</label>
+                </div>
+            </div>
+            <div class="form-group" style="margin-left:25%">
+                @Html.LabelFor(model => model.UpdateDT, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <label class="control-label">@Html.DisplayFor(model => model.UpdateDT)</label>
+                </div>
+            </div>
+            <div class="form-group" style="margin-left:25%">
+                @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <label class="control-label">@Html.DisplayFor(model => model.Remark)</label>
+                </div>
+            </div>
+            <div class="form-group" style="margin-left:25%">
+                <div class="col-md-offset-2 col-md-10">
+                    <!-- Trigger the modal with a button -->
+                    <button type="button" class="btn btn-info btn-group-sm" data-toggle="modal" data-target="#myModal">Reupload Content</button>
+                </div>
+            </div>
+        </div>
+    }
+}

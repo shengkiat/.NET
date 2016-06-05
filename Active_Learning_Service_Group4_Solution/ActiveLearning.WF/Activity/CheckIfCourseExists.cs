@@ -8,7 +8,7 @@ using ActiveLearning.Business.Implementation;
 namespace ActiveLearning.WF.Activity
 {
 
-    public sealed class CheckWhetherCourseExists : CodeActivity
+    public sealed class CheckIfCourseExists : CodeActivity
     {
         // Define an activity input argument of type string
         public InArgument<int> CourseSid { get; set; }

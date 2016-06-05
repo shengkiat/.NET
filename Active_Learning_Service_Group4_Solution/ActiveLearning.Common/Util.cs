@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace ActiveLearning.Common
 {
@@ -167,7 +168,6 @@ namespace ActiveLearning.Common
             string[] settings = System.Web.Configuration.WebConfigurationManager.AppSettings.GetValues(key);
             return settings == null || settings.Length == 0 ? defaultFolder : settings[0];
         }
-
         public static string GetAppSetting(string key)
         {
             string[] settings = System.Web.Configuration.WebConfigurationManager.AppSettings.GetValues(key);
@@ -198,6 +198,22 @@ namespace ActiveLearning.Common
                 {
                     return defaultChatHistoryCount;
                 }
+            }
+        }
+        #endregion
+
+        #region Stream
+        public static byte[] GetBytesFromStream(Stream inputStream)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = inputStream.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
             }
         }
         #endregion

@@ -97,7 +97,7 @@ namespace ActiveLearning.Web.Controllers
                 catch (Exception ex)
                 {
                     ExceptionLog(ex);
-                    SetTempDataError(ex.Message);
+                    SetTempDataError(Common.Constants.OperationFailedDuringCallingValue("course enrollment workflow service"));
                     return RedirectToAction("NewCourseList");
                 }
                 if(!enrolledCourseSuccesfully && !appliedCourseSuccesfully)

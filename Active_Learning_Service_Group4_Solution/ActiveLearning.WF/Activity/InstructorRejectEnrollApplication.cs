@@ -6,7 +6,7 @@ using ActiveLearning.Common;
 namespace ActiveLearning.WF.Activity
 {
 
-    public sealed class InstructorRejectEnrollApplicationActivity : CodeActivity
+    public sealed class InstructorRejectEnrollApplication : CodeActivity
     {
         // Define an activity input argument of type string
         public InArgument<int> EnrollApplicationSid { get; set; }

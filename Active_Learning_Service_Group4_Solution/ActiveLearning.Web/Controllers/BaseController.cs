@@ -117,16 +117,16 @@ namespace ActiveLearning.Web.Controllers
             {
                 case ActiveLearning.Common.Constants.User_Role_Student_Code:
                     return Redirect("~/student");
-                    break;
+                    //break;
                 case ActiveLearning.Common.Constants.User_Role_Instructor_Code:
                     return Redirect("~/instructor");
-                    break;
+                    //break;
                 case ActiveLearning.Common.Constants.User_Role_Admin_Code:
                     return Redirect("~/admin");
-                    break;
+                    //break;
                 default:
                     return RedirectToLogin();
-                    break;
+                    //break;
             }
         }
         public ActionResult RedirectToPreviousURL()

@@ -1,0 +1,723 @@
+﻿<WorkflowService mc:Ignorable="sap sap2010 sads" p1:TextExpression.Namespaces="{x:Reference __ReferenceID16}" p1:TextExpression.References="{x:Reference __ReferenceID17}" ConfigurationName="UploadCourseMaterialFlowChartWF" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WorkflowService_1" Name="UploadCourseMaterialFlowChartWF"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
+ xmlns:ad="clr-namespace:ActiveLearning.DB;assembly=ActiveLearning.DB"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:awa="clr-namespace:ActiveLearning.WF.Activity;assembly=ActiveLearning.WF"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:p="http://tempuri.org/"
+ xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ssx="clr-namespace:System.ServiceModel.XamlIntegration;assembly=System.ServiceModel"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <p1:Flowchart DisplayName="Main" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <p1:TextExpression.Namespaces>
+      <sco:Collection x:TypeArguments="x:String" x:Name="__ReferenceID16">
+        <x:String>System</x:String>
+        <x:String>System.Collections.Generic</x:String>
+        <x:String>System.Data</x:String>
+        <x:String>System.Linq</x:String>
+        <x:String>System.Text</x:String>
+        <x:String>System.ServiceModel.Activities</x:String>
+        <x:String>System.Web</x:String>
+        <x:String>System.IO</x:String>
+        <x:String>ActiveLearning.DB</x:String>
+      </sco:Collection>
+    </p1:TextExpression.Namespaces>
+    <p1:TextExpression.References>
+      <sco:Collection x:TypeArguments="p1:AssemblyReference" x:Name="__ReferenceID17">
+        <p1:AssemblyReference>EntityFramework</p1:AssemblyReference>
+        <p1:AssemblyReference>EntityFramework.SqlServer</p1:AssemblyReference>
+        <p1:AssemblyReference>Microsoft.CSharp</p1:AssemblyReference>
+        <p1:AssemblyReference>Microsoft.Web.Infrastructure</p1:AssemblyReference>
+        <p1:AssemblyReference>PresentationCore</p1:AssemblyReference>
+        <p1:AssemblyReference>PresentationFramework</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Activities.Presentation</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ComponentModel.DataAnnotations</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Drawing</p1:AssemblyReference>
+        <p1:AssemblyReference>System</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Activities</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Core</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Data</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Runtime.Serialization</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel.Activities</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel.Channels</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.Mvc</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.Razor</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.WebPages</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.WebPages.Razor</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xaml</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xml</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xml.Linq</p1:AssemblyReference>
+        <p1:AssemblyReference>WindowsBase</p1:AssemblyReference>
+        <p1:AssemblyReference>ActiveLearning.Business</p1:AssemblyReference>
+        <p1:AssemblyReference>ActiveLearning.Common</p1:AssemblyReference>
+        <p1:AssemblyReference>ActiveLearning.DB</p1:AssemblyReference>
+        <p1:AssemblyReference>mscorlib</p1:AssemblyReference>
+        <p1:AssemblyReference>ActiveLearning.WF</p1:AssemblyReference>
+      </sco:Collection>
+    </p1:TextExpression.References>
+    <p1:Flowchart.Variables>
+      <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="ContentDataSavedSuccessfully" />
+      <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="CommentedSuccessfully" />
+      <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="AcceptedSuccessfully" />
+      <p1:Variable x:TypeArguments="x:Int32" Name="InstructorSid" />
+      <p1:Variable x:TypeArguments="x:String" Name="Message" />
+      <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="IfInstructorExists" />
+      <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="IfFileExists" />
+      <p1:Variable x:TypeArguments="x:Int32" Name="CourseSid" />
+      <p1:Variable x:TypeArguments="ad:Content" Name="Content" />
+      <p1:Variable x:TypeArguments="x:Int32" Name="AdminSid" />
+      <p1:Variable x:TypeArguments="x:String" Name="Remark" />
+      <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="RevisedSuccessfully" />
+      <x:Reference>__ReferenceID14</x:Reference>
+      <p1:Variable x:TypeArguments="x:String" Name="ContentStatus" />
+      <p1:Variable x:TypeArguments="CorrelationHandle" Name="ContentHandle" />
+      <p1:Variable x:TypeArguments="x:Int32" Name="ContentSid" />
+    </p1:Flowchart.Variables>
+    <p1:Flowchart.StartNode>
+      <x:Reference>__ReferenceID15</x:Reference>
+    </p1:Flowchart.StartNode>
+    <p1:FlowStep x:Name="__ReferenceID15" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+      <p1:Sequence DisplayName="Instructor Save Content Data" sap2010:WorkflowViewState.IdRef="Sequence_1">
+        <Receive x:Name="__ReferenceID4" CanCreateInstance="True" sap2010:WorkflowViewState.IdRef="Receive_1" OperationName="InstructorSaveContentData" ServiceContractName="p:IService">
+          <Receive.CorrelationInitializers>
+            <RequestReplyCorrelationInitializer>
+              <RequestReplyCorrelationInitializer.CorrelationHandle>
+                <p1:InArgument x:TypeArguments="CorrelationHandle">
+                  <mca:CSharpValue x:TypeArguments="CorrelationHandle">__handle1</mca:CSharpValue>
+                </p1:InArgument>
+              </RequestReplyCorrelationInitializer.CorrelationHandle>
+            </RequestReplyCorrelationInitializer>
+          </Receive.CorrelationInitializers>
+          <ReceiveParametersContent>
+            <p1:OutArgument x:TypeArguments="x:Int32" x:Key="InstructorSid">
+              <mca:CSharpReference x:TypeArguments="x:Int32">InstructorSid</mca:CSharpReference>
+            </p1:OutArgument>
+            <p1:OutArgument x:TypeArguments="ad:Content" x:Key="Content">
+              <mca:CSharpReference x:TypeArguments="ad:Content">Content</mca:CSharpReference>
+            </p1:OutArgument>
+            <p1:OutArgument x:TypeArguments="x:Int32" x:Key="CourseSid">
+              <mca:CSharpReference x:TypeArguments="x:Int32">CourseSid</mca:CSharpReference>
+            </p1:OutArgument>
+          </ReceiveParametersContent>
+        </Receive>
+        <p1:Flowchart sap2010:WorkflowViewState.IdRef="Flowchart_2" StartNode="{x:Reference __ReferenceID3}">
+          <p1:FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_6">
+            <p1:WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_1">
+              <p1:InArgument x:TypeArguments="x:String">
+                <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+              </p1:InArgument>
+            </p1:WriteLine>
+          </p1:FlowStep>
+          <p1:FlowDecision x:Name="__ReferenceID1" DisplayName="Instructor Exists ?" sap2010:WorkflowViewState.IdRef="FlowDecision_3">
+            <p1:FlowDecision.Condition>
+              <mca:CSharpValue x:TypeArguments="x:Boolean">IfInstructorExists</mca:CSharpValue>
+            </p1:FlowDecision.Condition>
+            <p1:FlowDecision.True>
+              <p1:FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_17">
+                <awa:InstructorSaveContentData sap2010:WorkflowViewState.IdRef="InstructorSaveContentData_1">
+                  <awa:InstructorSaveContentData.Content>
+                    <p1:InArgument x:TypeArguments="ad:Content">
+                      <mca:CSharpValue x:TypeArguments="ad:Content">Content</mca:CSharpValue>
+                    </p1:InArgument>
+                  </awa:InstructorSaveContentData.Content>
+                  <awa:InstructorSaveContentData.ContentDataSavedSuccessfully>
+                    <p1:OutArgument x:TypeArguments="x:Boolean">
+                      <mca:CSharpReference x:TypeArguments="x:Boolean">ContentDataSavedSuccessfully</mca:CSharpReference>
+                    </p1:OutArgument>
+                  </awa:InstructorSaveContentData.ContentDataSavedSuccessfully>
+                  <awa:InstructorSaveContentData.ContentSid>
+                    <p1:OutArgument x:TypeArguments="x:Int32">
+                      <mca:CSharpReference x:TypeArguments="x:Int32">ContentSid</mca:CSharpReference>
+                    </p1:OutArgument>
+                  </awa:InstructorSaveContentData.ContentSid>
+                  <awa:InstructorSaveContentData.ContentStatus>
+                    <p1:OutArgument x:TypeArguments="x:String">
+                      <mca:CSharpReference x:TypeArguments="x:String">ContentStatus</mca:CSharpReference>
+                    </p1:OutArgument>
+                  </awa:InstructorSaveContentData.ContentStatus>
+                  <awa:InstructorSaveContentData.CourseSid>
+                    <p1:InArgument x:TypeArguments="x:Int32">
+                      <mca:CSharpValue x:TypeArguments="x:Int32">CourseSid</mca:CSharpValue>
+                    </p1:InArgument>
+                  </awa:InstructorSaveContentData.CourseSid>
+                  <awa:InstructorSaveContentData.Message>
+                    <p1:OutArgument x:TypeArguments="x:String">
+                      <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
+                    </p1:OutArgument>
+                  </awa:InstructorSaveContentData.Message>
+                </awa:InstructorSaveContentData>
+                <p1:FlowStep.Next>
+                  <x:Reference>__ReferenceID0</x:Reference>
+                </p1:FlowStep.Next>
+              </p1:FlowStep>
+            </p1:FlowDecision.True>
+            <p1:FlowDecision.False>
+              <x:Reference>__ReferenceID0</x:Reference>
+            </p1:FlowDecision.False>
+          </p1:FlowDecision>
+          <p1:FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_12">
+            <awa:CheckIfInstructorExists sap2010:WorkflowViewState.IdRef="CheckIfInstructorExists_2">
+              <awa:CheckIfInstructorExists.IfInstructorExists>
+                <p1:OutArgument x:TypeArguments="x:Boolean">
+                  <mca:CSharpReference x:TypeArguments="x:Boolean">IfInstructorExists</mca:CSharpReference>
+                </p1:OutArgument>
+              </awa:CheckIfInstructorExists.IfInstructorExists>
+              <awa:CheckIfInstructorExists.InstructorSid>
+                <p1:InArgument x:TypeArguments="x:Int32">
+                  <mca:CSharpValue x:TypeArguments="x:Int32">InstructorSid</mca:CSharpValue>
+                </p1:InArgument>
+              </awa:CheckIfInstructorExists.InstructorSid>
+              <awa:CheckIfInstructorExists.Message>
+                <p1:OutArgument x:TypeArguments="x:String">
+                  <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
+                </p1:OutArgument>
+              </awa:CheckIfInstructorExists.Message>
+            </awa:CheckIfInstructorExists>
+            <p1:FlowStep.Next>
+              <x:Reference>__ReferenceID1</x:Reference>
+            </p1:FlowStep.Next>
+          </p1:FlowStep>
+          <x:Reference>__ReferenceID2</x:Reference>
+        </p1:Flowchart>
+        <SendReply Request="{x:Reference __ReferenceID4}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_1">
+          <SendReply.CorrelationInitializers>
+            <QueryCorrelationInitializer>
+              <QueryCorrelationInitializer.CorrelationHandle>
+                <p1:InArgument x:TypeArguments="CorrelationHandle">
+                  <mca:CSharpValue x:TypeArguments="CorrelationHandle">ContentHandle</mca:CSharpValue>
+                </p1:InArgument>
+              </QueryCorrelationInitializer.CorrelationHandle>
+              <XPathMessageQuery x:Key="key1">
+                <XPathMessageQuery.Namespaces>
+                  <ssx:XPathMessageContextMarkup>
+                    <x:String x:Key="xgSc">http://tempuri.org/</x:String>
+                  </ssx:XPathMessageContextMarkup>
+                </XPathMessageQuery.Namespaces>sm:body()/xgSc:InstructorSaveContentDataResponse/xgSc:ContentSid</XPathMessageQuery>
+            </QueryCorrelationInitializer>
+          </SendReply.CorrelationInitializers>
+          <SendParametersContent>
+            <p1:InArgument x:TypeArguments="x:String" x:Key="Message">
+              <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+            </p1:InArgument>
+            <p1:InArgument x:TypeArguments="x:Int32" x:Key="ContentSid">
+              <mca:CSharpValue x:TypeArguments="x:Int32">ContentSid</mca:CSharpValue>
+            </p1:InArgument>
+            <p1:InArgument x:TypeArguments="x:Boolean" x:Key="ContentDataSavedSuccessfully">
+              <mca:CSharpValue x:TypeArguments="x:Boolean">ContentDataSavedSuccessfully</mca:CSharpValue>
+            </p1:InArgument>
+            <p1:InArgument x:TypeArguments="x:String" x:Key="ContentStatus">
+              <mca:CSharpValue x:TypeArguments="x:String">ContentStatus</mca:CSharpValue>
+            </p1:InArgument>
+          </SendParametersContent>
+        </SendReply>
+      </p1:Sequence>
+      <p1:FlowStep.Next>
+        <p1:FlowDecision x:Name="__ReferenceID10" DisplayName="Content Saved Successfully?" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+          <p1:FlowDecision.Condition>
+            <mca:CSharpValue x:TypeArguments="x:Boolean">ContentDataSavedSuccessfully</mca:CSharpValue>
+          </p1:FlowDecision.Condition>
+          <p1:FlowDecision.True>
+            <p1:FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_3">
+              <p1:Sequence DisplayName="Accept or Comment" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <p1:Pick sap2010:WorkflowViewState.IdRef="Pick_1">
+                  <p1:PickBranch DisplayName="Accept" sap2010:WorkflowViewState.IdRef="PickBranch_1">
+                    <p1:PickBranch.Trigger>
+                      <p1:Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+                        <p1:Sequence.Variables>
+                          <p1:Variable x:TypeArguments="CorrelationHandle" Name="__handle2" />
+                        </p1:Sequence.Variables>
+                        <Receive x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="Receive_2" OperationName="AdminAcceptContent" ServiceContractName="p:IService">
+                          <Receive.CorrelatesOn>
+                            <XPathMessageQuery x:Key="key1">
+                              <XPathMessageQuery.Namespaces>
+                                <ssx:XPathMessageContextMarkup>
+                                  <x:String x:Key="xgSc">http://tempuri.org/</x:String>
+                                </ssx:XPathMessageContextMarkup>
+                              </XPathMessageQuery.Namespaces>sm:body()/xgSc:AdminAcceptContent/xgSc:ContentSid</XPathMessageQuery>
+                          </Receive.CorrelatesOn>
+                          <Receive.CorrelatesWith>
+                            <p1:InArgument x:TypeArguments="CorrelationHandle">
+                              <mca:CSharpValue x:TypeArguments="CorrelationHandle">ContentHandle</mca:CSharpValue>
+                            </p1:InArgument>
+                          </Receive.CorrelatesWith>
+                          <Receive.CorrelationInitializers>
+                            <RequestReplyCorrelationInitializer>
+                              <RequestReplyCorrelationInitializer.CorrelationHandle>
+                                <p1:InArgument x:TypeArguments="CorrelationHandle">
+                                  <mca:CSharpValue x:TypeArguments="CorrelationHandle">__handle1</mca:CSharpValue>
+                                </p1:InArgument>
+                              </RequestReplyCorrelationInitializer.CorrelationHandle>
+                            </RequestReplyCorrelationInitializer>
+                          </Receive.CorrelationInitializers>
+                          <ReceiveParametersContent>
+                            <p1:OutArgument x:TypeArguments="x:Int32" x:Key="ContentSid">
+                              <mca:CSharpReference x:TypeArguments="x:Int32">ContentSid</mca:CSharpReference>
+                            </p1:OutArgument>
+                          </ReceiveParametersContent>
+                        </Receive>
+                        <awa:AdminAcceptContent sap2010:WorkflowViewState.IdRef="AdminAcceptContent_1">
+                          <awa:AdminAcceptContent.AcceptedSuccessfully>
+                            <p1:OutArgument x:TypeArguments="x:Boolean">
+                              <mca:CSharpReference x:TypeArguments="x:Boolean">AcceptedSuccessfully</mca:CSharpReference>
+                            </p1:OutArgument>
+                          </awa:AdminAcceptContent.AcceptedSuccessfully>
+                          <awa:AdminAcceptContent.ContentSid>
+                            <p1:InArgument x:TypeArguments="x:Int32">
+                              <mca:CSharpValue x:TypeArguments="x:Int32">ContentSid</mca:CSharpValue>
+                            </p1:InArgument>
+                          </awa:AdminAcceptContent.ContentSid>
+                          <awa:AdminAcceptContent.ContentStatus>
+                            <p1:OutArgument x:TypeArguments="x:String">
+                              <mca:CSharpReference x:TypeArguments="x:String">ContentStatus</mca:CSharpReference>
+                            </p1:OutArgument>
+                          </awa:AdminAcceptContent.ContentStatus>
+                          <awa:AdminAcceptContent.Message>
+                            <p1:OutArgument x:TypeArguments="x:String">
+                              <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
+                            </p1:OutArgument>
+                          </awa:AdminAcceptContent.Message>
+                        </awa:AdminAcceptContent>
+                        <SendReply Request="{x:Reference __ReferenceID5}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_2">
+                          <SendParametersContent>
+                            <p1:InArgument x:TypeArguments="x:Boolean" x:Key="AcceptedSuccessfully">
+                              <mca:CSharpValue x:TypeArguments="x:Boolean">AcceptedSuccessfully</mca:CSharpValue>
+                            </p1:InArgument>
+                            <p1:InArgument x:TypeArguments="x:String" x:Key="Message">
+                              <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+                            </p1:InArgument>
+                            <p1:InArgument x:TypeArguments="x:String" x:Key="ContentStatus">
+                              <mca:CSharpValue x:TypeArguments="x:String">ContentStatus</mca:CSharpValue>
+                            </p1:InArgument>
+                          </SendParametersContent>
+                        </SendReply>
+                      </p1:Sequence>
+                    </p1:PickBranch.Trigger>
+                  </p1:PickBranch>
+                  <p1:PickBranch DisplayName="Comment" sap2010:WorkflowViewState.IdRef="PickBranch_2">
+                    <p1:PickBranch.Trigger>
+                      <p1:Sequence sap2010:WorkflowViewState.IdRef="Sequence_5">
+                        <p1:Sequence.Variables>
+                          <p1:Variable x:TypeArguments="CorrelationHandle" Name="__handle2" />
+                        </p1:Sequence.Variables>
+                        <Receive x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="Receive_3" OperationName="AdminCommentContent" ServiceContractName="p:IService">
+                          <Receive.CorrelatesOn>
+                            <XPathMessageQuery x:Key="key1">
+                              <XPathMessageQuery.Namespaces>
+                                <ssx:XPathMessageContextMarkup>
+                                  <x:String x:Key="xgSc">http://tempuri.org/</x:String>
+                                </ssx:XPathMessageContextMarkup>
+                              </XPathMessageQuery.Namespaces>sm:body()/xgSc:AdminCommentContent/xgSc:ContentSid</XPathMessageQuery>
+                          </Receive.CorrelatesOn>
+                          <Receive.CorrelatesWith>
+                            <p1:InArgument x:TypeArguments="CorrelationHandle">
+                              <mca:CSharpValue x:TypeArguments="CorrelationHandle">ContentHandle</mca:CSharpValue>
+                            </p1:InArgument>
+                          </Receive.CorrelatesWith>
+                          <Receive.CorrelationInitializers>
+                            <RequestReplyCorrelationInitializer>
+                              <RequestReplyCorrelationInitializer.CorrelationHandle>
+                                <p1:InArgument x:TypeArguments="CorrelationHandle">
+                                  <mca:CSharpValue x:TypeArguments="CorrelationHandle">__handle1</mca:CSharpValue>
+                                </p1:InArgument>
+                              </RequestReplyCorrelationInitializer.CorrelationHandle>
+                            </RequestReplyCorrelationInitializer>
+                          </Receive.CorrelationInitializers>
+                          <ReceiveParametersContent>
+                            <p1:OutArgument x:TypeArguments="x:Int32" x:Key="ContentSid">
+                              <mca:CSharpReference x:TypeArguments="x:Int32">ContentSid</mca:CSharpReference>
+                            </p1:OutArgument>
+                            <p1:OutArgument x:TypeArguments="x:String" x:Key="Remark">
+                              <mca:CSharpReference x:TypeArguments="x:String">Remark</mca:CSharpReference>
+                            </p1:OutArgument>
+                          </ReceiveParametersContent>
+                        </Receive>
+                        <awa:AdminCommentContent sap2010:WorkflowViewState.IdRef="AdminCommentContent_1">
+                          <awa:AdminCommentContent.CommentedSuccessfully>
+                            <p1:OutArgument x:TypeArguments="x:Boolean">
+                              <mca:CSharpReference x:TypeArguments="x:Boolean">CommentedSuccessfully</mca:CSharpReference>
+                            </p1:OutArgument>
+                          </awa:AdminCommentContent.CommentedSuccessfully>
+                          <awa:AdminCommentContent.ContentSid>
+                            <p1:InArgument x:TypeArguments="x:Int32">
+                              <mca:CSharpValue x:TypeArguments="x:Int32">ContentSid</mca:CSharpValue>
+                            </p1:InArgument>
+                          </awa:AdminCommentContent.ContentSid>
+                          <awa:AdminCommentContent.ContentStatus>
+                            <p1:OutArgument x:TypeArguments="x:String">
+                              <mca:CSharpReference x:TypeArguments="x:String">ContentStatus</mca:CSharpReference>
+                            </p1:OutArgument>
+                          </awa:AdminCommentContent.ContentStatus>
+                          <awa:AdminCommentContent.Message>
+                            <p1:OutArgument x:TypeArguments="x:String">
+                              <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
+                            </p1:OutArgument>
+                          </awa:AdminCommentContent.Message>
+                          <awa:AdminCommentContent.Remark>
+                            <p1:InArgument x:TypeArguments="x:String">
+                              <mca:CSharpValue x:TypeArguments="x:String">Remark</mca:CSharpValue>
+                            </p1:InArgument>
+                          </awa:AdminCommentContent.Remark>
+                        </awa:AdminCommentContent>
+                        <SendReply Request="{x:Reference __ReferenceID6}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_3">
+                          <SendParametersContent>
+                            <p1:InArgument x:TypeArguments="x:Boolean" x:Key="CommentedSuccessfully">
+                              <mca:CSharpValue x:TypeArguments="x:Boolean">CommentedSuccessfully</mca:CSharpValue>
+                            </p1:InArgument>
+                            <p1:InArgument x:TypeArguments="x:String" x:Key="Message">
+                              <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+                            </p1:InArgument>
+                            <p1:InArgument x:TypeArguments="x:String" x:Key="ContentStatus">
+                              <mca:CSharpValue x:TypeArguments="x:String">ContentStatus</mca:CSharpValue>
+                            </p1:InArgument>
+                          </SendParametersContent>
+                        </SendReply>
+                      </p1:Sequence>
+                    </p1:PickBranch.Trigger>
+                  </p1:PickBranch>
+                </p1:Pick>
+              </p1:Sequence>
+              <p1:FlowStep.Next>
+                <p1:FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID13" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_1">
+                  <p1:FlowSwitch.Expression>
+                    <mca:CSharpValue x:TypeArguments="x:String">ContentStatus</mca:CSharpValue>
+                  </p1:FlowSwitch.Expression>
+                  <p1:FlowStep x:Key="&quot;Accepted&quot;" x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+                    <p1:TerminateWorkflow sap2010:WorkflowViewState.IdRef="TerminateWorkflow_1">
+                      <p1:TerminateWorkflow.Reason>
+                        <p1:InArgument x:TypeArguments="x:String">
+                          <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+                        </p1:InArgument>
+                      </p1:TerminateWorkflow.Reason>
+                    </p1:TerminateWorkflow>
+                  </p1:FlowStep>
+                  <p1:FlowStep x:Key="&quot;Commented&quot;" x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_4">
+                    <p1:Sequence DisplayName="Revise Content" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                      <Receive x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="Receive_4" OperationName="InstructorReviseContentData" ServiceContractName="p:IService">
+                        <Receive.CorrelatesOn>
+                          <XPathMessageQuery x:Key="key1">
+                            <XPathMessageQuery.Namespaces>
+                              <ssx:XPathMessageContextMarkup>
+                                <x:String x:Key="xgSc">http://tempuri.org/</x:String>
+                              </ssx:XPathMessageContextMarkup>
+                            </XPathMessageQuery.Namespaces>sm:body()/xgSc:InstructorReviseContentData/xgSc:ContentSid</XPathMessageQuery>
+                        </Receive.CorrelatesOn>
+                        <Receive.CorrelatesWith>
+                          <p1:InArgument x:TypeArguments="CorrelationHandle">
+                            <mca:CSharpValue x:TypeArguments="CorrelationHandle">ContentHandle</mca:CSharpValue>
+                          </p1:InArgument>
+                        </Receive.CorrelatesWith>
+                        <Receive.CorrelationInitializers>
+                          <RequestReplyCorrelationInitializer>
+                            <RequestReplyCorrelationInitializer.CorrelationHandle>
+                              <p1:InArgument x:TypeArguments="CorrelationHandle">
+                                <p1:VariableValue x:TypeArguments="CorrelationHandle">
+                                  <p1:VariableValue.Variable>
+                                    <p1:Variable x:TypeArguments="CorrelationHandle" x:Name="__ReferenceID14" Name="__handle1" />
+                                  </p1:VariableValue.Variable>
+                                </p1:VariableValue>
+                              </p1:InArgument>
+                            </RequestReplyCorrelationInitializer.CorrelationHandle>
+                          </RequestReplyCorrelationInitializer>
+                        </Receive.CorrelationInitializers>
+                        <ReceiveParametersContent>
+                          <p1:OutArgument x:TypeArguments="ad:Content" x:Key="Content">
+                            <mca:CSharpReference x:TypeArguments="ad:Content">Content</mca:CSharpReference>
+                          </p1:OutArgument>
+                          <p1:OutArgument x:TypeArguments="x:String" x:Key="Message">
+                            <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
+                          </p1:OutArgument>
+                          <p1:OutArgument x:TypeArguments="x:Int32" x:Key="ContentSid">
+                            <mca:CSharpReference x:TypeArguments="x:Int32">ContentSid</mca:CSharpReference>
+                          </p1:OutArgument>
+                        </ReceiveParametersContent>
+                      </Receive>
+                      <awa:InstructorReviseContentData sap2010:WorkflowViewState.IdRef="InstructorReviseContentData_1">
+                        <awa:InstructorReviseContentData.Content>
+                          <p1:InArgument x:TypeArguments="ad:Content">
+                            <mca:CSharpValue x:TypeArguments="ad:Content">Content</mca:CSharpValue>
+                          </p1:InArgument>
+                        </awa:InstructorReviseContentData.Content>
+                        <awa:InstructorReviseContentData.ContentStatus>
+                          <p1:OutArgument x:TypeArguments="x:String">
+                            <mca:CSharpReference x:TypeArguments="x:String">ContentStatus</mca:CSharpReference>
+                          </p1:OutArgument>
+                        </awa:InstructorReviseContentData.ContentStatus>
+                        <awa:InstructorReviseContentData.Message>
+                          <p1:OutArgument x:TypeArguments="x:String">
+                            <mca:CSharpReference x:TypeArguments="x:String">Message</mca:CSharpReference>
+                          </p1:OutArgument>
+                        </awa:InstructorReviseContentData.Message>
+                        <awa:InstructorReviseContentData.RevisedSuccessfully>
+                          <p1:OutArgument x:TypeArguments="x:Boolean">
+                            <mca:CSharpReference x:TypeArguments="x:Boolean">RevisedSuccessfully</mca:CSharpReference>
+                          </p1:OutArgument>
+                        </awa:InstructorReviseContentData.RevisedSuccessfully>
+                      </awa:InstructorReviseContentData>
+                      <SendReply Request="{x:Reference __ReferenceID7}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_4">
+                        <SendParametersContent>
+                          <p1:InArgument x:TypeArguments="x:Boolean" x:Key="RevisedSuccessfully">
+                            <mca:CSharpValue x:TypeArguments="x:Boolean">RevisedSuccessfully</mca:CSharpValue>
+                          </p1:InArgument>
+                          <p1:InArgument x:TypeArguments="x:String" x:Key="Message">
+                            <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
+                          </p1:InArgument>
+                          <p1:InArgument x:TypeArguments="x:String" x:Key="ContentStatus">
+                            <mca:CSharpValue x:TypeArguments="x:String">ContentStatus</mca:CSharpValue>
+                          </p1:InArgument>
+                        </SendParametersContent>
+                      </SendReply>
+                    </p1:Sequence>
+                    <p1:FlowStep.Next>
+                      <p1:FlowDecision x:Name="__ReferenceID12" DisplayName="Content Revised Successfully?" sap2010:WorkflowViewState.IdRef="FlowDecision_7">
+                        <p1:FlowDecision.Condition>
+                          <mca:CSharpValue x:TypeArguments="x:Boolean">RevisedSuccessfully</mca:CSharpValue>
+                        </p1:FlowDecision.Condition>
+                        <p1:FlowDecision.True>
+                          <x:Reference>__ReferenceID8</x:Reference>
+                        </p1:FlowDecision.True>
+                        <p1:FlowDecision.False>
+                          <x:Reference>__ReferenceID9</x:Reference>
+                        </p1:FlowDecision.False>
+                      </p1:FlowDecision>
+                    </p1:FlowStep.Next>
+                  </p1:FlowStep>
+                  <x:Reference>__ReferenceID8<x:Key>"Pending"</x:Key></x:Reference>
+                </p1:FlowSwitch>
+              </p1:FlowStep.Next>
+            </p1:FlowStep>
+          </p1:FlowDecision.True>
+          <p1:FlowDecision.False>
+            <x:Reference>__ReferenceID9</x:Reference>
+          </p1:FlowDecision.False>
+        </p1:FlowDecision>
+      </p1:FlowStep.Next>
+    </p1:FlowStep>
+    <x:Reference>__ReferenceID10</x:Reference>
+    <x:Reference>__ReferenceID9</x:Reference>
+    <x:Reference>__ReferenceID8</x:Reference>
+    <x:Reference>__ReferenceID11</x:Reference>
+    <x:Reference>__ReferenceID12</x:Reference>
+    <x:Reference>__ReferenceID13</x:Reference>
+    <sads:DebugSymbol.Symbol>d5EBRDpcV29ya3NwYWNlXEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNFx0cnVua1xBY3RpdmVfTGVhcm5pbmdfU2VydmljZV9Hcm91cDRfU29sdXRpb25cQWN0aXZlTGVhcm5pbmcuV0ZcVXBsb2FkQ291cnNlTWF0ZXJpYWxGbG93Q2hhcnRXRi54YW1seFkRA/4DEgEBQzhDPwEHRDhEPwEGRThFPwEFSDhIPwEESThJPwEDTjhOPwECWAfdARUC7wXhAQ3hAWgC3gWJAxWPAywCzAXlAQ+CAx0C7AGGAxWGA2AC2wGSAxXdAyMBGeEDG+EDbQEIWQluEwKnCG8JvQEYAugGvgEJ3AEVAvAFjAMbjANgAs0F5gERgQMbAu0BkwMXuQMhApUBugMXzwM5AVDQAxfcAyMBGmsPa10C2whoD2heAsoIZQ9lYQK5CF4TXmMCqAinAQ23ASsC8wd5D3lgAuIHcQ11HALQB30RnAExAukG1gEP1gFqAtcG0AEP0AFUAqQGwwETwwFnApMG2QEP2QFaAoIG0wEP0wFWAvEF5wETrwIjAu8DsAITgAMjAu4BngMdngNxAsoBswMdswNqArkBsAMdsANsAqgBpQMhqQM0AqcBtgMdtgNsApYBzAMdzAN3AoQBxwMdxwNqAXO9Ax29A2QBYsIDHcIDcAFR0wMd0wNvAT/WAx3WA2IBLNkDHdkDaAEbqgETqgFsApYItAETtAFgAoUIrwETrwFdAvQHcxFzVgLRB4UBF4UBegK/B5kBF5kBZAKuB5QBF5QBXQKdB4ABF4ABXgKMB48BF48BagL7BooBF4oBZgLqBukBF60CJQLwA7ICF/4CJQLvAe0BGYkCIwKVBYoCGZ8CMgLMBKACGawCJQLxA7YCGdUCIwKmA9YCGfACMwLLAvECGf0CJQLwAfgBH/gBcwK6Bf8BI/8BcwKoBYYCH4YCbgKWBY0CH40CegKDBZwCH5wCbALxBJcCH5cCcgLfBJICH5ICZgLNBKMCH6MCcgK6BKYCH6YCZAKEBKkCH6kCagLyA8ECH8ECcwLdA9ICH9ICawLLA8gCI8gCcwK5A88CH88CbgKnA+gCH+gCbAKUA+0CH+0CYwKCA9kCH9kCewLwAuMCH+MCcgLeAt4CH94CZgLMAvcCH/cCZAKVAvQCH/QCcwKDAvoCH/oCagLxAQ==</sads:DebugSymbol.Symbol>
+  </p1:Flowchart>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Receive_1" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="211,62">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">184.5,619</av:Point>
+            <av:Size x:Key="ShapeSize">211,62</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InstructorSaveContentData_1" sap:VirtualizedContainerService.HintSize="200,22">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_17">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">190,379</av:Point>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">290,401 290,619</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowDecision_3" sap:VirtualizedContainerService.HintSize="96,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">472,216.5</av:Point>
+            <av:Size x:Key="ShapeSize">96,87</av:Size>
+            <av:PointCollection x:Key="TrueConnector">472,260 290,260 290,379</av:PointCollection>
+            <av:PointCollection x:Key="FalseConnector">568,260 598,260 598,650 395.5,650</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CheckIfInstructorExists_2" sap:VirtualizedContainerService.HintSize="200,22">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_12">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">420,129</av:Point>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">520,151 520,216.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Flowchart_2" sap:VirtualizedContainerService.HintSize="255,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <av:Point x:Key="ShapeLocation">490,2.5</av:Point>
+            <av:Size x:Key="ShapeSize">60,75</av:Size>
+            <x:Double x:Key="Width">773</x:Double>
+            <x:Double x:Key="Height">768.11999999999989</x:Double>
+            <av:PointCollection x:Key="ConnectorLocation">520,77.5 520,129</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SendReply_1" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Receive_2" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="AdminAcceptContent_1" sap:VirtualizedContainerService.HintSize="255,22" />
+      <sap2010:ViewStateData Id="SendReply_2" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="277,406">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="PickBranch_1" sap:VirtualizedContainerService.HintSize="307,664" />
+      <sap2010:ViewStateData Id="Receive_3" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="AdminCommentContent_1" sap:VirtualizedContainerService.HintSize="255,22" />
+      <sap2010:ViewStateData Id="SendReply_3" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="277,406">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="PickBranch_2" sap:VirtualizedContainerService.HintSize="307,664" />
+      <sap2010:ViewStateData Id="Pick_1" sap:VirtualizedContainerService.HintSize="768,710" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TerminateWorkflow_1" sap:VirtualizedContainerService.HintSize="200,22">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">540,659</av:Point>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Receive_4" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="InstructorReviseContentData_1" sap:VirtualizedContainerService.HintSize="255,22" />
+      <sap2010:ViewStateData Id="SendReply_4" sap:VirtualizedContainerService.HintSize="255,90" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="277,406">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowDecision_7" sap:VirtualizedContainerService.HintSize="160,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">400,376.5</av:Point>
+            <av:Size x:Key="ShapeSize">160,87</av:Size>
+            <av:PointCollection x:Key="FalseConnector">560,420 640,420 640,659</av:PointCollection>
+            <av:PointCollection x:Key="TrueConnector">400,420 270,420</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">380,524.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">480,524.5 480,463.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowSwitch`1_1" sap:VirtualizedContainerService.HintSize="70,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">135,506.5</av:Point>
+            <av:Size x:Key="ShapeSize">70,87</av:Size>
+            <av:PointCollection x:Key="&quot;Accepted&quot;Connector">170,593.5 170,670 540,670</av:PointCollection>
+            <av:PointCollection x:Key="&quot;Commented&quot;Connector">205,550 380,550</av:PointCollection>
+            <av:PointCollection x:Key="&quot;Pending&quot;Connector">135,550 40,550 40,420 70,420</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">70,394.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">170,445.5 170,506.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowDecision_1" sap:VirtualizedContainerService.HintSize="155,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">352.5,256.5</av:Point>
+            <av:Size x:Key="ShapeSize">155,87</av:Size>
+            <av:PointCollection x:Key="FalseConnector">507.5,300 640,300 640,659</av:PointCollection>
+            <av:PointCollection x:Key="TrueConnector">352.5,300 170,300 170,394.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">330,164.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">430,215.5 430,256.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="754,757">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <av:Point x:Key="ShapeLocation">400,2.5</av:Point>
+            <av:Size x:Key="ShapeSize">60,75</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">430,77.5 430,164.5</av:PointCollection>
+            <x:Double x:Key="Width">740</x:Double>
+            <x:Double x:Key="Height">721</x:Double>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WorkflowService_1" sap:VirtualizedContainerService.HintSize="784,827" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</WorkflowService>

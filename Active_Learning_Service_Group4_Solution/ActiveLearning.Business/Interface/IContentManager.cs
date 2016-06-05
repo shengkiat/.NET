@@ -30,7 +30,12 @@ namespace ActiveLearning.Business.Interface
         IEnumerable<int> GetAllPendingContentSids(out string message);
         String GetContentPathByContentSid(int contentSid, out string message);
         Content AddContent(string physicalUploadPath, HttpPostedFileBase file, int courseSid, out string message);
+        Content AddContent(Content content, int courseSid, out string message);
+        Content AddContentWithoutData(string physicalUploadPath, HttpPostedFileBase file, out string message);
+        bool CheckIfContentExists(HttpPostedFileBase file, out string message);
+        bool CheckIfContentValid(HttpPostedFileBase file, out string message);
         bool DeleteContent(string physicalFilePath, int contentSid, out string message);
+        bool DeleteContentWithouData(string physicalFilePath, out string message);
         bool UpdateContent(Content content, out string message);
         bool UpdateContentStatus(int contentSid, string status, string remark, out string message);
         bool AcceptContent(Content content, out string message);

@@ -125,7 +125,11 @@
                             <label> &nbsp; | &nbsp;</label>
                             @Html.ActionLink("Delete", "Delete", new { courseSid = ViewBag.CourseSid, contentSid = @Model[i].Sid }, new { onclick = "return confirm('Confirm to delete the content ?')", @class = "btn-md", })
                         }
-
+                        @if (Model[i].Status.Equals(Constants.Commented_Code, StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            <label> &nbsp; | &nbsp;</label>
+                            @Html.ActionLink("Revise", "ReviseContent", new { courseSid = ViewBag.CourseSid, contentSid = @Model[i].Sid }, new { @class = "btn-md" })
+                        }
                     </td>
                 </tr>
             }

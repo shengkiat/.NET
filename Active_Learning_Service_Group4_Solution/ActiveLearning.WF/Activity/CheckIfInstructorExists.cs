@@ -8,13 +8,11 @@ using ActiveLearning.Business.Implementation;
 namespace ActiveLearning.WF.Activity
 {
 
-    public sealed class CheckWhetherEnrolledCourseActivity : CodeActivity
+    public sealed class CheckIfInstructorExists : CodeActivity
     {
         // Define an activity input argument of type string
-        public InArgument<int> StudentSid { get; set; }
-        public InArgument<int> CourseSid { get; set; }
-
-        public OutArgument<bool> HasEnrolled { get; set; }
+        public InArgument<int> InstructorSid { get; set; }
+        public OutArgument<bool> IfInstructorExists { get; set; }
         public OutArgument<string> Message { get; set; }
 
         // If your activity returns a value, derive from CodeActivity<TResult>
@@ -22,21 +20,26 @@ namespace ActiveLearning.WF.Activity
         protected override void Execute(CodeActivityContext context)
         {
             // Obtain the runtime value of the Text input argument
-            int studentSid = context.GetValue(this.StudentSid);
-            int courseSid = context.GetValue(this.CourseSid);
+            int instructorSid = context.GetValue(this.InstructorSid);
 
-            bool hasEnrolled = false;
+            bool ifInstructorExists = false;
             string message = string.Empty;
 
-            using (var courseManager = new CourseManager())
+            using (var userManager = new UserManager())
             {
-                if (courseManager.HasStudentEnrolledToCourse(studentSid, courseSid, out message))
+                var instructor = userManager.GetActiveInstructorByInstructorSid(instructorSid, out message);
+                if (instructor == null)
                 {
-                    hasEnrolled = true;
+                    ifInstructorExists = false;
+                }
+                else
+                {
+                    message = string.Empty;
+                    ifInstructorExists = true;
                 }
             }
 
-            context.SetValue(this.HasEnrolled, hasEnrolled);
+            context.SetValue(this.IfInstructorExists, ifInstructorExists);
             context.SetValue(this.Message, message);
         }
     }

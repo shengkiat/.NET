@@ -205,6 +205,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\UploadContentService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +273,25 @@
     <None Include="Service References\CourseEnrollService\configuration91.svcinfo" />
     <None Include="Service References\CourseEnrollService\configuration.svcinfo" />
     <None Include="Service References\CourseEnrollService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\UploadContentService\ActiveLearning.Web.UploadContentService.InstructorSaveContentDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\UploadContentService\ActiveLearning.Web.UploadContentService.AdminAcceptContentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\UploadContentService\ActiveLearning.Web.UploadContentService.AdminCommentContentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\UploadContentService\ActiveLearning.Web.UploadContentService.InstructorReviseContentDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\UploadContentService\UploadCourseMaterialFlowChartWF.disco" />
+    <None Include="Service References\UploadContentService\configuration91.svcinfo" />
+    <None Include="Service References\UploadContentService\configuration.svcinfo" />
+    <None Include="Service References\UploadContentService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -344,7 +368,18 @@
     <None Include="Service References\CourseEnrollService\StudentCourseEnrollFLowChartWF1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Instructor\testView.cshtml" />
+    <None Include="Service References\UploadContentService\UploadCourseMaterialFlowChartWF.wsdl" />
+    <None Include="Service References\UploadContentService\UploadCourseMaterialFlowChartWF.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UploadContentService\UploadCourseMaterialFlowChartWF1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UploadContentService\UploadCourseMaterialFlowChartWF2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Instructor\RejectEnrollmentApplication.cshtml" />
+    <Content Include="Views\Instructor\ReviseContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -381,6 +416,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\CourseEnrollService\" />
+    <WCFMetadataStorage Include="Service References\UploadContentService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

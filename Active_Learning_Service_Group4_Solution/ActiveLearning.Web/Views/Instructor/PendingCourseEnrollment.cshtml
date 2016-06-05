@@ -16,7 +16,13 @@
                 @Html.DisplayNameFor(model => model.Course.CourseName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Student.User.FullName)
+               Total Quota
+            </th>
+            <th>
+                Taken
+            </th>
+            <th>
+                Student Name
             </th>
             <th></th>
         </tr>
@@ -28,12 +34,18 @@
                     @Html.DisplayFor(modelItem => item.Course.CourseName)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Course.StudentQuota)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.SeatsTaken)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Student.User.FullName)
                 </td>
                 <td>
                     @Html.ActionLink("Accept", "AcceptEnrollmentApplication", new { courseSid = item.CourseSid, enrollmentAppliationSid = item.Sid })
                     &nbsp;|&nbsp;
-                    @Html.ActionLink("Reject", "RemarkForReject", new { enrollmentAppliationSid = item.Sid })
+                    @Html.ActionLink("Reject", "RejectEnrollmentApplication", new { courseSid = item.CourseSid, enrollmentAppliationSid = item.Sid })
                 </td>
             </tr>
         }

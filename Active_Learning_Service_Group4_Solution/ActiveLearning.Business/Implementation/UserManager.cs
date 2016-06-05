@@ -350,6 +350,7 @@ namespace ActiveLearning.Business.Implementation
             var student = GetStudentByStudentSid(studentSid, out message);
             if (student == null || student.User == null)
             {
+                message = Constants.ValueNotFound("Active Student");
                 return null;
             }
             if (!student.User.IsActive)
@@ -403,6 +404,7 @@ namespace ActiveLearning.Business.Implementation
             var allStudents = GetAllStudent(out message);
             if (allStudents == null || allStudents.Count() == 0)
             {
+                message = Constants.ThereIsNoValueFound("Active Student");
                 return null;
             }
             message = string.Empty;
@@ -727,6 +729,7 @@ namespace ActiveLearning.Business.Implementation
             }
             if (!instructor.User.IsActive)
             {
+                message = Constants.ValueNotFound("Active Instructor");
                 return null;
             }
             return instructor;
@@ -777,6 +780,7 @@ namespace ActiveLearning.Business.Implementation
             var allInstructors = GetAllInstructor(out message);
             if (allInstructors == null || allInstructors.Count() == 0)
             {
+                message = Constants.ThereIsNoValueFound("Active Instructor");
                 return null;
             }
             message = string.Empty;
@@ -1104,6 +1108,7 @@ namespace ActiveLearning.Business.Implementation
             }
             if (!admin.User.IsActive)
             {
+                message = Constants.ValueNotFound("Active Admin");
                 return null;
             }
             return admin;

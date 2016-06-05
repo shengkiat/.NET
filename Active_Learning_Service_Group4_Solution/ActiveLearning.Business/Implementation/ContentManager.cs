@@ -329,43 +329,108 @@ namespace ActiveLearning.Business.Implementation
         {
             message = string.Empty;
 
-            if (file == null || file.ContentLength == 0 || String.IsNullOrEmpty(file.FileName))
-            {
-                message = Constants.ValueIsEmpty(Constants.File);
-                return null;
-            }
             if (courseSid == 0)
             {
                 message = Constants.ValueIsEmpty(Constants.Course);
                 return null;
             }
 
+            if (!CheckIfContentExists(file, out message))
+            {
+                return null;
+            }
+
+            if (!CheckIfContentValid(file, out message))
+            {
+                return null;
+            }
+
             var fileName = new FileInfo(file.FileName).Name;
             var fileExtension = Path.GetExtension(file.FileName);
-            var fileSize = file.ContentLength;
 
-            if (String.IsNullOrEmpty(fileExtension))
+            var uploadFolder = Util.GetUploadFolderFromConfig();
+
+            var content = AddContentWithoutData(physicalUploadPath, file, out message);
+
+            if (content == null)
             {
-                message = Constants.UnknownValue(Constants.FileExtension);
                 return null;
             }
 
-            var allowedFileExtension = Util.GetAllowedFileExtensionFromConfig();
-
-
-            if (!allowedFileExtension.Contains(fileExtension))
+            content = AddContent(content, courseSid, out message);
+            if (content == null)
             {
-                message = Constants.OnlyValueAllowed(allowedFileExtension.Replace(".", ""));
+                return null;
+            }
+            message = string.Empty;
+            return content;
+        }
+        public Content AddContent(Content content, int courseSid, out string message)
+        {
+            if (courseSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Course);
+                return null;
+            }
+            if (content == null)
+            {
+                message = Constants.ValueIsEmpty(Constants.Content);
+                return null;
+            }
+            if (string.IsNullOrEmpty(content.FileName) || string.IsNullOrEmpty(content.FileName.Trim()))
+            {
+                message = Constants.ValueIsEmpty(Constants.FileName);
+                return null;
+            }
+            if (string.IsNullOrEmpty(content.OriginalFileName) || string.IsNullOrEmpty(content.OriginalFileName.Trim()))
+            {
+                message = Constants.ValueIsEmpty(Constants.OriginalFileName);
+                return null;
+            }
+            if (string.IsNullOrEmpty(content.Path) || string.IsNullOrEmpty(content.Path.Trim()))
+            {
+                message = Constants.ValueIsEmpty(Constants.FilePath);
+                return null;
+            }
+            if (string.IsNullOrEmpty(content.Type) || string.IsNullOrEmpty(content.Type.Trim()))
+            {
+                message = Constants.ValueIsEmpty(Constants.FileType);
+                return null;
+            }
+            try
+            {
+                content.CourseSid = courseSid;
+                content.CreateDT = DateTime.Now;
+                content.Status = Constants.Pending_Code;
+
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    unitOfWork.Contents.Add(content);
+                    unitOfWork.Complete();
+                    message = string.Empty;
+                    return content;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringAddingValue(Constants.Content);
+                return null;
+            }
+        }
+        public Content AddContentWithoutData(string physicalUploadPath, HttpPostedFileBase file, out string message)
+        {
+            if (!CheckIfContentExists(file, out message))
+            {
                 return null;
             }
 
-            var allowedFileSize = Util.GetAllowedFileSizeFromConfig();
-
-            if (fileSize > allowedFileSize * 1024 * 1024)
+            if (!CheckIfContentValid(file, out message))
             {
-                message = Constants.ValueNotAllowed(Constants.FileSize);
                 return null;
             }
+            var fileName = new FileInfo(file.FileName).Name;
+            var fileExtension = Path.GetExtension(file.FileName);
 
             string GUIDFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
             var uploadFolder = Util.GetUploadFolderFromConfig();
@@ -382,37 +447,63 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
 
-            try
-            {
-                Content content = new Content();
-                content.CourseSid = courseSid;
-                content.CreateDT = DateTime.Now;
-                content.FileName = GUIDFileName;
-                content.OriginalFileName = fileName;
-                content.Status = Constants.Pending_Code;
-                if (Util.GetVideoFormatsFromConfig().Contains(fileExtension))
-                {
-                    content.Type = Constants.Content_Type_Video;
-                }
-                else
-                {
-                    content.Type = Constants.Content_Type_File;
-                }
-                content.Path = uploadFolder;
+            message = string.Empty;
 
-                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
-                {
-                    unitOfWork.Contents.Add(content);
-                    unitOfWork.Complete();
-                    return content;
-                }
-            }
-            catch (Exception ex)
+            Content content = new Content();
+            content.CreateDT = DateTime.Now;
+            content.FileName = GUIDFileName;
+            content.OriginalFileName = fileName;
+            content.Status = Constants.Pending_Code;
+            if (Util.GetVideoFormatsFromConfig().Contains(fileExtension))
             {
-                ExceptionLog(ex);
-                message = Constants.OperationFailedDuringAddingValue(Constants.File);
-                return null;
+                content.Type = Constants.Content_Type_Video;
             }
+            else
+            {
+                content.Type = Constants.Content_Type_File;
+            }
+            content.Path = uploadFolder;
+            return content;
+        }
+        public bool CheckIfContentExists(HttpPostedFileBase file, out string message)
+        {
+            if (file == null || file.ContentLength == 0 || String.IsNullOrEmpty(file.FileName))
+            {
+                message = Constants.ValueIsEmpty(Constants.File);
+                return false;
+            }
+            message = string.Empty;
+            return true;
+        }
+        public bool CheckIfContentValid(HttpPostedFileBase file, out string message)
+        {
+            var fileExtension = Path.GetExtension(file.FileName);
+
+            if (String.IsNullOrEmpty(fileExtension))
+            {
+                message = Constants.UnknownValue(Constants.FileExtension);
+                return false;
+            }
+
+            var allowedFileExtension = Util.GetAllowedFileExtensionFromConfig();
+
+
+            if (!allowedFileExtension.Contains(fileExtension))
+            {
+                message = Constants.OnlyValueAllowed(allowedFileExtension.Replace(".", ""));
+                return false;
+            }
+
+            var allowedFileSize = Util.GetAllowedFileSizeFromConfig();
+
+            var fileSize = file.ContentLength;
+            if (fileSize > allowedFileSize * 1024 * 1024)
+            {
+                message = Constants.ValueNotAllowed(Constants.FileSize);
+                return false;
+            }
+            message = string.Empty;
+            return true;
         }
         public bool DeleteContent(string physicalFilePath, int contentSid, out string message)
         {
@@ -427,12 +518,16 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.ValueIsEmpty(Constants.File);
                 return false;
             }
+            if (!DeleteContentWithouData(physicalFilePath, out message))
+            {
+                return false;
+            }
             try
             {
                 using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
                 {
                     var content = unitOfWork.Contents.Get(contentSid);
-                    File.Delete(physicalFilePath);
+
                     content.DeleteDT = DateTime.Now;
                     unitOfWork.Complete();
                 }
@@ -444,6 +539,21 @@ namespace ActiveLearning.Business.Implementation
                 message = Constants.OperationFailedDuringDeletingValue(Constants.File);
                 return false;
             }
+        }
+        public bool DeleteContentWithouData(string physicalFilePath, out string message)
+        {
+            try
+            {
+                File.Delete(physicalFilePath);
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringDeletingValue(Constants.File);
+                return false;
+            }
+            message = string.Empty;
+            return true;
         }
         public bool UpdateContent(Content content, out string message)
         {
