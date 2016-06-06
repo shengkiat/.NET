@@ -6,6 +6,7 @@
  xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
  xmlns:p="http://tempuri.org/"
  xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
  xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
  xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
  xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
@@ -72,14 +73,14 @@
       <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="IsRejectedSuccessfully" />
       <p1:Variable x:TypeArguments="x:String" Name="Remark" />
       <p1:Variable x:TypeArguments="CorrelationHandle" Name="EnrollApplicationHandle" />
-      <x:Reference>__ReferenceID22</x:Reference>
+      <x:Reference>__ReferenceID23</x:Reference>
       <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="HasError" />
       <p1:Variable x:TypeArguments="x:Boolean" Default="False" Name="EnrolledSuccessfully" />
     </p1:Flowchart.Variables>
     <p1:Flowchart.StartNode>
-      <x:Reference>__ReferenceID23</x:Reference>
+      <x:Reference>__ReferenceID19</x:Reference>
     </p1:Flowchart.StartNode>
-    <p1:FlowStep x:Name="__ReferenceID23" sap2010:WorkflowViewState.IdRef="FlowStep_5">
+    <p1:FlowStep x:Name="__ReferenceID19" sap2010:WorkflowViewState.IdRef="FlowStep_5">
       <p1:Sequence DisplayName="Student Request To Enroll" sap2010:WorkflowViewState.IdRef="Sequence_2">
         <Receive x:Name="__ReferenceID13" CanCreateInstance="True" sap2010:WorkflowViewState.IdRef="Receive_3" OperationName="StudentRequestToEnrollCourse" ServiceContractName="p:IService">
           <Receive.CorrelationInitializers>
@@ -88,7 +89,7 @@
                 <p1:InArgument x:TypeArguments="CorrelationHandle">
                   <p1:VariableValue x:TypeArguments="CorrelationHandle">
                     <p1:VariableValue.Variable>
-                      <p1:Variable x:TypeArguments="CorrelationHandle" x:Name="__ReferenceID22" Name="__handle1" />
+                      <p1:Variable x:TypeArguments="CorrelationHandle" x:Name="__ReferenceID23" Name="__handle1" />
                     </p1:VariableValue.Variable>
                   </p1:VariableValue>
                 </p1:InArgument>
@@ -393,7 +394,7 @@
         </SendReply>
       </p1:Sequence>
       <p1:FlowStep.Next>
-        <p1:FlowDecision x:Name="__ReferenceID20" DisplayName="Enroll Application Successfully ?" sap2010:WorkflowViewState.IdRef="FlowDecision_7">
+        <p1:FlowDecision x:Name="__ReferenceID21" DisplayName="Enroll Application Successfully ?" sap2010:WorkflowViewState.IdRef="FlowDecision_7">
           <p1:FlowDecision.Condition>
             <mca:CSharpValue x:TypeArguments="x:Boolean">EnrollApplicationSuccessfully</mca:CSharpValue>
           </p1:FlowDecision.Condition>
@@ -568,13 +569,18 @@
                 </p1:PickBranch>
               </p1:Pick>
               <p1:FlowStep.Next>
-                <p1:FlowDecision x:Name="__ReferenceID21" DisplayName="Accepted/Rejected Successfully?" sap2010:WorkflowViewState.IdRef="FlowDecision_10">
+                <p1:FlowDecision x:Name="__ReferenceID22" DisplayName="Accepted/Rejected Successfully?" sap2010:WorkflowViewState.IdRef="FlowDecision_10">
                   <p1:FlowDecision.Condition>
                     <mca:CSharpValue x:TypeArguments="x:Boolean">IsAcceptedSuccessfully||IsRejectedSuccessfully</mca:CSharpValue>
                   </p1:FlowDecision.Condition>
                   <p1:FlowDecision.True>
-                    <p1:FlowStep x:Name="__ReferenceID19" sap2010:WorkflowViewState.IdRef="FlowStep_12">
+                    <p1:FlowStep x:Name="__ReferenceID20" sap2010:WorkflowViewState.IdRef="FlowStep_12">
                       <p1:TerminateWorkflow sap2010:WorkflowViewState.IdRef="TerminateWorkflow_2">
+                        <p1:TerminateWorkflow.Exception>
+                          <p1:InArgument x:TypeArguments="s:Exception">
+                            <mca:CSharpValue x:TypeArguments="s:Exception">new System.ServiceModel.FaultException(Message);</mca:CSharpValue>
+                          </p1:InArgument>
+                        </p1:TerminateWorkflow.Exception>
                         <p1:TerminateWorkflow.Reason>
                           <p1:InArgument x:TypeArguments="x:String">
                             <mca:CSharpValue x:TypeArguments="x:String">Message</mca:CSharpValue>
@@ -596,11 +602,11 @@
         </p1:FlowDecision>
       </p1:FlowStep.Next>
     </p1:FlowStep>
-    <x:Reference>__ReferenceID19</x:Reference>
-    <x:Reference>__ReferenceID18</x:Reference>
     <x:Reference>__ReferenceID20</x:Reference>
+    <x:Reference>__ReferenceID18</x:Reference>
     <x:Reference>__ReferenceID21</x:Reference>
-    <sads:DebugSymbol.Symbol>d5ABRDpcV29ya3NwYWNlXEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNFx0cnVua1xBY3RpdmVfTGVhcm5pbmdfU2VydmljZV9Hcm91cDRfU29sdXRpb25cQWN0aXZlTGVhcm5pbmcuV0ZcU3R1ZGVudENvdXJzZUVucm9sbEZMb3dDaGFydFdGLnhhbWx4ahAD3AQSAQFAOEA/AQtBNkE5AQpCNkI5AQlDOEM/AQhEOEQ/AQdFNkU5AQZHOEc/AQVIOEg/AQRMOEw/AQNNOE0/AQJTB4oDFQKkA44DDY4DaQKUA8EEF8cELgKDA5IDD7kEGQEcvQQVvQSCAQEMVAlqEwLjCGsJ5AIYApgE5QIJiQMVAqUDxAQdxARiAoQDkwMR4QMhAuEB4gMRuAQhAR1nD2ddAvUIZA9kXgLlCFkTXSYC5AhtPm1FApoEbj5uRQKZBMICDdICKAKsCNYCE9YCXwKaCIwBEZABIAKHCKICDbICJwLQB7YCE7YCXgK+B5UBDaoBKQL1Bq4BE64BXQLjBrUBFcUBLQKsBskBG8kBZgKaBnQNiQEnAtEFzQEd4gEyAogF5gEj5gFsAvYE7QElhwJGApsEgwMPgwNrAogEhgMPhgNiAvgD/QIP/QJUAuYD+gIP+gJVAtYDgAMPgANgAsYD9wIP9wJWArYD6gIT6gJxAqYDlQMV3wMjAuIB5AMVtgQjAR7FAhPFAmAC0QjPAhPPAloCvwjKAhPKAmcCrQiOARWOAVoCiAivAhOvAmAC9QeqAhOqAlkC4welAhOlAmYC0QeiAROiAWACrAeYAROYAVkCmgedAROdAWUCiAenAROnAVoC9gbCARvCAWgC0Qa4ARu4AWECvwa9ARu9AW4CrQZ8E3xuAogGgQETgQFgAvYFdxN3WQLkBYYBE4YBWgLSBdUBI9UBdAK/BdoBI9oBcAKtBdABI9ABaQKbBd8BI98BagKJBf8BK/8BeALkBPABK/ABcQLSBPUBK/UBhAECwAT6ASv6AY8BAq4EhAIrhAJyApwElgMX3gMlAuMB6AMXtQQlAR+aAxm6AyMC3wK7AxnQA0ECmgLRAxndAyUC5AHpAxmMBCMCrAGNBBmnBEEBVqgEGbQEJQEgpQMfpQN9AvICtwMftwN4AuECrAMjsAM2AuACyAMfyAN8As4CzQMfzQNsAr0CvgMfvgNwAqwCwwMfwwNuApsC1AMf1AN0AokC1wMf1wNkAvYB2gMf2gNmAuUB9AMf9AN9AtABiQQfiQR4Ar8BhgQfhgRrAq4B+wMj/wM2Aq0BmgQfmgR8ApsBnwQfnwRsAooBkAQfkARwAXmVBB+VBG4BaKQEH6QEYwFXqwQfqwR0AUWuBB+uBGQBMrEEH7EEZgEh</sads:DebugSymbol.Symbol>
+    <x:Reference>__ReferenceID22</x:Reference>
+    <sads:DebugSymbol.Symbol>d5ABRDpcV29ya3NwYWNlXEFjdGl2ZV9MZWFybmluZ19TZXJ2aWNlX0dyb3VwNFx0cnVua1xBY3RpdmVfTGVhcm5pbmdfU2VydmljZV9Hcm91cDRfU29sdXRpb25cQWN0aXZlTGVhcm5pbmcuV0ZcU3R1ZGVudENvdXJzZUVucm9sbEZMb3dDaGFydFdGLnhhbWx4axED4gQSAQFBOEE/AQtCNkI5AQpDNkM5AQlEOEQ/AQhFOEU/AQdGNkY5AQZIOEg/AQVJOEk/AQRNOE0/AQNOOE4/AQJUB4sDFQK0A48DDY8DaQKkA5MDD7oEGQE9vgQVvgSCAQEtwgQXzQQuAQxVCWsTAvMIbAnlAhgCqATmAgmKAxUCtQOUAxHiAyECggLjAxG5BCEBPsoEHcoEYgEdxQQdxQSOAQENaA9oXQKFCWUPZV4C9QhaE14mAvQIbj5uRQKqBG8+b0UCqQTDAg3TAigCvAjXAhPXAl8CqgiNARGRASAClwijAg2zAicC4Ae3AhO3Al4CzgeWAQ2rASkChQevAROvAV0C8wa2ARXGAS0CvAbKARvKAWYCqgZ1DYoBJwLhBc4BHeMBOAKYBecBI+cBbAKGBe4BJYgCRgKrBIQDD4QDawKYBIcDD4cDYgKIBP4CD/4CVAL2A/sCD/sCVQLmA4EDD4EDYALWA/gCD/gCVgLGA+sCE+sCcQK2A5YDFeADIwKDAuUDFbcEIwE/xgITxgJgAuEI0AIT0AJaAs8IywITywJnAr0IjwEVjwFaApgIsAITsAJgAoUIqwITqwJZAvMHpgITpgJmAuEHowETowFgArwHmQETmQFZAqoHngETngFlApgHqAETqAFaAoYHwwEbwwFoAuEGuQEbuQFhAs8GvgEbvgFuAr0GfRN9bgKYBoIBE4IBYAKGBngTeFkC9AWHAROHAVoC4gXWASPWAXQCzwXbASPbAXACvQXRASPRAWkCqwXgASPgAWoCmQWAAiuAAngC9ATxASvxAXEC4gT2ASv2AYQBAtAE+wEr+wGPAQK+BIUCK4UCcgKsBJcDF98DJQKEAukDF7YEJQFAmwMZuwMjAoADvAMZ0QNBArsC0gMZ3gMlAoUC6gMZjQQjAs0BjgQZqARBAXepBBm1BCUBQaYDH6YDfQKTA7gDH7gDeAKCA60DI7EDNgKBA8kDH8kDfALvAs4DH84DbALeAr8DH78DcALNAsQDH8QDbgK8AtUDH9UDdAKqAtgDH9gDZAKXAtsDH9sDZgKGAvUDH/UDfQLxAYoEH4oEeALgAYcEH4cEawLPAfwDI4AENgLOAZsEH5sEfAK8AaAEH6AEbAKrAZEEH5EEcAKaAZYEH5YEbgKJAaUEH6UEYwF4rAQfrAR0AWavBB+vBGQBU7IEH7IEZgFC</sads:DebugSymbol.Symbol>
   </p1:Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -788,7 +794,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="SendReply_2" sap:VirtualizedContainerService.HintSize="255,90" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="277,435">
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -880,7 +886,7 @@
             <av:Point x:Key="ShapeLocation">240,206.5</av:Point>
             <av:Size x:Key="ShapeSize">160,87</av:Size>
             <av:PointCollection x:Key="TrueConnector">240,250 190,250 190,324.5</av:PointCollection>
-            <av:PointCollection x:Key="FalseConnector">400,250 470,250 470,610 440,610</av:PointCollection>
+            <av:PointCollection x:Key="FalseConnector">400,250 484.5,250 484.5,130 420,130</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>

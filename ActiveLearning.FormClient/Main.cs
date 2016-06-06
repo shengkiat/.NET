@@ -65,8 +65,10 @@ namespace ActiveLearning.FormClient
                 links.Text = "Course Material";
                 links.FillWeight = 20;
                 links.Name = "LbtnCourseMaterial";
-                dataGridView1.Columns.Add(links);
-
+                if (!dataGridView1.Columns.Contains("LbtnCourseMaterial"))
+                {
+                    dataGridView1.Columns.Add(links);
+                }
                 links = new DataGridViewLinkColumn();
                 links.UseColumnTextForLinkValue = true;
                 links.HeaderText = "Quiz";
@@ -79,8 +81,10 @@ namespace ActiveLearning.FormClient
                 links.Text = "Quiz";
                 links.FillWeight = 20;
                 links.Name = "LbtnQuiz";
-                dataGridView1.Columns.Add(links);
-
+                if (!dataGridView1.Columns.Contains("LbtnQuiz"))
+                {
+                    dataGridView1.Columns.Add(links);
+                }
             }
             catch (FaultException fe)
             {
@@ -108,7 +112,10 @@ namespace ActiveLearning.FormClient
             {
                 try
                 {
-                    client.Close();
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
                 }
                 catch (Exception ex)
                 {
