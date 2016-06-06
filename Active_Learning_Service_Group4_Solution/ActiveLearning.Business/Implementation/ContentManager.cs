@@ -420,6 +420,11 @@ namespace ActiveLearning.Business.Implementation
         }
         public Content AddContentWithoutData(string physicalUploadPath, HttpPostedFileBase file, out string message)
         {
+            if(string.IsNullOrEmpty(physicalUploadPath)|| string.IsNullOrEmpty(physicalUploadPath.Trim()))
+            {
+                message = Constants.ValueIsEmpty(Constants.FilePath);
+                return null;
+            }
             if (!CheckIfContentExists(file, out message))
             {
                 return null;
@@ -439,6 +444,65 @@ namespace ActiveLearning.Business.Implementation
             {
                 var uploadPath = Path.Combine(physicalUploadPath, GUIDFileName);
                 file.SaveAs(uploadPath);
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringSavingValue(Constants.File);
+                return null;
+            }
+
+            message = string.Empty;
+
+            Content content = new Content();
+            content.CreateDT = DateTime.Now;
+            content.FileName = GUIDFileName;
+            content.OriginalFileName = fileName;
+            content.Status = Constants.Pending_Code;
+            if (Util.GetVideoFormatsFromConfig().Contains(fileExtension))
+            {
+                content.Type = Constants.Content_Type_Video;
+            }
+            else
+            {
+                content.Type = Constants.Content_Type_File;
+            }
+            content.Path = uploadFolder;
+            return content;
+        }
+        public Content AddContentWithoutData(string physicalUploadPath, string fileName, byte[] fileBytes, out string message)
+        {
+            if (string.IsNullOrEmpty(physicalUploadPath) || string.IsNullOrEmpty(physicalUploadPath.Trim()))
+            {
+                message = Constants.ValueIsEmpty(Constants.FilePath);
+                return null;
+            }
+            if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(fileName.Trim()))
+            {
+                message = Constants.ValueIsEmpty(Constants.FileName);
+                return null;
+            }
+            if(fileBytes==null || fileBytes.Length ==0)
+            {
+                message = Constants.ValueIsEmpty(Constants.File);
+                return null;
+            }
+
+            if (!CheckIfContentValid(fileBytes.Length, fileName, out message))
+            {
+                return null;
+            }
+            //var fileName = new FileInfo(file.FileName).Name;
+            var fileExtension = Path.GetExtension(fileName);
+
+            string GUIDFileName = Guid.NewGuid().ToString() + fileExtension;
+            var uploadFolder = Util.GetUploadFolderFromConfig();
+
+            try
+            {
+                var uploadPath = Path.Combine(physicalUploadPath, GUIDFileName);
+                File.WriteAllBytes(uploadPath,fileBytes);
+                //file.SaveAs(uploadPath);
             }
             catch (Exception ex)
             {
@@ -497,6 +561,37 @@ namespace ActiveLearning.Business.Implementation
             var allowedFileSize = Util.GetAllowedFileSizeFromConfig();
 
             var fileSize = file.ContentLength;
+            if (fileSize > allowedFileSize * 1024 * 1024)
+            {
+                message = Constants.ValueNotAllowed(Constants.FileSize);
+                return false;
+            }
+            message = string.Empty;
+            return true;
+        }
+
+        public bool CheckIfContentValid(long size, string fileName, out string message)
+        {
+            var fileExtension = Path.GetExtension(fileName);
+
+            if (String.IsNullOrEmpty(fileExtension))
+            {
+                message = Constants.UnknownValue(Constants.FileExtension);
+                return false;
+            }
+
+            var allowedFileExtension = Util.GetAllowedFileExtensionFromConfig();
+
+
+            if (!allowedFileExtension.Contains(fileExtension))
+            {
+                message = Constants.OnlyValueAllowed(allowedFileExtension.Replace(".", ""));
+                return false;
+            }
+
+            var allowedFileSize = Util.GetAllowedFileSizeFromConfig();
+
+            var fileSize = size;
             if (fileSize > allowedFileSize * 1024 * 1024)
             {
                 message = Constants.ValueNotAllowed(Constants.FileSize);

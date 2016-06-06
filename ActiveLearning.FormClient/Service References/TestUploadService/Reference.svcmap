@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4a45b797-559b-4004-80c2-0b7c8e5c2479" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:7662/TestUpload.xamlx" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TestUpload.xsd" MetadataType="Schema" ID="d352b752-0720-4038-b21c-ce542a509d25" SourceId="1" SourceUrl="http://localhost:7662/TestUpload.xamlx?xsd=xsd0" />
+    <MetadataFile FileName="TestUpload1.xsd" MetadataType="Schema" ID="1c58c80a-1c9f-430d-8ab8-556a158cf3b9" SourceId="1" SourceUrl="http://localhost:7662/TestUpload.xamlx?xsd=xsd1" />
+    <MetadataFile FileName="TestUpload.wsdl" MetadataType="Wsdl" ID="906f349d-c4ac-4664-b0d7-a39e55dea9d8" SourceId="1" SourceUrl="http://localhost:7662/TestUpload.xamlx?wsdl" />
+    <MetadataFile FileName="TestUpload.disco" MetadataType="Disco" ID="66abf93a-8b15-43a8-8d7e-9a05503bee8f" SourceId="1" SourceUrl="http://localhost:7662/TestUpload.xamlx?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

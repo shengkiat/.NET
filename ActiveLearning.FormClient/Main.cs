@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -131,6 +132,32 @@ namespace ActiveLearning.FormClient
                 var quiz = new Quiz(client, courses[e.RowIndex].Sid);
                 quiz.StartPosition = FormStartPosition.CenterScreen;
                 quiz.ShowDialog();
+            }
+        }
+
+        private void testUploadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var result = openFileDialog1.ShowDialog();
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
+            var stream = openFileDialog1.OpenFile();
+            var bytes = Util.GetBytesFromStream(stream);
+            var filePath = openFileDialog1.FileName;
+            FileInfo file = new FileInfo(filePath);
+            var fileName = file.Name;
+            using (TestUploadService.ServiceClient clien = new TestUploadService.ServiceClient())
+            {
+                try
+                {
+                    string message = clien.Upload(bytes, fileName);
+                    MessageBox.Show(message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }

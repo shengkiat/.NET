@@ -32,8 +32,10 @@ namespace ActiveLearning.Business.Interface
         Content AddContent(string physicalUploadPath, HttpPostedFileBase file, int courseSid, out string message);
         Content AddContent(Content content, int courseSid, out string message);
         Content AddContentWithoutData(string physicalUploadPath, HttpPostedFileBase file, out string message);
+        Content AddContentWithoutData(string physicalUploadPath, string fileName, byte[] fileBytes, out string message);
         bool CheckIfContentExists(HttpPostedFileBase file, out string message);
         bool CheckIfContentValid(HttpPostedFileBase file, out string message);
+        bool CheckIfContentValid(long size, string fileName, out string message);
         bool DeleteContent(string physicalFilePath, int contentSid, out string message);
         bool DeleteContentWithouData(string physicalFilePath, out string message);
         bool UpdateContent(Content content, out string message);

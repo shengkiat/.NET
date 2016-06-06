@@ -101,6 +101,7 @@
     <Compile Include="Activity\CheckIfCourseFull.cs" />
     <Compile Include="Activity\CheckIfEnrolledCourse.cs" />
     <Compile Include="Activity\CheckIfFileExists.cs" />
+    <Compile Include="Activity\CheckIfFileValid.cs" />
     <Compile Include="Activity\CheckIfInstructorExists.cs" />
     <Compile Include="Activity\CheckIfStudentExists.cs" />
     <Compile Include="Activity\CheckIfTeachCourse.cs" />
@@ -108,10 +109,11 @@
     <Compile Include="Activity\InstructorRejectEnrollApplication.cs" />
     <Compile Include="Activity\AdminAcceptContent.cs" />
     <Compile Include="Activity\AdminCommentContent.cs" />
-    <Compile Include="Activity\InstructorReviseContentData.cs" />
+    <Compile Include="Activity\InstructorReviseContent.cs" />
     <Compile Include="Activity\StudentApplyToEnrollCourse.cs" />
     <Compile Include="Activity\StudentEnrollCourse.cs" />
-    <Compile Include="Activity\InstructorSaveContentData.cs" />
+    <Compile Include="Activity\InstructorUploadContent.cs" />
+    <Compile Include="Activity\TestUpload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +140,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UploadCourseMaterialFlowChartWF.xamlx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestUpload.xamlx">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

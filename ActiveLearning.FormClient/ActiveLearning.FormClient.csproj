@@ -80,6 +80,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\TestUploadService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Util.cs" />
     <EmbeddedResource Include="CourseMaterial.resx">
       <DependentUpon>CourseMaterial.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,6 +138,13 @@
     <None Include="Service References\StudentService\StudentService3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\TestUploadService\TestUpload.wsdl" />
+    <None Include="Service References\TestUploadService\TestUpload.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TestUploadService\TestUpload1.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -141,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\StudentService\" />
+    <WCFMetadataStorage Include="Service References\TestUploadService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\StudentService\StudentService.disco" />
@@ -153,6 +167,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\StudentService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TestUploadService\TestUpload.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TestUploadService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TestUploadService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TestUploadService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

@@ -24,7 +24,6 @@
   <Metadata>
     <MetadataFile FileName="UploadCourseMaterialFlowChartWF.xsd" MetadataType="Schema" ID="c4124450-904d-40ea-8271-2dcacbcd30bb" SourceId="1" SourceUrl="http://localhost:7662/UploadCourseMaterialFlowChartWF.xamlx?xsd=xsd1" />
     <MetadataFile FileName="UploadCourseMaterialFlowChartWF1.xsd" MetadataType="Schema" ID="b895184f-aa05-4a13-b94e-753860b168a4" SourceId="1" SourceUrl="http://localhost:7662/UploadCourseMaterialFlowChartWF.xamlx?xsd=xsd0" />
-    <MetadataFile FileName="UploadCourseMaterialFlowChartWF2.xsd" MetadataType="Schema" ID="86ef9837-ef55-4ceb-90a1-d4da1c307cac" SourceId="1" SourceUrl="http://localhost:7662/UploadCourseMaterialFlowChartWF.xamlx?xsd=xsd2" />
     <MetadataFile FileName="UploadCourseMaterialFlowChartWF.disco" MetadataType="Disco" ID="428cd724-85e9-4ea5-a126-5d31133363ad" SourceId="1" SourceUrl="http://localhost:7662/UploadCourseMaterialFlowChartWF.xamlx?disco" />
     <MetadataFile FileName="UploadCourseMaterialFlowChartWF.wsdl" MetadataType="Wsdl" ID="44976861-a86e-4e0e-a873-26157c3f9bc8" SourceId="1" SourceUrl="http://localhost:7662/UploadCourseMaterialFlowChartWF.xamlx?wsdl" />
   </Metadata>

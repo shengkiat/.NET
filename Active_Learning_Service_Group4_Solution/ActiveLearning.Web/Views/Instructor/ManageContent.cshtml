@@ -62,7 +62,7 @@
                 <th>Type</th>
                 <th>Status</th>
                 <th>Remark</th>
-                <th>Action</th>
+                <th >Action</th>
             </tr>
 
             @for (var i = 0; i <= Model.Count - 1; i++)
@@ -111,23 +111,23 @@
                             @Model[i].Remark
                         }
                     </td>
-                    <td style="width:20%">
+                    <td style="width:30%">
 
                         @if (Model[i].Type.Equals(Constants.Content_Type_Video, StringComparison.CurrentCultureIgnoreCase))
                         {
                             @Html.ActionLink("Watch", "Download", new { courseSid = ViewBag.CourseSid, contentSid = @Model[i].Sid, originalFileName = @Model[i].OriginalFileName }, new { @class = "btn-md" })
-                            <label> &nbsp; |  &nbsp;</label>
+                            <label>&nbsp;|&nbsp;</label>
                             @Html.ActionLink("Delete", "Delete", new { courseSid = ViewBag.CourseSid, contentSid = @Model[i].Sid }, new { onclick = "return confirm('Confirm to delete the content ?')", @class = "btn-md", })
                         }
                         else if (Model[i].Type.Equals(Constants.Content_Type_File, StringComparison.CurrentCultureIgnoreCase))
                         {
                             @Html.ActionLink("Download", "Download", new { courseSid = ViewBag.CourseSid, contentSid = @Model[i].Sid, originalFileName = @Model[i].OriginalFileName }, new { @class = "btn-md" })
-                            <label> &nbsp; | &nbsp;</label>
+                            <label>&nbsp;|&nbsp;</label>
                             @Html.ActionLink("Delete", "Delete", new { courseSid = ViewBag.CourseSid, contentSid = @Model[i].Sid }, new { onclick = "return confirm('Confirm to delete the content ?')", @class = "btn-md", })
                         }
                         @if (Model[i].Status.Equals(Constants.Commented_Code, StringComparison.CurrentCultureIgnoreCase))
                         {
-                            <label> &nbsp; | &nbsp;</label>
+                            <label>&nbsp;|&nbsp;</label>
                             @Html.ActionLink("Revise", "ReviseContent", new { courseSid = ViewBag.CourseSid, contentSid = @Model[i].Sid }, new { @class = "btn-md" })
                         }
                     </td>

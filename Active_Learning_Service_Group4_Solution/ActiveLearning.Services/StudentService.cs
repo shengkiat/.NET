@@ -214,7 +214,7 @@ namespace ActiveLearning.Services
                 {
                     throw new FaultException(message);
                 }
-                string uploadPath = Util.GetAppSetting("UploadPath");
+                string uploadPath = Util.GetUploadFolderFromConfig();
                 if (string.IsNullOrEmpty(uploadPath))
                 {
                     throw new FaultException(Constants.ValueNotFound("UploadPath App Setting"));

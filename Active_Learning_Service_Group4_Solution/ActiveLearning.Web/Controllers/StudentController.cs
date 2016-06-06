@@ -229,7 +229,7 @@ namespace ActiveLearning.Web.Controllers
                 {
                     return RedirectToError(message);
                 }
-                filepath = content.Path + content.FileName;
+                filepath = Util.GetUploadFolderFromConfig() + content.FileName;
                 fileType = content.Type;
             }
             var file = File(filepath, System.Net.Mime.MediaTypeNames.Application.Octet, originalFileName);

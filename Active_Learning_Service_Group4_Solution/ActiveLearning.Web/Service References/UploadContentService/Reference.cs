@@ -15,19 +15,19 @@ namespace ActiveLearning.Web.UploadContentService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UploadContentService.IService")]
     public interface IService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InstructorSaveContentData", ReplyAction="http://tempuri.org/IService/InstructorSaveContentDataResponse")]
-        ActiveLearning.Web.UploadContentService.InstructorSaveContentDataResponse InstructorSaveContentData(ActiveLearning.Web.UploadContentService.InstructorSaveContentDataRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InstructorUploadContent", ReplyAction="http://tempuri.org/IService/InstructorUploadContentResponse")]
+        ActiveLearning.Web.UploadContentService.InstructorUploadContentResponse InstructorUploadContent(ActiveLearning.Web.UploadContentService.InstructorUploadContentRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InstructorSaveContentData", ReplyAction="http://tempuri.org/IService/InstructorSaveContentDataResponse")]
-        System.Threading.Tasks.Task<ActiveLearning.Web.UploadContentService.InstructorSaveContentDataResponse> InstructorSaveContentDataAsync(ActiveLearning.Web.UploadContentService.InstructorSaveContentDataRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InstructorUploadContent", ReplyAction="http://tempuri.org/IService/InstructorUploadContentResponse")]
+        System.Threading.Tasks.Task<ActiveLearning.Web.UploadContentService.InstructorUploadContentResponse> InstructorUploadContentAsync(ActiveLearning.Web.UploadContentService.InstructorUploadContentRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InstructorReviseContentData", ReplyAction="http://tempuri.org/IService/InstructorReviseContentDataResponse")]
-        ActiveLearning.Web.UploadContentService.InstructorReviseContentDataResponse InstructorReviseContentData(ActiveLearning.Web.UploadContentService.InstructorReviseContentDataRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InstructorReviseContent", ReplyAction="http://tempuri.org/IService/InstructorReviseContentResponse")]
+        ActiveLearning.Web.UploadContentService.InstructorReviseContentResponse InstructorReviseContent(ActiveLearning.Web.UploadContentService.InstructorReviseContentRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InstructorReviseContentData", ReplyAction="http://tempuri.org/IService/InstructorReviseContentDataResponse")]
-        System.Threading.Tasks.Task<ActiveLearning.Web.UploadContentService.InstructorReviseContentDataResponse> InstructorReviseContentDataAsync(ActiveLearning.Web.UploadContentService.InstructorReviseContentDataRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InstructorReviseContent", ReplyAction="http://tempuri.org/IService/InstructorReviseContentResponse")]
+        System.Threading.Tasks.Task<ActiveLearning.Web.UploadContentService.InstructorReviseContentResponse> InstructorReviseContentAsync(ActiveLearning.Web.UploadContentService.InstructorReviseContentRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AdminAcceptContent", ReplyAction="http://tempuri.org/IService/AdminAcceptContentResponse")]
         ActiveLearning.Web.UploadContentService.AdminAcceptContentResponse AdminAcceptContent(ActiveLearning.Web.UploadContentService.AdminAcceptContentRequest request);
@@ -46,32 +46,36 @@ namespace ActiveLearning.Web.UploadContentService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="InstructorSaveContentData", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class InstructorSaveContentDataRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="InstructorUploadContent", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class InstructorUploadContentRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public int InstructorSid;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
-        public ActiveLearning.DB.Content Content;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
         public int CourseSid;
         
-        public InstructorSaveContentDataRequest() {
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public string FileName;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public byte[] FileBytes;
+        
+        public InstructorUploadContentRequest() {
         }
         
-        public InstructorSaveContentDataRequest(int InstructorSid, ActiveLearning.DB.Content Content, int CourseSid) {
+        public InstructorUploadContentRequest(int InstructorSid, int CourseSid, string FileName, byte[] FileBytes) {
             this.InstructorSid = InstructorSid;
-            this.Content = Content;
             this.CourseSid = CourseSid;
+            this.FileName = FileName;
+            this.FileBytes = FileBytes;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="InstructorSaveContentDataResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class InstructorSaveContentDataResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="InstructorUploadContentResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class InstructorUploadContentResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string Message;
@@ -80,50 +84,58 @@ namespace ActiveLearning.Web.UploadContentService {
         public int ContentSid;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
-        public bool ContentDataSavedSuccessfully;
+        public bool ContentUploadedSuccessfully;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
         public string ContentStatus;
         
-        public InstructorSaveContentDataResponse() {
+        public InstructorUploadContentResponse() {
         }
         
-        public InstructorSaveContentDataResponse(string Message, int ContentSid, bool ContentDataSavedSuccessfully, string ContentStatus) {
+        public InstructorUploadContentResponse(string Message, int ContentSid, bool ContentUploadedSuccessfully, string ContentStatus) {
             this.Message = Message;
             this.ContentSid = ContentSid;
-            this.ContentDataSavedSuccessfully = ContentDataSavedSuccessfully;
+            this.ContentUploadedSuccessfully = ContentUploadedSuccessfully;
             this.ContentStatus = ContentStatus;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="InstructorReviseContentData", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class InstructorReviseContentDataRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="InstructorReviseContent", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class InstructorReviseContentRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
-        public ActiveLearning.DB.Content Content;
+        public int CourseSid;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
-        public string Message;
+        public int InstructorSid;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public byte[] FileBytes;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public string FileName;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
         public int ContentSid;
         
-        public InstructorReviseContentDataRequest() {
+        public InstructorReviseContentRequest() {
         }
         
-        public InstructorReviseContentDataRequest(ActiveLearning.DB.Content Content, string Message, int ContentSid) {
-            this.Content = Content;
-            this.Message = Message;
+        public InstructorReviseContentRequest(int CourseSid, int InstructorSid, byte[] FileBytes, string FileName, int ContentSid) {
+            this.CourseSid = CourseSid;
+            this.InstructorSid = InstructorSid;
+            this.FileBytes = FileBytes;
+            this.FileName = FileName;
             this.ContentSid = ContentSid;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="InstructorReviseContentDataResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class InstructorReviseContentDataResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="InstructorReviseContentResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class InstructorReviseContentResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public bool RevisedSuccessfully;
@@ -134,10 +146,10 @@ namespace ActiveLearning.Web.UploadContentService {
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
         public string ContentStatus;
         
-        public InstructorReviseContentDataResponse() {
+        public InstructorReviseContentResponse() {
         }
         
-        public InstructorReviseContentDataResponse(bool RevisedSuccessfully, string Message, string ContentStatus) {
+        public InstructorReviseContentResponse(bool RevisedSuccessfully, string Message, string ContentStatus) {
             this.RevisedSuccessfully = RevisedSuccessfully;
             this.Message = Message;
             this.ContentStatus = ContentStatus;
@@ -256,44 +268,47 @@ namespace ActiveLearning.Web.UploadContentService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ActiveLearning.Web.UploadContentService.InstructorSaveContentDataResponse ActiveLearning.Web.UploadContentService.IService.InstructorSaveContentData(ActiveLearning.Web.UploadContentService.InstructorSaveContentDataRequest request) {
-            return base.Channel.InstructorSaveContentData(request);
+        ActiveLearning.Web.UploadContentService.InstructorUploadContentResponse ActiveLearning.Web.UploadContentService.IService.InstructorUploadContent(ActiveLearning.Web.UploadContentService.InstructorUploadContentRequest request) {
+            return base.Channel.InstructorUploadContent(request);
         }
         
-        public string InstructorSaveContentData(int InstructorSid, ActiveLearning.DB.Content Content, int CourseSid, out int ContentSid, out bool ContentDataSavedSuccessfully, out string ContentStatus) {
-            ActiveLearning.Web.UploadContentService.InstructorSaveContentDataRequest inValue = new ActiveLearning.Web.UploadContentService.InstructorSaveContentDataRequest();
+        public string InstructorUploadContent(int InstructorSid, int CourseSid, string FileName, byte[] FileBytes, out int ContentSid, out bool ContentUploadedSuccessfully, out string ContentStatus) {
+            ActiveLearning.Web.UploadContentService.InstructorUploadContentRequest inValue = new ActiveLearning.Web.UploadContentService.InstructorUploadContentRequest();
             inValue.InstructorSid = InstructorSid;
-            inValue.Content = Content;
             inValue.CourseSid = CourseSid;
-            ActiveLearning.Web.UploadContentService.InstructorSaveContentDataResponse retVal = ((ActiveLearning.Web.UploadContentService.IService)(this)).InstructorSaveContentData(inValue);
+            inValue.FileName = FileName;
+            inValue.FileBytes = FileBytes;
+            ActiveLearning.Web.UploadContentService.InstructorUploadContentResponse retVal = ((ActiveLearning.Web.UploadContentService.IService)(this)).InstructorUploadContent(inValue);
             ContentSid = retVal.ContentSid;
-            ContentDataSavedSuccessfully = retVal.ContentDataSavedSuccessfully;
+            ContentUploadedSuccessfully = retVal.ContentUploadedSuccessfully;
             ContentStatus = retVal.ContentStatus;
             return retVal.Message;
         }
         
-        public System.Threading.Tasks.Task<ActiveLearning.Web.UploadContentService.InstructorSaveContentDataResponse> InstructorSaveContentDataAsync(ActiveLearning.Web.UploadContentService.InstructorSaveContentDataRequest request) {
-            return base.Channel.InstructorSaveContentDataAsync(request);
+        public System.Threading.Tasks.Task<ActiveLearning.Web.UploadContentService.InstructorUploadContentResponse> InstructorUploadContentAsync(ActiveLearning.Web.UploadContentService.InstructorUploadContentRequest request) {
+            return base.Channel.InstructorUploadContentAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ActiveLearning.Web.UploadContentService.InstructorReviseContentDataResponse ActiveLearning.Web.UploadContentService.IService.InstructorReviseContentData(ActiveLearning.Web.UploadContentService.InstructorReviseContentDataRequest request) {
-            return base.Channel.InstructorReviseContentData(request);
+        ActiveLearning.Web.UploadContentService.InstructorReviseContentResponse ActiveLearning.Web.UploadContentService.IService.InstructorReviseContent(ActiveLearning.Web.UploadContentService.InstructorReviseContentRequest request) {
+            return base.Channel.InstructorReviseContent(request);
         }
         
-        public bool InstructorReviseContentData(ActiveLearning.DB.Content Content, ref string Message, int ContentSid, out string ContentStatus) {
-            ActiveLearning.Web.UploadContentService.InstructorReviseContentDataRequest inValue = new ActiveLearning.Web.UploadContentService.InstructorReviseContentDataRequest();
-            inValue.Content = Content;
-            inValue.Message = Message;
+        public bool InstructorReviseContent(int CourseSid, int InstructorSid, byte[] FileBytes, string FileName, int ContentSid, out string Message, out string ContentStatus) {
+            ActiveLearning.Web.UploadContentService.InstructorReviseContentRequest inValue = new ActiveLearning.Web.UploadContentService.InstructorReviseContentRequest();
+            inValue.CourseSid = CourseSid;
+            inValue.InstructorSid = InstructorSid;
+            inValue.FileBytes = FileBytes;
+            inValue.FileName = FileName;
             inValue.ContentSid = ContentSid;
-            ActiveLearning.Web.UploadContentService.InstructorReviseContentDataResponse retVal = ((ActiveLearning.Web.UploadContentService.IService)(this)).InstructorReviseContentData(inValue);
+            ActiveLearning.Web.UploadContentService.InstructorReviseContentResponse retVal = ((ActiveLearning.Web.UploadContentService.IService)(this)).InstructorReviseContent(inValue);
             Message = retVal.Message;
             ContentStatus = retVal.ContentStatus;
             return retVal.RevisedSuccessfully;
         }
         
-        public System.Threading.Tasks.Task<ActiveLearning.Web.UploadContentService.InstructorReviseContentDataResponse> InstructorReviseContentDataAsync(ActiveLearning.Web.UploadContentService.InstructorReviseContentDataRequest request) {
-            return base.Channel.InstructorReviseContentDataAsync(request);
+        public System.Threading.Tasks.Task<ActiveLearning.Web.UploadContentService.InstructorReviseContentResponse> InstructorReviseContentAsync(ActiveLearning.Web.UploadContentService.InstructorReviseContentRequest request) {
+            return base.Channel.InstructorReviseContentAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

@@ -810,7 +810,7 @@ namespace ActiveLearning.Web.Controllers
                     SetTempDataError(message);
                     return RedirectToAction("ReviewContent");
                 }
-                filepath = content.Path + content.FileName;
+                filepath = Util.GetUploadFolderFromConfig() + content.FileName;
                 fileType = content.Type;
             }
             var file = File(filepath, System.Net.Mime.MediaTypeNames.Application.Octet, originalFileName);
@@ -822,6 +822,7 @@ namespace ActiveLearning.Web.Controllers
             if (fileType.Equals(ActiveLearning.Common.Constants.Content_Type_Video))
             {
                 ViewBag.VideoPath = filepath;
+                SetBackURL("ReviewContent");
                 return View("Video");
             }
             else if (fileType.Equals(ActiveLearning.Common.Constants.Content_Type_File))

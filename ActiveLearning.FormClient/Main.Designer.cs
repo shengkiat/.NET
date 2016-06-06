@@ -38,6 +38,8 @@
             this.courseNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.courseDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.LblMessage = new System.Windows.Forms.Label();
+            this.testUploadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.Menu.SuspendLayout();
             this.PanelCourseList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -48,7 +50,8 @@
             // 
             this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loginToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem,
+            this.testUploadToolStripMenuItem});
             this.Menu.Location = new System.Drawing.Point(0, 0);
             this.Menu.Name = "Menu";
             this.Menu.Size = new System.Drawing.Size(1008, 24);
@@ -126,6 +129,17 @@
             this.LblMessage.TabIndex = 0;
             this.LblMessage.Text = "label1";
             // 
+            // testUploadToolStripMenuItem
+            // 
+            this.testUploadToolStripMenuItem.Name = "testUploadToolStripMenuItem";
+            this.testUploadToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.testUploadToolStripMenuItem.Text = "TestUpload";
+            this.testUploadToolStripMenuItem.Click += new System.EventHandler(this.testUploadToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,5 +175,7 @@
         private System.Windows.Forms.BindingSource courseDTOBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn sidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn courseNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolStripMenuItem testUploadToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

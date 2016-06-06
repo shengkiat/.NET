@@ -11,6 +11,7 @@ using ActiveLearning.Business.Implementation;
 using ActiveLearning.Web.Filter;
 using System.Threading.Tasks;
 using ActiveLearning.Common;
+using System.IO;
 
 namespace ActiveLearning.Web.Controllers
 {
@@ -149,32 +150,35 @@ namespace ActiveLearning.Web.Controllers
                 return RedirectToLogin();
             }
 
-            Content content = null;
-            using (var contentManager = new ContentManager())
-            {
-                var uploadFolder = Util.GetUploadFolderFromConfig();
-                string path = Server.MapPath(uploadFolder);
+            //Content content = null;
+            //using (var contentManager = new ContentManager())
+            //{
+            //    var uploadFolder = Util.GetUploadFolderFromConfig();
+            //    string path = Server.MapPath(uploadFolder);
 
-                content = contentManager.AddContentWithoutData(path, file, out message);
-                if (content == null)
-                {
-                    SetTempDataError(message);
-                    return RedirectToAction("ManageContent", new { courseSid = courseSid });
-                }
-            }
+            //    content = contentManager.AddContentWithoutData(path, file, out message);
+            //    if (content == null)
+            //    {
+            //        SetTempDataError(message);
+            //        return RedirectToAction("ManageContent", new { courseSid = courseSid });
+            //    }
+            //}
             //return new RedirectResult(Request.UrlReferrer.ToString());
 
+            byte[] fileBytes = Util.GetBytesFromStream(file.InputStream);
+
+            string fileName = new FileInfo(file.FileName).Name;
             var instructorSid = GetLoginUser().Instructors.FirstOrDefault().Sid;
 
             int contentSid = 0;
-            bool contentDataSavedSuccessfully = false;
+            bool contentUploadedSuccessfully = false;
             string contentStatus = string.Empty;
             using (UploadContentService.ServiceClient client = new UploadContentService.ServiceClient())
             {
                 try
                 {
-                    message = client.InstructorSaveContentData(instructorSid, content, courseSid, out contentSid, out contentDataSavedSuccessfully, out contentStatus);
-                    if (contentDataSavedSuccessfully)
+                    message = client.InstructorUploadContent(instructorSid, courseSid, fileName, fileBytes, out contentSid, out contentUploadedSuccessfully, out contentStatus);
+                    if (contentUploadedSuccessfully)
                     {
                         SetTempDataMessage(message);
                         //return RedirectToAction("PendingCourseEnrollment");
@@ -220,7 +224,7 @@ namespace ActiveLearning.Web.Controllers
                     return RedirectToAction("ManageContent", new { courseSid = courseSid });
                 }
 
-                string path = Server.MapPath(content.Path + content.FileName);
+                string path = Server.MapPath(Util.GetUploadFolderFromConfig() + content.FileName);
 
                 if (contentManager.DeleteContent(path, contentSid, out message))
                 {
@@ -259,7 +263,7 @@ namespace ActiveLearning.Web.Controllers
                     return RedirectToAction("ManageContent", new { courseSid = courseSid });
                     //return RedirectToError(message);
                 }
-                filepath = content.Path + content.FileName;
+                filepath = Util.GetUploadFolderFromConfig() + content.FileName;
                 fileType = content.Type;
             }
             var file = File(filepath, System.Net.Mime.MediaTypeNames.Application.Octet, originalFileName);
@@ -331,57 +335,62 @@ namespace ActiveLearning.Web.Controllers
                 return RedirectToLogin();
             }
 
-            Content content = null;
-            Content newContent = null;
+            //Content content = null;
+            //Content newContent = null;
 
-            using (var contentManager = new ContentManager())
-            {
-                content = contentManager.GetContentByContentSid(contentSid, out message);
+            //using (var contentManager = new ContentManager())
+            //{
+            //    content = contentManager.GetContentByContentSid(contentSid, out message);
 
-                if (content == null)
-                {
-                    SetTempDataError(message);
-                    return RedirectToAction("ReviseContent", new { courseSid = courseSid, contentSid = contentSid });
-                    //return View(content);
-                }
-                SetBackURL("ManageContent?courseSid=" + courseSid);
-                var oldFilePath = Server.MapPath(content.Path + content.FileName);
+            //    if (content == null)
+            //    {
+            //        SetTempDataError(message);
+            //        return RedirectToAction("ReviseContent", new { courseSid = courseSid, contentSid = contentSid });
+            //        //return View(content);
+            //    }
+            //    SetBackURL("ManageContent?courseSid=" + courseSid);
 
-                bool oldFileDeleted = contentManager.DeleteContentWithouData(oldFilePath, out message);
+            //    var oldFilePath = Server.MapPath(content.Path + content.FileName);
 
-                if (!oldFileDeleted)
-                {
-                    SetTempDataError(message);
-                    return RedirectToAction("ReviseContent", new { courseSid = courseSid, contentSid = contentSid });
-                    //return View(content);
-                }
+            //    bool oldFileDeleted = contentManager.DeleteContentWithouData(oldFilePath, out message);
 
-                var uploadFolder = Util.GetUploadFolderFromConfig();
-                string path = Server.MapPath(uploadFolder);
+            //    if (!oldFileDeleted)
+            //    {
+            //        SetTempDataError(message);
+            //        return RedirectToAction("ReviseContent", new { courseSid = courseSid, contentSid = contentSid });
+            //        //return View(content);
+            //    }
 
-                newContent = contentManager.AddContentWithoutData(path, file, out message);
-                newContent.Sid = content.Sid;
-                newContent.CourseSid = content.CourseSid;
-                newContent.CreateDT = content.CreateDT;
-                newContent.Remark = content.Remark;
+            //    var uploadFolder = Util.GetUploadFolderFromConfig();
+            //    string path = Server.MapPath(uploadFolder);
 
-                if (newContent == null)
-                {
-                    SetTempDataError(message);
-                    return RedirectToAction("ReviseContent", new { courseSid = courseSid, contentSid = contentSid });
-                    //return View(content);
-                }
-            }
+            //    newContent = contentManager.AddContentWithoutData(path, file, out message);
+            //    newContent.Sid = content.Sid;
+            //    newContent.CourseSid = content.CourseSid;
+            //    newContent.CreateDT = content.CreateDT;
+            //    newContent.Remark = content.Remark;
+
+            //    if (newContent == null)
+            //    {
+            //        SetTempDataError(message);
+            //        return RedirectToAction("ReviseContent", new { courseSid = courseSid, contentSid = contentSid });
+            //        //return View(content);
+            //    }
+            //}
+            byte[] fileBytes = Util.GetBytesFromStream(file.InputStream);
+
+            string fileName = new FileInfo(file.FileName).Name;
+
             var instructorSid = GetLoginUser().Instructors.FirstOrDefault().Sid;
 
-            bool contentDataRevisedSuccessfully = false;
+            bool contentRevisedSuccessfully = false;
             string contentStatus = string.Empty;
             using (UploadContentService.ServiceClient client = new UploadContentService.ServiceClient())
             {
                 try
                 {
-                    contentDataRevisedSuccessfully = client.InstructorReviseContentData(newContent, ref message, contentSid, out contentStatus);
-                    if (contentDataRevisedSuccessfully)
+                    contentRevisedSuccessfully = client.InstructorReviseContent(courseSid, instructorSid, fileBytes, fileName, contentSid, out message, out contentStatus);
+                    if (contentRevisedSuccessfully)
                     {
                         SetTempDataMessage(message);
                         return RedirectToAction("ManageContent", new { courseSid = courseSid });

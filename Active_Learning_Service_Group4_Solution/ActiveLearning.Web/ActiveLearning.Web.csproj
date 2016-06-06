@@ -276,16 +276,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Service References\UploadContentService\ActiveLearning.Web.UploadContentService.InstructorSaveContentDataResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\UploadContentService\ActiveLearning.Web.UploadContentService.AdminAcceptContentResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\UploadContentService\ActiveLearning.Web.UploadContentService.AdminCommentContentResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\UploadContentService\ActiveLearning.Web.UploadContentService.InstructorReviseContentDataResponse.datasource">
+    <Content Include="Service References\UploadContentService\ActiveLearning.Web.UploadContentService.InstructorReviseContentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\UploadContentService\ActiveLearning.Web.UploadContentService.InstructorUploadContentResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\UploadContentService\UploadCourseMaterialFlowChartWF.disco" />
@@ -373,9 +373,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\UploadContentService\UploadCourseMaterialFlowChartWF1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UploadContentService\UploadCourseMaterialFlowChartWF2.xsd">
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Instructor\RejectEnrollmentApplication.cshtml" />
