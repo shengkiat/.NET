@@ -31,9 +31,7 @@ namespace ActiveLearning.DB
                         return Constants.UnknownValue(Constants.Status);
                 }
             }
-
         }
-
     }
     public class ContentMetadata
     {

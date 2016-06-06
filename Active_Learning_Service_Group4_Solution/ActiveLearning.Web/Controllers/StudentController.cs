@@ -52,8 +52,6 @@ namespace ActiveLearning.Web.Controllers
             }
         }
 
-
-        [OutputCache(Duration = Cache_Duration)]
         public ActionResult NewCourseList()
         {
             if (!IsUserAuthenticated())
@@ -72,6 +70,29 @@ namespace ActiveLearning.Web.Controllers
                 else
                 {
                     GetErrorAneMessage();
+                }
+                return View(nonEnroledCourseList);
+            }
+        }
+        public ActionResult EnrollmentApplication()
+        {
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToLogin();
+            }
+            var student = GetLoginUser().Students.FirstOrDefault();
+            if (student == null || student.Sid == 0)
+            {
+                return RedirectToLogin();
+            }
+
+            string message = string.Empty;
+            using (var courseManager = new CourseManager())
+            {
+                var nonEnroledCourseList = courseManager.GetAllStudentEnrollApplicationsByStudentSid(student.Sid, out message);
+                if (nonEnroledCourseList == null || nonEnroledCourseList.Count() == 0)
+                {
+                    SetViewBagError(message);
                 }
                 return View(nonEnroledCourseList);
             }
@@ -100,7 +121,7 @@ namespace ActiveLearning.Web.Controllers
                     SetTempDataError(Common.Constants.OperationFailedDuringCallingValue("course enrollment workflow service"));
                     return RedirectToAction("NewCourseList");
                 }
-                if(!enrolledCourseSuccesfully && !appliedCourseSuccesfully)
+                if (!enrolledCourseSuccesfully && !appliedCourseSuccesfully)
                 {
                     SetTempDataError(message);
                     return RedirectToAction("NewCourseList");
@@ -109,6 +130,7 @@ namespace ActiveLearning.Web.Controllers
             SetTempDataMessage(message);
             return RedirectToAction("NewCourseList");
         }
+
         #endregion
 
         #region chat

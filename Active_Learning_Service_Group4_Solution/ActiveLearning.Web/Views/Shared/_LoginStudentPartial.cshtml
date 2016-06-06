@@ -24,7 +24,13 @@
             <li>@Html.ActionLink("Change Password", "ChangePassword")</li>
             <li>@Html.ActionLink("Home", "Index", "student")</li>
             <li>@Html.ActionLink("My Course", "CourseList", "student")</li>
-            <li>@Html.ActionLink("Apply New Course", "NewCourseList", "student")</li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">New Course<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Apply to Enroll", "NewCourseList", "student")</li>
+                    <li>@Html.ActionLink("View Application", "EnrollmentApplication", "student")</li>
+                </ul>
+            </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
         </ul>
 

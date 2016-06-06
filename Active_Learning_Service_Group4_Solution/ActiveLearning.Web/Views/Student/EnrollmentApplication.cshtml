@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ActiveLearning.DB.StudentEnrollApplication>
+
+
+@using ActiveLearning.Common;
+@{
+    ViewBag.Title = "Enrollment Application";
+}
+
+<h2>Enrollment Application</h2>
+
+@Html.Partial("_MessageBoxPartial")
+@if (Model != null && Model.Count() > 0)
+{
+    <table class="table" style="margin-top:100px">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remark)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateDT)
+                </td>
+                <td>
+                    @switch (item.Status)
+                    {
+                        default:
+                        case Constants.Pending_Code:
+                            <label class="text-warning">@Html.DisplayFor(modelItem => item.StatusDescription)</label>
+                            break;
+                        case Constants.Accepted_Code:
+                            <label class="text-success">@Html.DisplayFor(modelItem => item.StatusDescription)</label>
+                            break;
+                        case Constants.Rejected_Code:
+                            <label class="text-danger">@Html.DisplayFor(modelItem => item.StatusDescription)</label>
+                            break;
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remark)
+                </td>
+            </tr>
+        }
+    </table>
+}

@@ -56,6 +56,7 @@ namespace ActiveLearning.Business.Interface
         IEnumerable<StudentEnrollApplication> GetAllPendingStudentEnrollApplicationsByStudentSid(int studentSid, out string message);
         IEnumerable<StudentEnrollApplication> GetAllRejectedStudentEnrollApplicationsByStudentSid(int studentSid, out string message);
         IEnumerable<StudentEnrollApplication> GetAllAcceptedStudentEnrollApplicationsByStudentSid(int studentSid, out string message);
+        IEnumerable<StudentEnrollApplication> GetAllStudentEnrollApplicationsByStudentSid(int studentSid, out string message);
         StudentEnrollApplication GetStudentEnrollApplicationByStudentSidCourseSid(int studentSid, int courseSid, out string message);
         StudentEnrollApplication GetStudentEnrollApplicationBySid(int enrollApplicationSid, out string message);
         bool HasStudentAppliedCourse(int studentSid, int courseSid, out string message);

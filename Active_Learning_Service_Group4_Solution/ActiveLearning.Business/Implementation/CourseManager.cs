@@ -1048,6 +1048,43 @@ namespace ActiveLearning.Business.Implementation
                 return null;
             }
         }
+        public IEnumerable<StudentEnrollApplication> GetAllStudentEnrollApplicationsByStudentSid(int studentSid, out string message)
+        {
+            if (studentSid == 0)
+            {
+                message = Constants.ValueIsEmpty(Constants.Student);
+                return null;
+            }
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new ActiveLearningContext()))
+                {
+                    var studentEnrollmentApplications = unitOfWork.StudentEnrollApplications.Find(a => a.StudentSid == studentSid && !a.DeleteDT.HasValue);
+                    if (studentEnrollmentApplications == null || studentEnrollmentApplications.Count() == 0)
+                    {
+                        message = Constants.ThereIsNoValueFound(Constants.Student_Course_Enrolment_Application);
+                        return null;
+                    }
+                    using (var userManager = new UserManager())
+                    {
+                        foreach (var application in studentEnrollmentApplications)
+                        {
+                            application.Course = GetCourseByCourseSid(application.CourseSid, out message);
+                            application.Student = userManager.GetStudentByStudentSid(application.StudentSid, out message);
+                        }
+                    }
+                    studentEnrollmentApplications = studentEnrollmentApplications.Where(a => a.Course != null && a.Student != null);
+                    message = string.Empty;
+                    return studentEnrollmentApplications.OrderBy(a=>a.Status).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog(ex);
+                message = Constants.OperationFailedDuringRetrievingValue(Constants.Student_Course_Enrolment_Application);
+                return null;
+            }
+        }
         public StudentEnrollApplication GetStudentEnrollApplicationByStudentSidCourseSid(int studentSid, int courseSid, out string message)
         {
             if (studentSid == 0)

@@ -377,6 +377,7 @@
     </None>
     <Content Include="Views\Instructor\RejectEnrollmentApplication.cshtml" />
     <Content Include="Views\Instructor\ReviseContent.cshtml" />
+    <Content Include="Views\Student\EnrollmentApplication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
