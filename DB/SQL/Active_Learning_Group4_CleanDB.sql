@@ -693,9 +693,9 @@ INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (5, 
 GO
 INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (6, 'Object Oriented Software Design - SE24', 5, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (7, 'Scheduling and Producing Project Plans - SE24', 5, GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (7, 'Scheduling and Producing Project Plans - SE24', 2, GETDATE())
 GO
-INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (8, 'Advanced Project Estimation - SE24', 5, GETDATE())
+INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (8, 'Advanced Project Estimation - SE24', 2, GETDATE())
 GO
 INSERT INTO [dbo].[Course] (Sid, CourseName, StudentQuota, CreateDT) VALUES (9, 'Project Tracking and Control - SE24', 2, GETDATE())
 GO
