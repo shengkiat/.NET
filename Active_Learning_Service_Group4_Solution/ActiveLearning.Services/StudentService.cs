@@ -165,41 +165,6 @@ namespace ActiveLearning.Services
             studentDTO = null;
         }
 
-        //public byte[] DownloadFileBytes(int contentSid)
-        //{
-        //    if (studentDTO == null || userDTO == null)
-        //    {
-        //        throw new FaultException(Constants.User_Not_Logged_In);
-        //    }
-        //    string message = string.Empty;
-        //    using (contentManager = new ContentManager())
-        //    {
-        //        Content content = contentManager.GetContentByContentSid(contentSid, out message);
-        //        if (content == null)
-        //        {
-        //            throw new FaultException(message);
-        //        }
-        //        string uploadPath = Util.GetAppSetting("UploadPath");
-        //        if (string.IsNullOrEmpty(uploadPath))
-        //        {
-        //            throw new FaultException(Constants.ValueNotFound("UploadPath App Setting"));
-        //        }
-        //        string path = uploadPath + content.FileName;
-        //        try
-        //        {
-        //            byte[] bytes = System.IO.File.ReadAllBytes(path);
-        //            return bytes;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Log.ExceptionLog(ex);
-        //            Log.ExceptionLog(ex.InnerException);
-        //            throw new FaultException(Constants.OperationFailedDuringRetrievingValue("File"));
-        //        }
-
-        //    }
-        //}
-
         public Stream DownloadFileStream(int contentSid)
         {
             if (studentDTO == null || userDTO == null)
