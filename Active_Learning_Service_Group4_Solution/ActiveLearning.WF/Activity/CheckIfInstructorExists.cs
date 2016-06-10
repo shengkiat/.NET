@@ -19,6 +19,8 @@ namespace ActiveLearning.WF.Activity
         // and return the value from the Execute method.
         protected override void Execute(CodeActivityContext context)
         {
+            log4net.Config.XmlConfigurator.Configure();
+
             // Obtain the runtime value of the Text input argument
             int instructorSid = context.GetValue(this.InstructorSid);
 

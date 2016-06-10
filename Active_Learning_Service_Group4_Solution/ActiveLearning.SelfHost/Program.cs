@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using log4net;
 
 namespace ActiveLearning.SelfHost
 {
@@ -11,6 +12,8 @@ namespace ActiveLearning.SelfHost
     {
         static void Main(string[] args)
         {
+            log4net.Config.XmlConfigurator.Configure();
+
             ServiceHost svcHost = null;
             try
             {
